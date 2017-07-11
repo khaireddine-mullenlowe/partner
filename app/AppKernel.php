@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Mullenlowe\CommonBundle\MullenloweCommonBundle(),
             new AppBundle\AppBundle(),
             new PartnerBundle\PartnerBundle(),
