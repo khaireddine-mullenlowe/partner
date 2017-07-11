@@ -40,6 +40,7 @@
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
         "stof/doctrine-extensions-bundle": "^1.2",
+        "php-amqplib/rabbitmq-bundle": "~1.6",
         "mullenlowe/audi-agc5-common-bundle": "dev-master",
         "mullenlowe/component": "dev-master"
     },

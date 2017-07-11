@@ -1,0 +1,38 @@
+# RabbitMQ configuration
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     '192.168.56.101'
+            port:     5672
+            user:     'radmin'
+            password: 'radmin'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+
+            #requires php_sockets.dll
+            #use_socket: true # default false
+        another:
+            # A different (unused) connection defined by an URL. One can omit all parts,
+            # except the scheme (amqp:). If both segment in the URL and a key value (see above)
+            # are given the value from the URL takes precedence.
+            # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
+            url: 'amqp://radmin:radmin@192.168.56.101:5672/vhost?lazy=1&connection_timeout=6'
+    producers:
+        myaudi_user_create_or_update: ~
+    consumers:
+        myaudi_user_create_or_update_partner:
+            connection:       default
+            exchange_options: {name: 'myaudi.user.create_or_update', type: topic}
+            queue_options:
+                name: "myaudi.user.create_or_update.partner"
+                routing_keys:
+                  - 'myaudi.user.create_or_update.#'
+            callback:         PartnerBundle\Service\MyaudiUserUpdatePartnerConsumer
