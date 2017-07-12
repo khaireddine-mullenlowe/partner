@@ -3,7 +3,8 @@
     "license": "proprietary",
     "type": "project",
     "minimum-stability": "dev",
-    "prefer-stable": true, 
+    "prefer-stable": true,
+    "prefer-dist": true,
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -21,14 +22,16 @@
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
-    "repositories": [{
-        "type": "vcs",
-        "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git"
-    },{
-        "type": "vcs",
-        "url": "git@github.com:itagenceone/component.git"
-
-    }],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:itagenceone/component.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
