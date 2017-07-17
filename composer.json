@@ -50,6 +50,7 @@
         "mullenlowe/component": "dev-master"
     },
     "require-dev": {
+        "codeception/codeception": "^2.2",
         "sensio/generator-bundle": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "symfony/phpunit-bridge": "^3.0"
