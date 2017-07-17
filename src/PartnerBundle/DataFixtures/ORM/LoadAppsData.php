@@ -29,7 +29,6 @@ class LoadAppsData extends BaseFixtureData
             $partner = new Partner();
             $partner->setContractNumber($partnerData['contract_number']);
             $partner->setCommercialName($partnerData['commercial_name']);
-            $partner->setRegistryUserId($partnerData['registry_user_id']);
             $partner->setKvpsNumber($partnerData['kvps_number']);
             $partner->setWebSite($partnerData['web_site']);
             $partner->setIsEtron(false);

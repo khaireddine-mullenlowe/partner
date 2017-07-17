@@ -11,52 +11,69 @@ use Doctrine\ORM\Mapping as ORM;
 class Partner extends Date
 {
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer", name="partner_id", unique=true, nullable=true)
+     */
+    protected $partnerId;
+
+    /**
+     * @var @ORM\Column(type="string", nullable=true)
+     */
+    protected $type;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $contractNumber;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $commercialName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $kvpsNumber;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $webSite;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isPartnerR8;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isTwinService;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isPartnerPlus;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isOccPlus;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isEtron;
 
     /**
-     * @ORM\Column(type="integer", name="registry_user_id", unique=true)
+     * @ORM\Column(type="integer", name="registry_user_id", unique=true, nullable=true)
      */
     protected $registryUserId;
 
@@ -291,4 +308,55 @@ class Partner extends Date
     {
         $this->registryUserId = $registryUserId;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPartnerId()
+    {
+        return $this->partnerId;
+    }
+
+    /**
+     * @param mixed $partnerId
+     */
+    public function setPartnerId($partnerId)
+    {
+        $this->partnerId = $partnerId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
+
 }

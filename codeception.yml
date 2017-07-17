@@ -8,3 +8,22 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+
+modules:
+    config:
+        - Db:
+            dsn: 'sqlite:./tests/_data/test.sqlite'
+            user: ''
+            password: ''
+            dump: 'tests/_data/test.sql'
+            populate: true
+            cleanup: true
+            reconnect: true
+
+coverage:
+    enabled: true
+    remote: false
+    include:
+        - src/*
+    low_limit: 30
+    high_limit: 60

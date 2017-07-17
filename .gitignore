@@ -16,6 +16,7 @@
 /vendor/
 /web/bundles/
 bin
+tests/_data
 
 #ide
 .idea

@@ -15,6 +15,14 @@ class ApiControllerTest extends WebTestCase
      */
     protected static $client;
 
+    /**
+     * @return mixed
+     */
+    protected static function getKernelClass()
+    {
+        return 'AppKernel';
+    }
+
     public static function setUpBeforeClass()
     {
         static::$client = static::createClient();

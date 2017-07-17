@@ -3,4 +3,7 @@ services:
 #        class: PartnerBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-    PartnerBundle\Service\MyaudiUserUpdatePartnerConsumer: ~
+    PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer:
+          arguments:
+              $logger: '@monolog.logger.request'
+              $em: '@doctrine.orm.entity_manager'
