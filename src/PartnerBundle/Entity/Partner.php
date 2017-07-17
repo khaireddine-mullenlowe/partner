@@ -55,6 +55,10 @@ class Partner extends Date
      */
     protected $isEtron;
 
+    /**
+     * @ORM\Column(type="integer", name="registry_user_id", unique=true)
+     */
+    protected $registryUserId;
 
     /**
      * Set contractNumber.
@@ -270,5 +274,21 @@ class Partner extends Date
     public function getIsEtron()
     {
         return $this->isEtron;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistryUserId()
+    {
+        return $this->registryUserId;
+    }
+
+    /**
+     * @param mixed $registryUserId
+     */
+    public function setRegistryUserId($registryUserId)
+    {
+        $this->registryUserId = $registryUserId;
     }
 }
