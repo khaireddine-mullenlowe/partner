@@ -28,7 +28,13 @@ class ApiController extends Controller
      */
     public function __construct()
     {
-        $this->serialiser = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(1);
+        // Add Circular reference handler
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $this->serialiser = new Serializer([$normalizer], [new JsonEncoder()]);
     }
 
     /**

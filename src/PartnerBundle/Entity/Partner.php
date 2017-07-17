@@ -1,6 +1,8 @@
 <?php
 
 namespace PartnerBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
 use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -76,6 +78,20 @@ class Partner extends Date
      * @ORM\Column(type="integer", name="registry_user_id", unique=true, nullable=true)
      */
     protected $registryUserId;
+
+    /**
+     * One Partner have Many MyaudiUsers.
+     * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"})
+     */
+    protected $myaudiUsers;
+
+    /**
+     * Partner constructor.
+     */
+    public function __construct()
+    {
+        $this->myaudiUsers = new ArrayCollection();
+    }
 
     /**
      * Set contractNumber.
@@ -357,6 +373,37 @@ class Partner extends Date
         $this->type = $type;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getMyaudiUsers()
+    {
+        return $this->myaudiUsers;
+    }
 
+    /**
+     * @param PartnerMyaudiUser $myaudiUser
+     * @return $this
+     */
+    public function addMyaudiUser(PartnerMyaudiUser $myaudiUser)
+    {
+        if (!$this->myaudiUsers->contains($myaudiUser)) {
+            $this->myaudiUsers->add($myaudiUser);
+        }
 
+        return $this;
+    }
+
+    /**
+     * @param PartnerMyaudiUser $myaudiUser
+     * @return $this
+     */
+    public function removeMyaudiUser(PartnerMyaudiUser $myaudiUser)
+    {
+        if ($this->myaudiUsers->contains($myaudiUser)) {
+            $this->myaudiUsers->removeElement($myaudiUser);
+        }
+
+        return $this;
+    }
 }

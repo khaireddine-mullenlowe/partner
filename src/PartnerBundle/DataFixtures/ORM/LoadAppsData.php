@@ -5,6 +5,7 @@ namespace PartnerBundle\DataFixtures\ORM;
 use Mullenlowe\CommonBundle\DataFixtures\BaseFixtureData;
 use Doctrine\Common\Persistence\ObjectManager;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\PartnerMyaudiUser;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -19,7 +20,7 @@ class LoadAppsData extends BaseFixtureData
      */
     public function loadData(ObjectManager $manager)
     {
-        $fixturesPath = sprintf(__DIR__ . '/../../../../app/config/%s', 'data_fixtures.yml');
+        $fixturesPath = sprintf(__DIR__.'/../../../../app/config/%s', 'data_fixtures.yml');
 
         $fixtures = Yaml::parse(file_get_contents($fixturesPath));
 
@@ -31,11 +32,18 @@ class LoadAppsData extends BaseFixtureData
             $partner->setCommercialName($partnerData['commercial_name']);
             $partner->setKvpsNumber($partnerData['kvps_number']);
             $partner->setWebSite($partnerData['web_site']);
+            $partner->setRegistryUserId($partnerData['registry_user_id']);
             $partner->setIsEtron(false);
             $partner->setIsOccPlus(false);
             $partner->setIsPartnerPlus(false);
             $partner->setIsPartnerR8(false);
             $partner->setIsTwinService(false);
+
+            foreach ($partnerData['myaudi_users'] as $myaudiUserId) {
+                $partnerMyaudiUser = new PartnerMyaudiUser($partner, $myaudiUserId);
+                $partner->addMyaudiUser($partnerMyaudiUser);
+            }
+
             $manager->persist($partner);
         }
         $manager->flush();

@@ -15,30 +15,9 @@ class ApiControllerTest extends WebTestCase
      */
     protected static $client;
 
-    /**
-     * @return mixed
-     */
-    protected static function getKernelClass()
-    {
-        return 'AppKernel';
-    }
-
     public static function setUpBeforeClass()
     {
         static::$client = static::createClient();
-        $em = static::getEntityManager();
-        $metadatas = $em->getMetadataFactory()->getAllMetadata();
-
-        $schema = new SchemaTool($em);
-        $schema->dropDatabase();
-        $schema->createSchema($metadatas);
-
-        $loader = new DataFixturesLoader(self::$kernel->getContainer());
-        $loader->loadFromFile(self::$kernel->getBundle('PartnerBundle')->getPath().'/DataFixtures/ORM/LoadAppsData.php');
-        $fixtures = $loader->getFixtures();
-        $purger = new ORMPurger($em);
-        $executor = new ORMExecutor($em, $purger);
-        $executor->execute($fixtures);
     }
 
     public function testGetPartnerByRegistryUserId()
@@ -52,23 +31,6 @@ class ApiControllerTest extends WebTestCase
 
         $responseData = json_decode($response->getContent(), true);
 
-        $this->assertEquals(1, $responseData['id']);
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected static function getEntityManager()
-    {
-        return static::getService('doctrine.orm.entity_manager');
-    }
-
-    protected static function getService($id)
-    {
-        return self::$kernel->getContainer()->get($id);
+        $this->assertEquals(47, $responseData['registryUserId']);
     }
 }
-
-
-
-
