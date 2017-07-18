@@ -3,6 +3,8 @@
 namespace PartnerBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use PartnerBundle\Entity\Partner;
+
 /**
  * PartnerRepository
  *
@@ -11,4 +13,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class PartnerRepository extends EntityRepository
 {
+    /**
+     * @param integer $myaudiUserId
+     * @return null|Partner
+     */
+    public function findOneByMyaudiUserId($myaudiUserId)
+    {
+        $result = $this->createQueryBuilder('p')
+            ->addSelect('p')
+            ->innerJoin('p.myaudiUsers', 'u')
+            ->add('where', 'u.myaudiUserId=:myaudi_user_id')
+            ->setParameter('myaudi_user_id', $myaudiUserId)
+            ->getQuery()
+            ->getResult();
+
+        if (isset($result[0])) {
+            return $result[0];
+        }
+
+        return null;
+    }
 }

@@ -7,7 +7,7 @@ use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner_partner")
  */
 class Partner extends Date

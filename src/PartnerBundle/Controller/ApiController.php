@@ -54,4 +54,24 @@ class ApiController extends Controller
 
         return new JsonResponse($jsonContent, 200, [], true);
     }
+
+
+    /**
+     * @Route("/myaudiuser/{myaudiUserId}")
+     * @Method({"GET"})
+     *
+     * @param int $myaudiUserId
+     * @return JsonResponse
+     */
+    public function getPartnerByMyaudiUserId($myaudiUserId)
+    {
+        $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
+        $partner = $repository->findOneByMyaudiUserId($myaudiUserId);
+        if (!$partner) {
+            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+        }
+        $jsonContent = $this->serialiser->serialize($partner, 'json');
+
+        return new JsonResponse($jsonContent, 200, [], true);
+    }
 }
