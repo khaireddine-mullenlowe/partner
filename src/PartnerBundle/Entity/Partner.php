@@ -20,6 +20,7 @@ class Partner extends Date
     protected $id;
 
     /**
+     * Legacy id
      * @ORM\Column(type="integer", name="partner_id", unique=true, nullable=true)
      */
     protected $partnerId;
@@ -81,9 +82,17 @@ class Partner extends Date
 
     /**
      * One Partner have Many MyaudiUsers.
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"})
      */
     protected $myaudiUsers;
+
+    /**
+     * One Partner have Many Addresses.
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="PartnerAddress", mappedBy="partner", cascade={"persist", "remove"})
+     */
+    protected $addresses;
 
     /**
      * Partner constructor.
@@ -91,6 +100,7 @@ class Partner extends Date
     public function __construct()
     {
         $this->myaudiUsers = new ArrayCollection();
+        $this->addresses   = new ArrayCollection();
     }
 
     /**
@@ -382,6 +392,14 @@ class Partner extends Date
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
      * @param PartnerMyaudiUser $myaudiUser
      * @return $this
      */
@@ -402,6 +420,31 @@ class Partner extends Date
     {
         if ($this->myaudiUsers->contains($myaudiUser)) {
             $this->myaudiUsers->removeElement($myaudiUser);
+        }
+
+        return $this;
+    }
+    /**
+     * @param PartnerAddress $address
+     * @return $this
+     */
+    public function addAddress(PartnerAddress $address)
+    {
+        if (!$this->addresses->contains($address)) {
+            $this->addresses->add($address);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PartnerAddress $address
+     * @return $this
+     */
+    public function removeAddress(PartnerAddress $address)
+    {
+        if ($this->addresses->contains($address)) {
+            $this->addresses->removeElement($address);
         }
 
         return $this;

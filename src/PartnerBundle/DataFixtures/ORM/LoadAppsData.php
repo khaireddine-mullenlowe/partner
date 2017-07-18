@@ -5,6 +5,7 @@ namespace PartnerBundle\DataFixtures\ORM;
 use Mullenlowe\CommonBundle\DataFixtures\BaseFixtureData;
 use Doctrine\Common\Persistence\ObjectManager;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\PartnerAddress;
 use PartnerBundle\Entity\PartnerMyaudiUser;
 use Symfony\Component\Yaml\Yaml;
 
@@ -40,8 +41,11 @@ class LoadAppsData extends BaseFixtureData
             $partner->setIsTwinService(false);
 
             foreach ($partnerData['myaudi_users'] as $myaudiUserId) {
-                $partnerMyaudiUser = new PartnerMyaudiUser($partner, $myaudiUserId);
-                $partner->addMyaudiUser($partnerMyaudiUser);
+                $partner->addMyaudiUser(new PartnerMyaudiUser($partner, $myaudiUserId));
+            }
+
+            foreach ($partnerData['addresses'] as $addressId) {
+                $partner->addAddress(new PartnerAddress($partner, $addressId));
             }
 
             $manager->persist($partner);
