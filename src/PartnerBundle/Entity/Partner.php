@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
- * @ORM\Table(name="partner_partner")
+ * @ORM\Table(name="partner")
  */
 class Partner extends Date
 {
