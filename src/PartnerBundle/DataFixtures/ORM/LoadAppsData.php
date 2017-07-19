@@ -34,11 +34,13 @@ class LoadAppsData extends BaseFixtureData
             $partner->setCommercialName($partnerData['commercial_name']);
             $partner->setKvpsNumber($partnerData['kvps_number']);
             $partner->setWebSite($partnerData['web_site']);
-            $partner->setIsEtron(false);
-            $partner->setIsOccPlus(false);
-            $partner->setIsPartnerPlus(false);
-            $partner->setIsPartnerR8(false);
-            $partner->setIsTwinService(false);
+            $partner->setIsEtron($partnerData['is_etron']);
+            $partner->setIsOccPlus($partnerData['is_occ_plus']);
+            $partner->setIsPartnerPlus($partnerData['is_partner_plus']);
+            $partner->setIsPartnerR8($partnerData['is_partner_r8']);
+            $partner->setIsTwinService($partnerData['is_twin_service']);
+            $partner->setPartnerId($partnerData['partner_id']);
+            $partner->setType($partnerData['type']);
 
             foreach ($partnerData['myaudi_users'] as $myaudiUserId) {
                 $partner->addMyaudiUser(new PartnerMyaudiUser($partner, $myaudiUserId));
