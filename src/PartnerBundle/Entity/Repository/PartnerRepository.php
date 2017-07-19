@@ -33,4 +33,25 @@ class PartnerRepository extends EntityRepository
 
         return null;
     }
+
+    /**
+     * @param integer $registryUserId
+     * @return null|Partner
+     */
+    public function findOneByRegistryUserId($registryUserId)
+    {
+        $result = $this->createQueryBuilder('p')
+            ->addSelect('p')
+            ->innerJoin('p.registryUsers', 'u')
+            ->add('where', 'u.registryUserId=:registry_user_id')
+            ->setParameter('registry_user_id', $registryUserId)
+            ->getQuery()
+            ->getResult();
+
+        if (isset($result[0])) {
+            return $result[0];
+        }
+
+        return null;
+    }
 }

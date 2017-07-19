@@ -31,8 +31,8 @@ class ApiControllerTest extends WebTestCase
 
         $responseData = json_decode($response->getContent(), true);
 
-        $this->assertEquals(47, $responseData['registryUserId']);
         $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
+        $this->assertListContainsArrayWithKeyValue(47, 'registryUserId', $responseData['registryUsers']);
     }
 
     public function testGetPartnerByMyaudiUserId()
@@ -47,5 +47,21 @@ class ApiControllerTest extends WebTestCase
         $responseData = json_decode($response->getContent(), true);
 
         $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
+        $this->assertListContainsArrayWithKeyValue(55, 'myaudiUserId', $responseData['myaudiUsers']);
+    }
+
+    /**
+     * @param mixed  $value
+     * @param string $key
+     * @param array  $list
+     */
+    protected function assertListContainsArrayWithKeyValue($value, string $key, array $list)
+    {
+        foreach ($list as $array) {
+            if (isset($array[$key]) && $value == $array[$key]) {
+                return $this->assertEquals($value, $array[$key]);
+            }
+        }
+        $this->fail(sprintf("Fail asserting that a list contains an array with [%s => %s]", $key, $value));
     }
 }

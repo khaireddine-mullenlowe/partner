@@ -1,3 +1,3 @@
 partners:
-    - {contract_number: '', commercial_name: 'GARAGE CLERFOND SARL', registry_user_id: 47, kvps_number: '', web_site: '', myaudi_users:[2,30,40,55,61], addresses: [1]}
-    - {contract_number: '', commercial_name: 'J.LAIN AUTO TARENTAISE SARL', registry_user_id: 50, kvps_number: '', web_site: '', myaudi_users:[10,11,12], addresses: [2]}
+    - {contract_number: '', commercial_name: 'GARAGE CLERFOND SARL', registry_users: [47], kvps_number: '', web_site: '', myaudi_users:[2,30,40,55,61], addresses: [1]}
+    - {contract_number: '', commercial_name: 'J.LAIN AUTO TARENTAISE SARL', registry_users: [50, 55], kvps_number: '', web_site: '', myaudi_users:[10,11,12], addresses: [2]}

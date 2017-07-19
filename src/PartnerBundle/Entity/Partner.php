@@ -76,9 +76,11 @@ class Partner extends Date
     protected $isEtron;
 
     /**
-     * @ORM\Column(type="integer", name="registry_user_id", unique=true, nullable=true)
+     * One Partner have Many registryUsers.
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"})
      */
-    protected $registryUserId;
+    protected $registryUsers;
 
     /**
      * One Partner have Many MyaudiUsers.
@@ -100,6 +102,7 @@ class Partner extends Date
     public function __construct()
     {
         $this->myaudiUsers = new ArrayCollection();
+        $this->registryUsers = new ArrayCollection();
         $this->addresses   = new ArrayCollection();
     }
 
@@ -322,22 +325,6 @@ class Partner extends Date
     /**
      * @return mixed
      */
-    public function getRegistryUserId()
-    {
-        return $this->registryUserId;
-    }
-
-    /**
-     * @param mixed $registryUserId
-     */
-    public function setRegistryUserId($registryUserId)
-    {
-        $this->registryUserId = $registryUserId;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
@@ -394,6 +381,14 @@ class Partner extends Date
     /**
      * @return ArrayCollection
      */
+    public function getRegistryUsers()
+    {
+        return $this->registryUsers;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getAddresses()
     {
         return $this->addresses;
@@ -420,6 +415,31 @@ class Partner extends Date
     {
         if ($this->myaudiUsers->contains($myaudiUser)) {
             $this->myaudiUsers->removeElement($myaudiUser);
+        }
+
+        return $this;
+    }
+    /**
+     * @param PartnerRegistryUser $registryUser
+     * @return $this
+     */
+    public function addRegistryUser(PartnerRegistryUser $registryUser)
+    {
+        if (!$this->registryUsers->contains($registryUser)) {
+            $this->registryUsers->add($registryUser);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PartnerRegistryUser $registryUser
+     * @return $this
+     */
+    public function removeRegistryUser(PartnerRegistryUser $registryUser)
+    {
+        if ($this->registryUsers->contains($registryUser)) {
+            $this->registryUsers->removeElement($registryUser);
         }
 
         return $this;

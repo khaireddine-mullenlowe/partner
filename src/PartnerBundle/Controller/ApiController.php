@@ -46,7 +46,7 @@ class ApiController extends Controller
      */
     public function getPartnerByRegistryUserId($registryUserId)
     {
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->findOneBy(array('registryUserId' => $registryUserId));
+        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->findOneByRegistryUserId($registryUserId);
         if (!$partner) {
             return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
         }
