@@ -11,5 +11,4 @@ class MyaudiUserUpdatePartnerConsumer implements ConsumerInterface
     public function execute(AMQPMessage $msg)
     {
     }
-
 }

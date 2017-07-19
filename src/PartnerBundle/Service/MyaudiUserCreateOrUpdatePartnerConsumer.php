@@ -44,14 +44,11 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
         $data = json_decode($jsonData);
 
         if ($data) {
-
             if (isset($data->partner_response)) {
-
                 // contains sales and aftersales partner information
                 $partnerDatas = $data->partner_response;
 
                 foreach ($partnerDatas as $typePartner => $partnerData) {
-
                     $this->logger->info(sprintf("[Consumer] Reading messages to update partner %s (__CLASS__): %s", $typePartner, json_encode($data)));
 
                     if ($typePartner == 'partner_response') {
@@ -88,14 +85,10 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
                     $this->em->flush();
                 }
             } else {
-
                 $this->logger->info(sprintf("[Consumer] No data to update partner (__CLASS__)"));
             }
-
         } else {
-
             throw new InvalidArgumentException("[Consumer] Update Profile Data is empty and can't be processed (__CLASS__)");
         }
-
     }
 }
