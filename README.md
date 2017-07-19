@@ -1,5 +1,6 @@
 # audi-agc5-partner
 
+## Configuration Supervisor pour injection des données myAudi
 ```
 [program:rabbitmq-audi-user-update-partner]
 command=/var/www/audi-agc5-partner/bin/console rabbitmq:consumer myaudi_user_create_or_update_partner
