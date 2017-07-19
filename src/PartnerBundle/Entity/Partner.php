@@ -51,26 +51,31 @@ class Partner extends Date
     protected $webSite;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isPartnerR8;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isTwinService;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isPartnerPlus;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isOccPlus;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isEtron;
@@ -203,13 +208,18 @@ class Partner extends Date
     }
 
     /**
-     * Set isPartnerR8.
-     *
-     * @param bool $isPartnerR8
-     *
-     * @return Partner
+     * @return bool
      */
-    public function setIsPartnerR8($isPartnerR8)
+    public function isPartnerR8(): bool
+    {
+        return $this->isPartnerR8;
+    }
+
+    /**
+     * @param bool $isPartnerR8
+     * @return $this
+     */
+    public function setIsPartnerR8(bool $isPartnerR8)
     {
         $this->isPartnerR8 = $isPartnerR8;
 
@@ -217,23 +227,18 @@ class Partner extends Date
     }
 
     /**
-     * Get isPartnerR8.
-     *
      * @return bool
      */
-    public function getIsPartnerR8()
+    public function isTwinService(): bool
     {
-        return $this->isPartnerR8;
+        return $this->isTwinService;
     }
 
     /**
-     * Set isTwinService.
-     *
      * @param bool $isTwinService
-     *
-     * @return Partner
+     * @return $this
      */
-    public function setIsTwinService($isTwinService)
+    public function setIsTwinService(bool $isTwinService)
     {
         $this->isTwinService = $isTwinService;
 
@@ -241,23 +246,18 @@ class Partner extends Date
     }
 
     /**
-     * Get isTwinService.
-     *
      * @return bool
      */
-    public function getIsTwinService()
+    public function isPartnerPlus(): bool
     {
-        return $this->isTwinService;
+        return $this->isPartnerPlus;
     }
 
     /**
-     * Set isPartnerPlus.
-     *
      * @param bool $isPartnerPlus
-     *
-     * @return Partner
+     * @return $this
      */
-    public function setIsPartnerPlus($isPartnerPlus)
+    public function setIsPartnerPlus(bool $isPartnerPlus)
     {
         $this->isPartnerPlus = $isPartnerPlus;
 
@@ -265,23 +265,18 @@ class Partner extends Date
     }
 
     /**
-     * Get isPartnerPlus.
-     *
      * @return bool
      */
-    public function getIsPartnerPlus()
+    public function isOccPlus(): bool
     {
-        return $this->isPartnerPlus;
+        return $this->isOccPlus;
     }
 
     /**
-     * Set isOccPlus.
-     *
      * @param bool $isOccPlus
-     *
-     * @return Partner
+     * @return $this
      */
-    public function setIsOccPlus($isOccPlus)
+    public function setIsOccPlus(bool $isOccPlus)
     {
         $this->isOccPlus = $isOccPlus;
 
@@ -289,37 +284,22 @@ class Partner extends Date
     }
 
     /**
-     * Get isOccPlus.
-     *
      * @return bool
      */
-    public function getIsOccPlus()
+    public function isEtron(): bool
     {
-        return $this->isOccPlus;
+        return $this->isEtron;
     }
 
     /**
-     * Set isEtron.
-     *
      * @param bool $isEtron
-     *
-     * @return Partner
+     * @return $this
      */
-    public function setIsEtron($isEtron)
+    public function setIsEtron(bool $isEtron)
     {
         $this->isEtron = $isEtron;
 
         return $this;
-    }
-
-    /**
-     * Get isEtron.
-     *
-     * @return bool
-     */
-    public function getIsEtron()
-    {
-        return $this->isEtron;
     }
 
     /**

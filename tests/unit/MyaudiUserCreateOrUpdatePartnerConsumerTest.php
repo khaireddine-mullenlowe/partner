@@ -43,10 +43,10 @@ class MyaudiUserCreateOrUpdatePartnerConsumerTest extends \Codeception\Test\Unit
 
             $this->assertEquals($partnerInfo->commercial_name, $partner->getCommercialName());
             $this->assertEquals($partnerInfo->contract_number, $partner->getContractNumber());
-            $this->assertEquals($partnerInfo->etron, $partner->getIsEtron());
-            $this->assertEquals($partnerInfo->occ_plus, $partner->getIsOccPlus());
-            $this->assertEquals($partnerInfo->partner_r8, $partner->getIsPartnerR8());
-            $this->assertEquals($partnerInfo->twin_service, $partner->getIsTwinService());
+            $this->assertEquals((bool)$partnerInfo->etron, $partner->isEtron());
+            $this->assertEquals((bool)$partnerInfo->occ_plus, $partner->isOccPlus());
+            $this->assertEquals((bool)$partnerInfo->partner_r8, $partner->isPartnerR8());
+            $this->assertEquals((bool)$partnerInfo->twin_service, $partner->isTwinService());
             $this->assertEquals($partnerInfo->website, $partner->getWebSite());
             $this->assertEquals($type, $partner->getType());
 
