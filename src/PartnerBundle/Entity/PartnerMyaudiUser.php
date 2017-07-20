@@ -3,12 +3,14 @@
 namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Swagger\Annotations as SWG;
 
 /**
  * Relation One to Many between Partner and MyaudiUser
  * Class PartnerMyaudiUser
  * @package PartnerBundle\Entity
  *
+ * @SWG\Definition()
  * @ORM\Entity
  * @ORM\Table(name="partner_myaudiuser")
  */
@@ -19,12 +21,16 @@ class PartnerMyaudiUser
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="myaudiUsers")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
+     * @SWG\Property(format="int64", type="integer")
+     * @var Partner
      */
     protected $partner;
 
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
+     * @SWG\Property(format="int64")
+     * @var integer
      */
     protected $myaudiUserId;
 

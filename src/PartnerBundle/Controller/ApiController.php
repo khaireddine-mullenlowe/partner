@@ -10,9 +10,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Swagger\Annotations as SWG;
 
 /**
- * Class ApiController
+ * @SWG\Swagger(
+ *     @SWG\Info(
+ *         version="1.0.0",
+ *         title="Partner Api"
+ *     ),
+ *     host="api5.audi.agence-one.net",
+ *     basePath="/partner/api/v1/partner",
+ *     schemes={"http"},
+ *     produces={"application/json"},
+ *     @SWG\Definition(
+ *         definition="Error",
+ *         required={"message"},
+ *         @SWG\Property(
+ *             property="message",
+ *             type="string",
+ *             default="Partner not found"
+ *         )
+ *     )
+ * )
+ *
+ * @SWG\SecurityScheme(
+ *   securityDefinition="bearer",
+ *   type="apiKey",
+ *   in="header",
+ *   name="Authorization"
+ * )
+ *
  * @Route("/api/v1/partner")
  * @package PartnerBundle\Controller
  */
@@ -38,6 +65,32 @@ class ApiController extends Controller
     }
 
     /**
+     * @SWG\Get(
+     *     path="/user/{registryUserId}",
+     *     summary="get partner for userId",
+     *     operationId="getPartnerByRegistryUserId",
+     *     @SWG\Parameter(
+     *         name="registryUserId",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="registry user Id"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the partner",
+     *         @SWG\Schema(ref="#/definitions/Partner")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(
+     *             ref="#/definitions/Error"
+     *         )
+     *     ),
+     *   security={{ "bearer":{} }}
+     * )
+     *
      * @Route("/user/{registryUserId}")
      * @Method({"GET"})
      *

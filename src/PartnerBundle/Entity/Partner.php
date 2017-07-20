@@ -5,8 +5,10 @@ namespace PartnerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\ORM\Mapping as ORM;
+use Swagger\Annotations as SWG;
 
 /**
+ * @SWG\Definition()
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
  */
@@ -16,67 +18,86 @@ class Partner extends Date
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @SWG\Property(format="int64")
+     * @var integer
      */
     protected $id;
 
     /**
      * Legacy id
      * @ORM\Column(type="integer", name="partner_id", unique=true, nullable=true)
+     * @SWG\Property(format="int64")
+     * @var integer
      */
     protected $partnerId;
 
     /**
      * @var @ORM\Column(type="string", nullable=true)
+     * @SWG\Property
+     * @var string
      */
     protected $type;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @SWG\Property
+     * @var string
      */
     protected $contractNumber;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @SWG\Property
+     * @var string
      */
     protected $commercialName;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @SWG\Property
+     * @var string
      */
     protected $kvpsNumber;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @SWG\Property
+     * @var string
      */
     protected $webSite;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
+     * @SWG\Property
      */
     protected $isPartnerR8;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
+     * @SWG\Property
      */
     protected $isTwinService;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
+     * @SWG\Property
      */
     protected $isPartnerPlus;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
+     * @SWG\Property
      */
     protected $isOccPlus;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
+     * @SWG\Property
      */
     protected $isEtron;
 
@@ -84,6 +105,7 @@ class Partner extends Date
      * One Partner have Many registryUsers.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"})
+     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUser"))
      */
     protected $registryUsers;
 
@@ -91,6 +113,7 @@ class Partner extends Date
      * One Partner have Many MyaudiUsers.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"})
+     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerMyaudiUser"))
      */
     protected $myaudiUsers;
 
@@ -98,6 +121,7 @@ class Partner extends Date
      * One Partner have Many Addresses.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerAddress", mappedBy="partner", cascade={"persist", "remove"})
+     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerAddress"))
      */
     protected $addresses;
 

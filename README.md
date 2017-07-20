@@ -8,3 +8,24 @@ stdout_logfile=/var/log/supervisor/%(program_name)s.log
 stderr_logfile=/var/log/supervisor/%(program_name)s.log
 autostart=true
 ```
+
+
+## Tests & Documentation :
+### Tests codeception
+
+Excecute the following commande :
+``` bash
+./vendor/bin/codecept run --coverage-html coverage
+```
+
+The coverage is readable in HTML format in tests/_output/coverage/
+
+
+### Documentation swagger
+Generate the swagger.json file and let nginx serve it :
+
+``` bash
+./vendor/bin/swagger src/PartnerBundle/  --output web/swagger.json 
+# if you want to modify host and basePath dynamically :
+./vendor/bin/swagger src/PartnerBundle/  --stdout | sed 's#"host":.*#"host": "api5.audi.dev.agence-one.net",#;s#"basePath":.*#"basePath": "/partner/api/v1/partner",#' > web/swagger.json
+```
