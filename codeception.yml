@@ -10,7 +10,7 @@ extensions:
         - Codeception\Extension\RunFailed
 
 modules:
-    config:
+    enabled:
         - Db:
             dsn: 'sqlite:./tests/_data/test.sqlite'
             user: ''

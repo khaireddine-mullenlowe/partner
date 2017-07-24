@@ -18,6 +18,7 @@ swiftmailer:
 # Doctrine Configuration
 doctrine:
     dbal:
+        driver:   pdo_sqlite
         path:     %database_path%
         user:     %database_user%
         password: %database_password%
