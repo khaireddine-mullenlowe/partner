@@ -71,7 +71,7 @@ class ApiController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="s/{partnerId}",
+     *     path="/{partnerId}",
      *     summary="get partner for userId",
      *     operationId="getPartnerById",
      *     @SWG\Parameter(
@@ -89,9 +89,7 @@ class ApiController extends Controller
      *     @SWG\Response(
      *         response=404,
      *         description="not found",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *   security={{ "bearer":{} }}
      * )
@@ -133,9 +131,7 @@ class ApiController extends Controller
      *     @SWG\Response(
      *         response=404,
      *         description="not found",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *   security={{ "bearer":{} }}
      * )
@@ -178,9 +174,7 @@ class ApiController extends Controller
      *     @SWG\Response(
      *         response=404,
      *         description="not found",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *    security={{ "bearer":{} }}
      * )
@@ -206,11 +200,11 @@ class ApiController extends Controller
 
     /**
      * @SWG\Put(
-     *     path="/{partnerId}",
+     *     path="/{partnerIdToUpdate}",
      *     summary="update partner for userId",
      *     operationId="updatePartnerById",
      *     @SWG\Parameter(
-     *         name="partnerId",
+     *         name="partnerIdToUpdate",
      *         in="path",
      *         type="integer",
      *         required=true,
@@ -230,16 +224,12 @@ class ApiController extends Controller
      *     @SWG\Response(
      *         response=404,
      *         description="not found",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     @SWG\Response(
      *         response=500,
      *         description="updating error",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *    ),
      *   security={{ "bearer":{} }}
      * )
@@ -287,13 +277,6 @@ class ApiController extends Controller
      *     summary="create partner for userId",
      *     operationId="createPartner",
      *     @SWG\Parameter(
-     *         name="partnerId",
-     *         in="path",
-     *         type="integer",
-     *         required=true,
-     *         description="partnerId"
-     *     ),
-     *     @SWG\Parameter(
      *         name="partner",
      *         in="body",
      *         required=true,
@@ -307,18 +290,14 @@ class ApiController extends Controller
      *     @SWG\Response(
      *         response=404,
      *         description="not found",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     @SWG\Response(
      *         response=500,
      *         description="updating error",
-     *         @SWG\Schema(
-     *             ref="#/definitions/Error"
-     *         )
-     *    ),
-     *   security={{ "bearer":{} }}
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
      * )
      *
      * @Route("")
@@ -351,5 +330,64 @@ class ApiController extends Controller
         $jsonContent = $this->serialiser->serialize($partner, 'json');
 
         return new JsonResponse($jsonContent, 200, [], true);
+    }
+    /**
+     * @SWG\Delete(
+     *     path="/{partnerIdToRemove}",
+     *     summary="remove partner for Id",
+     *     operationId="removePartnerById",
+     *     @SWG\Parameter(
+     *         name="partnerIdToRemove",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="partnerId"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the partner",
+     *         @SWG\Schema(ref="#/definitions/Success")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
+     * )
+     * @SWG\Definition(
+     *     definition="Success",
+     *     type="object",
+     *     required={"success"},
+     *     @SWG\Property(property="success", type="boolean")
+     * )
+     *
+     * @Route("/{partnerId}")
+     * @Method({"DELETE"})
+     *
+     * @param Request $request
+     * @param integer $partnerId
+     * @return JsonResponse
+     */
+    public function removePartnerById(Request $request, $partnerId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var Partner $partner
+         */
+        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($partnerId);
+        if (!$partner) {
+            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $em->remove($partner);
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
     }
 }

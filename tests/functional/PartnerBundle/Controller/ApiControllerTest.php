@@ -159,8 +159,69 @@ HEREDOC;
         $this->assertEquals('NEW ESPACE PREMIUM', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(16730, 'myaudiUserId', $responseData['myaudiUsers']);
         $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
+
+        return $partnerId;
     }
 
+    /**
+     * @depends testPutPartner
+     */
+    public function testGetPartner($partnerId)
+    {
+        static::$client->request('GET', '/api/v1/partner/'.$partnerId);
+        $response = static::$client->getResponse();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
+        $this->assertJson($response->getContent());
+
+        $responseData = json_decode($response->getContent(), true);
+
+        $this->assertEquals('NEW ESPACE PREMIUM', $responseData['commercialName']);
+        $this->assertListContainsArrayWithKeyValue(16730, 'myaudiUserId', $responseData['myaudiUsers']);
+        $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
+
+        return $partnerId;
+    }
+
+
+    /**
+     * @depends testGetPartner
+     */
+    public function testRemovePartner($partnerId)
+    {
+        static::$client->request('DELETE', '/api/v1/partner/'.$partnerId);
+        $response = static::$client->getResponse();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
+        $this->assertJson($response->getContent());
+
+        $responseData = json_decode($response->getContent(), true);
+
+        $this->assertEquals(true, $responseData['success']);
+
+        return $partnerId;
+    }
+
+    /**
+     * @depends testRemovePartner
+     */
+    public function testGetParnterWhenNotFound($partnerId)
+    {
+        static::$client->request('GET', '/api/v1/partner/'.$partnerId);
+        $response = static::$client->getResponse();
+
+        $this->assertSame(404, $response->getStatusCode());
+        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
+        $this->assertJson($response->getContent());
+
+        $responseData = json_decode($response->getContent(), true);
+
+        $this->assertEquals('Partner not found', $responseData['message']);
+
+        return $partnerId;
+    }
 
     /**
      * @param mixed  $value
