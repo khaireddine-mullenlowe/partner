@@ -104,15 +104,15 @@ class Partner extends Date
     /**
      * One Partner have Many registryUsers.
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUser"))
      */
-    protected $registryUsers;
+    private $registryUsers;
 
     /**
      * One Partner have Many MyaudiUsers.
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerMyaudiUser"))
      */
     protected $myaudiUsers;
@@ -120,7 +120,7 @@ class Partner extends Date
     /**
      * One Partner have Many Addresses.
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="PartnerAddress", mappedBy="partner", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="PartnerAddress", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerAddress"))
      */
     protected $addresses;
@@ -133,6 +133,11 @@ class Partner extends Date
         $this->myaudiUsers = new ArrayCollection();
         $this->registryUsers = new ArrayCollection();
         $this->addresses   = new ArrayCollection();
+        $this->isTwinService = false;
+        $this->isPartnerR8 = false;
+        $this->isPartnerPlus = false;
+        $this->isOccPlus = false;
+        $this->isEtron = false;
     }
 
     /**
@@ -407,6 +412,7 @@ class Partner extends Date
         if (!$this->myaudiUsers->contains($myaudiUser)) {
             $this->myaudiUsers->add($myaudiUser);
         }
+        $myaudiUser->setPartner($this);
 
         return $this;
     }
@@ -432,6 +438,7 @@ class Partner extends Date
         if (!$this->registryUsers->contains($registryUser)) {
             $this->registryUsers->add($registryUser);
         }
+        $registryUser->setPartner($this);
 
         return $this;
     }
@@ -445,6 +452,7 @@ class Partner extends Date
         if ($this->registryUsers->contains($registryUser)) {
             $this->registryUsers->removeElement($registryUser);
         }
+        $registryUser->setPartner(null);
 
         return $this;
     }
@@ -457,6 +465,7 @@ class Partner extends Date
         if (!$this->addresses->contains($address)) {
             $this->addresses->add($address);
         }
+        $address->setPartner($this);
 
         return $this;
     }

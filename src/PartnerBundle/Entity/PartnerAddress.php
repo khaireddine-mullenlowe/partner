@@ -17,16 +17,20 @@ use Swagger\Annotations as SWG;
 class PartnerAddress
 {
     /**
-     * Many Addresses have One Partner.
      * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Many Addresses have One Partner.
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="addresses")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
-     * @SWG\Property(format="int64", type="integer")
      */
     protected $partner;
 
     /**
-     * @ORM\Id
      * @ORM\Column(type="integer")
      * @SWG\Property(format="int64")
      * @var integer
@@ -38,10 +42,26 @@ class PartnerAddress
      * @param Partner $partner
      * @param integer $addressId
      */
-    public function __construct(Partner $partner, $addressId)
+    public function __construct(Partner $partner = null, $addressId = null)
     {
         $this->partner = $partner;
         $this->addressId = $addressId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
