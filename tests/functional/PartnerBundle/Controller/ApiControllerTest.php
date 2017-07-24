@@ -22,29 +22,14 @@ class ApiControllerTest extends WebTestCase
 
     public function testGetPartnerByRegistryUserId()
     {
-        static::$client->request('GET', '/api/v1/partner/user/47');
-        $response = static::$client->getResponse();
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/user/47');
         $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(47, 'registryUserId', $responseData['registryUsers']);
     }
 
     public function testGetPartnerByMyaudiUserId()
     {
-        static::$client->request('GET', '/api/v1/partner/myaudiuser/55');
-        $response = static::$client->getResponse();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/myaudiuser/55');
         $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(55, 'myaudiUserId', $responseData['myaudiUsers']);
     }
@@ -88,15 +73,7 @@ class ApiControllerTest extends WebTestCase
 }
 HEREDOC;
 
-        static::$client->request('POST', '/api/v1/partner', [], [], [], $data);
-        $response = static::$client->getResponse();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'POST', '/api/v1/partner', [], [], [], $data);
         $this->assertEquals('ESPACE PREMIUM', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(1673, 'myaudiUserId', $responseData['myaudiUsers']);
         $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
@@ -147,15 +124,7 @@ HEREDOC;
 }
 HEREDOC;
 
-        static::$client->request('PUT', '/api/v1/partner/'.$partnerId, [], [], [], $data);
-        $response = static::$client->getResponse();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'PUT', '/api/v1/partner/'.$partnerId, [], [], [], $data);
         $this->assertEquals('NEW ESPACE PREMIUM', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(16730, 'myaudiUserId', $responseData['myaudiUsers']);
         $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
@@ -168,15 +137,7 @@ HEREDOC;
      */
     public function testGetPartner($partnerId)
     {
-        static::$client->request('GET', '/api/v1/partner/'.$partnerId);
-        $response = static::$client->getResponse();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/'.$partnerId);
         $this->assertEquals('NEW ESPACE PREMIUM', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(16730, 'myaudiUserId', $responseData['myaudiUsers']);
         $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
@@ -190,15 +151,7 @@ HEREDOC;
      */
     public function testRemovePartner($partnerId)
     {
-        static::$client->request('DELETE', '/api/v1/partner/'.$partnerId);
-        $response = static::$client->getResponse();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(200, 'DELETE', '/api/v1/partner/'.$partnerId);
         $this->assertEquals(true, $responseData['success']);
 
         return $partnerId;
@@ -209,15 +162,7 @@ HEREDOC;
      */
     public function testGetParnterWhenNotFound($partnerId)
     {
-        static::$client->request('GET', '/api/v1/partner/'.$partnerId);
-        $response = static::$client->getResponse();
-
-        $this->assertSame(404, $response->getStatusCode());
-        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
-        $this->assertJson($response->getContent());
-
-        $responseData = json_decode($response->getContent(), true);
-
+        $responseData = $this->requestJson(404, 'GET', '/api/v1/partner/'.$partnerId);
         $this->assertEquals('Partner not found', $responseData['message']);
 
         return $partnerId;
@@ -236,5 +181,16 @@ HEREDOC;
             }
         }
         $this->fail(sprintf("Fail asserting that a list contains an array with [%s => %s]", $key, $value));
+    }
+
+    protected function requestJson($expectedStatusCode, $method, $uri, $parameters = [], $files = [], $server = [], $content = null)
+    {
+        static::$client->request($method, $uri, $parameters, $files, $server, $content);
+        $response =  static::$client->getResponse();
+        $this->assertSame($expectedStatusCode, $response->getStatusCode());
+        $this->assertTrue($response->headers->contains('Content-Type', 'application/json'));
+        $this->assertJson($response->getContent());
+
+        return json_decode($response->getContent(), true);
     }
 }
