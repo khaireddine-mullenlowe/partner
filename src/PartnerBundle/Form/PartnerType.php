@@ -55,12 +55,6 @@ class PartnerType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
-            ->add('addresses', CollectionType::class, [
-                'entry_type' => PartnerAddressType::class,
-                'allow_add'    => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ])
         ;
     }
 

@@ -50,12 +50,7 @@ class ApiControllerTest extends WebTestCase
         }
     ],
     "type": "sales",
-    "isPartnerPlus": false,
-    "addresses": [
-        {
-            "addressId": 2
-        }
-    ]
+    "isPartnerPlus": false
 }
 HEREDOC;
 
@@ -121,12 +116,7 @@ HEREDOC;
         }
     ],
     "type": "sales",
-    "isPartnerPlus": false,
-    "addresses": [
-        {
-            "addressId": 2
-        }
-    ]
+    "isPartnerPlus": false
 }
 HEREDOC;
 

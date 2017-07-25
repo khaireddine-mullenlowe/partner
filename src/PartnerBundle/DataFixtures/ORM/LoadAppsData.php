@@ -50,10 +50,6 @@ class LoadAppsData extends BaseFixtureData
                 $partner->addRegistryUser(new PartnerRegistryUser($partner, $registryUserId));
             }
 
-            foreach ($partnerData['addresses'] as $addressId) {
-                $partner->addAddress(new PartnerAddress($partner, $addressId));
-            }
-
             $manager->persist($partner);
         }
         $manager->flush();

@@ -118,21 +118,12 @@ class Partner extends Date
     protected $myaudiUsers;
 
     /**
-     * One Partner have Many Addresses.
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="PartnerAddress", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerAddress"))
-     */
-    protected $addresses;
-
-    /**
      * Partner constructor.
      */
     public function __construct()
     {
         $this->myaudiUsers = new ArrayCollection();
         $this->registryUsers = new ArrayCollection();
-        $this->addresses   = new ArrayCollection();
         $this->isTwinService = false;
         $this->isPartnerR8 = false;
         $this->isPartnerPlus = false;
@@ -396,14 +387,6 @@ class Partner extends Date
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    /**
      * @param PartnerMyaudiUser $myaudiUser
      * @return $this
      */
@@ -453,32 +436,6 @@ class Partner extends Date
             $this->registryUsers->removeElement($registryUser);
         }
         $registryUser->setPartner(null);
-
-        return $this;
-    }
-    /**
-     * @param PartnerAddress $address
-     * @return $this
-     */
-    public function addAddress(PartnerAddress $address)
-    {
-        if (!$this->addresses->contains($address)) {
-            $this->addresses->add($address);
-        }
-        $address->setPartner($this);
-
-        return $this;
-    }
-
-    /**
-     * @param PartnerAddress $address
-     * @return $this
-     */
-    public function removeAddress(PartnerAddress $address)
-    {
-        if ($this->addresses->contains($address)) {
-            $this->addresses->removeElement($address);
-        }
 
         return $this;
     }

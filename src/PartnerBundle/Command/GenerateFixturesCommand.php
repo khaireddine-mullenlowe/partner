@@ -58,7 +58,6 @@ class GenerateFixturesCommand extends ContainerAwareCommand
                 'kvps_number' => $partner->getKvpsNumber(),
                 'web_site' => $partner->getWebSite(),
                 'myaudi_users' => [],
-                'addresses' => [],
                 'partner_id' => $partner->getPartnerId(),
                 'type' => $partner->getType(),
                 'is_etron' => $partner->isEtron(),
