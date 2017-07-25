@@ -17,3 +17,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    # Commonbundle authentication parameters
+    auth_signer_secret: agcv5
+    auth_login_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/login'
+    auth_logout_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/logout'
+    auth_failure_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/login'
+    auth_cookie_domain: .audi.dev.agence-one.net
+

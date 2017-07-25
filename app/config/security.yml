@@ -6,12 +6,25 @@ security:
     providers:
         in_memory:
             memory: ~
+        jwt:
+            lexik_jwt:
+                class: \Mullenlowe\CommonBundle\Security\User\JwtUser
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        secured_api:
+            pattern: ^/api/v1
+            provider: jwt
+            guard:
+                authenticators:
+                    - 'mullenlowe.commonbundle.jwt_json_token_authenticator'
+            anonymous:    true
+            stateless: true
+            entry_point: 'mullenlowe.commonbundle.jwt_json_token_authenticator'
 
         main:
             anonymous: ~
@@ -22,3 +35,5 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+    access_control:
+        - { path: ^/api/v1, role: ROLE_USER }
