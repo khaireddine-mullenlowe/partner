@@ -20,20 +20,6 @@ class ApiControllerTest extends WebTestCase
         static::$client = static::createClient();
     }
 
-    public function testGetPartnerByRegistryUserId()
-    {
-        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/user/47');
-        $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
-        $this->assertListContainsArrayWithKeyValue(47, 'registryUserId', $responseData['registryUsers']);
-    }
-
-    public function testGetPartnerByMyaudiUserId()
-    {
-        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/myaudiuser/55');
-        $this->assertEquals('GARAGE CLERFOND SARL', $responseData['commercialName']);
-        $this->assertListContainsArrayWithKeyValue(55, 'myaudiUserId', $responseData['myaudiUsers']);
-    }
-
     public function testPostPartner()
     {
         $data = <<<HEREDOC
@@ -80,6 +66,26 @@ HEREDOC;
         $this->assertArrayHasKey('id', $responseData);
 
         return $responseData['id'];
+    }
+
+    /**
+     * @depends testPostPartner
+     */
+    public function testGetPartnerByRegistryUserId()
+    {
+        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/user/673');
+        $this->assertEquals('ESPACE PREMIUM', $responseData['commercialName']);
+        $this->assertListContainsArrayWithKeyValue(673, 'registryUserId', $responseData['registryUsers']);
+    }
+
+    /**
+     * @depends testGetPartnerByRegistryUserId
+     */
+    public function testGetPartnerByMyaudiUserId()
+    {
+        $responseData = $this->requestJson(200, 'GET', '/api/v1/partner/myaudiuser/1673');
+        $this->assertEquals('ESPACE PREMIUM', $responseData['commercialName']);
+        $this->assertListContainsArrayWithKeyValue(1673, 'myaudiUserId', $responseData['myaudiUsers']);
     }
 
     /**
