@@ -3,4 +3,4 @@ modules:
     enabled:
         - \Helper\Functional
         - PhpBrowser:
-            url: http://annuairev5.audi.dev.agence-one.net
+            url: http://api5.audi.dev.agence-one.net/partner/dev

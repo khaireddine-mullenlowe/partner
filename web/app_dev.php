@@ -18,6 +18,9 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
+define('C3_CODECOVERAGE_ERROR_LOG_FILE', __DIR__.'/../var/logs/c3_error.log'); //Optional (if not set the default c3 output dir will be used)
+include __DIR__.'/../c3.php';
+
 /** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../vendor/autoload.php';
 Debug::enable();
