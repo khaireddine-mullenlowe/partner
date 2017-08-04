@@ -25,11 +25,11 @@ class Partner extends Date
 
     /**
      * Legacy id
-     * @ORM\Column(type="integer", name="partner_id", unique=true, nullable=true)
+     * @ORM\Column(type="integer", unique=true, nullable=true)
      * @SWG\Property(format="int64")
      * @var integer
      */
-    protected $partnerId;
+    protected $legacyPartnerId;
 
     /**
      * @var @ORM\Column(type="string", nullable=true)
@@ -341,17 +341,17 @@ class Partner extends Date
     /**
      * @return mixed
      */
-    public function getPartnerId()
+    public function getLegacyPartnerId()
     {
-        return $this->partnerId;
+        return $this->legacyPartnerId;
     }
 
     /**
-     * @param mixed $partnerId
+     * @param mixed $legacyPartnerId
      */
-    public function setPartnerId($partnerId)
+    public function setLegacyPartnerId($legacyPartnerId)
     {
-        $this->partnerId = $partnerId;
+        $this->legacyPartnerId = $legacyPartnerId;
     }
 
     /**

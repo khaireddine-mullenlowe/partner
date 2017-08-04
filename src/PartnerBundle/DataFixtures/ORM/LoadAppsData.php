@@ -39,7 +39,7 @@ class LoadAppsData extends BaseFixtureData
             $partner->setIsPartnerPlus($partnerData['is_partner_plus']);
             $partner->setIsPartnerR8($partnerData['is_partner_r8']);
             $partner->setIsTwinService($partnerData['is_twin_service']);
-            $partner->setPartnerId($partnerData['partner_id']);
+            $partner->setLegacyPartnerId($partnerData['legacy_partner_id']);
             $partner->setType($partnerData['type']);
 
             foreach ($partnerData['myaudi_users'] as $myaudiUserId) {

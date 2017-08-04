@@ -23,7 +23,7 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('partnerId', TextType::class)
+            ->add('legacyPartnerId', TextType::class)
             ->add(
                 'type',
                 ChoiceType::class,

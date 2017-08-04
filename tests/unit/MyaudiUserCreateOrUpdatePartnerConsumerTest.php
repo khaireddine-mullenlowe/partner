@@ -37,7 +37,7 @@ class MyaudiUserCreateOrUpdatePartnerConsumerTest extends \Codeception\Test\Unit
 
             $em = $this->container->get('doctrine.orm.entity_manager');;
 
-            $partner = $em->getRepository("PartnerBundle:Partner")->findOneBy(['partnerId' => $partnerInfo->id_partner]);
+            $partner = $em->getRepository("PartnerBundle:Partner")->findOneBy(['legacyPartnerId' => $partnerInfo->id_partner]);
 
             $this->assertNotEmpty($partner);
 

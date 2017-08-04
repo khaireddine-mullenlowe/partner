@@ -59,7 +59,7 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
 
                     $partner = $this->em
                         ->getRepository("PartnerBundle:Partner")
-                        ->findOneBy(["partnerId" => $partnerData->id_partner]);
+                        ->findOneBy(["legacyPartnerId" => $partnerData->id_partner]);
 
                     // create partner user
                     if (!$partner) {
@@ -69,7 +69,7 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
                     $partner->setType($type);
                     $partner->setCommercialName($partnerData->commercial_name);
                     $partner->setContractNumber($partnerData->contract_number);
-                    $partner->setPartnerId($partnerData->id_partner);
+                    $partner->setLegacyPartnerId($partnerData->id_partner);
 
                     $partner->setIsEtron($partnerData->etron);
                     $partner->setIsOccPlus($partnerData->occ_plus);
