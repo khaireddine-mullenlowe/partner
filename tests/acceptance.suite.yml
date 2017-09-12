@@ -7,6 +7,6 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://api5.audi.dev.agence-one.net/partner/dev
+        - Symfony:
+            url: http://localhost
         - \Helper\Acceptance
