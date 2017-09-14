@@ -11,6 +11,13 @@ function usage {
     exit 1
 }
 
+if [ ! -f "./codeception.yml" ]; then
+    echo "File codeception.yml does not exist."
+    exit 1
+fi
+
+export PATH="$PATH:$HOME/.composer/vendor/bin/:./vendor/bin:./bin"
+
 CODECEPT_OPTIONS=""
 while [[ $# -gt 0 ]]
 do
@@ -36,12 +43,12 @@ done
 
 echo "Runing codecept with following arguments :  $CODECEPT_OPTIONS"
 
-php vendor/bin/codecept build
+codecept build
 
 php bin/console doctrine:schema:update --force --env=test
 
-# php bin/console doctrine:fixtures:load --env=test --no-interaction
+php bin/console doctrine:fixtures:load --env=test --no-interaction
 #
 sqlite3 tests/_data/test.sqlite .dump > tests/_data/test.sql
 #
-php vendor/bin/codecept run $CODECEPT_OPTIONS
+codecept run $CODECEPT_OPTIONS
