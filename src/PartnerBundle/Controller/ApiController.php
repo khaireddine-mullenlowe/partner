@@ -24,7 +24,7 @@ use Swagger\Annotations as SWG;
  *     ),
  *     host="api5.audi.agence-one.net",
  *     basePath="/partner/api/v1/partner",
- *     schemes={"http"},
+ *     schemes={"http", "https"},
  *     produces={"application/json"},
  *     @SWG\Definition(
  *         definition="Error",
