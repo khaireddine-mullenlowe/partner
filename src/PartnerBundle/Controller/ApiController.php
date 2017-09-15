@@ -301,7 +301,7 @@ class ApiController extends Controller
      *     security={{ "bearer":{} }}
      * )
      *
-     * @Route("")
+     * @Route("/")
      * @Method({"POST"})
      *
      * @param Request $request
