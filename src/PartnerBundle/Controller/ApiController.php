@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Swagger\Annotations as SWG;
@@ -66,7 +67,7 @@ class ApiController extends Controller
         });
         $normalizer->setIgnoredAttributes(['partner']);
 
-        $this->serialiser = new Serializer([$normalizer], [new JsonEncoder()]);
+        $this->serialiser = new Serializer([new DateTimeNormalizer(), $normalizer], [new JsonEncoder()]);
     }
 
     /**
