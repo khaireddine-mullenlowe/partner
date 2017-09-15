@@ -54,7 +54,7 @@ class ApiControllerTest extends WebTestCase
 }
 HEREDOC;
 
-        $responseData = $this->requestJson(200, 'POST', '/api/v1/partner', [], [], [], $data);
+        $responseData = $this->requestJson(200, 'POST', '/api/v1/partner/', [], [], [], $data);
         $this->assertEquals('ESPACE PREMIUM', $responseData['commercialName']);
         $this->assertListContainsArrayWithKeyValue(1673, 'myaudiUserId', $responseData['myaudiUsers']);
         $this->assertListContainsArrayWithKeyValue(1674, 'myaudiUserId', $responseData['myaudiUsers']);
