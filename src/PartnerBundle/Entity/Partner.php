@@ -230,7 +230,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isPartnerR8(): bool
+    public function getIsPartnerR8(): bool
     {
         return $this->isPartnerR8;
     }
@@ -249,7 +249,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isTwinService(): bool
+    public function getIsTwinService(): bool
     {
         return $this->isTwinService;
     }
@@ -268,7 +268,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isPartnerPlus(): bool
+    public function getIsPartnerPlus(): bool
     {
         return $this->isPartnerPlus;
     }
@@ -287,7 +287,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isOccPlus(): bool
+    public function getIsOccPlus(): bool
     {
         return $this->isOccPlus;
     }
@@ -306,7 +306,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isEtron(): bool
+    public function getIsEtron(): bool
     {
         return $this->isEtron;
     }
@@ -438,5 +438,20 @@ class Partner extends Date
         $registryUser->setPartner(null);
 
         return $this;
+    }
+
+    /**
+     * Allows to call isser method for boolean attribute, like 'isEtron()'
+     * Il calls the associated getter if exists, like getIsEtron()
+     * @param string $name
+     * @param array  $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (0 === strrpos($name, 'is') && method_exists($this, $getter = 'get'.ucfirst($name))) {
+            return $this->$getter($arguments);
+        }
+        throw new \BadMethodCallException(sprintf('Method  "%s" does not exist', $name));
     }
 }
