@@ -10,4 +10,10 @@ modules:
     enabled:
         # add a framework module here
         - \Helper\Functional
-bootstrap: _bootstrap.php
+        - REST:
+            url: http://localhost
+            depends: Symfony
+    config:
+        Db:
+            populate: false
+            cleanup: false
