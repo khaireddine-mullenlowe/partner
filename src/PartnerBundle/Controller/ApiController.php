@@ -83,7 +83,7 @@ class ApiController extends FOSRestController
             throw $this->createNotFoundException('Partner not found');
         }
 
-        return $this->view($partner, Response::HTTP_OK);
+        return $this->createView($partner);
     }
 
     /**
@@ -124,7 +124,7 @@ class ApiController extends FOSRestController
             throw $this->createNotFoundException('Partner not found');
         }
 
-        return $this->view($partner, Response::HTTP_OK);
+        return $this->createView($partner);
     }
 
     /**
@@ -166,7 +166,7 @@ class ApiController extends FOSRestController
             throw $this->createNotFoundException('Partner not found');
         }
 
-        return $this->view($partner, Response::HTTP_OK);
+        return $this->createView($partner);
     }
 
     /**
@@ -254,7 +254,7 @@ class ApiController extends FOSRestController
 
         $em->flush();
 
-        return $this->view($partner, Response::HTTP_OK);
+        return $this->createView($partner);
     }
 
     /**
@@ -308,7 +308,7 @@ class ApiController extends FOSRestController
         $em->persist($partner);
         $em->flush();
 
-        return $this->view($partner, Response::HTTP_CREATED);
+        return $this->createView($partner, Response::HTTP_CREATED);
     }
 
     /**
@@ -367,6 +367,11 @@ class ApiController extends FOSRestController
         $em->remove($partner);
         $em->flush();
 
-        return ['context' => 'success', 'data' => ['success' => true]];
+        return $this->view(['context' => 'success', 'data' => ['success' => true]], Response::HTTP_OK);
+    }
+
+    protected function createView(Partner $partner, $statusCode = Response::HTTP_OK)
+    {
+        return $this->view(['context' => 'partner', 'data' => $partner], $statusCode);
     }
 }
