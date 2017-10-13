@@ -30,6 +30,8 @@ class PartnerMyaudiUserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PartnerMyaudiUser::class,
+            'allow_extra_fields' => false,
+            'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
         ]);
     }
 

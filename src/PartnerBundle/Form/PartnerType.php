@@ -66,6 +66,8 @@ class PartnerType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => Partner::class,
+            'allow_extra_fields' => false,
+            'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
         ]);
     }
 

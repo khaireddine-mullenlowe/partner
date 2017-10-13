@@ -20,7 +20,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *         title="Partner Api"
  *     ),
  *     host="api5.audi.agence-one.net",
- *     basePath="/partner/api/v1/partner",
+ *     basePath="/partner",
  *     schemes={"http", "https"},
  *     produces={"application/json"},
  *     @SWG\Definition(
@@ -185,30 +185,45 @@ class ApiController extends FOSRestController
      *         required=true,
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="updating error",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *    ),
      *    @SWG\Put(
      *        summary="update partner for userId",
      *        operationId="putPartnerById",
-     *        security={{ "bearer":{} }}
+     *        security={{ "bearer":{} }},
+     *        @SWG\Response(
+     *            response=200,
+     *            description="the partner",
+     *            @SWG\Schema(ref="#/definitions/Partner")
+     *        ),
+     *        @SWG\Response(
+     *            response=404,
+     *            description="not found",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        ),
+     *        @SWG\Response(
+     *            response=500,
+     *            description="updating error",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *       )
      *    ),
      *    @SWG\Patch(
      *        summary="patch partner for userId",
      *        operationId="patchPartnerById",
-     *        security={{ "bearer":{} }}
+     *        security={{ "bearer":{} }},
+     *        @SWG\Response(
+     *            response=200,
+     *            description="the partner",
+     *            @SWG\Schema(ref="#/definitions/Partner")
+     *        ),
+     *        @SWG\Response(
+     *            response=404,
+     *            description="not found",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        ),
+     *        @SWG\Response(
+     *            response=500,
+     *            description="updating error",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        )
      *    )
      * )
      *
