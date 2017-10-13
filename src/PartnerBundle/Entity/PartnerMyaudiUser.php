@@ -4,6 +4,7 @@ namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relation One to Many between Partner and MyaudiUser
@@ -34,6 +35,7 @@ class PartnerMyaudiUser
     /**
      * @ORM\Column(type="integer")
      * @SWG\Property(format="int64")
+     * @Assert\Range(min=1, max=null)
      * @var integer
      */
     protected $myaudiUserId;

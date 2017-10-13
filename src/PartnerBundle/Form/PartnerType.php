@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,20 +25,11 @@ class PartnerType extends AbstractType
     {
         $builder
             ->add('legacyPartnerId')
-            ->add(
-                'type',
-                ChoiceType::class,
-                [
-                    'choices' => [
-                        0 => 'sales',
-                        1 => 'aftersales',
-                    ],
-                ]
-            )
+            ->add('type')
             ->add('contractNumber', TextType::class)
             ->add('commercialName', TextType::class)
             ->add('kvpsNumber', TextType::class)
-            ->add('webSite', TextType::class)
+            ->add('webSite', UrlType::class)
             ->add('isPartnerR8', CheckboxType::class)
             ->add('isTwinService', CheckboxType::class)
             ->add('isPartnerPlus', CheckboxType::class)

@@ -6,11 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @SWG\Definition()
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
+ * @UniqueEntity(
+ *       fields={"legacyPartnerId"},
+ *       message="legacyPartnerId already used"
+ * )
  */
 class Partner extends Date
 {
@@ -32,9 +38,10 @@ class Partner extends Date
     protected $legacyPartnerId;
 
     /**
-     * @var @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
+     * @Assert\Choice({"sales", "aftersales"})
      */
     protected $type;
 
@@ -62,6 +69,7 @@ class Partner extends Date
     /**
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
+     * @Assert\Url()
      * @var string
      */
     protected $webSite;
@@ -70,6 +78,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isPartnerR8;
 
@@ -77,6 +86,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isTwinService;
 
@@ -84,6 +94,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isPartnerPlus;
 
@@ -91,6 +102,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isOccPlus;
 
@@ -98,6 +110,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isEtron;
 
@@ -106,6 +119,7 @@ class Partner extends Date
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUser"))
+     * @Assert\Valid()
      */
     private $registryUsers;
 
@@ -114,6 +128,7 @@ class Partner extends Date
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerMyaudiUser"))
+     * @Assert\Valid()
      */
     protected $myaudiUsers;
 
