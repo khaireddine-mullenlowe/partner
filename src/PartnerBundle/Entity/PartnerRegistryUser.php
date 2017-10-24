@@ -4,6 +4,8 @@ namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relation One to Many between Partner and RegistryUser
@@ -13,6 +15,10 @@ use Swagger\Annotations as SWG;
  * @SWG\Definition()
  * @ORM\Entity
  * @ORM\Table(name="partner_registryuser")
+ * @UniqueEntity(
+ *       fields={"registryUserId"},
+ *       message="registryUserId already related to another partner"
+ * )
  */
 class PartnerRegistryUser
 {
@@ -33,6 +39,7 @@ class PartnerRegistryUser
     /**
      * @ORM\Column(type="integer")
      * @SWG\Property(format="int64")
+     * @Assert\Range(min=1, max=null)
      * @var integer
      */
     protected $registryUserId;

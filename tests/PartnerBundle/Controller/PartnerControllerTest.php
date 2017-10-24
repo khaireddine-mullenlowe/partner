@@ -6,19 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PartnerControllerTest extends WebTestCase
 {
-    /**
-     * @return mixed
-     */
-    protected static function getKernelClass()
-    {
-        return 'AppKernel';
-    }
-
     public function testIndex()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/partner/');
 
         $this->assertContains('Hello World', $client->getResponse()->getContent());
     }

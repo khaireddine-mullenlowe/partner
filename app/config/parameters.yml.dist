@@ -24,4 +24,5 @@ parameters:
     auth_logout_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/logout'
     auth_failure_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/login'
     auth_cookie_domain: .audi.dev.agence-one.net
+    api_host: api5.audi.dev.agence-one.net
 

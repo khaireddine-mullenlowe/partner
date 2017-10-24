@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,21 +24,12 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('legacyPartnerId', TextType::class)
-            ->add(
-                'type',
-                ChoiceType::class,
-                [
-                    'choices' => [
-                        0 => 'sales',
-                        1 => 'aftersales',
-                    ],
-                ]
-            )
+            ->add('legacyPartnerId')
+            ->add('type')
             ->add('contractNumber', TextType::class)
             ->add('commercialName', TextType::class)
             ->add('kvpsNumber', TextType::class)
-            ->add('webSite', TextType::class)
+            ->add('webSite', UrlType::class)
             ->add('isPartnerR8', CheckboxType::class)
             ->add('isTwinService', CheckboxType::class)
             ->add('isPartnerPlus', CheckboxType::class)
@@ -66,6 +58,8 @@ class PartnerType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => Partner::class,
+            'allow_extra_fields' => false,
+            'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
         ]);
     }
 

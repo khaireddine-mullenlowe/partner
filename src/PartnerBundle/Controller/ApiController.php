@@ -2,19 +2,16 @@
 
 namespace PartnerBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Form\PartnerType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Swagger\Annotations as SWG;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\Route;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
  * @SWG\Swagger(
@@ -23,7 +20,7 @@ use Swagger\Annotations as SWG;
  *         title="Partner Api"
  *     ),
  *     host="api5.audi.agence-one.net",
- *     basePath="/partner/api/v1/partner",
+ *     basePath="/partner",
  *     schemes={"http", "https"},
  *     produces={"application/json"},
  *     @SWG\Definition(
@@ -44,32 +41,11 @@ use Swagger\Annotations as SWG;
  *   name="Authorization"
  * )
  *
- * @Route("/api/v1/partner", defaults={"_format": "json"})
+ * @RouteResource("", pluralize=false)
  * @package PartnerBundle\Controller
  */
-class ApiController extends Controller
+class ApiController extends FOSRestController
 {
-    /**
-     * @var Serializer
-     */
-    protected $serialiser;
-
-    /**
-     * ApiController constructor.
-     */
-    public function __construct()
-    {
-        $normalizer = new ObjectNormalizer();
-        $normalizer->setCircularReferenceLimit(1);
-        // Add Circular reference handler
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getId();
-        });
-        $normalizer->setIgnoredAttributes(['partner']);
-
-        $this->serialiser = new Serializer([new DateTimeNormalizer(), $normalizer], [new JsonEncoder()]);
-    }
-
     /**
      * @SWG\Get(
      *     path="/{partnerId}",
@@ -95,26 +71,24 @@ class ApiController extends Controller
      *   security={{ "bearer":{} }}
      * )
      *
-     * @Route("/{partnerId}")
-     * @Method({"GET"})
+     * @Rest\View()
      *
      * @param int $partnerId
-     * @return JsonResponse
+     * @return View
      */
-    public function getPartnerById($partnerId)
+    public function getAction($partnerId)
     {
         $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
-            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+            throw $this->createNotFoundException('Partner not found');
         }
-        $jsonContent = $this->serialiser->serialize($partner, 'json');
 
-        return new JsonResponse($jsonContent, 200, [], true);
+        return $this->createView($partner);
     }
 
     /**
      * @SWG\Get(
-     *     path="/user/{registryUserId}",
+     *     path="/registry_user/{registryUserId}",
      *     summary="get partner for userId",
      *     operationId="getPartnerByRegistryUserId",
      *     @SWG\Parameter(
@@ -137,27 +111,25 @@ class ApiController extends Controller
      *   security={{ "bearer":{} }}
      * )
      *
-     * @Route("/user/{registryUserId}")
-     * @Method({"GET"})
+     * @Route("/registry_user/{registryUserId}")
+     * @Rest\View()
      *
      * @param int $registryUserId
-     * @return JsonResponse
+     * @return View
      */
-    public function getPartnerByRegistryUserId($registryUserId)
+    public function getPartnerByRegistryUserIdAction($registryUserId)
     {
         $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->findOneByRegistryUserId($registryUserId);
         if (!$partner) {
-            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+            throw $this->createNotFoundException('Partner not found');
         }
-        $jsonContent = $this->serialiser->serialize($partner, 'json');
 
-        return new JsonResponse($jsonContent, 200, [], true);
+        return $this->createView($partner);
     }
-
 
     /**
      * @SWG\Get(
-     *     path="/myaudiuser/{myaudiUserId}",
+     *     path="/myaudi_user/{myaudiUserId}",
      *     summary="get partner for myAudi userId",
      *     operationId="getPartnerByMyaudiUserId",
      *     @SWG\Parameter(
@@ -180,30 +152,26 @@ class ApiController extends Controller
      *    security={{ "bearer":{} }}
      * )
      *
-     * @Route("/myaudiuser/{myaudiUserId}")
-     * @Method({"GET"})
+     * @Route("/myaudi_user/{myaudiUserId}")
+     * @Rest\View()
      *
      * @param int $myaudiUserId
-     * @return JsonResponse
+     * @return View
      */
-    public function getPartnerByMyaudiUserId($myaudiUserId)
+    public function getPartnerByMyaudiUserIdAction($myaudiUserId)
     {
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
         $partner = $repository->findOneByMyaudiUserId($myaudiUserId);
         if (!$partner) {
-            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+            throw $this->createNotFoundException('Partner not found');
         }
-        $jsonContent = $this->serialiser->serialize($partner, 'json');
 
-        return new JsonResponse($jsonContent, 200, [], true);
+        return $this->createView($partner);
     }
 
-
     /**
-     * @SWG\Put(
+     * @SWG\Path(
      *     path="/{partnerIdToUpdate}",
-     *     summary="update partner for userId",
-     *     operationId="updatePartnerById",
      *     @SWG\Parameter(
      *         name="partnerIdToUpdate",
      *         in="path",
@@ -217,59 +185,76 @@ class ApiController extends Controller
      *         required=true,
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="updating error",
-     *         @SWG\Schema(ref="#/definitions/Error")
+     *    @SWG\Put(
+     *        summary="update partner for userId",
+     *        operationId="putPartnerById",
+     *        security={{ "bearer":{} }},
+     *        @SWG\Response(
+     *            response=200,
+     *            description="the partner",
+     *            @SWG\Schema(ref="#/definitions/Partner")
+     *        ),
+     *        @SWG\Response(
+     *            response=404,
+     *            description="not found",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        ),
+     *        @SWG\Response(
+     *            response=500,
+     *            description="updating error",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *       )
      *    ),
-     *   security={{ "bearer":{} }}
+     *    @SWG\Patch(
+     *        summary="patch partner for userId",
+     *        operationId="patchPartnerById",
+     *        security={{ "bearer":{} }},
+     *        @SWG\Response(
+     *            response=200,
+     *            description="the partner",
+     *            @SWG\Schema(ref="#/definitions/Partner")
+     *        ),
+     *        @SWG\Response(
+     *            response=404,
+     *            description="not found",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        ),
+     *        @SWG\Response(
+     *            response=500,
+     *            description="updating error",
+     *            @SWG\Schema(ref="#/definitions/Error")
+     *        )
+     *    )
      * )
      *
-     * @Route("/{partnerId}")
-     * @Method({"PUT"})
+     * @Route("/{partnerId}", methods={"PUT", "PATCH"})
+     * @Rest\View()
      *
      * @param Request $request
      * @param int     $partnerId
-     * @return JsonResponse
+     * @return View
      */
-    public function updatePartnerById(Request $request, $partnerId)
+    public function putOrPatchAction(Request $request, $partnerId)
     {
         $em = $this->getDoctrine()->getManager();
-        /**
-         * @var Partner $partner
-         */
+        $dataInput = $request->request->all();
+
         $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
-            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
-        }
-        $dataInput = json_decode($request->getContent(), true);
-        if (null === $dataInput) {
-            throw new \InvalidArgumentException("json input data is invalid");
+            throw $this->createNotFoundException('Partner not found');
         }
 
+        $isPut = $request->getMethod() == "PUT";
         $form = $this->createForm(PartnerType::class, $partner);
-        $form->submit($dataInput);
+        $form->submit($dataInput, $isPut);
         // validate
         if (!$form->isValid()) {
-            throw new \InvalidArgumentException($form->getErrors());
+            return $this->view($form);
         }
 
-        $em->persist($partner);
         $em->flush();
 
-        $jsonContent = $this->serialiser->serialize($partner, 'json');
-
-        return new JsonResponse($jsonContent, 200, [], true);
+        return $this->createView($partner);
     }
 
     /**
@@ -301,19 +286,15 @@ class ApiController extends Controller
      *     security={{ "bearer":{} }}
      * )
      *
-     * @Route("/")
-     * @Method({"POST"})
+     * @Rest\View()
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return View
      */
-    public function createPartner(Request $request)
+    public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dataInput = json_decode($request->getContent(), true);
-        if (null === $dataInput) {
-            throw new \InvalidArgumentException("json input data is invalid");
-        }
+        $dataInput = $request->request->all();
 
         $partner = new Partner();
         $em->persist($partner);
@@ -321,17 +302,15 @@ class ApiController extends Controller
         $form->submit($dataInput);
         // validate
         if (!$form->isValid()) {
-            throw new \InvalidArgumentException($form->getErrors());
+            return $this->view($form);
         }
 
         $em->persist($partner);
-
         $em->flush();
 
-        $jsonContent = $this->serialiser->serialize($partner, 'json');
-
-        return new JsonResponse($jsonContent, 200, [], true);
+        return $this->createView($partner, Response::HTTP_CREATED);
     }
+
     /**
      * @SWG\Delete(
      *     path="/{partnerIdToRemove}",
@@ -368,14 +347,13 @@ class ApiController extends Controller
      *     @SWG\Property(property="success", type="boolean")
      * )
      *
-     * @Route("/{partnerId}")
-     * @Method({"DELETE"})
+     * @Rest\View()
      *
      * @param Request $request
      * @param integer $partnerId
-     * @return JsonResponse
+     * @return View
      */
-    public function removePartnerById(Request $request, $partnerId)
+    public function deleteAction(Request $request, $partnerId)
     {
         $em = $this->getDoctrine()->getManager();
         /**
@@ -383,12 +361,17 @@ class ApiController extends Controller
          */
         $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
-            return new JsonResponse(['message' => 'Partner not found'], Response::HTTP_NOT_FOUND);
+            throw $this->createNotFoundException('Partner not found');
         }
 
         $em->remove($partner);
         $em->flush();
 
-        return new JsonResponse(['success' => true]);
+        return $this->view(['context' => 'success', 'data' => ['success' => true]], Response::HTTP_OK);
+    }
+
+    protected function createView(Partner $partner, $statusCode = Response::HTTP_OK)
+    {
+        return $this->view(['context' => 'partner', 'data' => $partner], $statusCode);
     }
 }

@@ -6,11 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @SWG\Definition()
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
+ * @UniqueEntity(
+ *       fields={"legacyPartnerId"},
+ *       message="legacyPartnerId already used"
+ * )
  */
 class Partner extends Date
 {
@@ -32,9 +38,10 @@ class Partner extends Date
     protected $legacyPartnerId;
 
     /**
-     * @var @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
+     * @Assert\Choice({"sales", "aftersales"})
      */
     protected $type;
 
@@ -62,6 +69,7 @@ class Partner extends Date
     /**
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
+     * @Assert\Url()
      * @var string
      */
     protected $webSite;
@@ -70,6 +78,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isPartnerR8;
 
@@ -77,6 +86,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isTwinService;
 
@@ -84,6 +94,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isPartnerPlus;
 
@@ -91,6 +102,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isOccPlus;
 
@@ -98,6 +110,7 @@ class Partner extends Date
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
+     * @Assert\Type("boolean")
      */
     protected $isEtron;
 
@@ -106,6 +119,7 @@ class Partner extends Date
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUser"))
+     * @Assert\Valid()
      */
     private $registryUsers;
 
@@ -114,6 +128,7 @@ class Partner extends Date
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
      * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerMyaudiUser"))
+     * @Assert\Valid()
      */
     protected $myaudiUsers;
 
@@ -230,7 +245,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isPartnerR8(): bool
+    public function getIsPartnerR8(): bool
     {
         return $this->isPartnerR8;
     }
@@ -249,7 +264,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isTwinService(): bool
+    public function getIsTwinService(): bool
     {
         return $this->isTwinService;
     }
@@ -268,7 +283,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isPartnerPlus(): bool
+    public function getIsPartnerPlus(): bool
     {
         return $this->isPartnerPlus;
     }
@@ -287,7 +302,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isOccPlus(): bool
+    public function getIsOccPlus(): bool
     {
         return $this->isOccPlus;
     }
@@ -306,7 +321,7 @@ class Partner extends Date
     /**
      * @return bool
      */
-    public function isEtron(): bool
+    public function getIsEtron(): bool
     {
         return $this->isEtron;
     }
@@ -438,5 +453,20 @@ class Partner extends Date
         $registryUser->setPartner(null);
 
         return $this;
+    }
+
+    /**
+     * Allows to call isser method for boolean attribute, like 'isEtron()'
+     * Il calls the associated getter if exists, like getIsEtron()
+     * @param string $name
+     * @param array  $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (0 === strrpos($name, 'is') && method_exists($this, $getter = 'get'.ucfirst($name))) {
+            return $this->$getter($arguments);
+        }
+        throw new \BadMethodCallException(sprintf('Method  "%s" does not exist', $name));
     }
 }

@@ -46,8 +46,7 @@
         "twig/twig": "^1.0||^2.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "php-amqplib/rabbitmq-bundle": "~1.6",
-        "mullenlowe/audi-agc5-common-bundle": "dev-master",
-        "mullenlowe/component": "dev-master",
+        "mullenlowe/audi-agc5-common-bundle": "dev-develop",
         "nelmio/cors-bundle": "^1.5"
     },
     "require-dev": {
@@ -55,7 +54,8 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "symfony/phpunit-bridge": "^3.0",
         "zircote/swagger-php": "^2.0",
-        "swagger-api/swagger-ui": "^3.0"
+        "swagger-api/swagger-ui": "^3.0",
+        "flow/jsonpath": "^0.3"
     },
     "scripts": {
         "swagger-ui-assets": "php -r \"is_dir('vendor/swagger-api/swagger-ui/dist') && !is_link('web/swagger-ui') && symlink('../vendor/swagger-api/swagger-ui/dist', 'web/swagger-ui');\"",

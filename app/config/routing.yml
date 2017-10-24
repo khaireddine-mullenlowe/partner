@@ -1,8 +1,11 @@
+rest_api:
+    resource: PartnerBundle\Controller\ApiController
+    type:     rest
+    prefix:   /
 partner:
     resource: "@PartnerBundle/Controller/"
     type:     annotation
     prefix:   /
-
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
