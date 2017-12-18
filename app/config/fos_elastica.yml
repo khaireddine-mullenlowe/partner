@@ -1,0 +1,60 @@
+# configuration file for elastic search
+fos_elastica:
+    clients:
+        default:
+            host: localhost
+            port: 9200
+    indexes:
+        partner:
+            client: default
+            types:
+                partner:
+                    properties:
+                        id:
+                            type: integer
+                        legacyPartnerId:
+                            type: integer
+                        type:
+                            type: string
+                        contractNumber:
+                            type: string
+                        commercialName:
+                            type: string
+                        kvpsNumber:
+                            type: string
+                        webSite:
+                            type: string
+                        isPartnerR8:
+                            type: boolean
+                        isTwinService:
+                            type: boolean
+                        isPartnerPlus:
+                            type: boolean
+                        isOccPlus:
+                            type: boolean
+                        isEtron:
+                            type: boolean
+                        registryUsers:
+                            type: nested
+                            properties:
+                                id:
+                                    type: integer
+                                registryUserId:
+                                    type: integer
+                        myaudiUsers:
+                          type: nested
+                          properties:
+                              id:
+                                  type: integer
+                              myaudiUserId:
+                                  type: integer
+                        created_at:
+                            type: date
+                        updated_at:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: PartnerBundle\Entity\Partner
+                        finder: ~
+                        provider: ~
+                        listener: ~
