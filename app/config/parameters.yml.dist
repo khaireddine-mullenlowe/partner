@@ -26,3 +26,10 @@ parameters:
     auth_cookie_domain: .audi.dev.agence-one.net
     api_host: api5.audi.dev.agence-one.net
 
+    # Related to AGC V4
+    v4_database_host: audiwas201.as44099.net
+    v4_database_port: null
+    v4_database_name: AUDI_RECETTE
+    v4_database_user: useraudipp
+    v4_database_password: 4Hv2Og4L7tsWw
+

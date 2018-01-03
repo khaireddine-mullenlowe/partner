@@ -21,6 +21,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Partner extends Date
 {
     /**
+     * @var string
+     */
+    const SALES_TYPE = 'sales';
+    /**
+     * @var string
+     */
+    const AFTERSALES_TYPE = 'aftersales';
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")

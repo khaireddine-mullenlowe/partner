@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Partners migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+            SELECT
+                T2.id_company as partner_id
+                ,T2.commercial_name
+                ,T2.website
+                ,T6.kvps_number
+                ,T6.ntw_contract_id
+                ,T6.partner_r8
+                ,T6.twin_service
+                ,T6.partner_plus
+                ,T6.occ_plus
+                ,T6.etron
+                ,T6.contract_number
+            FROM ntw_company AS T2
+            LEFT JOIN ntw_company_business AS T6 ON  T2.id_company = T6.company_id
+            LEFT JOIN ntw_address AS T3 ON T2.id_company = T3.company_id
+            LEFT JOIN ntw_phone AS T4 ON T2.id_company = T4.company_id AND T4.phone_type_id = 823
+            LEFT JOIN ntw_phone AS T5 ON T2.id_company = T5.company_id AND T5.phone_type_id = 825
+            LEFT JOIN buss_contact_form T7 ON T6.kvps_number = T7.sales_partner_kvps_number
+            WHERE T6.ntw_contract_id IN (2270913, 2270914)
+            ]]>
+        </query>
+    </extractor>
+
+    <transformer>
+        <preTransformerClass>PartnerBundle\ETL\Transformer\PartnerPreTransformer</preTransformerClass>
+    </transformer>
+
+    <loader>
+        <connection>default</connection>
+        <entity>PartnerBundle\Entity\Partner</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>partner_id</name>
+            <targetProperty>legacyPartnerId</targetProperty>
+        </mapping>
+        <mapping>
+            <name>commercial_name</name>
+            <targetProperty>commercialName</targetProperty>
+        </mapping>
+        <mapping>
+            <name>website</name>
+            <targetProperty>webSite</targetProperty>
+        </mapping>
+        <mapping>
+            <name>kvps_number</name>
+            <targetProperty>kvpsNumber</targetProperty>
+        </mapping>
+        <mapping>
+            <!-- this value is transformed into a string -->
+            <name>ntw_contract_id</name>
+            <targetProperty>type</targetProperty>
+        </mapping>
+        <mapping>
+            <name>partner_r8</name>
+            <targetProperty>isPartnerR8</targetProperty>
+        </mapping>
+        <mapping>
+            <name>twin_service</name>
+            <targetProperty>isTwinService</targetProperty>
+        </mapping>
+        <mapping>
+            <name>partner_plus</name>
+            <targetProperty>isPartnerPlus</targetProperty>
+        </mapping>
+        <mapping>
+            <name>occ_plus</name>
+            <targetProperty>isOccPlus</targetProperty>
+        </mapping>
+        <mapping>
+            <name>etron</name>
+            <targetProperty>isEtron</targetProperty>
+        </mapping>
+        <mapping>
+            <name>contract_number</name>
+            <targetProperty>contractNumber</targetProperty>
+        </mapping>
+    </mappings>
+</job>
