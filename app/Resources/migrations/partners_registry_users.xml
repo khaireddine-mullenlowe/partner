@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Partners registry users migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+            SELECT
+                sys_user.id_user
+                ,T2.id_company as partner_id
+                FROM ntw_company AS T2
+                INNER JOIN ntw_company_contact ON ntw_company_contact.company_id = T2.id_company
+                INNER JOIN sys_user ON sys_user.contact_id = ntw_company_contact.contact_id
+                LEFT JOIN ntw_company_business AS T6 ON  T2.id_company = T6.company_id
+                LEFT JOIN ntw_address AS T3 ON T2.id_company = T3.company_id
+                LEFT JOIN ntw_phone AS T4 ON T2.id_company = T4.company_id AND T4.phone_type_id = 823
+                LEFT JOIN ntw_phone AS T5 ON T2.id_company = T5.company_id AND T5.phone_type_id = 825
+                LEFT JOIN buss_contact_form T7 ON T6.kvps_number = T7.sales_partner_kvps_number
+                WHERE
+                 T6.ntw_contract_id IN (2270913, 2270914)
+                 ORDER BY partner_id ASC
+            ]]>
+        </query>
+    </extractor>
+    <transformer>
+        <!-- nothing here -->
+    </transformer>
+
+    <loader>
+        <connection>default</connection>
+        <entity>PartnerBundle\Entity\PartnerRegistryUser</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>id_user</name>
+            <targetProperty>registryUserId</targetProperty>
+        </mapping>
+        <mapping>
+            <name>partner_id</name>
+            <targetProperty>partner</targetProperty>
+            <entityClass>PartnerBundle\Entity\Partner</entityClass>
+            <type>entity</type>
+            <referencedBy>legacyPartnerId</referencedBy>
+        </mapping>
+    </mappings>
+</job>
