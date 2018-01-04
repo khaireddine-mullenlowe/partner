@@ -50,7 +50,7 @@ class Partner extends Date
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
-     * @Assert\Choice({"sales", "aftersales"})
+     * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE})
      */
     protected $type;
 

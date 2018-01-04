@@ -52,9 +52,9 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
                     $this->logger->info(sprintf("[Consumer] Reading messages to update partner %s (__CLASS__): %s", $typePartner, json_encode($data)));
 
                     if ($typePartner == 'partner_response') {
-                        $type = 'sales';
+                        $type = Partner::SALES_TYPE;
                     } else {
-                        $type = 'aftersales';
+                        $type = Partner::AFTERSALES_TYPE;
                     }
 
                     $partner = $this->em
