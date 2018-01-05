@@ -8,6 +8,8 @@ class PartnerControllerTest extends WebTestCase
 {
     public function testIndex()
     {
+        $this->markTestSkipped('Unused');
+
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/partner/');
