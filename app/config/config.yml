@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: doctrine_extension.yml }
     - { resource: old_sound_rabbit_mq.yml }
+    - { resource: fos_elastica.yml }
     - { resource: "@PartnerBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
