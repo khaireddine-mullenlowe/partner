@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: florian.trouve
- * Date: 03/01/2018
- * Time: 11:28
- */
 
 namespace PartnerBundle\ETL\Transformer;
 
-use Mullenlowe\EtlBundle\Mapping\Column;
 use Mullenlowe\EtlBundle\Row;
 use Mullenlowe\EtlBundle\Transformer\TransformerInterface;
 use PartnerBundle\Entity\Partner;
@@ -49,13 +42,16 @@ class PartnerPreTransformer implements TransformerInterface
      */
     public function transform(Row $row): Row
     {
-        $payload = $row->getPayload();
-
-        foreach ($payload as $item) {
-            if (self::CONTRACT_ID_FIELD_NAME === $item->getName()) {
-                $item->setValue($this->getMappedType($item));
-            }
+        $column = $row->getColumn(self::CONTRACT_ID_FIELD_NAME);
+        $contractType = $this->getMappedType($column->getValue());
+        if (null === $contractType) {
+            throw new \InvalidArgumentException(sprintf(
+                "Invalid partner contract number '%s'\n%s",
+                $column->getValue(),
+                json_encode($row->getPayload())
+            ));
         }
+        $column->setValue($contractType);
 
         return $row;
     }
@@ -63,16 +59,14 @@ class PartnerPreTransformer implements TransformerInterface
     /**
      * Returns the correct mapped value for 'type' field
      *
-     * @param Column $column
+     * @param string $contractId
      *
-     * @return mixed|null
+     * @return string|null
      */
-    private function getMappedType(Column $column)
+    private function getMappedType(string $contractId)
     {
-        if (array_key_exists($column->getValue(), self::CONTRACT_TYPE_MAPPING)) {
-            return self::CONTRACT_TYPE_MAPPING[$column->getValue()];
-        }
-
-        return null;
+        return array_key_exists($contractId, self::CONTRACT_TYPE_MAPPING)
+            ? self::CONTRACT_TYPE_MAPPING[$contractId]
+            : null;
     }
 }

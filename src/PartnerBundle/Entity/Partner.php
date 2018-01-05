@@ -47,7 +47,7 @@ class Partner extends Date
     protected $legacyPartnerId;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @SWG\Property
      * @var string
      * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE})

@@ -61,6 +61,14 @@ doctrine:
                 dbname: '%v4_database_name%'
                 user: '%v4_database_user%'
                 password: '%v4_database_password%'
+            agcv5_user:
+                driver: pdo_mysql
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name_userdb%'
+                user: '%database_user_userdb%'
+                password: '%database_password%'
+                charset: UTF8
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         entity_managers:
@@ -71,6 +79,11 @@ doctrine:
                     PartnerBundle: ~
             agcv4:
                 connection: agcv4
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                mappings:
+                    PartnerBundle: ~
+            agcv5_user:
+                connection: agcv5_user
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     PartnerBundle: ~
