@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Partners migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+            SELECT
+                T2.id_company as partner_id
+                ,T2.commercial_name
+                ,T2.website
+                ,T6.kvps_number
+                ,T6.ntw_contract_id
+                ,T6.partner_r8
+                ,T6.twin_service
+                ,T6.partner_plus
+                ,T6.occ_plus
+                ,T6.etron
+                ,T6.contract_number
+                ,T3.hist_change_date as created_at
+            FROM ntw_company AS T2
+            INNER JOIN ntw_company_business AS T6 ON  T2.id_company = T6.company_id
+            LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company T3
+                ON T2.id_company = T3.id_company
+                AND T3.hist_action = 'INSERT'
+            WHERE T6.ntw_contract_id IN (2270913, 2270914)
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\PartnerPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\Partner</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>legacyPartnerId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>website</name>
+                <targetProperty>webSite</targetProperty>
+            </mapping>
+            <mapping>
+                <!-- this value is transformed into a string -->
+                <name>ntw_contract_id</name>
+                <targetProperty>type</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_r8</name>
+                <targetProperty>isPartnerR8</targetProperty>
+            </mapping>
+            <mapping>
+                <name>twin_service</name>
+                <targetProperty>isTwinService</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_plus</name>
+                <targetProperty>isPartnerPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>occ_plus</name>
+                <targetProperty>isOccPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>etron</name>
+                <targetProperty>isEtron</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Temp Registry Users migration">
+        <extractor>
+            <connection>agcv5_user</connection>
+            <query>
+                <![CDATA[
+                SELECT id as user_id, legacy_id
+                FROM registry_user
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\TempRegistryUser</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+
+    <job name="Temp Partners Registry Users migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        sys_user.contact_id
+                        ,T2.id_company as partner_id
+                    FROM ntw_company AS T2
+                    INNER JOIN ntw_company_contact ON ntw_company_contact.company_id = T2.id_company
+                    INNER JOIN sys_user ON sys_user.contact_id = ntw_company_contact.contact_id
+                    INNER JOIN ntw_company_business AS T6 ON T2.id_company = T6.company_id
+                    WHERE T6.ntw_contract_id IN (2270913, 2270914)
+                    GROUP BY sys_user.contact_id, T2.id_company
+                    ORDER BY partner_id ASC
+                ]]>
+            </query>
+        </extractor>
+        <transformer>
+            <!-- nothing here -->
+        </transformer>
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\TempPartnerRegistryUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>legacyRegistryUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>legacyPartnerId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Partners Registry Users migration">
+        <extractor>
+            <connection>default</connection>
+            <query>
+                <![CDATA[
+                SELECT t1.partner_id, t2.user_id
+                FROM temp_partner_registry_user t1
+                INNER JOIN temp_registry_user t2
+                    ON t2.legacy_id = t1.legacy_registry_user_id
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\PartnerRegistryUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>user_id</name>
+                <targetProperty>registryUserId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

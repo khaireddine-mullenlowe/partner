@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new PartnerBundle\PartnerBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new Mullenlowe\EtlBundle\MullenloweEtlBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

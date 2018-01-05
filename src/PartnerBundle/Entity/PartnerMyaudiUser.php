@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @SWG\Definition()
  * @ORM\Entity
- * @ORM\Table(name="partner_myaudiuser")
+ * @ORM\Table(name="partner_myaudi_user")
  * @UniqueEntity(
  *       fields={"myaudiUserId"},
  *       message="myaudiUserId already related to another partner"

@@ -5,7 +5,9 @@ parameters:
     database_host: 127.0.0.1
     database_port: ~
     database_name: DB_PARTNERS
-    database_user: root
+    database_user: dev_u_partners
+    database_name_userdb: DEV_DB_USERS
+    database_user_userdb: dev_u_users
     database_password: spirit
     mailer_transport: smtp
     # You should uncomment this if you want to use pdo_sqlite
@@ -25,4 +27,11 @@ parameters:
     auth_failure_path: 'http://api5.audi.dev.agence-one.net/authentication/sso/login'
     auth_cookie_domain: .audi.dev.agence-one.net
     api_host: api5.audi.dev.agence-one.net
+
+    # Related to AGC V4
+    v4_database_host: audiwas201.as44099.net
+    v4_database_port: 1433
+    v4_database_name: AUDI_RECETTE
+    v4_database_user: useraudipp
+    v4_database_password: 4Hv2Og4L7tsWw
 

@@ -9,18 +9,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relation One to Many between Partner and RegistryUser
- * Class PartnerRegistryUser
+ * Class TempPartnerRegistryUser
  * @package PartnerBundle\Entity
  *
  * @SWG\Definition()
  * @ORM\Entity
- * @ORM\Table(name="partner_registry_user")
+ * @ORM\Table(name="temp_partner_registry_user")
  * @UniqueEntity(
- *       fields={"registryUserId"},
- *       message="registryUserId already related to another partner"
+ *       fields={"legacyRegistryUserId"},
+ *       message="legacyRegistryUserId already related to another partner"
  * )
  */
-class PartnerRegistryUser
+class TempPartnerRegistryUser
 {
     /**
      * Many RegistryUser have One Partner.
@@ -37,17 +37,17 @@ class PartnerRegistryUser
      * @Assert\Range(min=1, max=null)
      * @var integer
      */
-    protected $registryUserId;
+    protected $legacyRegistryUserId;
 
     /**
      * PartnerRegistryUser constructor.
      * @param Partner $partner
-     * @param integer $registryUserId
+     * @param integer $legacyRegistryUserId
      */
-    public function __construct(Partner $partner = null, $registryUserId = null)
+    public function __construct(Partner $partner = null, $legacyRegistryUserId = null)
     {
         $this->partner = $partner;
-        $this->registryUserId = $registryUserId;
+        $this->legacyRegistryUserId = $legacyRegistryUserId;
     }
 
     /**
@@ -69,16 +69,16 @@ class PartnerRegistryUser
     /**
      * @return integer
      */
-    public function getRegistryUserId()
+    public function getLegacyRegistryUserId()
     {
-        return $this->registryUserId;
+        return $this->legacyRegistryUserId;
     }
 
     /**
-     * @param integer $registryUserId
+     * @param integer $legacyRegistryUserId
      */
-    public function setRegistryUserId($registryUserId)
+    public function setLegacyRegistryUserId($legacyRegistryUserId)
     {
-        $this->registryUserId = $registryUserId;
+        $this->legacyRegistryUserId = $legacyRegistryUserId;
     }
 }
