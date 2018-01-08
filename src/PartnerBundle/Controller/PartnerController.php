@@ -8,7 +8,6 @@ use PartnerBundle\Form\PartnerType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Swagger\Annotations as SWG;
-use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -20,7 +19,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *         title="Partner Api"
  *     ),
  *     host="api5.audi.agence-one.net",
- *     basePath="/partners",
+ *     basePath="/partner",
  *     schemes={"http", "https"},
  *     produces={"application/json"},
  *     @SWG\Definition(
@@ -170,8 +169,11 @@ class PartnerController extends FOSRestController
     }
 
     /**
-     * @SWG\Path(
-     *     path="/partners/{partnerId}",
+     * @SWG\Put(
+     *     summary="update partner for userId",
+     *     operationId="putPartnerById",
+     *     security={{ "bearer":{} }},
+     *     path="/partners/{id}",
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -185,26 +187,22 @@ class PartnerController extends FOSRestController
      *         required=true,
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
-     *    @SWG\Put(
-     *        summary="update partner for userId",
-     *        operationId="putPartnerById",
-     *        security={{ "bearer":{} }},
-     *        @SWG\Response(
-     *            response=200,
-     *            description="the partner",
-     *            @SWG\Schema(ref="#/definitions/Partner")
-     *        ),
-     *        @SWG\Response(
-     *            response=404,
-     *            description="not found",
-     *            @SWG\Schema(ref="#/definitions/Error")
-     *        ),
-     *        @SWG\Response(
-     *            response=500,
-     *            description="updating error",
-     *            @SWG\Schema(ref="#/definitions/Error")
-     *       )
-     *    )
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the partner",
+     *         @SWG\Schema(ref="#/definitions/Partner")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
      * )
      *
      * @Rest\View()
@@ -237,8 +235,11 @@ class PartnerController extends FOSRestController
     }
 
     /**
-     * @SWG\Path(
+     * @SWG\Patch(
      *     path="/partners/{id}",
+     *     summary="patch partner for userId",
+     *     operationId="patchPartnerById",
+     *     security={{ "bearer":{} }},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -252,26 +253,21 @@ class PartnerController extends FOSRestController
      *         required=true,
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
-     *    @SWG\Patch(
-     *        summary="patch partner for userId",
-     *        operationId="patchPartnerById",
-     *        security={{ "bearer":{} }},
-     *        @SWG\Response(
-     *            response=200,
-     *            description="the partner",
-     *            @SWG\Schema(ref="#/definitions/Partner")
-     *        ),
-     *        @SWG\Response(
-     *            response=404,
-     *            description="not found",
-     *            @SWG\Schema(ref="#/definitions/Error")
-     *        ),
-     *        @SWG\Response(
-     *            response=500,
-     *            description="updating error",
-     *            @SWG\Schema(ref="#/definitions/Error")
-     *        )
-     *    )
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the partner",
+     *         @SWG\Schema(ref="#/definitions/Partner")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
      * )
      *
      * @Rest\View()
@@ -395,11 +391,10 @@ class PartnerController extends FOSRestController
      *
      * @Rest\View()
      *
-     * @param Request $request
      * @param integer $id
      * @return View
      */
-    public function deletePartnerAction(Request $request, $id)
+    public function deletePartnerAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         /**
