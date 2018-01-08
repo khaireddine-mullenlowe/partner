@@ -87,7 +87,7 @@ class PartnerController extends FOSRestController
     /**
      * @SWG\Get(
      *     path="/partners/registry_user/{registryUserId}",
-     *     summary="get partner for userId",
+     *     summary="get partner from userId",
      *     operationId="getPartnerByRegistryUserId",
      *     @SWG\Parameter(
      *         name="registryUserId",
@@ -170,7 +170,7 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Put(
-     *     summary="update partner for userId",
+     *     summary="update partner from userId",
      *     operationId="putPartnerById",
      *     security={{ "bearer":{} }},
      *     path="/partners/{id}",
@@ -237,7 +237,7 @@ class PartnerController extends FOSRestController
     /**
      * @SWG\Patch(
      *     path="/partners/{id}",
-     *     summary="patch partner for userId",
+     *     summary="patch partner from id",
      *     operationId="patchPartnerById",
      *     security={{ "bearer":{} }},
      *     @SWG\Parameter(
@@ -302,7 +302,7 @@ class PartnerController extends FOSRestController
     /**
      * @SWG\Post(
      *     path="/partners",
-     *     summary="create partner for userId",
+     *     summary="create partner",
      *     operationId="createPartner",
      *     @SWG\Parameter(
      *         name="partner",
@@ -356,7 +356,7 @@ class PartnerController extends FOSRestController
     /**
      * @SWG\Delete(
      *     path="/partners/{id}",
-     *     summary="remove partner for Id",
+     *     summary="remove partner from id",
      *     operationId="removePartnerById",
      *     @SWG\Parameter(
      *         name="id",
