@@ -27,6 +27,7 @@ class PartnerRegistryUser
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="registryUsers")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
+     * @var Partner
      */
     protected $partner;
 
@@ -35,16 +36,16 @@ class PartnerRegistryUser
      * @ORM\Column(type="integer")
      * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
-     * @var integer
+     * @var int
      */
     protected $registryUserId;
 
     /**
      * PartnerRegistryUser constructor.
      * @param Partner $partner
-     * @param integer $registryUserId
+     * @param int     $registryUserId
      */
-    public function __construct(Partner $partner = null, $registryUserId = null)
+    public function __construct(Partner $partner = null, int $registryUserId = null)
     {
         $this->partner = $partner;
         $this->registryUserId = $registryUserId;
@@ -60,14 +61,18 @@ class PartnerRegistryUser
 
     /**
      * @param Partner $partner
+     *
+     * @return PartnerRegistryUser
      */
-    public function setPartner(Partner $partner = null)
+    public function setPartner(Partner $partner): PartnerRegistryUser
     {
         $this->partner = $partner;
+
+        return $this;
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getRegistryUserId()
     {
@@ -75,10 +80,14 @@ class PartnerRegistryUser
     }
 
     /**
-     * @param integer $registryUserId
+     * @param int $registryUserId
+     *
+     * @return PartnerRegistryUser
      */
-    public function setRegistryUserId($registryUserId)
+    public function setRegistryUserId(int $registryUserId): PartnerRegistryUser
     {
         $this->registryUserId = $registryUserId;
+
+        return $this;
     }
 }

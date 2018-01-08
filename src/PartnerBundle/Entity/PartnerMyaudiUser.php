@@ -23,14 +23,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class PartnerMyaudiUser
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
      * Many MyaudiUser have One Partner.
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="myaudiUsers")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
      * @var Partner
@@ -38,38 +32,23 @@ class PartnerMyaudiUser
     protected $partner;
 
     /**
+     * @ORM\Id
      * @ORM\Column(type="integer")
      * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
-     * @var integer
+     * @var int
      */
     protected $myaudiUserId;
 
     /**
      * PartnerMyaudiUser constructor.
      * @param Partner $partner
-     * @param integer $myaudiUserId
+     * @param int     $myaudiUserId
      */
-    public function __construct(Partner $partner = null, $myaudiUserId = null)
+    public function __construct(Partner $partner = null, int $myaudiUserId = null)
     {
         $this->partner = $partner;
         $this->myaudiUserId = $myaudiUserId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -82,14 +61,18 @@ class PartnerMyaudiUser
 
     /**
      * @param Partner $partner
+     *
+     * @return PartnerMyaudiUser
      */
-    public function setPartner($partner)
+    public function setPartner($partner): PartnerMyaudiUser
     {
         $this->partner = $partner;
+
+        return $this;
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getMyaudiUserId()
     {
@@ -97,10 +80,14 @@ class PartnerMyaudiUser
     }
 
     /**
-     * @param integer $myaudiUserId
+     * @param int  $myaudiUserId
+     *
+     * @return PartnerMyaudiUser
      */
-    public function setMyaudiUserId($myaudiUserId)
+    public function setMyaudiUserId(int $myaudiUserId): PartnerMyaudiUser
     {
         $this->myaudiUserId = $myaudiUserId;
+
+        return $this;
     }
 }
