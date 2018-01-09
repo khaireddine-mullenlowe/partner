@@ -1,7 +1,7 @@
 <?php
 namespace PartnerBundle\Tests\Controller;
 
-class ApiControllerCest
+class PartnerControllerCest
 {
     protected static $jsonPartner = <<<HEREDOC
 {
@@ -72,7 +72,7 @@ HEREDOC;
 
     public function testPostPartner(\FunctionalTester $I)
     {
-        $this->requestJson($I,201, 'POST', '/partners', [], [], [], static::$jsonPartner);
+        $this->requestJson($I,201, 'POST', '/', [], [], [], static::$jsonPartner);
         $arrayPartner = json_decode(static::$jsonPartner, true);
         $I->seeResponseContainsJson($arrayPartner);
         $this->createdPartnerId = $I->grabDataFromResponseByJsonPath('$..id')[0];
@@ -83,7 +83,7 @@ HEREDOC;
      */
     public function testGetPartnerByRegistryUserId(\FunctionalTester $I)
     {
-        $this->requestJson($I,200, 'GET', '/partners/registry_user/6736666');
+        $this->requestJson($I,200, 'GET', '/registry_user/6736666');
         $I->seeResponseContainsJson(json_decode(static::$jsonPartner, true));
     }
 
@@ -92,7 +92,7 @@ HEREDOC;
      */
     public function testGetPartnerByMyaudiUserId(\FunctionalTester $I)
     {
-        $this->requestJson($I,200, 'GET', '/partners/myaudi_user/16739999');
+        $this->requestJson($I,200, 'GET', '/myaudi_user/16739999');
         $I->seeResponseContainsJson(json_decode(static::$jsonPartner, true));
     }
 
@@ -101,7 +101,7 @@ HEREDOC;
      */
     public function testPutPartner(\FunctionalTester $I)
     {
-        $this->requestJson($I,200, 'PUT', '/partners/'.$this->createdPartnerId, [], [], [], static::$jsonPartner2);
+        $this->requestJson($I,200, 'PUT', '/'.$this->createdPartnerId, [], [], [], static::$jsonPartner2);
         $I->seeResponseContainsJson(json_decode(static::$jsonPartner2, true));
     }
 
@@ -110,7 +110,7 @@ HEREDOC;
      */
     public function testGetPartner(\FunctionalTester $I)
     {
-        $this->requestJson($I,200, 'GET', '/partners/'.$this->createdPartnerId);
+        $this->requestJson($I,200, 'GET', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(json_decode(static::$jsonPartner2, true));
     }
 
@@ -119,7 +119,7 @@ HEREDOC;
      */
     public function testRemovePartner(\FunctionalTester $I)
     {
-        $this->requestJson($I, 200, 'DELETE', '/partners/'.$this->createdPartnerId);
+        $this->requestJson($I, 200, 'DELETE', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(['success' => true]);
     }
 
@@ -128,7 +128,7 @@ HEREDOC;
      */
     public function testGetParnterWhenNotFound(\FunctionalTester $I)
     {
-        $this->requestJson($I,404, 'GET', '/partners/'.$this->createdPartnerId);
+        $this->requestJson($I,404, 'GET', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(["message" => "Partner not found"]);
     }
 
