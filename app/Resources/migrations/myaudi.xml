@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Temp Myaudi Users migration">
+        <extractor>
+            <connection>agcv5_user</connection>
+            <query>
+                <![CDATA[
+                SELECT id as user_id, legacy_id
+                FROM myaudi_user
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\TempMyaudiUser</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+
+    <job name="Temp Partners Myaudi Users migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        t1.contact_id,
+                        t1.sales_partner_id,
+                        CASE WHEN t1.selection_time IS NOT NULL
+                            THEN t1.selection_time
+                            ELSE t4.hist_change_date
+                        END AS created_at
+                    FROM ctc_sales_partner t1
+                    INNER JOIN sys_user t2 on t2.contact_id = t1.contact_id
+                    INNER JOIN usr_application_access t3 on t3.user_id = t2.id_user
+                    INNER JOIN (
+                        SELECT contact_id, sales_partner_id, hist_action, Max(hist_change_date) as hist_change_date
+                        FROM HIST_AUDIV3.dbo.hist_ctc_sales_partner
+                        WHERE hist_action = 'INSERT'
+                        GROUP by contact_id, sales_partner_id, hist_action
+                    ) t4
+                        ON t4.contact_id = t1.contact_id
+                        AND t4.sales_partner_id = t1.sales_partner_id
+                    WHERE t3.application_id = 4
+                    ORDER BY t1.sales_partner_id ASC
+                ]]>
+            </query>
+        </extractor>
+        <transformer>
+            <!-- nothing here -->
+        </transformer>
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\TempPartnerMyaudiUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>legacyUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>sales_partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Partners Myaudi Users migration">
+        <extractor>
+            <connection>default</connection>
+            <query>
+                <![CDATA[
+                SELECT t1.partner_id, t2.user_id, t1.created_at
+                FROM temp_partner_myaudi_user t1
+                INNER JOIN temp_myaudi_user t2
+                    ON t2.legacy_id = t1.legacy_user_id
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\PartnerMyaudiUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>user_id</name>
+                <targetProperty>myaudiUserId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

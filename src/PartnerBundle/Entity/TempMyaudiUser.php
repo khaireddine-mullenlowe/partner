@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use PartnerBundle\Entity\Base\BaseTempUserTrait;
 
 /**
- * Class TempRegistryUser
+ * Class TempMyaudiUser
  * @package PartnerBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="temp_registry_user")
+ * @ORM\Table(name="temp_myaudi_user")
  */
-class TempRegistryUser
+class TempMyaudiUser
 {
     use BaseTempUserTrait;
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Relation One to Many between Partner and MyaudiUser
@@ -22,6 +23,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class PartnerMyaudiUser
 {
+    use TimestampableEntity;
+
     /**
      * Many MyaudiUser have One Partner.
      * @ORM\Id

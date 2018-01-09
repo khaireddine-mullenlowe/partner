@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
  * @UniqueEntity(
- *       fields={"legacyPartnerId"},
- *       message="legacyPartnerId already used"
+ *       fields={"legacyId"},
+ *       message="legacyId already used"
  * )
  */
 class Partner extends Date
@@ -37,14 +37,6 @@ class Partner extends Date
      * @var integer
      */
     protected $id;
-
-    /**
-     * Legacy id
-     * @ORM\Column(type="integer", unique=true, nullable=true)
-     * @SWG\Property(format="int64")
-     * @var integer
-     */
-    protected $legacyPartnerId;
 
     /**
      * @ORM\Column(type="string")
@@ -122,6 +114,21 @@ class Partner extends Date
      * @Assert\Type("boolean")
      */
     protected $isEtron;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Group", inversedBy="partners")
+     * @ORM\JoinColumn(name="partner_group_id", referencedColumnName="id")
+     * @var Group|null
+     */
+    protected $group;
+
+    /**
+     * Legacy id
+     * @ORM\Column(type="integer", unique=true)
+     * @SWG\Property(format="int64")
+     * @var integer
+     */
+    protected $legacyId;
 
     /**
      * One Partner have Many registryUsers.
@@ -363,19 +370,19 @@ class Partner extends Date
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getLegacyPartnerId()
+    public function getLegacyId()
     {
-        return $this->legacyPartnerId;
+        return $this->legacyId;
     }
 
     /**
-     * @param mixed $legacyPartnerId
+     * @param int $legacyId
      */
-    public function setLegacyPartnerId($legacyPartnerId)
+    public function setLegacyId(int $legacyId)
     {
-        $this->legacyPartnerId = $legacyPartnerId;
+        $this->legacyId = $legacyId;
     }
 
     /**
@@ -392,6 +399,26 @@ class Partner extends Date
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return Group|null
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param Group|null $group
+     *
+     * @return Partner
+     */
+    public function setGroup($group): Partner
+    {
+        $this->group = $group;
+
+        return $this;
     }
 
     /**

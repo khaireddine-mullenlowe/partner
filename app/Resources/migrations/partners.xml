@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Groups migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                SELECT t1.name, t1.website_url, t1.status, t2.hist_change_date as created_at
+                FROM ntw_partner_group t1
+                INNER JOIN HIST_AUDIV3.dbo.hist_ntw_partner_group t2
+                    ON t2.id_partner_group = t1.id_partner_group
+                    AND t2.hist_action = 'INSERT'
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\Group</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+
+    <job name="Partners migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+            SELECT
+                T2.id_company as partner_id
+                ,T2.commercial_name
+                ,T2.website
+                ,T6.kvps_number
+                ,T6.ntw_contract_id
+                ,T6.partner_r8
+                ,T6.twin_service
+                ,T6.partner_plus
+                ,T6.occ_plus
+                ,T6.etron
+                ,T6.contract_number
+                ,T3.hist_change_date as created_at
+                ,T4.partner_group_id
+            FROM ntw_company AS T2
+            INNER JOIN ntw_company_business AS T6 ON  T2.id_company = T6.company_id
+            LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company T3
+                ON T2.id_company = T3.id_company
+                AND T3.hist_action = 'INSERT'
+            LEFT JOIN ntw_company_partner_group T4 ON T4.company_id = T2.id_company
+            WHERE T6.ntw_contract_id IN (2270913, 2270914)
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\PartnerPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\Partner</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>website</name>
+                <targetProperty>webSite</targetProperty>
+            </mapping>
+            <mapping>
+                <!-- this value is transformed into a string -->
+                <name>ntw_contract_id</name>
+                <targetProperty>type</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_r8</name>
+                <targetProperty>isPartnerR8</targetProperty>
+            </mapping>
+            <mapping>
+                <name>twin_service</name>
+                <targetProperty>isTwinService</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_plus</name>
+                <targetProperty>isPartnerPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>occ_plus</name>
+                <targetProperty>isOccPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>etron</name>
+                <targetProperty>isEtron</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_group_id</name>
+                <targetProperty>group</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Group</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>
