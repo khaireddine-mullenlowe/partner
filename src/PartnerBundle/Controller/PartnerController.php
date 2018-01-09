@@ -18,6 +18,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *         version="1.0.0",
  *         title="Partner Api"
  *     ),
+ *     @SWG\Tag(name="partner"),
  *     host="api5.audi.agence-one.net",
  *     basePath="/partner",
  *     schemes={"http", "https"},
@@ -40,15 +41,18 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *   name="Authorization"
  * )
  *
+ * @Rest\RouteResource("")
+ *
  * @package PartnerBundle\Controller
  */
 class PartnerController extends FOSRestController
 {
     /**
      * @SWG\Get(
-     *     path="/partners/{id}",
+     *     path="/{id}",
      *     summary="get partner from id",
      *     operationId="getPartnerById",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -74,7 +78,7 @@ class PartnerController extends FOSRestController
      * @param int $id
      * @return View
      */
-    public function getPartnerAction($id)
+    public function getAction($id)
     {
         $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($id);
         if (!$partner) {
@@ -86,9 +90,10 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Get(
-     *     path="/partners/registry_user/{registryUserId}",
+     *     path="/registry_user/{registryUserId}",
      *     summary="get partner from userId",
      *     operationId="getPartnerByRegistryUserId",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="registryUserId",
      *         in="path",
@@ -109,7 +114,7 @@ class PartnerController extends FOSRestController
      *   security={{ "bearer":{} }}
      * )
      *
-     * @Route("/partners/registry_user/{registryUserId}")
+     * @Route("/registry_user/{registryUserId}")
      * todo : refact this action (it needs to be restful)
      * @Rest\View()
      *
@@ -128,9 +133,10 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Get(
-     *     path="/partners/myaudi_user/{myaudiUserId}",
+     *     path="/myaudi_user/{myaudiUserId}",
      *     summary="get partner for myAudi userId",
      *     operationId="getPartnerByMyaudiUserId",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="myaudiUserId",
      *         in="path",
@@ -151,7 +157,7 @@ class PartnerController extends FOSRestController
      *    security={{ "bearer":{} }}
      * )
      *
-     * @Route("/partners/myaudi_user/{myaudiUserId}")
+     * @Route("/myaudi_user/{myaudiUserId}")
      * @Rest\View()
      *
      * @param int $myaudiUserId
@@ -173,7 +179,8 @@ class PartnerController extends FOSRestController
      *     summary="update partner from userId",
      *     operationId="putPartnerById",
      *     security={{ "bearer":{} }},
-     *     path="/partners/{id}",
+     *     path="/{id}",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -211,7 +218,7 @@ class PartnerController extends FOSRestController
      * @param int     $id
      * @return View
      */
-    public function putPartnerAction(Request $request, $id)
+    public function putAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
@@ -236,10 +243,11 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Patch(
-     *     path="/partners/{id}",
+     *     path="/{id}",
      *     summary="patch partner from id",
      *     operationId="patchPartnerById",
      *     security={{ "bearer":{} }},
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -276,7 +284,7 @@ class PartnerController extends FOSRestController
      * @param int     $id
      * @return View
      */
-    public function patchPartnerAction(Request $request, $id)
+    public function patchAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
@@ -301,9 +309,10 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Post(
-     *     path="/partners",
+     *     path="/",
      *     summary="create partner",
      *     operationId="createPartner",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="partner",
      *         in="body",
@@ -333,7 +342,7 @@ class PartnerController extends FOSRestController
      * @param Request $request
      * @return View
      */
-    public function postPartnersAction(Request $request)
+    public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
@@ -355,9 +364,10 @@ class PartnerController extends FOSRestController
 
     /**
      * @SWG\Delete(
-     *     path="/partners/{id}",
+     *     path="/{id}",
      *     summary="remove partner from id",
      *     operationId="removePartnerById",
+     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -394,7 +404,7 @@ class PartnerController extends FOSRestController
      * @param integer $id
      * @return View
      */
-    public function deletePartnerAction($id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         /**
