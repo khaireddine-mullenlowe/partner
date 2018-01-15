@@ -48,7 +48,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class PartnerController extends MullenloweRestController
 {
-    const CONTEXT = 'lead';
+    const CONTEXT = 'partner';
 
     /**
      * @SWG\Get(
