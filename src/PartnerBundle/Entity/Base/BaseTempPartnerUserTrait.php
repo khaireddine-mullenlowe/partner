@@ -24,7 +24,6 @@ trait BaseTempPartnerUserTrait
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
      * @var int
      */

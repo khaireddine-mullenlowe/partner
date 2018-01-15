@@ -2,14 +2,15 @@
 
 namespace PartnerBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Form\PartnerType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Swagger\Annotations as SWG;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
@@ -89,89 +90,79 @@ class PartnerController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/", name="_partners")
+     *
      * @SWG\Get(
-     *     path="/registry_user/{registryUserId}",
-     *     summary="get partner from userId",
-     *     operationId="getPartnerByRegistryUserId",
+     *     path="/",
+     *     summary="get partners",
+     *     operationId="getPartners",
      *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="registryUserId",
-     *         in="path",
+     *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description="registry user Id"
+     *         required=false,
+     *         description="registryUserId"
      *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *   security={{ "bearer":{} }}
-     * )
-     *
-     * @Route("/registry_user/{registryUserId}")
-     * todo : refact this action (it needs to be restful)
-     * @Rest\View()
-     *
-     * @param int $registryUserId
-     * @return View
-     */
-    public function getPartnerByRegistryUserIdAction($registryUserId)
-    {
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->findOneByRegistryUserId($registryUserId);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
-
-        return $this->createView($partner);
-    }
-
-    /**
-     * @SWG\Get(
-     *     path="/myaudi_user/{myaudiUserId}",
-     *     summary="get partner for myAudi userId",
-     *     operationId="getPartnerByMyaudiUserId",
-     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="myaudiUserId",
-     *         in="path",
+     *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description="myAudi user Id"
+     *         required=false,
+     *         description="myaudiUserId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="page number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="max items per page"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="Partners",
+     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Partner"))
      *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *    security={{ "bearer":{} }}
      * )
-     *
-     * @Route("/myaudi_user/{myaudiUserId}")
      * @Rest\View()
      *
-     * @param int $myaudiUserId
-     * @return View
+     * @param Request $request
+     * @return array
      */
-    public function getPartnerByMyaudiUserIdAction($myaudiUserId)
+    public function cgetAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
-        $partner = $repository->findOneByMyaudiUserId($myaudiUserId);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
 
-        return $this->createView($partner);
+        $paginator = $this->get('knp_paginator');
+
+        $queryBuilder = $repository->createQueryBuilder('partner');
+
+        $this->applyFilters($queryBuilder, $request);
+
+        /** @var SlidingPagination $pager */
+        $pager = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
+        return [
+            'pagination' => [
+                'total' => $pager->getTotalItemCount(),
+                'count' => $pager->count(),
+                'per_page' => $pager->getItemNumberPerPage(),
+                'current_page' => $pager->getCurrentPageNumber(),
+                'total_pages' => $pager->getPageCount(),
+            ],
+            'data' => $pager->getItems(),
+        ];
     }
 
     /**
@@ -424,5 +415,32 @@ class PartnerController extends FOSRestController
     protected function createView(Partner $partner, $statusCode = Response::HTTP_OK)
     {
         return $this->view(['context' => 'partner', 'data' => $partner], $statusCode);
+    }
+
+    /**
+     * Applies filters from request
+     * todo: move this method in a service
+     *
+     * @param QueryBuilder $builder
+     * @param Request $request
+     */
+    private function applyFilters(QueryBuilder $builder, Request $request)
+    {
+        $registryUserId = $request->query->get('registryUserId');
+        $myaudiUserId = $request->query->get('myaudiUserId');
+
+        if ($registryUserId) {
+            $builder
+                ->join('partner.registryUsers', 'registryUsers')
+                ->andWhere('registryUsers.registryUserId = :registryUserId')
+                ->setParameter('registryUserId', $registryUserId);
+        }
+
+        if ($myaudiUserId) {
+            $builder
+                ->join('partner.myaudiUsers', 'myaudiUsers')
+                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
+                ->setParameter('myaudiUserId', $myaudiUserId);
+        }
     }
 }
