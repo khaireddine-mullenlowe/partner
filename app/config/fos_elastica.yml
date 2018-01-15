@@ -12,8 +12,6 @@ fos_elastica:
                     properties:
                         id:
                             type: integer
-                        legacyPartnerId:
-                            type: integer
                         type:
                             type: string
                         contractNumber:
@@ -34,18 +32,28 @@ fos_elastica:
                             type: boolean
                         isEtron:
                             type: boolean
-                        registryUsers:
-                            type: nested
+                        group:
+                            type: object
                             properties:
                                 id:
                                     type: integer
+                                name:
+                                    type: string
+                                websiteUrl:
+                                    type: string
+                                status:
+                                    type: integer
+
+                        legacyId:
+                            type: integer
+                        registryUsers:
+                            type: nested
+                            properties:
                                 registryUserId:
                                     type: integer
                         myaudiUsers:
                           type: nested
                           properties:
-                              id:
-                                  type: integer
                               myaudiUserId:
                                   type: integer
                         created_at:

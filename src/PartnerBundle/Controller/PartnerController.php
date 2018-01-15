@@ -2,14 +2,15 @@
 
 namespace PartnerBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Form\PartnerType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Swagger\Annotations as SWG;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\Route;
+use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
@@ -45,8 +46,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *
  * @package PartnerBundle\Controller
  */
-class PartnerController extends FOSRestController
+class PartnerController extends MullenloweRestController
 {
+    const CONTEXT = 'lead';
+
     /**
      * @SWG\Get(
      *     path="/{id}",
@@ -89,89 +92,70 @@ class PartnerController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/", name="_partners")
+     *
      * @SWG\Get(
-     *     path="/registry_user/{registryUserId}",
-     *     summary="get partner from userId",
-     *     operationId="getPartnerByRegistryUserId",
+     *     path="/",
+     *     summary="get partners",
+     *     operationId="getPartners",
      *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="registryUserId",
-     *         in="path",
+     *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description="registry user Id"
+     *         required=false,
+     *         description="registryUserId"
      *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *   security={{ "bearer":{} }}
-     * )
-     *
-     * @Route("/registry_user/{registryUserId}")
-     * todo : refact this action (it needs to be restful)
-     * @Rest\View()
-     *
-     * @param int $registryUserId
-     * @return View
-     */
-    public function getPartnerByRegistryUserIdAction($registryUserId)
-    {
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->findOneByRegistryUserId($registryUserId);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
-
-        return $this->createView($partner);
-    }
-
-    /**
-     * @SWG\Get(
-     *     path="/myaudi_user/{myaudiUserId}",
-     *     summary="get partner for myAudi userId",
-     *     operationId="getPartnerByMyaudiUserId",
-     *     tags={"partner"},
      *     @SWG\Parameter(
      *         name="myaudiUserId",
-     *         in="path",
+     *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description="myAudi user Id"
+     *         required=false,
+     *         description="myaudiUserId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="page number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="max items per page"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="Partners",
+     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Partner"))
      *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *    security={{ "bearer":{} }}
      * )
-     *
-     * @Route("/myaudi_user/{myaudiUserId}")
      * @Rest\View()
      *
-     * @param int $myaudiUserId
+     * @param Request $request
      * @return View
      */
-    public function getPartnerByMyaudiUserIdAction($myaudiUserId)
+    public function cgetAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
-        $partner = $repository->findOneByMyaudiUserId($myaudiUserId);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
 
-        return $this->createView($partner);
+        $paginator = $this->get('knp_paginator');
+
+        $queryBuilder = $repository->createQueryBuilder('partner');
+
+        $this->applyFilters($queryBuilder, $request);
+
+        /** @var SlidingPagination $pager */
+        $pager = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
+        return $this->createPaginatedView($pager);
     }
 
     /**
@@ -220,25 +204,7 @@ class PartnerController extends FOSRestController
      */
     public function putAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $dataInput = $request->request->all();
-
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($id);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
-
-        $isPut = $request->getMethod() == "PUT";
-        $form = $this->createForm(PartnerType::class, $partner);
-        $form->submit($dataInput, $isPut);
-        // validate
-        if (!$form->isValid()) {
-            return $this->view($form);
-        }
-
-        $em->flush();
-
-        return $this->createView($partner);
+        return $this->putOrPatch($request, $id);
     }
 
     /**
@@ -286,25 +252,7 @@ class PartnerController extends FOSRestController
      */
     public function patchAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $dataInput = $request->request->all();
-
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($id);
-        if (!$partner) {
-            throw $this->createNotFoundException('Partner not found');
-        }
-
-        $isPut = $request->getMethod() == "PUT";
-        $form = $this->createForm(PartnerType::class, $partner);
-        $form->submit($dataInput, $isPut);
-        // validate
-        if (!$form->isValid()) {
-            return $this->view($form);
-        }
-
-        $em->flush();
-
-        return $this->createView($partner);
+        return $this->putOrPatch($request, $id, false);
     }
 
     /**
@@ -320,7 +268,7 @@ class PartnerController extends FOSRestController
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
      *     @SWG\Response(
-     *         response=200,
+     *         response=201,
      *         description="the partner",
      *         @SWG\Schema(ref="#/definitions/Partner")
      *     ),
@@ -348,7 +296,6 @@ class PartnerController extends FOSRestController
         $dataInput = $request->request->all();
 
         $partner = new Partner();
-        $em->persist($partner);
         $form = $this->createForm(PartnerType::class, $partner);
         $form->submit($dataInput);
         // validate
@@ -392,12 +339,6 @@ class PartnerController extends FOSRestController
      *    ),
      *    security={{ "bearer":{} }}
      * )
-     * @SWG\Definition(
-     *     definition="Success",
-     *     type="object",
-     *     required={"success"},
-     *     @SWG\Property(property="success", type="boolean")
-     * )
      *
      * @Rest\View()
      *
@@ -410,7 +351,7 @@ class PartnerController extends FOSRestController
         /**
          * @var Partner $partner
          */
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($id);
+        $partner = $em->getRepository('PartnerBundle:Partner')->find($id);
         if (!$partner) {
             throw $this->createNotFoundException('Partner not found');
         }
@@ -418,11 +359,64 @@ class PartnerController extends FOSRestController
         $em->remove($partner);
         $em->flush();
 
-        return $this->view(['context' => 'success', 'data' => ['success' => true]], Response::HTTP_OK);
+        return $this->deleteView();
     }
 
-    protected function createView(Partner $partner, $statusCode = Response::HTTP_OK)
+    /**
+     * Applies filters from request
+     * todo: move this method in a service
+     *
+     * @param QueryBuilder $builder
+     * @param Request $request
+     */
+    private function applyFilters(QueryBuilder $builder, Request $request)
     {
-        return $this->view(['context' => 'partner', 'data' => $partner], $statusCode);
+        $registryUserId = $request->query->get('registryUserId');
+        $myaudiUserId = $request->query->get('myaudiUserId');
+
+        if ($registryUserId) {
+            $builder
+                ->join('partner.registryUsers', 'registryUsers')
+                ->andWhere('registryUsers.registryUserId = :registryUserId')
+                ->setParameter('registryUserId', $registryUserId);
+        }
+
+        if ($myaudiUserId) {
+            $builder
+                ->join('partner.myaudiUsers', 'myaudiUsers')
+                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
+                ->setParameter('myaudiUserId', $myaudiUserId);
+        }
+    }
+
+    /**
+     * Handles put or patch action
+     *
+     * @param Request $request
+     * @param int $id lead id
+     * @param bool $clearMissing
+     *
+     * @return View
+     */
+    private function putOrPatch(Request $request, int $id, $clearMissing = true)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dataInput = $request->request->all();
+
+        $lead = $em->getRepository('PartnerBundle:Partner')->find($id);
+        if (!$lead) {
+            throw $this->createNotFoundException('Partner not found');
+        }
+
+        $form = $this->createForm(PartnerType::class, $lead);
+        $form->submit($dataInput, $clearMissing);
+        // validate
+        if (!$form->isValid()) {
+            return $this->view($form);
+        }
+
+        $em->flush();
+
+        return $this->createView($lead);
     }
 }
