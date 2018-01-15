@@ -1,7 +1,7 @@
 <?php
 namespace PartnerBundle\Tests\Controller;
 
-class ApiControllerCest
+class PartnerControllerCest
 {
     protected static $jsonPartner = <<<HEREDOC
 {

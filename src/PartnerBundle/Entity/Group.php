@@ -2,6 +2,7 @@
 
 namespace PartnerBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Mullenlowe\CommonBundle\Entity\Base\Date;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -109,9 +110,9 @@ class Group extends Date
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getPartners(): ArrayCollection
+    public function getPartners(): Collection
     {
         return $this->partners;
     }

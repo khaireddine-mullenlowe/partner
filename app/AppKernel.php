@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new PartnerBundle\PartnerBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Mullenlowe\EtlBundle\MullenloweEtlBundle(),
         ];
 
