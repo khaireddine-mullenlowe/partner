@@ -88,7 +88,7 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
                 $this->logger->info(sprintf("[Consumer] No data to update partner (__CLASS__)"));
             }
         } else {
-            throw new InvalidArgumentException("[Consumer] Update Profile Data is empty and can't be processed (__CLASS__)");
+            throw new \InvalidArgumentException("[Consumer] Update Profile Data is empty and can't be processed (__CLASS__)");
         }
     }
 }
