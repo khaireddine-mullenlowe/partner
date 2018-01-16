@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\RestBundle\FOSRestBundle(), // FosRestBundle must be loaded before CommonBundle
             new Mullenlowe\CommonBundle\MullenloweCommonBundle(),
-            new AppBundle\AppBundle(),
             new PartnerBundle\PartnerBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),

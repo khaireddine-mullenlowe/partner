@@ -1,6 +1,0 @@
-services:
-    # automatically injects dependencies in your services
-    _defaults: {autowire: true}
-
-    PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer:
-        arguments: ['@doctrine.orm.default_entity_manager']
