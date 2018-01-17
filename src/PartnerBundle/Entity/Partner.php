@@ -3,7 +3,7 @@
 namespace PartnerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Mullenlowe\CommonBundle\Entity\Base\Date;
+use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *       message="legacyId already used"
  * )
  */
-class Partner extends Date
+class Partner extends BaseEntity
 {
     /**
      * @var string

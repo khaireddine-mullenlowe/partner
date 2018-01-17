@@ -4,7 +4,7 @@ namespace PartnerBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Mullenlowe\CommonBundle\Entity\Base\Date;
+use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
