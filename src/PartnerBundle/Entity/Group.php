@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\GroupRepository")
  * @ORM\Table(name="partner_group")
  */
-class Group extends Date
+class Group extends BaseEntity
 {
     /**
      * @ORM\Column(type="string")
