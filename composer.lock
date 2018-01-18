@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff67dc791f869087e2b5ff15e3c9ed5c",
+    "content-hash": "8569844aa0fd06ed36a9975c038f6309",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1013,6 +1013,45 @@
                 "orm"
             ],
             "time": "2017-12-17T02:57:51+00:00"
+        },
+        {
+            "name": "exsyst/swagger",
+            "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GuilhemN/swagger.git",
+                "reference": "b8235e5312f86ab6caaf3c6728972e6832bab32f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GuilhemN/swagger/zipball/b8235e5312f86ab6caaf3c6728972e6832bab32f",
+                "reference": "b8235e5312f86ab6caaf3c6728972e6832bab32f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EXSyst\\Component\\Swagger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ener-Getick",
+                    "email": "egetick@gmail.com"
+                }
+            ],
+            "description": "A php library to manipulate Swagger specifications",
+            "time": "2017-12-19T19:46:02+00:00"
         },
         {
             "name": "fig/link-util",
@@ -2043,7 +2082,13 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "f4e87021d5619710e285d8cc695954ab28979970"
+                "reference": "3ecee72bea02bbb714afa001ac494bf9ac2254f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/3ecee72bea02bbb714afa001ac494bf9ac2254f0",
+                "reference": "3ecee72bea02bbb714afa001ac494bf9ac2254f0",
+                "shasum": ""
             },
             "require": {
                 "friendsofsymfony/elastica-bundle": "^4.0",
@@ -2054,8 +2099,10 @@
                 "lexik/jwt-authentication-bundle": "^2.4",
                 "mullenlowe/component": "dev-master",
                 "neitanod/forceutf8": "~2.0",
+                "nelmio/api-doc-bundle": "^3.0",
                 "php": ">=7",
                 "php-amqplib/rabbitmq-bundle": "~1.6",
+                "phpdocumentor/reflection-docblock": "^4.2",
                 "stof/doctrine-extensions-bundle": "^1.2",
                 "symfony/config": ">=3",
                 "symfony/security-bundle": ">=3",
@@ -2085,7 +2132,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-01-17T08:57:37+00:00"
+            "time": "2018-01-18T09:55:51+00:00"
         },
         {
             "name": "mullenlowe/component",
@@ -2094,6 +2141,12 @@
                 "type": "git",
                 "url": "git@github.com:itagenceone/component.git",
                 "reference": "66703f93713d0bdac11e6e358f89f9bdbfbbee6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itagenceone/component/zipball/66703f93713d0bdac11e6e358f89f9bdbfbbee6e",
+                "reference": "66703f93713d0bdac11e6e358f89f9bdbfbbee6e",
+                "shasum": ""
             },
             "require": {
                 "namshi/jose": ">=7",
@@ -2250,6 +2303,88 @@
             "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
             "homepage": "https://github.com/neitanod/forceutf8",
             "time": "2017-05-22T18:50:57+00:00"
+        },
+        {
+            "name": "nelmio/api-doc-bundle",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
+                "reference": "29ec20bda12c4f0f65dd806ab00f25a9d5b20b9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/29ec20bda12c4f0f65dd806ab00f25a9d5b20b9c",
+                "reference": "29ec20bda12c4f0f65dd806ab00f25a9d5b20b9c",
+                "shasum": ""
+            },
+            "require": {
+                "exsyst/swagger": "~0.3",
+                "php": "^7.0",
+                "symfony/framework-bundle": "^3.2.5|^4.0",
+                "symfony/property-info": "^3.1|^4.0",
+                "zircote/swagger-php": "^2.0.9"
+            },
+            "require-dev": {
+                "api-platform/core": "^2.0.3",
+                "doctrine/annotations": "^1.2",
+                "friendsofsymfony/rest-bundle": "^2.0",
+                "jms/serializer-bundle": "^2.0",
+                "phpdocumentor/reflection-docblock": "^3.1",
+                "sensio/framework-extra-bundle": "^3.0",
+                "symfony/asset": "^2.8|^3.0|^4.0",
+                "symfony/browser-kit": "^2.8|^3.0|^4.0",
+                "symfony/cache": "^3.1|^4.0",
+                "symfony/config": "^2.8|^3.0|^4.0",
+                "symfony/console": "^2.8|^3.0|^4.0",
+                "symfony/dom-crawler": "^2.8|^3.0|^4.0",
+                "symfony/form": "^3.0.8|^4.0",
+                "symfony/phpunit-bridge": "^3.3",
+                "symfony/property-access": "^2.8|^3.0|^4.0",
+                "symfony/stopwatch": "^2.8|^3.0|^4.0",
+                "symfony/templating": "^2.8|^3.0|^4.0",
+                "symfony/twig-bundle": "^3.0|^4.0",
+                "symfony/validator": "^2.8|^3.0|^4.0",
+                "symfony/yaml": "^2.8|^3.0|^4.0"
+            },
+            "suggest": {
+                "api-platform/core": "For using an API oriented framework.",
+                "friendsofsymfony/rest-bundle": "For using the parameters annotations.",
+                "phpdocumentor/reflection-docblock": "For parsing php docs."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nelmio\\ApiDocBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioApiDocBundle/contributors"
+                }
+            ],
+            "description": "Generates documentation for your REST API from annotations",
+            "keywords": [
+                "api",
+                "doc",
+                "documentation",
+                "rest"
+            ],
+            "time": "2017-12-09T13:31:56+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -2608,6 +2743,158 @@
                 "rabbitmq"
             ],
             "time": "2017-12-08T12:54:50+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-common",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "time": "2017-09-11T18:02:19+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "66465776cfc249844bde6d117abff1d22e06c2da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/66465776cfc249844bde6d117abff1d22e06c2da",
+                "reference": "66465776cfc249844bde6d117abff1d22e06c2da",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "phpdocumentor/reflection-common": "^1.0.0",
+                "phpdocumentor/type-resolver": "^0.4.0",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "~1.0.5",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2017-11-27T17:38:31+00:00"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^7.0",
+                "phpdocumentor/reflection-common": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.2||^4.8.24"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "psr/cache",
@@ -3924,6 +4211,56 @@
             "time": "2017-09-27T18:10:31+00:00"
         },
         {
+            "name": "webmozart/assert",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert.git",
+                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/2db61e59ff05fe5126d152bd0655c9ea113e550f",
+                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "time": "2016-11-23T20:04:58+00:00"
+        },
+        {
             "name": "willdurand/jsonp-callback-validator",
             "version": "v1.1.0",
             "source": {
@@ -4121,6 +4458,68 @@
                 "zf2"
             ],
             "time": "2017-07-11T19:17:22+00:00"
+        },
+        {
+            "name": "zircote/swagger-php",
+            "version": "2.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zircote/swagger-php.git",
+                "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
+                "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "*",
+                "php": ">=5.6",
+                "symfony/finder": ">=2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8.35 <=5.6",
+                "squizlabs/php_codesniffer": ">=2.7",
+                "zendframework/zend-form": "<2.8"
+            },
+            "bin": [
+                "bin/swagger"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Swagger\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Allen",
+                    "email": "zircote@gmail.com",
+                    "homepage": "http://www.zircote.com"
+                },
+                {
+                    "name": "Bob Fanger",
+                    "email": "bfanger@gmail.com",
+                    "homepage": "http://bfanger.nl"
+                }
+            ],
+            "description": "Swagger-PHP - Generate interactive documentation for your RESTful API using phpdoc annotations",
+            "homepage": "https://github.com/zircote/swagger-php/",
+            "keywords": [
+                "api",
+                "json",
+                "rest",
+                "service discovery"
+            ],
+            "time": "2017-12-01T09:22:05+00:00"
         }
     ],
     "packages-dev": [
@@ -4457,68 +4856,6 @@
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
             "time": "2018-01-04T17:19:23+00:00"
-        },
-        {
-            "name": "zircote/swagger-php",
-            "version": "2.0.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
-                "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/annotations": "*",
-                "php": ">=5.6",
-                "symfony/finder": ">=2.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=4.8.35 <=5.6",
-                "squizlabs/php_codesniffer": ">=2.7",
-                "zendframework/zend-form": "<2.8"
-            },
-            "bin": [
-                "bin/swagger"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Swagger\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Allen",
-                    "email": "zircote@gmail.com",
-                    "homepage": "http://www.zircote.com"
-                },
-                {
-                    "name": "Bob Fanger",
-                    "email": "bfanger@gmail.com",
-                    "homepage": "http://bfanger.nl"
-                }
-            ],
-            "description": "Swagger-PHP - Generate interactive documentation for your RESTful API using phpdoc annotations",
-            "homepage": "https://github.com/zircote/swagger-php/",
-            "keywords": [
-                "api",
-                "json",
-                "rest",
-                "service discovery"
-            ],
-            "time": "2017-12-01T09:22:05+00:00"
         }
     ],
     "aliases": [],

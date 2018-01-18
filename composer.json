@@ -24,11 +24,13 @@
     },
     "repositories": [
         {
-            "type": "git",
+            "type": "vcs",
+	    "no-api": true,
             "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git"
         },
         {
-            "type": "git",
+            "type": "vcs",
+	    "no-api": true,
             "url": "git@github.com:itagenceone/component.git"
         },
         {
