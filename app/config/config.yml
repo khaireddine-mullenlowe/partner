@@ -65,8 +65,8 @@ doctrine:
                 driver: pdo_mysql
                 host: '%database_host%'
                 port: '%database_port%'
-                dbname: '%database_name_userdb%'
-                user: '%database_user_userdb%'
+                dbname: '%database_name_user%'
+                user: '%database_user_user%'
                 password: '%database_password%'
                 charset: UTF8
     orm:
