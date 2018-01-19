@@ -8,8 +8,8 @@ class PartnerControllerCest
     "isTwinService": false,
     "commercialName": "ESPACE PREMIUM",
     "webSite": "http://www.espace-premium-lorient.fr/",
-    "legacyPartnerId": 123456,
     "contractNumber": "01002047",
+    "legacyId": "123456",
     "kvpsNumber": "FRAA01931",
     "isOccPlus": true,
     "isPartnerR8": false,
@@ -41,7 +41,7 @@ HEREDOC;
     "isTwinService": false,
     "commercialName": "NEW ESPACE PREMIUM",
     "webSite": "http://www.espace-premium-lorient.fr/",
-    "legacyPartnerId": 1234567,
+    "legacyId": 1234567,
     "contractNumber": "01002047",
     "kvpsNumber": "FRAA01931",
     "isOccPlus": true,
@@ -79,15 +79,6 @@ HEREDOC;
     }
 
     /**
-     * @depends testPostPartner
-     */
-    public function testGetPartnerByRegistryUserId(\FunctionalTester $I)
-    {
-        $this->requestJson($I,200, 'GET', '/registry_user/6736666');
-        $I->seeResponseContainsJson(json_decode(static::$jsonPartner, true));
-    }
-
-    /**
      * @depends testGetPartnerByRegistryUserId
      */
     public function testGetPartnerByMyaudiUserId(\FunctionalTester $I)
@@ -120,7 +111,7 @@ HEREDOC;
     public function testRemovePartner(\FunctionalTester $I)
     {
         $this->requestJson($I, 200, 'DELETE', '/'.$this->createdPartnerId);
-        $I->seeResponseContainsJson(['success' => true]);
+        $I->seeResponseContainsJson(['context' => 'partner']);
     }
 
     /**
@@ -136,7 +127,6 @@ HEREDOC;
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->{"send".$method}($uri, $content, $parameters);
-//        echo $I->grabResponse();die;
         $I->seeResponseCodeIs($expectedStatusCode);
         $I->seeResponseIsJson();
     }
