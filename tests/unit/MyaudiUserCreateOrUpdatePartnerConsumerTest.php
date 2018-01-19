@@ -2,59 +2,85 @@
 
 namespace Tests\unit;
 
+use Doctrine\ORM\EntityManager;
+use Monolog\Logger;
+use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\Repository\PartnerRepository;
+use PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class MyaudiUserCreateOrUpdatePartnerConsumerTest extends \Codeception\Test\Unit
 {
+
+    private $em;
+
+    private $logger;
+
+    private $consumer;
+
     protected function _before()
     {
+        $this->em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
+        $this->logger = $this->getMockBuilder(Logger::class)->disableOriginalConstructor()->getMock();
+        $this->consumer = new MyaudiUserCreateOrUpdatePartnerConsumer($this->em, $this->logger);
+    }
 
+    /**
+     * @dataProvider        emptyDataProvider
+     * @expectedException   \InvalidArgumentException
+     */
+    public function testExecuteEmptyData($emptyDataProvider)
+    {
+        $amqpMessage = new AMQPMessage();
+        $amqpMessage->setBody(serialize($emptyDataProvider));
+        $this->consumer->execute($amqpMessage);
+    }
+
+    /**
+     * @dataProvider                noIndexPartnerResponseDataProvider
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    [Consumer] No data to update partner (__CLASS__)
+     */
+    public function testExecuteNoIndexPartnerResponse($noIndexPartnerResponseDataProvider)
+    {
+        $amqpMessage = new AMQPMessage();
+        $amqpMessage->setBody(serialize($noIndexPartnerResponseDataProvider));
+        $this->consumer->execute($amqpMessage);
     }
 
     /**
      * @dataProvider myaudiDataProvider
      */
-    public function testExecute($myaudiDataProviders)
+    public function testExecute($myaudiDataProvider)
     {
-        $this->container = $this->getModule('Symfony2')->_getContainer();
+        $repository = $this->getMockBuilder(PartnerRepository::class)->disableOriginalConstructor()->getMock();
+        $this->em->expects($this->any())->method('getRepository')->willReturn($repository);
+        $repository->expects($this->any())->method('findOneBy')->willReturn(new Partner());
 
-        $myaudiDataProviderObject = json_decode($myaudiDataProviders);
-        $partnerInfos = $myaudiDataProviderObject->partner_response;
-        $consumer = $this->container->get('PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer');
+        $amqpMessage = new AMQPMessage();
+        $amqpMessage->setBody(serialize($myaudiDataProvider));
+        $result = $this->consumer->execute($amqpMessage);
+        $this->assertTrue($result);
+    }
 
-        foreach($partnerInfos as $partnerType => $partnerInfo){
+    public function emptyDataProvider()
+    {
+        return [['{}']];
+    }
 
-            $amqpMessage = new AMQPMessage();
-            $amqpMessage->setBody(serialize($myaudiDataProviders));
-
-            if ($partnerType == 'partner_response') {
-                $type = 'sales';
-            } else {
-                $type = 'aftersales';
-            }
-
-            $consumer->execute($amqpMessage);
-
-            $em = $this->container->get('doctrine.orm.entity_manager');;
-
-            $partner = $em->getRepository("PartnerBundle:Partner")->findOneBy(['legacyPartnerId' => $partnerInfo->id_partner]);
-
-            $this->assertNotEmpty($partner);
-
-            $this->assertEquals($partnerInfo->commercial_name, $partner->getCommercialName());
-            $this->assertEquals($partnerInfo->contract_number, $partner->getContractNumber());
-            $this->assertEquals((bool)$partnerInfo->etron, $partner->isEtron());
-            $this->assertEquals((bool)$partnerInfo->occ_plus, $partner->isOccPlus());
-            $this->assertEquals((bool)$partnerInfo->partner_r8, $partner->isPartnerR8());
-            $this->assertEquals((bool)$partnerInfo->twin_service, $partner->isTwinService());
-            $this->assertEquals($partnerInfo->website, $partner->getWebSite());
-            $this->assertEquals($type, $partner->getType());
-
-            if(isset($partnerInfo->kvps_number)){
-                $this->assertEquals($partnerInfo->kvps_number, $partner->getKvpsNumber());
-            }
-
-        }
+    public function noIndexPartnerResponseDataProvider()
+    {
+        return [[
+            '{
+            "login_response": {},
+            "no_profile_response": {
+                "personal_info": {},
+                "address": {},
+                "phones": {},
+                "user": {}
+            },
+            "aftersales_partner": {}
+        }']];
     }
 
     public function myaudiDataProvider()
@@ -200,38 +226,9 @@ class MyaudiUserCreateOrUpdatePartnerConsumerTest extends \Codeception\Test\Unit
                 "images": []
             }],
             "desired_cars": [{
-                 "id_desired_car": "686426",
-                "model_id": "267",
-                "information_requested": "0",
-                "model": "Audi A3",
-                "purchase_type": null,
-                "purchase_delay": null,
-                "purchase_mode": null,
-                "usage": null,
-                "purchase_type_id": null,
-                "purchase_delay_id": null,
-                "purchase_mode_id": null,
-                "usage_id": null,
-                "model_catalog": "A3_733.1150.32_41_22_17_Doppel.pdf",
-                "id_configurated_product": "49232",
-                "contact_id": "406779",
-                "configuration_code": "AX0PFBLS",
-                "model_code": "",
-                "configuration_date": "",
-                "title": "",
-                "price": "",
-                "currency": "",
-                "picture_url": "",
-                "detail_url": "",
-                "creation_time": "2017-04-13 12:29:44.263",
-                "rank": "32",
-                "status": "0"
+                
             }]
         }']
         ];
-    }
-
-    protected function _after()
-    {
     }
 }
