@@ -41,54 +41,59 @@ class MyaudiUserCreateOrUpdatePartnerConsumer implements ConsumerInterface
         // unserialize
         $jsonData = unserialize($SerializedData);
         // json decode
-        $data = json_decode($jsonData);
+        $data = json_decode($jsonData, true);
 
-        if ($data) {
-            if (isset($data->partner_response)) {
-                // contains sales and aftersales partner information
-                $partnerDatas = $data->partner_response;
-
-                foreach ($partnerDatas as $typePartner => $partnerData) {
-                    $this->logger->info(sprintf("[Consumer] Reading messages to update partner %s (__CLASS__): %s", $typePartner, json_encode($data)));
-
-                    if ($typePartner == 'partner_response') {
-                        $type = Partner::SALES_TYPE;
-                    } else {
-                        $type = Partner::AFTERSALES_TYPE;
-                    }
-
-                    $partner = $this->em
-                        ->getRepository("PartnerBundle:Partner")
-                        ->findOneBy(["legacyPartnerId" => $partnerData->id_partner]);
-
-                    // create partner user
-                    if (!$partner) {
-                        $partner = new Partner();
-                    }
-
-                    $partner->setType($type);
-                    $partner->setCommercialName($partnerData->commercial_name);
-                    $partner->setContractNumber($partnerData->contract_number);
-                    $partner->setLegacyPartnerId($partnerData->id_partner);
-
-                    $partner->setIsEtron($partnerData->etron);
-                    $partner->setIsOccPlus($partnerData->occ_plus);
-                    $partner->setIsPartnerR8($partnerData->partner_r8);
-                    $partner->setIsTwinService($partnerData->twin_service);
-                    $partner->setWebSite($partnerData->website);
-
-                    if (isset($partnerData->kvps_number)) {
-                        $partner->setKvpsNumber($partnerData->kvps_number);
-                    }
-
-                    $this->em->persist($partner);
-                    $this->em->flush();
-                }
-            } else {
-                $this->logger->info(sprintf("[Consumer] No data to update partner (__CLASS__)"));
-            }
-        } else {
+        if (empty($data)) {
             throw new \InvalidArgumentException("[Consumer] Update Profile Data is empty and can't be processed (__CLASS__)");
         }
+        $data = json_decode($jsonData);
+
+        if (!isset($data->partner_response)) {
+            $message = "[Consumer] No data to update partner (__CLASS__)";
+            $this->logger->info($message);
+            throw new \InvalidArgumentException($message);
+        }
+
+        // contains sales and aftersales partner information
+        $partnerDatas = $data->partner_response;
+
+        foreach ($partnerDatas as $typePartner => $partnerData) {
+            $this->logger->info(sprintf("[Consumer] Reading messages to update partner %s (__CLASS__): %s", $typePartner, json_encode($data)));
+
+            if ($typePartner == 'partner_response') {
+                $type = Partner::SALES_TYPE;
+            } else {
+                $type = Partner::AFTERSALES_TYPE;
+            }
+
+            $partner = $this->em
+                ->getRepository("PartnerBundle:Partner")
+                ->findOneBy(["legacyPartnerId" => $partnerData->id_partner]);
+
+            // create partner user
+            if (!$partner) {
+                $partner = new Partner();
+            }
+
+            $partner->setType($type);
+            $partner->setCommercialName($partnerData->commercial_name);
+            $partner->setContractNumber($partnerData->contract_number);
+            $partner->setLegacyId($partnerData->id_partner);
+
+            $partner->setIsEtron($partnerData->etron);
+            $partner->setIsOccPlus($partnerData->occ_plus);
+            $partner->setIsPartnerR8($partnerData->partner_r8);
+            $partner->setIsTwinService($partnerData->twin_service);
+            $partner->setWebSite($partnerData->website);
+
+            if (isset($partnerData->kvps_number)) {
+                $partner->setKvpsNumber($partnerData->kvps_number);
+            }
+
+            $this->em->persist($partner);
+            $this->em->flush();
+        }
+
+        return true;
     }
 }
