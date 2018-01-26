@@ -42,7 +42,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string")
      * @SWG\Property
      * @var string
-     * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE})
+     * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
      */
     protected $type;
 
