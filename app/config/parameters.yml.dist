@@ -35,3 +35,8 @@ parameters:
     v4_database_user: useraudipp
     v4_database_password: 4Hv2Og4L7tsWw
 
+    # rabbitMQ
+    rabbitmq_host: rabbitmq5.audi.dev.agence-one.net
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+

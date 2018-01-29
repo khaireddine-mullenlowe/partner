@@ -2,10 +2,10 @@
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     '192.168.56.101'
+            host:     '%rabbitmq_host%'
             port:     5672
-            user:     'radmin'
-            password: 'radmin'
+            user:     '%rabbitmq_user%'
+            password: '%rabbitmq_password%'
             vhost:    '/'
             lazy:     false
             connection_timeout: 3
@@ -24,7 +24,7 @@ old_sound_rabbit_mq:
             # except the scheme (amqp:). If both segment in the URL and a key value (see above)
             # are given the value from the URL takes precedence.
             # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
-            url: 'amqp://radmin:radmin@192.168.56.101:5672/vhost?lazy=1&connection_timeout=6'
+            url: 'amqp://%rabbitmq_user%:%rabbitmq_password%@%rabbitmq_host%/vhost?lazy=1&connection_timeout=6'
 
     producers:
         partner_crud:
