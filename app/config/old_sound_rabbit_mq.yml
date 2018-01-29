@@ -25,14 +25,19 @@ old_sound_rabbit_mq:
             # are given the value from the URL takes precedence.
             # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
             url: 'amqp://radmin:radmin@192.168.56.101:5672/vhost?lazy=1&connection_timeout=6'
+
     producers:
-        myaudi_user_create_or_update: ~
-    consumers:
-        myaudi_user_create_or_update_partner:
-            connection:       default
-            exchange_options: {name: 'myaudi.user.create_or_update', type: topic}
-            queue_options:
-                name: "myaudi.user.create_or_update.partner"
-                routing_keys:
-                  - 'myaudi.user.create_or_update.#'
-            callback:         PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer
+        partner_crud:
+            connection: 'default'
+            class: Mullenlowe\CommonBundle\Component\AMQP\CrudProducer
+            exchange_options:
+                name: 'CRUD'
+                type: 'direct'
+
+mullenlowe_common:
+    rabbitmq_crud_publisher:
+        producer: "old_sound_rabbit_mq.partner_crud_producer"
+        mapping:
+            - { context: 'Partner', routing_key: 'crud.partner' }
+            - { context: 'PartnerMyaudiUser', routing_key: 'crud.partner.myaudi' }
+            - { context: 'PartnerRegistryUser', routing_key: 'crud.partner.registry' }

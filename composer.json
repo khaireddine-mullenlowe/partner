@@ -43,7 +43,7 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
-        "mullenlowe/audi-agc5-common-bundle": "dev-develop",
+        "mullenlowe/audi-agc5-common-bundle": "dev-feature/513-516-rabbitmq-normalization",
         "mullenlowe/etl-bundle": "dev-master",
         "nelmio/cors-bundle": "^1.5",
         "php-amqplib/rabbitmq-bundle": "~1.6",
