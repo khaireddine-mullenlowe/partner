@@ -9,7 +9,7 @@ class PartnerControllerCest
     "commercialName": "ESPACE PREMIUM",
     "webSite": "http://www.espace-premium-lorient.fr/",
     "contractNumber": "01002047",
-    "legacyId": "123456",
+    "legacyId": 123456,
     "kvpsNumber": "FRAA01931",
     "isOccPlus": true,
     "isPartnerR8": false,
@@ -73,18 +73,9 @@ HEREDOC;
     public function testPostPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,201, 'POST', '/', [], [], [], static::$jsonPartner);
-        $arrayPartner = json_decode(static::$jsonPartner, true);
-        $I->seeResponseContainsJson($arrayPartner);
+        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContains('data');
         $this->createdPartnerId = $I->grabDataFromResponseByJsonPath('$..id')[0];
-    }
-
-    /**
-     * @depends testGetPartnerByRegistryUserId
-     */
-    public function testGetPartnerByMyaudiUserId(\FunctionalTester $I)
-    {
-        $this->requestJson($I,200, 'GET', '/myaudi_user/16739999');
-        $I->seeResponseContainsJson(json_decode(static::$jsonPartner, true));
     }
 
     /**
@@ -93,7 +84,8 @@ HEREDOC;
     public function testPutPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,200, 'PUT', '/'.$this->createdPartnerId, [], [], [], static::$jsonPartner2);
-        $I->seeResponseContainsJson(json_decode(static::$jsonPartner2, true));
+        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContains('data');
     }
 
     /**
@@ -102,7 +94,8 @@ HEREDOC;
     public function testGetPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,200, 'GET', '/'.$this->createdPartnerId);
-        $I->seeResponseContainsJson(json_decode(static::$jsonPartner2, true));
+        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContains('data');
     }
 
     /**

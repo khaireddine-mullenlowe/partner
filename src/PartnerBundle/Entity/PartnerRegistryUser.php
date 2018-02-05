@@ -5,6 +5,7 @@ namespace PartnerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,6 +29,7 @@ class PartnerRegistryUser
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="registryUsers")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
      * @var Partner
+     * @Groups({"amqp"})
      */
     protected $partner;
 
@@ -37,6 +39,7 @@ class PartnerRegistryUser
      * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
      * @var int
+     * @Groups({"amqp"})
      */
     protected $registryUserId;
 

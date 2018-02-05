@@ -2238,16 +2238,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-feature/513-516-rabbitmq-normalization",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "1a6b6ba5f989aef48d59fa5b6573d58d5c9d8d46"
+                "reference": "f3d3483ef2ff430780da0637a791461fc6d9fc51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/1a6b6ba5f989aef48d59fa5b6573d58d5c9d8d46",
-                "reference": "1a6b6ba5f989aef48d59fa5b6573d58d5c9d8d46",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/f3d3483ef2ff430780da0637a791461fc6d9fc51",
+                "reference": "f3d3483ef2ff430780da0637a791461fc6d9fc51",
                 "shasum": ""
             },
             "require": {
@@ -2293,7 +2293,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-02-01 09:16:58"
+            "time": "2018-02-02 10:46:16"
         },
         {
             "name": "mullenlowe/component",
