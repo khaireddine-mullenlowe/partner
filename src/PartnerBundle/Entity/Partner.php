@@ -5,8 +5,10 @@ namespace PartnerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -35,6 +37,7 @@ class Partner extends BaseEntity
      * @ORM\GeneratedValue(strategy="AUTO")
      * @SWG\Property(format="int64")
      * @var integer
+     * @Groups({"amqp"})
      */
     protected $id;
 
@@ -43,6 +46,7 @@ class Partner extends BaseEntity
      * @SWG\Property
      * @var string
      * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
+     * @Groups({"amqp"})
      */
     protected $type;
 
@@ -50,6 +54,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
+     * @Groups({"amqp"})
      */
     protected $contractNumber;
 
@@ -57,6 +62,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
+     * @Groups({"amqp"})
      */
     protected $commercialName;
 
@@ -64,6 +70,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
+     * @Groups({"amqp"})
      */
     protected $kvpsNumber;
 
@@ -72,6 +79,7 @@ class Partner extends BaseEntity
      * @SWG\Property
      * @Assert\Url()
      * @var string
+     * @Groups({"amqp"})
      */
     protected $webSite;
 
@@ -80,6 +88,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
+     * @Groups({"amqp"})
      */
     protected $isPartnerR8;
 
@@ -88,6 +97,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
+     * @Groups({"amqp"})
      */
     protected $isTwinService;
 
@@ -96,6 +106,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
+     * @Groups({"amqp"})
      */
     protected $isPartnerPlus;
 
@@ -104,6 +115,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
+     * @Groups({"amqp"})
      */
     protected $isOccPlus;
 
@@ -112,6 +124,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
+     * @Groups({"amqp"})
      */
     protected $isEtron;
 
@@ -119,6 +132,7 @@ class Partner extends BaseEntity
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Group", inversedBy="partners")
      * @ORM\JoinColumn(name="partner_group_id", referencedColumnName="id")
      * @var Group|null
+     * @Groups({"amqp"})
      */
     protected $group;
 
@@ -127,8 +141,25 @@ class Partner extends BaseEntity
      * @ORM\Column(type="integer", unique=true)
      * @SWG\Property(format="int64")
      * @var integer
+     * @Groups({"amqp"})
      */
     protected $legacyId;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Groups({"amqp"})
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Groups({"amqp"})
+     */
+    protected $updatedAt;
 
     /**
      * One Partner have Many registryUsers.

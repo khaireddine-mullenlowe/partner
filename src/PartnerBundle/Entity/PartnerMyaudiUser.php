@@ -4,6 +4,7 @@ namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -31,6 +32,7 @@ class PartnerMyaudiUser
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="myaudiUsers")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
      * @var Partner
+     * @Groups({"amqp"})
      */
     protected $partner;
 
@@ -40,6 +42,7 @@ class PartnerMyaudiUser
      * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
      * @var int
+     * @Groups({"amqp"})
      */
     protected $myaudiUserId;
 

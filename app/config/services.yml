@@ -28,8 +28,3 @@ services:
         resource: '../../src/PartnerBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
-    PartnerBundle\Service\MyaudiUserCreateOrUpdatePartnerConsumer:
-         arguments:
-              - '@doctrine.orm.default_entity_manager'
-              - '@logger'
