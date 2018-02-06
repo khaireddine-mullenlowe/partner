@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Group
@@ -17,20 +19,31 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Group extends BaseEntity
 {
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"rest"})
+     */
+    protected $id;
+
+    /**
      * @ORM\Column(type="string")
      * @var string
+     * @Groups({"rest"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string")
      * @var string
+     * @Groups({"rest"})
      */
     private $websiteUrl;
 
     /**
      * @ORM\Column(type="smallint", options={"default":1})
      * @var int
+     * @Groups({"rest"})
      */
     private $status;
 
@@ -40,6 +53,22 @@ class Group extends BaseEntity
      * @var ArrayCollection
      */
     private $partners;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+    protected $updatedAt;
 
     /**
      * Group constructor.

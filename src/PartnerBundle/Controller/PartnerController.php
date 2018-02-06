@@ -133,7 +133,7 @@ class PartnerController extends MullenloweRestController
      *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Partner"))
      *     ),
      * )
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"rest"})
      *
      * @param Request $request
      * @return View

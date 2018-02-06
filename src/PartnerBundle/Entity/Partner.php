@@ -37,7 +37,7 @@ class Partner extends BaseEntity
      * @ORM\GeneratedValue(strategy="AUTO")
      * @SWG\Property(format="int64")
      * @var integer
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $id;
 
@@ -46,7 +46,7 @@ class Partner extends BaseEntity
      * @SWG\Property
      * @var string
      * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $type;
 
@@ -54,7 +54,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $contractNumber;
 
@@ -62,7 +62,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $commercialName;
 
@@ -70,7 +70,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="string", nullable=true)
      * @SWG\Property
      * @var string
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $kvpsNumber;
 
@@ -79,7 +79,7 @@ class Partner extends BaseEntity
      * @SWG\Property
      * @Assert\Url()
      * @var string
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $webSite;
 
@@ -88,7 +88,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $isPartnerR8;
 
@@ -97,7 +97,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $isTwinService;
 
@@ -106,7 +106,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $isPartnerPlus;
 
@@ -115,7 +115,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $isOccPlus;
 
@@ -124,7 +124,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="boolean", nullable=true)
      * @SWG\Property
      * @Assert\Type("boolean")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $isEtron;
 
@@ -132,7 +132,7 @@ class Partner extends BaseEntity
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Group", inversedBy="partners")
      * @ORM\JoinColumn(name="partner_group_id", referencedColumnName="id")
      * @var Group|null
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $group;
 
@@ -141,7 +141,7 @@ class Partner extends BaseEntity
      * @ORM\Column(type="integer", unique=true)
      * @SWG\Property(format="int64")
      * @var integer
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $legacyId;
 
@@ -149,7 +149,7 @@ class Partner extends BaseEntity
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $createdAt;
 
@@ -157,7 +157,7 @@ class Partner extends BaseEntity
      * @var \DateTime
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $updatedAt;
 
