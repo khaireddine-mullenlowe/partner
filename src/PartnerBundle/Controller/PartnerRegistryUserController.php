@@ -63,7 +63,7 @@ class PartnerRegistryUserController extends MullenloweRestController
      * @param int $registryUserId
      * @return View
      */
-    public function cgetAction(int $registryUserId)
+    public function getAction(int $registryUserId)
     {
         $partnerRegistryUser = $this->getDoctrine()
             ->getRepository('PartnerBundle:PartnerRegistryUser')

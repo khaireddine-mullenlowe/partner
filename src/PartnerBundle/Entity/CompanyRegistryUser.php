@@ -32,7 +32,7 @@ class CompanyRegistryUser extends BaseEntity
      * @var Company
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Company", inversedBy="registryUsers")
-     * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      * @Groups({"amqp", "rest"})
      */
     private $company;
