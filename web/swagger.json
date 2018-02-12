@@ -1,0 +1,995 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Partner Api",
+        "version": "1.0.0"
+    },
+    "host": "api5.audi.dev.agence-one.net",
+    "basePath": "/partner/dev/",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/company/registry/{registryUserId}": {
+            "get": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Finds and displays a CompanyRegistryUser entity collection by its registryUserId",
+                "operationId": "getCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "path",
+                        "description": "registryUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target CompanyRegistryUser",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a CompanyRegistryUser entity collection by its registryUserId.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/{id}": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get a Partner from id",
+                "operationId": "getPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "update partner from userId",
+                "operationId": "putPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "remove partner from id",
+                "operationId": "removePartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the partner",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "patch partner from id",
+                "operationId": "patchPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "get partners",
+                "operationId": "getPartners",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "query",
+                        "description": "registryUserId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "myaudiUserId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target Partners",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "create partner",
+                "operationId": "createPartner",
+                "parameters": [
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/registry/{registryUserId}": {
+            "get": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "Finds and displays a PartnerRegistryUser entity collection by its registryUserId",
+                "operationId": "getPartnerRegistryUser",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "path",
+                        "description": "registryUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target PartnerRegistryUser",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a PartnerRegistryUser entity collection by its registryUserId.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Context": {
+            "properties": {
+                "context": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Pagination": {
+            "required": [
+                "pagination"
+            ],
+            "properties": {
+                "pagination": {
+                    "properties": {
+                        "total": {
+                            "type": "integer"
+                        },
+                        "count": {
+                            "type": "integer"
+                        },
+                        "per_page": {
+                            "type": "integer"
+                        },
+                        "current_page": {
+                            "type": "integer"
+                        },
+                        "total_pages": {
+                            "type": "integer"
+                        },
+                        "previous_url": {
+                            "type": "string"
+                        },
+                        "next_url": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "Success": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "Error": {
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "IdableEntity": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "LegacyEntity": {
+            "required": [
+                "legacyId"
+            ],
+            "properties": {
+                "legacyId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "TimestampableEntity": {
+            "required": [
+                "createdAt",
+                "updatedAt"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "NamedEntity": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "StatusEntity": {
+            "required": [
+                "status"
+            ],
+            "properties": {
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ReferentialEntity": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/NamedEntity"
+                },
+                {
+                    "$ref": "#/definitions/StatusEntity"
+                }
+            ]
+        },
+        "Partner": {
+            "allOf": [
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "sales",
+                                "aftersales"
+                            ]
+                        },
+                        "contractNumber": {
+                            "type": "string"
+                        },
+                        "commercialName": {
+                            "type": "string"
+                        },
+                        "kvpsNumber": {
+                            "type": "string"
+                        },
+                        "webSite": {
+                            "type": "string"
+                        },
+                        "isPartnerR8": {
+                            "type": "boolean"
+                        },
+                        "isTwinService": {
+                            "type": "boolean"
+                        },
+                        "isPartnerPlus": {
+                            "type": "boolean"
+                        },
+                        "isOccPlus": {
+                            "type": "boolean"
+                        },
+                        "isEtron": {
+                            "type": "boolean"
+                        },
+                        "group": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "PartnerComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/Partner"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Group": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "properties": {
+                        "webSiteUrl": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "GroupComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/Group"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Company": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CompanyTypeComplete"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyType": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyTypeComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyType"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyDepartment": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyDepartmentComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyDepartment"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyPosition": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyPositionComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyPosition"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyPositionCode": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyPositionCodeComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyPositionCode"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "PartnerMyaudiUser": {
+            "required": [
+                "partner",
+                "myaudiUserId"
+            ],
+            "properties": {
+                "partner": {
+                    "type": "integer"
+                },
+                "myaudiUserId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "PartnerMyaudiUserComplete": {
+            "allOf": [
+                {
+                    "properties": {
+                        "partner": {
+                            "$ref": "#/definitions/PartnerComplete"
+                        },
+                        "myaudiUserId": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "PartnerRegistryUser": {
+            "required": [
+                "partner",
+                "registryUserId"
+            ],
+            "properties": {
+                "partner": {
+                    "type": "integer"
+                },
+                "registryUserId": {
+                    "type": "integer"
+                },
+                "department": {
+                    "type": "integer"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "positionCode": {
+                    "type": "integer"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "PartnerRegistryUserComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "required": [
+                        "partner",
+                        "registryUserId"
+                    ],
+                    "properties": {
+                        "partner": {
+                            "$ref": "#/definitions/PartnerComplete"
+                        },
+                        "registryUserId": {
+                            "type": "integer"
+                        },
+                        "department": {
+                            "$ref": "#/definitions/CompanyDepartmentComplete"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/CompanyPositionComplete"
+                        },
+                        "positionCode": {
+                            "$ref": "#/definitions/CompanyPositionCodeComplete"
+                        },
+                        "isAdmin": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyRegistryUser": {
+            "required": [
+                "partner",
+                "registryUserId"
+            ],
+            "properties": {
+                "company": {
+                    "type": "integer"
+                },
+                "registryUserId": {
+                    "type": "integer"
+                },
+                "department": {
+                    "type": "integer"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "positionDescription": {
+                    "type": "string"
+                },
+                "positionCode": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CompanyRegistryUserComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "required": [
+                        "partner",
+                        "registryUserId"
+                    ],
+                    "properties": {
+                        "company": {
+                            "$ref": "#/definitions/CompanyComplete"
+                        },
+                        "registryUserId": {
+                            "type": "integer"
+                        },
+                        "department": {
+                            "$ref": "#/definitions/CompanyDepartmentComplete"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/CompanyPositionComplete"
+                        },
+                        "positionDescription": {
+                            "type": "string"
+                        },
+                        "positionCode": {
+                            "$ref": "#/definitions/CompanyPositionCodeComplete"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        }
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

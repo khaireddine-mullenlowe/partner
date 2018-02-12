@@ -6,7 +6,6 @@
 /vendor/
 /web/bundles/
 /web/swagger-ui
-/web/swagger.json
 tests/_data
 /app/DoctrineMigrations
 
