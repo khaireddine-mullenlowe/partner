@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b9f5178dcf22454a78139016de565f5f",
-    "content-hash": "02a830c5082f7ca7d42531064b6fe462",
+    "hash": "8f868a15f9c2d334c0af3e6e82bbe0fa",
+    "content-hash": "b3639cea4a673219184914c37a2b805f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2344,6 +2344,12 @@
                 "url": "git@github.com:itagenceone/etl-bundle.git",
                 "reference": "f00f29bce5438acb4d33fbfe8d5a5da4d26c1db6"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/f00f29bce5438acb4d33fbfe8d5a5da4d26c1db6",
+                "reference": "f00f29bce5438acb4d33fbfe8d5a5da4d26c1db6",
+                "shasum": ""
+            },
             "require": {
                 "doctrine/doctrine-bundle": "^1.6",
                 "doctrine/doctrine-migrations-bundle": "^1.2",
@@ -2831,16 +2837,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v2.7.1",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "39ff84e893676d5fc677f9c4843f1d4466d83d30"
+                "reference": "dfd3694a86f1a7394d3693485259d4074a6ec79b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/39ff84e893676d5fc677f9c4843f1d4466d83d30",
-                "reference": "39ff84e893676d5fc677f9c4843f1d4466d83d30",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/dfd3694a86f1a7394d3693485259d4074a6ec79b",
+                "reference": "dfd3694a86f1a7394d3693485259d4074a6ec79b",
                 "shasum": ""
             },
             "require": {
@@ -2898,7 +2904,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-02-01 16:31:07"
+            "time": "2018-02-11 19:28:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
