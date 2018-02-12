@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- To be executed 2nd -->
+<jobs>
+    <job name="CompanyType migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t1.id_item, t1.name, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 73
+                    AND t1.status = 1
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\CompanyType</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Company migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t1.id_company, t1.name, t1.company_type_id, t2.created_at
+                    FROM ntw_company t1
+                    LEFT JOIN (
+                        SELECT id_company, name, company_type_id, hist_action, MAX(hist_change_date) AS created_at
+                        FROM HIST_AUDIV3.dbo.hist_ntw_company
+                        GROUP BY id_company, name, company_type_id, hist_action
+                    ) t2
+                        ON t2.id_company = t1.id_company
+						AND t2.company_type_id = t1.company_type_id
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.company_type_id != 424
+                    AND t1.status = 1
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\Company</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_company</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>company_type_id</name>
+                <targetProperty>type</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyType</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="CompanyDepartment migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT MIN(t1.id_item) AS id_item, t1.name, MIN(t2.hist_change_date) as created_at
+                    FROM buss_item t1
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 74
+                    AND t1.status = 1
+                    GROUP BY t1.name
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\CompanyDepartment</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="CompanyType CompanyDepartment association migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t3.id_item AS company_department_id, t2.id_item AS company_type_id
+                    FROM buss_item t1
+                    INNER JOIN buss_item t2 ON t2.id_item = t1.parent_id
+                    INNER JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 74
+                        GROUP BY name
+                    ) t3 ON t3.name = t1.name
+                    WHERE t1.list_id = 74
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <association/>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>company_department_id</name>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <relations>
+                    <relation>
+                        <entityClass>PartnerBundle\Entity\CompanyType</entityClass>
+                        <callMethod>addCompanyType</callMethod>
+                    </relation>
+                </relations>
+            </mapping>
+            <mapping>
+                <name>company_type_id</name>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyType</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <relations>
+                    <relation>
+                        <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                        <callMethod>addDepartment</callMethod>
+                    </relation>
+                </relations>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="CompanyPosition migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT MIN(t1.id_item) AS id_item, t1.name, MIN(t2.hist_change_date) as created_at
+                    FROM buss_item t1
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 75
+                    AND t1.status = 1
+                    GROUP BY t1.name
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\CompanyPosition</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="CompanyDepartment CompanyPosition association migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t4.id_item as position_id, t3.id_item as department_id
+                    FROM buss_item t1
+                    INNER JOIN (
+                        SELECT id_item, name
+                        FROM buss_item
+                        WHERE list_id = 74
+                    ) t2 ON t2.id_item = t1.parent_id
+                    INNER JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 74
+                        Group BY name
+                    ) t3 ON t3.name = t2.name
+                    INNER JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 75
+                        Group BY name
+                    ) t4 ON t4.name = t1.name
+                    WHERE t1.list_id = 75
+                    AND t1.status = 1
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <association/>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>position_id</name>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyPosition</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <relations>
+                    <relation>
+                        <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                        <callMethod>addDepartment</callMethod>
+                    </relation>
+                </relations>
+            </mapping>
+            <mapping>
+                <name>department_id</name>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <relations>
+                    <relation>
+                        <entityClass>PartnerBundle\Entity\CompanyPosition</entityClass>
+                        <callMethod>addPosition</callMethod>
+                    </relation>
+                </relations>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="CompanyPositionCode migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t1.id_item, t1.name, t1.parent_id, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 76
+                    AND t1.status = 1
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>default</connection>
+            <entity>PartnerBundle\Entity\CompanyPositionCode</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>parent_id</name>
+                <targetProperty>department</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

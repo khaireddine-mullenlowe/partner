@@ -1,0 +1,4 @@
+services:
+    PartnerBundle\DataFixtures\Provider\PartnerFixtureProvider:
+        tags:
+            - { name: hautelook_alice.faker.provider }

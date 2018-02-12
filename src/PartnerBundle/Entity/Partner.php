@@ -3,16 +3,15 @@
 namespace PartnerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @SWG\Definition()
  * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
  * @UniqueEntity(
@@ -35,7 +34,6 @@ class Partner extends BaseEntity
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @SWG\Property(format="int64")
      * @var integer
      * @Groups({"amqp", "rest"})
      */
@@ -43,7 +41,6 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\Column(type="string")
-     * @SWG\Property
      * @var string
      * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
      * @Groups({"amqp", "rest"})
@@ -52,7 +49,6 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @SWG\Property
      * @var string
      * @Groups({"amqp", "rest"})
      */
@@ -60,7 +56,6 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @SWG\Property
      * @var string
      * @Groups({"amqp", "rest"})
      */
@@ -68,7 +63,6 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @SWG\Property
      * @var string
      * @Groups({"amqp", "rest"})
      */
@@ -76,7 +70,6 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @SWG\Property
      * @Assert\Url()
      * @var string
      * @Groups({"amqp", "rest"})
@@ -86,7 +79,6 @@ class Partner extends BaseEntity
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
-     * @SWG\Property
      * @Assert\Type("boolean")
      * @Groups({"amqp", "rest"})
      */
@@ -95,7 +87,6 @@ class Partner extends BaseEntity
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
-     * @SWG\Property
      * @Assert\Type("boolean")
      * @Groups({"amqp", "rest"})
      */
@@ -104,7 +95,6 @@ class Partner extends BaseEntity
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
-     * @SWG\Property
      * @Assert\Type("boolean")
      * @Groups({"amqp", "rest"})
      */
@@ -113,7 +103,6 @@ class Partner extends BaseEntity
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
-     * @SWG\Property
      * @Assert\Type("boolean")
      * @Groups({"amqp", "rest"})
      */
@@ -122,7 +111,6 @@ class Partner extends BaseEntity
     /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
-     * @SWG\Property
      * @Assert\Type("boolean")
      * @Groups({"amqp", "rest"})
      */
@@ -139,7 +127,6 @@ class Partner extends BaseEntity
     /**
      * Legacy id
      * @ORM\Column(type="integer", unique=true)
-     * @SWG\Property(format="int64")
      * @var integer
      * @Groups({"amqp", "rest"})
      */
@@ -165,7 +152,6 @@ class Partner extends BaseEntity
      * One Partner have Many registryUsers.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUser"))
      * @Assert\Valid()
      */
     private $registryUsers;
@@ -174,7 +160,6 @@ class Partner extends BaseEntity
      * One Partner have Many MyaudiUsers.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerMyaudiUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @SWG\Property(type="array", @SWG\Items(ref="#/definitions/PartnerMyaudiUser"))
      * @Assert\Valid()
      */
     protected $myaudiUsers;
@@ -453,7 +438,7 @@ class Partner extends BaseEntity
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getMyaudiUsers()
     {
@@ -461,7 +446,7 @@ class Partner extends BaseEntity
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getRegistryUsers()
     {
@@ -494,6 +479,7 @@ class Partner extends BaseEntity
 
         return $this;
     }
+
     /**
      * @param PartnerRegistryUser $registryUser
      * @return $this
@@ -534,6 +520,7 @@ class Partner extends BaseEntity
         if (0 === strrpos($name, 'is') && method_exists($this, $getter = 'get'.ucfirst($name))) {
             return $this->$getter($arguments);
         }
+
         throw new \BadMethodCallException(sprintf('Method  "%s" does not exist', $name));
     }
 }

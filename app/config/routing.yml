@@ -2,3 +2,13 @@ partners_api:
     resource: PartnerBundle\Controller\PartnerController
     type:     rest
     prefix:   /
+
+partner_registry_user:
+    resource: PartnerBundle\Controller\PartnerRegistryUserController
+    type:     rest
+    prefix:   /registry
+
+company_registry_user:
+    resource: PartnerBundle\Controller\CompanyRegistryUserController
+    type:     rest
+    prefix:   /company/registry

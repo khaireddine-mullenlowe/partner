@@ -56,6 +56,7 @@ class Group extends BaseEntity
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      * @Groups({"rest"})
@@ -64,6 +65,7 @@ class Group extends BaseEntity
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      * @Groups({"rest"})

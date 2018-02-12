@@ -8,7 +8,7 @@
 /web/swagger-ui
 /web/swagger.json
 tests/_data
+/app/DoctrineMigrations
 
-#ide
 .idea
 /c3.php

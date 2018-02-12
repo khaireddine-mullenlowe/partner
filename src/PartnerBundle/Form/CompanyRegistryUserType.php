@@ -2,25 +2,25 @@
 
 namespace PartnerBundle\Form;
 
+use PartnerBundle\Entity\Company;
 use PartnerBundle\Entity\CompanyDepartment;
 use PartnerBundle\Entity\CompanyPosition;
 use PartnerBundle\Entity\CompanyPositionCode;
-use PartnerBundle\Entity\Partner;
-use PartnerBundle\Entity\PartnerRegistryUser;
+use PartnerBundle\Entity\CompanyRegistryUser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Required;
 
 /**
- * Class PartnerRegistryUserType
+ * Class CompanyRegistryUserType
  * @package PartnerBundle\Form
  */
-class PartnerRegistryUserType extends AbstractType
+class CompanyRegistryUserType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,8 +29,8 @@ class PartnerRegistryUserType extends AbstractType
     {
         $builder
             ->add('registryUserId', IntegerType::class)
-            ->add('partner', EntityType::class, [
-                'class' => Partner::class,
+            ->add('company', EntityType::class, [
+                'class' => Company::class,
                 'constraints' => [new Required(), new NotNull()]
             ])
             ->add('department', EntityType::class, [
@@ -39,10 +39,10 @@ class PartnerRegistryUserType extends AbstractType
             ->add('position', EntityType::class, [
                 'class' => CompanyPosition::class,
             ])
+            ->add('positionDescription', TextType::class)
             ->add('positionCode', EntityType::class, [
                 'class' => CompanyPositionCode::class,
             ])
-            ->add('isAdmin', CheckboxType::class)
         ;
     }
 
@@ -52,7 +52,7 @@ class PartnerRegistryUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => PartnerRegistryUser::class,
+            'data_class' => CompanyRegistryUser::class,
             'csrf_protection' => false,
             'allow_extra_fields' => false,
             'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',

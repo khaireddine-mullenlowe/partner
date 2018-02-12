@@ -14,48 +14,27 @@ use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
- * @SWG\Swagger(
- *     @SWG\Info(
- *         version="1.0.0",
- *         title="Partner Api"
- *     ),
- *     @SWG\Tag(name="partner"),
- *     host="api5.audi.agence-one.net",
- *     basePath="/partner",
- *     schemes={"http", "https"},
- *     produces={"application/json"},
- *     @SWG\Definition(
- *         definition="Error",
- *         required={"message"},
- *         @SWG\Property(
- *             property="message",
- *             type="string",
- *             default="Partner not found"
- *         )
- *     )
- * )
- *
- * @SWG\SecurityScheme(
- *   securityDefinition="bearer",
- *   type="apiKey",
- *   in="header",
- *   name="Authorization"
- * )
- *
  * @Rest\RouteResource("")
  *
  * @package PartnerBundle\Controller
  */
 class PartnerController extends MullenloweRestController
 {
-    const CONTEXT = 'partner';
+    const CONTEXT = 'Partner';
 
     /**
+     * @Rest\Get(
+     *     "/{id}",
+     *     name="_partner",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
      * @SWG\Get(
      *     path="/{id}",
-     *     summary="get partner from id",
+     *     summary="Get a Partner from id",
      *     operationId="getPartnerById",
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -65,8 +44,15 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="Target partner",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/PartnerComplete"),
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -75,8 +61,6 @@ class PartnerController extends MullenloweRestController
      *     ),
      *   security={{ "bearer":{} }}
      * )
-     *
-     * @Rest\View()
      *
      * @param int $id
      * @return View
@@ -93,12 +77,13 @@ class PartnerController extends MullenloweRestController
 
     /**
      * @Rest\Get("/", name="_partners")
+     * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
      *     path="/",
      *     summary="get partners",
      *     operationId="getPartners",
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="registryUserId",
      *         in="query",
@@ -129,11 +114,17 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Partners",
-     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Partner"))
+     *         description="Target Partners",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerComplete")),
+     *                 ),
+     *             }
+     *         )
      *     ),
      * )
-     * @Rest\View(serializerGroups={"rest"})
      *
      * @param Request $request
      * @return View
@@ -159,12 +150,19 @@ class PartnerController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Put(
+     *     "/{id}",
+     *     name="_partner",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
      * @SWG\Put(
      *     summary="update partner from userId",
      *     operationId="putPartnerById",
      *     security={{ "bearer":{} }},
      *     path="/{id}",
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -180,8 +178,15 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="the updated partner",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/PartnerComplete"),
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -196,8 +201,6 @@ class PartnerController extends MullenloweRestController
      *    security={{ "bearer":{} }}
      * )
      *
-     * @Rest\View()
-     *
      * @param Request $request
      * @param int     $id
      * @return View
@@ -208,12 +211,19 @@ class PartnerController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Patch(
+     *     "/{id}",
+     *     name="_partner",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
      * @SWG\Patch(
      *     path="/{id}",
      *     summary="patch partner from id",
      *     operationId="patchPartnerById",
      *     security={{ "bearer":{} }},
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -229,8 +239,15 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="the updated partner",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/PartnerComplete"),
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -244,8 +261,6 @@ class PartnerController extends MullenloweRestController
      *     )
      * )
      *
-     * @Rest\View()
-     *
      * @param Request $request
      * @param int     $id
      * @return View
@@ -256,11 +271,14 @@ class PartnerController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Post("/", name="_partner")
+     * @Rest\View(serializerGroups={"rest"})
+     *
      * @SWG\Post(
      *     path="/",
      *     summary="create partner",
      *     operationId="createPartner",
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="partner",
      *         in="body",
@@ -269,8 +287,15 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=201,
-     *         description="the partner",
-     *         @SWG\Schema(ref="#/definitions/Partner")
+     *         description="the created partner",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/PartnerComplete"),
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -279,13 +304,11 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=500,
-     *         description="updating error",
+     *         description="internal error",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     security={{ "bearer":{} }}
      * )
-     *
-     * @Rest\View()
      *
      * @param Request $request
      * @return View
@@ -310,11 +333,18 @@ class PartnerController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Delete(
+     *     "/{id}",
+     *     name="_partner",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
      * @SWG\Delete(
      *     path="/{id}",
      *     summary="remove partner from id",
      *     operationId="removePartnerById",
-     *     tags={"partner"},
+     *     tags={"Partner"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
@@ -334,13 +364,11 @@ class PartnerController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=500,
-     *         description="updating error",
+     *         description="internal error",
      *         @SWG\Schema(ref="#/definitions/Error")
      *    ),
      *    security={{ "bearer":{} }}
      * )
-     *
-     * @Rest\View()
      *
      * @param integer $id
      * @return View

@@ -13,25 +13,10 @@ class PartnerControllerCest
     "kvpsNumber": "FRAA01931",
     "isOccPlus": true,
     "isPartnerR8": false,
-    "registryUsers": [
-        {
-            "registryUserId": 6736666
-        },
-        {
-            "registryUserId": 6746666
-        }
-    ],
     "isEtron": true,
-    "myaudiUsers": [
-        {
-            "myaudiUserId": 16739999
-        },
-        {
-            "myaudiUserId": 16749999
-        }
-    ],
     "type": "sales",
-    "isPartnerPlus": false
+    "isPartnerPlus": false,
+    "group": 1
 }
 HEREDOC;
 
@@ -46,25 +31,10 @@ HEREDOC;
     "kvpsNumber": "FRAA01931",
     "isOccPlus": true,
     "isPartnerR8": false,
-    "registryUsers": [
-        {
-            "registryUserId": 9996730
-        },
-        {
-            "registryUserId": 9996740
-        }
-    ],
     "isEtron": true,
-    "myaudiUsers": [
-        {
-            "myaudiUserId": 9916730
-        },
-        {
-            "myaudiUserId": 9991674
-        }
-    ],
     "type": "sales",
-    "isPartnerPlus": false
+    "isPartnerPlus": false,
+    "group": 2
 }
 HEREDOC;
 
@@ -73,7 +43,7 @@ HEREDOC;
     public function testPostPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,201, 'POST', '/', [], [], [], static::$jsonPartner);
-        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContainsJson(['context' => 'Partner']);
         $I->seeResponseContains('data');
         $this->createdPartnerId = $I->grabDataFromResponseByJsonPath('$..id')[0];
     }
@@ -84,7 +54,7 @@ HEREDOC;
     public function testPutPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,200, 'PUT', '/'.$this->createdPartnerId, [], [], [], static::$jsonPartner2);
-        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContainsJson(['context' => 'Partner']);
         $I->seeResponseContains('data');
     }
 
@@ -94,7 +64,7 @@ HEREDOC;
     public function testGetPartner(\FunctionalTester $I)
     {
         $this->requestJson($I,200, 'GET', '/'.$this->createdPartnerId);
-        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContainsJson(['context' => 'Partner']);
         $I->seeResponseContains('data');
     }
 
@@ -104,7 +74,7 @@ HEREDOC;
     public function testRemovePartner(\FunctionalTester $I)
     {
         $this->requestJson($I, 200, 'DELETE', '/'.$this->createdPartnerId);
-        $I->seeResponseContainsJson(['context' => 'partner']);
+        $I->seeResponseContainsJson(['context' => 'Partner']);
     }
 
     /**

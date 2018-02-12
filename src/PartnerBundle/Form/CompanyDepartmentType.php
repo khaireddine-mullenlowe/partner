@@ -3,24 +3,20 @@
 namespace PartnerBundle\Form;
 
 use PartnerBundle\Entity\CompanyDepartment;
-use PartnerBundle\Entity\CompanyPosition;
-use PartnerBundle\Entity\CompanyPositionCode;
-use PartnerBundle\Entity\Partner;
-use PartnerBundle\Entity\PartnerRegistryUser;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Required;
 
 /**
- * Class PartnerRegistryUserType
+ * Class CompanyDepartmentType
  * @package PartnerBundle\Form
  */
-class PartnerRegistryUserType extends AbstractType
+class CompanyDepartmentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,21 +24,30 @@ class PartnerRegistryUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('registryUserId', IntegerType::class)
-            ->add('partner', EntityType::class, [
-                'class' => Partner::class,
+            ->add('name', TextType::class, [
                 'constraints' => [new Required(), new NotNull()]
             ])
-            ->add('department', EntityType::class, [
-                'class' => CompanyDepartment::class,
+            ->add('companyTypes', CollectionType::class, [
+                'entry_type'   => CompanyTypeType::class,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
             ])
-            ->add('position', EntityType::class, [
-                'class' => CompanyPosition::class,
+            ->add('positions', CollectionType::class, [
+                'entry_type'   => CompanyPositionType::class,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
             ])
-            ->add('positionCode', EntityType::class, [
-                'class' => CompanyPositionCode::class,
+            ->add('positionCodes', CollectionType::class, [
+                'entry_type'   => CompanyPositionCodeType::class,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
             ])
-            ->add('isAdmin', CheckboxType::class)
+            ->add('status', IntegerType::class, [
+                'constraints' => [new Required(), new NotNull()]
+            ])
         ;
     }
 
@@ -52,8 +57,8 @@ class PartnerRegistryUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => PartnerRegistryUser::class,
             'csrf_protection' => false,
+            'data_class' => CompanyDepartment::class,
             'allow_extra_fields' => false,
             'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
         ]);

@@ -3,18 +3,17 @@
 namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Relation One to Many between Partner and MyaudiUser
  * Class PartnerMyaudiUser
  * @package PartnerBundle\Entity
  *
- * @SWG\Definition()
  * @ORM\Entity
  * @ORM\Table(name="partner_myaudi_user")
  * @UniqueEntity(
@@ -22,29 +21,53 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *       message="myaudiUserId already related to another partner"
  * )
  */
-class PartnerMyaudiUser
+class PartnerMyaudiUser extends BaseEntity
 {
-    use TimestampableEntity;
+    /**
+     * @var integer
+
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $id;
 
     /**
      * Many MyaudiUser have One Partner.
-     * @ORM\Id
+     *
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="myaudiUsers")
-     * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="partner_id", referencedColumnName="id", nullable=false)
      * @var Partner
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $partner;
 
     /**
-     * @ORM\Id
      * @ORM\Column(type="integer")
-     * @SWG\Property(format="int64")
      * @Assert\Range(min=1, max=null)
      * @var int
-     * @Groups({"amqp"})
+     * @Groups({"amqp", "rest"})
      */
     protected $myaudiUserId;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $updatedAt;
 
     /**
      * PartnerMyaudiUser constructor.

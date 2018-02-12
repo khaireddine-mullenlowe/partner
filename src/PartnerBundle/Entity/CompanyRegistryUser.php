@@ -9,19 +9,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Relation One to Many between Partner and RegistryUser
- * Class PartnerRegistryUser
+ * Relation One to Many between Company and RegistryUser
+ * Class CompanyRegistryUser
  * @package PartnerBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(
- *     name="partner_registry_user",
- *     indexes={
- *         @ORM\Index(name="PartnerRegistryUser_registry_user_idx", columns={"registry_user_id"})
- *     }
- * )
+ * @ORM\Table(name="company_registry_user")
  */
-class PartnerRegistryUser extends BaseEntity
+class CompanyRegistryUser extends BaseEntity
 {
     /**
      * @var integer
@@ -34,13 +29,13 @@ class PartnerRegistryUser extends BaseEntity
     protected $id;
 
     /**
-     * @var Partner
+     * @var Company
      *
-     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Partner", inversedBy="registryUsers")
-     * @ORM\JoinColumn(name="partner_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Company", inversedBy="registryUsers")
+     * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
      * @Groups({"amqp", "rest"})
      */
-    private $partner;
+    private $company;
 
     /**
      * @var int
@@ -70,6 +65,14 @@ class PartnerRegistryUser extends BaseEntity
     private $position;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=128, nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $positionDescription;
+
+    /**
      * @var CompanyPositionCode
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPositionCode")
@@ -77,14 +80,6 @@ class PartnerRegistryUser extends BaseEntity
      * @Groups({"amqp", "rest"})
      */
     private $positionCode;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", options={"default":0})
-     * @Groups({"amqp", "rest"})
-     */
-    private $isAdmin;
 
     /**
      * @var \DateTime
@@ -105,33 +100,32 @@ class PartnerRegistryUser extends BaseEntity
     protected $updatedAt;
 
     /**
-     * PartnerRegistryUser constructor.
-     * @param Partner $partner
+     * CompanyRegistryUser constructor.
+     * @param Company $company
      * @param int     $registryUserId
      */
-    public function __construct(Partner $partner = null, int $registryUserId = null)
+    public function __construct(Company $company = null, int $registryUserId = null)
     {
-        $this->partner = $partner;
+        $this->company = $company;
         $this->registryUserId = $registryUserId;
-        $this->isAdmin = false;
     }
 
     /**
-     * @return Partner
+     * @return Company
      */
-    public function getPartner()
+    public function getCompany()
     {
-        return $this->partner;
+        return $this->company;
     }
 
     /**
-     * @param Partner $partner
+     * @param Company $company
      *
-     * @return PartnerRegistryUser
+     * @return CompanyRegistryUser
      */
-    public function setPartner(Partner $partner): PartnerRegistryUser
+    public function setCompany(Company $company): CompanyRegistryUser
     {
-        $this->partner = $partner;
+        $this->company = $company;
 
         return $this;
     }
@@ -147,9 +141,9 @@ class PartnerRegistryUser extends BaseEntity
     /**
      * @param int $registryUserId
      *
-     * @return PartnerRegistryUser
+     * @return CompanyRegistryUser
      */
-    public function setRegistryUserId(int $registryUserId): PartnerRegistryUser
+    public function setRegistryUserId(int $registryUserId): CompanyRegistryUser
     {
         $this->registryUserId = $registryUserId;
 
@@ -167,7 +161,7 @@ class PartnerRegistryUser extends BaseEntity
     /**
      * @param CompanyDepartment|null $department
      *
-     * @return PartnerRegistryUser
+     * @return CompanyRegistryUser
      */
     public function setDepartment($department)
     {
@@ -187,7 +181,7 @@ class PartnerRegistryUser extends BaseEntity
     /**
      * @param CompanyPosition|null $position
      *
-     * @return PartnerRegistryUser
+     * @return CompanyRegistryUser
      */
     public function setPosition($position)
     {
@@ -207,7 +201,7 @@ class PartnerRegistryUser extends BaseEntity
     /**
      * @param CompanyPositionCode|null $positionCode
      *
-     * @return PartnerRegistryUser|null
+     * @return CompanyRegistryUser|null
      */
     public function setPositionCode($positionCode)
     {
@@ -217,22 +211,21 @@ class PartnerRegistryUser extends BaseEntity
     }
 
     /**
-     * @return bool
+     * @return string|null
      */
-    public function isAdmin()
+    public function getPositionDescription()
     {
-        return $this->isAdmin;
+        return $this->positionDescription;
     }
 
     /**
-     * @param bool $isAdmin
+     * @param string|null $positionDescription
      *
-     * @return PartnerRegistryUser
+     * @return CompanyRegistryUser
      */
-    public function setIsAdmin(bool $isAdmin)
+    public function setPositionDescription($positionDescription): CompanyRegistryUser
     {
-        $this->isAdmin = $isAdmin;
-
+        $this->positionDescription = $positionDescription;
         return $this;
     }
 }

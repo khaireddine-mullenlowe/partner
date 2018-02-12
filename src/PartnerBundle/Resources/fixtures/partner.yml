@@ -1,0 +1,47 @@
+parameters:
+    partner_type:
+        - 'sales'
+        - 'aftersales'
+
+PartnerBundle\Entity\Group:
+    group{1..5}:
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        name: '<company()>'
+        websiteUrl: '<url()>'
+        status: 1
+
+PartnerBundle\Entity\Partner:
+    partner{1..20}:
+        type: '<randomElement(<{partner_type}>)>'
+        contractNumber: '0<randomNumber(7, true)>'
+        commercialName: '<company()>'
+        kvpsNumber: 'FRAA0<randomNumber(4, true)>'
+        webSite: '<url()>'
+        isPartnerR8: <boolean(15)>
+        isTwinService: <boolean(15)>
+        isPartnerPlus: <boolean(15)>
+        isOccPlus: <boolean(75)>
+        isEtron: <boolean(50)>
+        group: '75%? @group*'
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+
+PartnerBundle\Entity\PartnerMyaudiUser:
+    partner_myaudi_user{1..20}:
+        partner: '@partner<numberBetween(1, 20)>'
+        myaudiUserId: <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+
+PartnerBundle\Entity\PartnerRegistryUser:
+    partner_registry_user{1..50}:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: <numberBetween(1, 45)>
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'

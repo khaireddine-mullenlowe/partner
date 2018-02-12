@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3df30a9ce90ef22a33b95c06f9f62a55",
-    "content-hash": "3ae580f358cb0929b9d53c578285781f",
+    "hash": "b9f5178dcf22454a78139016de565f5f",
+    "content-hash": "02a830c5082f7ca7d42531064b6fe462",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1074,16 +1074,16 @@
         },
         {
             "name": "exsyst/swagger",
-            "version": "v0.3.2",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GuilhemN/swagger.git",
-                "reference": "b8235e5312f86ab6caaf3c6728972e6832bab32f"
+                "reference": "9e3a92833ee8489db899607f72deec7d7995e050"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GuilhemN/swagger/zipball/b8235e5312f86ab6caaf3c6728972e6832bab32f",
-                "reference": "b8235e5312f86ab6caaf3c6728972e6832bab32f",
+                "url": "https://api.github.com/repos/GuilhemN/swagger/zipball/9e3a92833ee8489db899607f72deec7d7995e050",
+                "reference": "9e3a92833ee8489db899607f72deec7d7995e050",
                 "shasum": ""
             },
             "require": {
@@ -1109,7 +1109,7 @@
                 }
             ],
             "description": "A php library to manipulate Swagger specifications",
-            "time": "2017-12-19 19:46:02"
+            "time": "2018-02-03 12:20:03"
         },
         {
             "name": "fig/link-util",
@@ -1167,16 +1167,16 @@
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
-            "version": "v5.0.2",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "4857392c7cb40b5b970157c283e57c5ebb08fcf5"
+                "reference": "ebf96f984c7f0b6bdc830accd722c76b80943a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/4857392c7cb40b5b970157c283e57c5ebb08fcf5",
-                "reference": "4857392c7cb40b5b970157c283e57c5ebb08fcf5",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/ebf96f984c7f0b6bdc830accd722c76b80943a23",
+                "reference": "ebf96f984c7f0b6bdc830accd722c76b80943a23",
                 "shasum": ""
             },
             "require": {
@@ -1249,7 +1249,7 @@
                 "mongodb",
                 "search"
             ],
-            "time": "2018-01-03 13:22:51"
+            "time": "2018-02-07 12:32:48"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -2242,12 +2242,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "f3d3483ef2ff430780da0637a791461fc6d9fc51"
+                "reference": "def0a2ab2ee41f0e437b87008470387e13ca1b71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/f3d3483ef2ff430780da0637a791461fc6d9fc51",
-                "reference": "f3d3483ef2ff430780da0637a791461fc6d9fc51",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/def0a2ab2ee41f0e437b87008470387e13ca1b71",
+                "reference": "def0a2ab2ee41f0e437b87008470387e13ca1b71",
                 "shasum": ""
             },
             "require": {
@@ -2293,7 +2293,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-02-02 10:46:16"
+            "time": "2018-02-09 18:13:59"
         },
         {
             "name": "mullenlowe/component",
@@ -2342,13 +2342,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/etl-bundle.git",
-                "reference": "aa71321c8d04d5d96b981171141c14df24a8725e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/aa71321c8d04d5d96b981171141c14df24a8725e",
-                "reference": "aa71321c8d04d5d96b981171141c14df24a8725e",
-                "shasum": ""
+                "reference": "f00f29bce5438acb4d33fbfe8d5a5da4d26c1db6"
             },
             "require": {
                 "doctrine/doctrine-bundle": "^1.6",
@@ -2366,11 +2360,7 @@
                 "proprietary"
             ],
             "description": "Symfony implementation of an ETL database migration flow",
-            "support": {
-                "source": "https://github.com/itagenceone/etl-bundle/tree/master",
-                "issues": "https://github.com/itagenceone/etl-bundle/issues"
-            },
-            "time": "2018-01-04 21:50:35"
+            "time": "2018-02-08 15:57:24"
         },
         {
             "name": "namshi/jose",
@@ -2841,16 +2831,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "f48748546e398d846134c594dfca9070c4c3b356"
+                "reference": "39ff84e893676d5fc677f9c4843f1d4466d83d30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/f48748546e398d846134c594dfca9070c4c3b356",
-                "reference": "f48748546e398d846134c594dfca9070c4c3b356",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/39ff84e893676d5fc677f9c4843f1d4466d83d30",
+                "reference": "39ff84e893676d5fc677f9c4843f1d4466d83d30",
                 "shasum": ""
             },
             "require": {
@@ -2862,6 +2852,7 @@
                 "videlalvaro/php-amqplib": "self.version"
             },
             "require-dev": {
+                "phpdocumentor/phpdocumentor": "^2.9",
                 "phpunit/phpunit": "^4.8",
                 "scrutinizer/ocular": "^1.1",
                 "squizlabs/php_codesniffer": "^2.5"
@@ -2882,7 +2873,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "LGPL-2.1-or-later"
             ],
             "authors": [
                 {
@@ -2907,7 +2898,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2017-08-03 22:06:21"
+            "time": "2018-02-01 16:31:07"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
@@ -3576,16 +3567,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v5.1.4",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "072c00c52b947e88a1e619e9ff426cee6c8c482b"
+                "reference": "93ae48d5f4b567105bcc058c3a8ba506176eca8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/072c00c52b947e88a1e619e9ff426cee6c8c482b",
-                "reference": "072c00c52b947e88a1e619e9ff426cee6c8c482b",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/93ae48d5f4b567105bcc058c3a8ba506176eca8a",
+                "reference": "93ae48d5f4b567105bcc058c3a8ba506176eca8a",
                 "shasum": ""
             },
             "require": {
@@ -3641,7 +3632,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2018-01-12 13:08:16"
+            "time": "2018-02-06 19:53:10"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -4847,6 +4838,194 @@
             "time": "2016-09-06 17:43:18"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2017-08-15 16:48:10"
+        },
+        {
+            "name": "hautelook/alice-bundle",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hautelook/AliceBundle.git",
+                "reference": "058925945bccbc8776725fec9e8557aca9666d9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hautelook/AliceBundle/zipball/058925945bccbc8776725fec9e8557aca9666d9c",
+                "reference": "058925945bccbc8776725fec9e8557aca9666d9c",
+                "shasum": ""
+            },
+            "require": {
+                "nelmio/alice": "^2.1 < 2.2.0 || ^2.2.1",
+                "php": "^5.6||^7.0",
+                "symfony/finder": "^2.7||^3.0"
+            },
+            "require-dev": {
+                "doctrine/data-fixtures": "1.0.1",
+                "doctrine/doctrine-bundle": "^1.6.4",
+                "doctrine/doctrine-fixtures-bundle": "^2.2",
+                "doctrine/mongodb-odm": "^1.0",
+                "doctrine/mongodb-odm-bundle": "^3.0",
+                "doctrine/orm": "^2.4",
+                "phpunit/phpunit": "^5.6",
+                "sllh/php-cs-fixer-styleci-bridge": "^1.0",
+                "symfony/console": "^2.3||~3.0",
+                "symfony/framework-bundle": "^2.3||^3.0",
+                "symfony/phpunit-bridge": "^3.1",
+                "symfony/validator": "^2.3|^3.0",
+                "symfony/yaml": "^2.3||^3.0"
+            },
+            "suggest": {
+                "doctrine/data-fixtures": "To use Doctrine fixtures loader",
+                "doctrine/doctrine-bundle": "To use Doctrine with Symfony",
+                "doctrine/mongodb-odm": "To use Doctrine MongoDB",
+                "doctrine/mongodb-odm-bundle": "To use Doctrine MongoDB with Symfony",
+                "doctrine/orm": "To use Doctrine ORM",
+                "theofidry/alice-bundle-extension": "Behat extension for HautelookAliceBundle"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "sort-packages": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hautelook\\AliceBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baldur Rensch",
+                    "email": "brensch@gmail.com"
+                },
+                {
+                    "name": "Théo FIDRY",
+                    "email": "theo.fidry@gmail.com",
+                    "homepage": "https://github.com/theofidry"
+                }
+            ],
+            "description": "Symfony2 Bundle to manage fixtures with Alice and Faker.",
+            "keywords": [
+                "Fixture",
+                "alice",
+                "faker",
+                "orm",
+                "symfony"
+            ],
+            "time": "2016-11-04 08:48:00"
+        },
+        {
+            "name": "nelmio/alice",
+            "version": "v2.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/alice.git",
+                "reference": "41fc89e2dfbb9d6d13a0f350393e5a91e9064d69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/41fc89e2dfbb9d6d13a0f350393e5a91e9064d69",
+                "reference": "41fc89e2dfbb9d6d13a0f350393e5a91e9064d69",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.5",
+                "php": "^5.6||^7.0",
+                "symfony/yaml": "^2.0||^3.0"
+            },
+            "require-dev": {
+                "doctrine/common": "^2.3",
+                "phpspec/prophecy": "^1.5.0",
+                "phpunit/phpunit": "^5.6||^6.0",
+                "symfony/phpunit-bridge": "^3.0",
+                "symfony/property-access": "^2.2||^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nelmio\\Alice\\": "src/Nelmio/Alice"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be"
+                },
+                {
+                    "name": "Tim Shelburne",
+                    "email": "shelburt02@gmail.com"
+                },
+                {
+                    "name": "Théo FIDRY",
+                    "email": "theo.fidry@gmail.com"
+                }
+            ],
+            "description": "Expressive fixtures generator",
+            "keywords": [
+                "Fixture",
+                "data",
+                "orm",
+                "test"
+            ],
+            "time": "2017-10-31 11:42:39"
+        },
+        {
             "name": "sensio/generator-bundle",
             "version": "v3.1.7",
             "source": {
@@ -4902,16 +5081,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v3.9.3",
+            "version": "v3.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "11c14ea1b0e53b4661b238dd0af40354a3f0da23"
+                "reference": "1013d16d9eb0bb851b30d38d355a58639baf0f3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/11c14ea1b0e53b4661b238dd0af40354a3f0da23",
-                "reference": "11c14ea1b0e53b4661b238dd0af40354a3f0da23",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/1013d16d9eb0bb851b30d38d355a58639baf0f3a",
+                "reference": "1013d16d9eb0bb851b30d38d355a58639baf0f3a",
                 "shasum": ""
             },
             "type": "library",
@@ -4955,7 +5134,7 @@
                 "swagger",
                 "ui"
             ],
-            "time": "2018-01-27 03:38:54"
+            "time": "2018-02-10 04:47:44"
         },
         {
             "name": "symfony/phpunit-bridge",

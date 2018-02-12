@@ -2,24 +2,23 @@
 
 namespace PartnerBundle\Form;
 
+use PartnerBundle\Entity\Company;
 use PartnerBundle\Entity\Group;
-use PartnerBundle\Entity\Partner;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Required;
 
 /**
- * Class PartnerType
+ * Class CompanyType
  * @package PartnerBundle\Form
  */
-class PartnerType extends AbstractType
+class CompanyType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,33 +26,21 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('legacyId', IntegerType::class)
-            ->add('type', ChoiceType::class, [
-                'choices' => [Partner::SALES_TYPE, Partner::AFTERSALES_TYPE]
+            ->add('name', TextType::class, [
+                'constraints' => [new Required(), new NotNull()]
             ])
-            ->add('contractNumber', TextType::class)
-            ->add('commercialName', TextType::class)
-            ->add('kvpsNumber', TextType::class)
-            ->add('webSite', UrlType::class)
-            ->add('isPartnerR8', CheckboxType::class)
-            ->add('isTwinService', CheckboxType::class)
-            ->add('isPartnerPlus', CheckboxType::class)
-            ->add('isOccPlus', CheckboxType::class)
-            ->add('isEtron', CheckboxType::class)
+            ->add('type', EntityType::class, [
+                'class' => \PartnerBundle\Entity\CompanyType::class,
+                'constraints' => [new Required(), new NotNull()]
+            ])
             ->add('registryUsers', CollectionType::class, [
                 'entry_type'   => PartnerRegistryUserType::class,
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
-            ->add('myaudiUsers', CollectionType::class, [
-                'entry_type' => PartnerMyaudiUserType::class,
-                'allow_add'    => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ])
-            ->add('group', EntityType::class, [
-                'class' => Group::class,
+            ->add('status', IntegerType::class, [
+                'constraints' => [new Required(), new NotNull()]
             ])
         ;
     }
@@ -65,7 +52,7 @@ class PartnerType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => Partner::class,
+            'data_class' => Company::class,
             'allow_extra_fields' => false,
             'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
         ]);
