@@ -84,7 +84,7 @@ class PartnerRegistryUserController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Post(
-     *     path="/",
+     *     path="/registry/",
      *     summary="Link partner and registry user",
      *     operationId="postPartnerRegistryUser",
      *     tags={"Partner Registry User"},
@@ -92,10 +92,7 @@ class PartnerRegistryUserController extends MullenloweRestController
      *         name="partner registry user",
      *         in="body",
      *         required=true,
-     *         @SWG\Schema(
-     *             @SWG\Property(property="partner", type="integer"),
-     *             @SWG\Property(property="registryUserId", type="integer"),
-     *             required={"partner", "registryUserId"})
+     *         @SWG\Schema(ref="#/definitions/PartnerRegistryUser")
      *     ),
      *     @SWG\Response(
      *         response=201,
