@@ -25,8 +25,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     }
  * )
  * @UniqueEntity(
- *       fields={"partner", "myaudiUserId"},
- *       message="myaudiUserId already related to another partner"
+ *     fields={"partner", "myaudiUserId"},
+ *     errorPath="myaudiUserId",
+ *     message="This MyaudiUser is already bound to this Partner"
  * )
  */
 class PartnerMyaudiUser extends BaseEntity

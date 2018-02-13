@@ -4,6 +4,7 @@ namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -19,6 +20,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     indexes={
  *         @ORM\Index(name="CompanyRegistryUser_registry_user_idx", columns={"registry_user_id"})
  *     }
+ * )
+ * @UniqueEntity(
+ *     fields={"company", "registryUserId", "department", "position", "positionCode"},
+ *     ignoreNull=false,
+ *     errorPath="registryUserId",
+ *     message="This RegistryUser is already bound to this Company with the same Department and Position"
  * )
  */
 class CompanyRegistryUser extends BaseEntity
