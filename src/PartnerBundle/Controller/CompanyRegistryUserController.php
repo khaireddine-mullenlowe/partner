@@ -63,7 +63,7 @@ class CompanyRegistryUserController extends MullenloweRestController
      * @param int $registryUserId
      * @return View
      */
-    public function getAction(int $registryUserId)
+    public function cgetAction(int $registryUserId)
     {
         $companyRegistryUser = $this->getDoctrine()
             ->getRepository('PartnerBundle:CompanyRegistryUser')
