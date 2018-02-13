@@ -14,7 +14,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @package PartnerBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="company_registry_user")
+ * @ORM\Table(
+ *     name="company_registry_user",
+ *     indexes={
+ *         @ORM\Index(name="CompanyRegistryUser_registry_user_idx", columns={"registry_user_id"})
+ *     }
+ * )
  */
 class CompanyRegistryUser extends BaseEntity
 {

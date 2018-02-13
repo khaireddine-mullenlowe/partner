@@ -15,9 +15,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @package PartnerBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="partner_myaudi_user")
+ * @ORM\Table(
+ *     name="partner_myaudi_user",
+ *     indexes={
+ *         @ORM\Index(name="PartnerMyaudiUser_myaudi_user_idx", columns={"myaudi_user_id"})
+ *     },
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="PartnerMyaudiUser_unique_idx", columns={"partner_id", "myaudi_user_id"})
+ *     }
+ * )
  * @UniqueEntity(
- *       fields={"myaudiUserId"},
+ *       fields={"partner", "myaudiUserId"},
  *       message="myaudiUserId already related to another partner"
  * )
  */
