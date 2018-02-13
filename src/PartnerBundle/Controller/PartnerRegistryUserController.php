@@ -10,6 +10,7 @@ use PartnerBundle\Entity\PartnerRegistryUser;
 use PartnerBundle\Form\PartnerRegistryUserType;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Rest\RouteResource("")
@@ -92,9 +93,9 @@ class PartnerRegistryUserController extends MullenloweRestController
      *         in="body",
      *         required=true,
      *         @SWG\Schema(
-     *             @SWG\Property(property="partner_id", type="integer"),
-     *             @SWG\Property(property="registry_user_id", type="integer"),
-     *             required={"partner_id", "registry_user_id"})
+     *             @SWG\Property(property="partner", type="integer"),
+     *             @SWG\Property(property="registryUserId", type="integer"),
+     *             required={"partner", "registryUserId"})
      *     ),
      *     @SWG\Response(
      *         response=201,
@@ -139,6 +140,6 @@ class PartnerRegistryUserController extends MullenloweRestController
         $em->persist($partnerRegistryUser);
         $em->flush();
 
-        return $this->createView($partnerRegistryUser);
+        return $this->createView($partnerRegistryUser, Response::HTTP_CREATED);
     }
 }

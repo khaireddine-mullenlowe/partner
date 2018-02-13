@@ -2,6 +2,7 @@
 namespace PartnerBundle\Controller;
 
 use Codeception\Util\HttpCode;
+use Symfony\Component\HttpFoundation\Response;
 
 class PartnerRegistryUserControllerCest
 {
@@ -25,5 +26,20 @@ class PartnerRegistryUserControllerCest
         $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
         $I->seeResponseContains('errors');
         $I->seeResponseContains('PartnerRegistryUser not found');
+    }
+
+    public function tryPostANonExistingPartnerToRegistryUser(\FunctionalTester $I)
+    {
+        $data = <<<HEREDOC
+{
+  "partner": 1,
+  "registryUserId": 3
+}
+HEREDOC;
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPOST('/registry/', $data);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
+        $I->seeResponseIsJson();
     }
 }
