@@ -12,26 +12,85 @@ class PartnerRegistryUserControllerCest
 }
 HEREDOC;
 
-    public function tryToGetAnExistingPartnerRegistryUser(\FunctionalTester $I)
+    public function tryToGetDefaultPartnerRegistryCollection(\FunctionalTester $I)
     {
-        $I->sendGet('/registry/1');
+        $I->sendGet('/registry/');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
         $I->seeResponseContains('data');
+        $I->seeResponseContains('pagination');
         $I->seeResponseJsonMatchesJsonPath('$..id');
         $I->seeResponseJsonMatchesJsonPath('$..partner');
         $I->seeResponseJsonMatchesJsonPath('$..registryUserId');
     }
 
-    public function tryToGetANonExistingPartnerRegistryUser(\FunctionalTester $I)
+    public function tryToGetDefaultPartnerRegistryCollectionWithoutPagination(\FunctionalTester $I)
     {
-        $I->sendGet('/registry/10000');
-        $I->seeResponseCodeIs(HttpCode::NOT_FOUND);
+        $I->sendGet('/registry/?paginate=0');
+        $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
-        $I->seeResponseContains('errors');
-        $I->seeResponseContains('PartnerRegistryUser not found');
+        $I->seeResponseContains('data');
+        $I->dontSeeResponseContains('pagination');
+        $I->seeResponseJsonMatchesJsonPath('$..id');
+        $I->seeResponseJsonMatchesJsonPath('$..partner');
+        $I->seeResponseJsonMatchesJsonPath('$..registryUserId');
+    }
+
+    public function tryToGetARegistryUserIdFilteredAndNonEmptyPartnerRegistryCollection(\FunctionalTester $I)
+    {
+        $I->sendGet('/registry/?registryUserId=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
+        $I->seeResponseContains('data');
+        $I->seeResponseContains('pagination');
+        $I->seeResponseJsonMatchesJsonPath('$..id');
+        $I->seeResponseJsonMatchesJsonPath('$..partner');
+        $I->seeResponseJsonMatchesJsonPath('$..registryUserId');
+    }
+
+    public function tryToGetARegistryUserIdFilteredAndEmptyPartnerRegistryCollection(\FunctionalTester $I)
+    {
+        $I->sendGet('/registry/?registryUserId=99999999');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
+        $I->seeResponseContainsJson(['data' => []]);
+        $I->seeResponseContains('pagination');
+    }
+
+    public function tryToGetARegistryUserIdsFilteredAndNonEmptyPartnerRegistryCollection(\FunctionalTester $I)
+    {
+        $I->sendGet('/registry/?registryUserIds=1,2');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
+        $I->seeResponseContains('data');
+        $I->seeResponseContains('pagination');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].id');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].partner');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].registryUserId');
+        $I->seeResponseJsonMatchesJsonPath('$.data[1].id');
+        $I->seeResponseJsonMatchesJsonPath('$.data[1].partner');
+        $I->seeResponseJsonMatchesJsonPath('$.data[1].registryUserId');
+    }
+
+    public function tryToGetARegistryUserIdsFilteredAndMixedEmptyPartnerRegistryCollection(\FunctionalTester $I)
+    {
+        $I->sendGet('/registry/?registryUserIds=1,99999999');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
+        $I->seeResponseContains('data');
+        $I->seeResponseContains('pagination');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].id');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].partner');
+        $I->seeResponseJsonMatchesJsonPath('$.data[0].registryUserId');
+        $I->dontSeeResponseJsonMatchesJsonPath('$.data[1].id');
+        $I->dontSeeResponseJsonMatchesJsonPath('$.data[1].partner');
+        $I->dontSeeResponseJsonMatchesJsonPath('$.data[1].registryUserId');
     }
 
     public function tryToPostANonExistingPartnerRegistryUser(\FunctionalTester $I)
