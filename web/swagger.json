@@ -13,25 +13,46 @@
         "application/json"
     ],
     "paths": {
-        "/company/registry/{registryUserId}": {
+        "/company/registry/": {
             "get": {
                 "tags": [
                     "Company Registry User"
                 ],
-                "summary": "Finds and displays a CompanyRegistryUser entity collection by its registryUserId",
-                "operationId": "getCompanyRegistryUser",
+                "summary": "Finds and displays a CompanyRegistryUser entity collection",
+                "operationId": "cgetCompanyRegistryUser",
                 "parameters": [
                     {
                         "name": "registryUserId",
-                        "in": "path",
-                        "description": "registryUserId",
-                        "required": true,
+                        "in": "query",
+                        "description": "Filter collection by RegistryUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "registryUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of RegistryUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
                         "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Target CompanyRegistryUser",
+                        "description": "CompanyRegistryUser collection",
                         "schema": {
                             "allOf": [
                                 {
@@ -40,7 +61,7 @@
                                 {
                                     "properties": {
                                         "data": {
-                                            "description": "Finds and displays a CompanyRegistryUser entity collection by its registryUserId.",
+                                            "description": "Finds and displays a CompanyRegistryUser entity collection.",
                                             "type": "array",
                                             "items": {
                                                 "$ref": "#/definitions/CompanyRegistryUserComplete"
@@ -49,12 +70,6 @@
                                     }
                                 }
                             ]
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -388,25 +403,53 @@
                 ]
             }
         },
-        "/registry/{registryUserId}": {
+        "/registry/": {
             "get": {
                 "tags": [
                     "Partner Registry User"
                 ],
-                "summary": "Finds and displays a PartnerRegistryUser entity collection by its registryUserId",
-                "operationId": "getPartnerRegistryUser",
+                "summary": "Finds and displays a PartnerRegistryUser entity collection",
+                "operationId": "cgetPartnerRegistryUser",
                 "parameters": [
                     {
                         "name": "registryUserId",
-                        "in": "path",
-                        "description": "registryUserId",
-                        "required": true,
+                        "in": "query",
+                        "description": "Filter collection by RegistryUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "registryUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of RegistryUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to RegistryUser collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
                         "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Target PartnerRegistryUser",
+                        "description": "PartnerRegistryUser collection",
                         "schema": {
                             "allOf": [
                                 {
@@ -415,7 +458,7 @@
                                 {
                                     "properties": {
                                         "data": {
-                                            "description": "Finds and displays a PartnerRegistryUser entity collection by its registryUserId.",
+                                            "description": "Finds and displays a PartnerRegistryUser entity collection.",
                                             "type": "array",
                                             "items": {
                                                 "$ref": "#/definitions/PartnerRegistryUserComplete"
@@ -425,12 +468,6 @@
                                 }
                             ]
                         }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
                     }
                 },
                 "security": [
@@ -438,9 +475,7 @@
                         "bearer": []
                     }
                 ]
-            }
-        },
-        "/registry/": {
+            },
             "post": {
                 "tags": [
                     "Partner Registry User"
