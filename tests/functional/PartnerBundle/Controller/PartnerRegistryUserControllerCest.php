@@ -116,4 +116,43 @@ HEREDOC;
         $I->seeResponseContains('errors');
         $I->seeResponseContains('This RegistryUser is already bound to this Partner with the same Department and Position');
     }
+
+    public function tryToPutPartnerRegistryUser(\FunctionalTester $I)
+    {
+        $data = <<<HEREDOC
+{
+  "partner": 1,
+  "registryUserId": 3,
+  "department": 1,
+  "position": 1,
+  "positionCode": 1,
+  "isAdmin": 0
+}
+HEREDOC;
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPUT('/registry/1', $data);
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerRegistryUser']);
+        $I->seeResponseContains('data');
+    }
+
+    public function CantPutPartnerRegistryUser(\FunctionalTester $I)
+    {
+        $data = <<<HEREDOC
+{
+  "partner": 1,
+  "registryUserId": 3,
+  "department": 1,
+  "position": 1,
+  "positionCode": 1,
+  "isAdmin": 0
+}
+HEREDOC;
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPUT('/registry/9999', $data);
+        $I->seeResponseCodeIs(404);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('error');
+    }
 }

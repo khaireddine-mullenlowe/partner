@@ -175,6 +175,94 @@ class PartnerRegistryUserController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Put("/{id}", name="_partner_registry_user", requirements={"id"="\d+"})
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Put(
+     *     summary="update link partner registry user by id",
+     *     operationId="putPartnerRegistryUserById",
+     *     security={{ "bearer":{} }},
+     *     path="/registry/{id}",
+     *     tags={"Partner Registry User"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="partnerRegistryUserId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="partner registry user",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/PartnerRegistryUser")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the updated link partner and registry user",
+     *         @SWG\Schema(
+     *            allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUserComplete")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @param int     $id
+     * @return View
+     */
+    public function putAction(Request $request, int $id)
+    {
+        return $this->putOrPatch($request, $id);
+    }
+
+    /**
+     * Handles put or patch action
+     *
+     * @param Request $request
+     * @param int $id lead id
+     * @param bool $clearMissing
+     *
+     * @return View
+     */
+    private function putOrPatch(Request $request, int $id, $clearMissing = true)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dataInput = $request->request->all();
+
+        $partnerRegistryUser = $em->getRepository('PartnerBundle:PartnerRegistryUser')->find($id);
+        if (!$partnerRegistryUser) {
+            throw $this->createNotFoundException('PartnerRegistryUser not found');
+        }
+
+        $form = $this->createForm(PartnerRegistryUserType::class, $partnerRegistryUser);
+        $form->submit($dataInput, $clearMissing);
+        // validate
+        if (!$form->isValid()) {
+            return $this->view($form);
+        }
+
+        $em->flush();
+
+        return $this->createView($partnerRegistryUser);
+    }
+
+    /**
      * Applies filters from request
      * todo: move this method in a service
      *
