@@ -30,6 +30,11 @@
         },
         {
             "type": "vcs",
+            "no-api": true,
+            "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git"
+        },
+        {
+            "type": "vcs",
 	        "no-api": true,
             "url": "git@github.com:itagenceone/component.git"
         },
@@ -45,6 +50,7 @@
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
         "mullenlowe/audi-agc5-common-bundle": "dev-develop",
+        "mullenlowe/audi-agc5-plugins-bundle": "dev-develop",
         "mullenlowe/etl-bundle": "dev-master",
         "nelmio/cors-bundle": "^1.5",
         "php-amqplib/rabbitmq-bundle": "~1.6",
