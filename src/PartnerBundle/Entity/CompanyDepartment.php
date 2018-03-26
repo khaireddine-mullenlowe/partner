@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
  * Class CompanyDepartment
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\CompanyDepartmentRepository")
  * @ORM\Table(name="company_department")
  */
 class CompanyDepartment extends BaseCompany
