@@ -1,6 +1,6 @@
 <?php
 
-namespace PartnerBundle\Entity\Repository;
+namespace PartnerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use PartnerBundle\Entity\Partner;

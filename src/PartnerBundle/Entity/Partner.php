@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\PartnerRepository")
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
  * @UniqueEntity(
  *       fields={"legacyId"},
