@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Group
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity(repositoryClass="PartnerBundle\Entity\Repository\GroupRepository")
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\GroupRepository")
  * @ORM\Table(name="partner_group")
  */
 class Group extends BaseEntity
