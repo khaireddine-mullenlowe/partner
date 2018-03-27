@@ -12,3 +12,8 @@ company_registry_user:
     resource: PartnerBundle\Controller\CompanyRegistryUserController
     type:     rest
     prefix:   /company/registry
+
+company_department:
+    resource: PartnerBundle\Controller\CompanyDepartmentController
+    type:     rest
+    prefix:   /company/department
