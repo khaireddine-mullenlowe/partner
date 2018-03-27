@@ -4,14 +4,14 @@ namespace PartnerBundle\Controller;
 
 use Codeception\Util\HttpCode;
 
-class DepartmentControllerCest
+class CompanyDepartmentControllerCest
 {
     public function tryToGetDepartmentCollection(\FunctionalTester $I)
     {
         $I->sendGet('/company/department');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['context' => 'Department']);
+        $I->seeResponseContainsJson(['context' => 'CompanyDepartment']);
         $I->seeResponseContains('data');
         $I->seeResponseContains('pagination');
     }

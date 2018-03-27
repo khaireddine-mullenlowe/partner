@@ -14,9 +14,9 @@ use Swagger\Annotations as SWG;
 *
 * @package PartnerBundle\Controller
 */
-class DepartmentController extends MullenloweRestController
+class CompanyDepartmentController extends MullenloweRestController
 {
-    const CONTEXT = 'Department';
+    const CONTEXT = 'CompanyDepartment';
 
     /**
      * @Rest\Get("/", name="_departments")
