@@ -17,3 +17,9 @@ company_department:
     resource: PartnerBundle\Controller\CompanyDepartmentController
     type:     rest
     prefix:   /company/department
+
+company_position:
+    resource: PartnerBundle\Controller\CompanyPositionController
+    type:     rest
+    prefix:   /company/position
+

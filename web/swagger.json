@@ -13,6 +13,105 @@
         "application/json"
     ],
     "paths": {
+        "/company/department": {
+            "get": {
+                "tags": [
+                    "Department"
+                ],
+                "summary": "get departments",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target department collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyDepartmentComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/company/position": {
+            "get": {
+                "tags": [
+                    "Position"
+                ],
+                "summary": "get positions",
+                "parameters": [
+                    {
+                        "name": "deparmentId",
+                        "in": "query",
+                        "description": "deparmentId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target position collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyPositionComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/company/registry/": {
             "get": {
                 "tags": [
@@ -78,52 +177,6 @@
                         "bearer": []
                     }
                 ]
-            }
-        },
-        "/company/department": {
-            "get": {
-                "tags": [
-                    "Department"
-                ],
-                "summary": "get departments",
-                "parameters": [
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "page number",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "max items per page",
-                        "required": false,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Target department collection",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/CompanyDepartmentComplete"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
             }
         },
         "/{id}": {
