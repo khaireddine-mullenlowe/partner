@@ -66,21 +66,18 @@ class CompanyPositionController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $queryBuilder = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition')
-            ->createQueryBuilder('cp');
+        $repository = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition');
+        $queryBuilder = $repository->createQueryBuilder('cp');
 
         if ($request->query->has('departmentId')) {
-            $queryBuilder
-                ->innerJoin('cp.departments', 'd')
-                ->andWhere('d.id = :departmentId')
-                ->setParameter('departmentId', $request->query->get('departmentId'));
+            $repository->applyFilterDepartment($queryBuilder, $request->query->get('departmentId'));
         }
 
         /** @var SlidingPagination $pager */
         $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10)
+            $request->query->getInt('limit', 20)
         );
 
         return $this->createPaginatedView($pager);
