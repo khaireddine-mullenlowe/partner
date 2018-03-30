@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
  * Class CompanyPosition
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\CompanyPositionRepository")
  * @ORM\Table(name="company_position")
  */
 class CompanyPosition extends BaseCompany

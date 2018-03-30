@@ -10,22 +10,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 
 /**
-* @Rest\RouteResource("")
-*
-* @package PartnerBundle\Controller
-*/
-class CompanyDepartmentController extends MullenloweRestController
+ * @Rest\RouteResource("")
+ *
+ * @package PartnerBundle\Controller
+ */
+class CompanyPositionController extends MullenloweRestController
 {
-    const CONTEXT = 'CompanyDepartment';
+    const CONTEXT = 'CompanyPosition';
 
     /**
-     * @Rest\Get("/", name="_departments")
+     * @Rest\Get("/", name="_positions")
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
-     *     path="/company/department",
-     *     summary="get departments",
-     *     tags={"Department"},
+     *     path="/company/position",
+     *     summary="get positions",
+     *     tags={"Position"},
+     *     @SWG\Parameter(
+     *         name="deparmentId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="deparmentId"
+     *     ),
      *     @SWG\Parameter(
      *         name="page",
      *         in="query",
@@ -42,16 +49,16 @@ class CompanyDepartmentController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Target department collection",
+     *         description="Target position collection",
      *         @SWG\Schema(
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
      *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/CompanyDepartmentComplete")),
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/CompanyPositionComplete")),
      *                 ),
      *             }
      *         )
-     *     ),
+     *     )
      * )
      *
      * @param Request $request
@@ -59,17 +66,18 @@ class CompanyDepartmentController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
-        $queryBuilder = $this->getDoctrine()
-            ->getRepository('PartnerBundle:CompanyDepartment')
-            ->createQueryBuilder('company_department')
-        ;
+        $repository = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition');
+        $queryBuilder = $repository->createQueryBuilder('cp');
+
+        if ($request->query->has('departmentId')) {
+            $repository->applyFilterDepartment($queryBuilder, $request->query->get('departmentId'));
+        }
 
         /** @var SlidingPagination $pager */
-        $pager = $paginator->paginate(
+        $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 100)
+            $request->query->getInt('limit', 20)
         );
 
         return $this->createPaginatedView($pager);
