@@ -57,10 +57,6 @@ class SyncPartner
     {
         $partnersData = $this->client->getPartners($token);
 
-        // todo: remove this
-        $partnersData['Dealer_DealerId'] = '1';
-        $partnersData['AfterSalesDealer_DealerId'] = '2';
-
         // sync sales partner
         if (!empty($partnersData[self::WEGA_SALES_PARTNER_KEY])) {
             $this->syncPartner($partnersData[self::WEGA_SALES_PARTNER_KEY], $myaudiUserId);
