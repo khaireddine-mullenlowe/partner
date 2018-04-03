@@ -33,6 +33,13 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'CRUD'
                 type: 'direct'
+    consumers:
+        sync_partner:
+            connection: default
+            exchange_options: {name: 'authentication', type: direct}
+            queue_options:    {name: 'authentication.sso.partner'}
+            callback:         PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
 
 mullenlowe_common:
     rabbitmq_crud_publisher:
