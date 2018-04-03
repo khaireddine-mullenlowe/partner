@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityNotFoundException;
 use Mullenlowe\PluginsBundle\Service\Wega\WegaSoapClient;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Entity\PartnerMyaudiUser;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class SyncPartner
@@ -35,25 +34,17 @@ class SyncPartner
     private $manager;
 
     /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
      * SyncPartner constructor.
      *
      * @param WegaSoapClient         $client
      * @param EntityManagerInterface $manager
-     * @param ValidatorInterface     $validator
      */
     public function __construct(
         WegaSoapClient $client,
-        EntityManagerInterface $manager,
-        ValidatorInterface $validator
+        EntityManagerInterface $manager
     ) {
         $this->client = $client;
         $this->manager = $manager;
-        $this->validator = $validator;
     }
 
     /**
