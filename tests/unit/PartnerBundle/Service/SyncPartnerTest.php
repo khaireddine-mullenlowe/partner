@@ -45,7 +45,7 @@ class SyncPartnerTest extends \Codeception\Test\Unit
         $mockedPartnerRepository = $this->getMockBuilder(PartnerRepository::class)->disableOriginalConstructor()->getMock();
         $mockedPartnerMyaudiUserRepository = $this->getMockBuilder(EntityRepository::class)->disableOriginalConstructor()->getMock();
 
-        $mockedPartnerRepository->method('find')->willReturnOnConsecutiveCalls($this->getSalesPartner(), $this->getAfterSalesPartner());
+        $mockedPartnerRepository->method('find')->willReturn(new Partner());
         $mockedPartnerMyaudiUserRepository->method('findOneBy')->willReturnOnConsecutiveCalls(
             new PartnerMyaudiUser(),
             null
@@ -68,31 +68,5 @@ class SyncPartnerTest extends \Codeception\Test\Unit
         $syncPartner = new SyncPartner($client, $mockedManager);
 
         $syncPartner->sync(1, 'ld5D5r5dmDKJr2r2dfjxe32rt4fJ');
-    }
-
-    /**
-     * Returns a fake sales partner for testing
-     *
-     * @return Partner
-     */
-    private function getSalesPartner()
-    {
-        $partner = new Partner();
-        $partner->setType('sales');
-
-        return $partner;
-    }
-
-    /**
-     * Returns a fake sales partner for testing
-     *
-     * @return Partner
-     */
-    private function getAfterSalesPartner()
-    {
-        $partner = new Partner();
-        $partner->setType('aftersales');
-
-        return $partner;
     }
 }
