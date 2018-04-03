@@ -121,8 +121,8 @@ class SwaggerDefinitions
      *                      property="type",
      *                      type="string",
      *                      enum={
-     *                          PartnerBundle\Entity\Partner::SALES_TYPE,
-     *                          PartnerBundle\Entity\Partner::AFTERSALES_TYPE
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
      *                      }
      *                  ),
      *                  @SWG\Property(property="contractNumber", type="string"),
