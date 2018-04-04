@@ -27,11 +27,11 @@ class CompanyPositionController extends MullenloweRestController
      *     summary="get positions",
      *     tags={"Position"},
      *     @SWG\Parameter(
-     *         name="deparmentId",
+     *         name="deparment",
      *         in="query",
      *         type="integer",
      *         required=false,
-     *         description="deparmentId"
+     *         description="deparment id"
      *     ),
      *     @SWG\Parameter(
      *         name="page",
@@ -69,8 +69,8 @@ class CompanyPositionController extends MullenloweRestController
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition');
         $queryBuilder = $repository->createQueryBuilder('cp');
 
-        if ($request->query->has('departmentId')) {
-            $repository->applyFilterDepartment($queryBuilder, $request->query->get('departmentId'));
+        if ($request->query->has('department')) {
+            $repository->applyFilterDepartment($queryBuilder, $request->query->get('department'));
         }
 
         /** @var SlidingPagination $pager */

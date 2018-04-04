@@ -7,12 +7,14 @@ use Doctrine\ORM\EntityRepository;
 
 class CompanyPositionRepository extends EntityRepository
 {
-    public function applyFilterDepartment(QueryBuilder $queryBuilder, $departmentId)
+    public function applyFilterDepartment(QueryBuilder $queryBuilder, $departments)
     {
-        $queryBuilder
-            ->innerJoin('cp.departments', 'd')
-            ->andWhere('d.id = :departmentId')
-            ->setParameter('departmentId', $departmentId);
+        $queryBuilder->innerJoin('cp.departments', 'd');
+        if (is_array($departments)) {
+            $queryBuilder->andWhere('d.id IN (:departments)')->setParameter('departments', $departments);
+        } else {
+            $queryBuilder->andWhere('d.id = :departmentId')->setParameter('departmentId', $departments);
+        }
 
         return $queryBuilder;
     }
