@@ -67,9 +67,9 @@
                 "summary": "get positions",
                 "parameters": [
                     {
-                        "name": "deparmentId",
+                        "name": "deparment",
                         "in": "query",
-                        "description": "deparmentId",
+                        "description": "deparment id",
                         "required": false,
                         "type": "integer"
                     },
