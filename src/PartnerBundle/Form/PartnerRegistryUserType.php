@@ -5,8 +5,10 @@ namespace PartnerBundle\Form;
 use PartnerBundle\Entity\CompanyDepartment;
 use PartnerBundle\Entity\CompanyPosition;
 use PartnerBundle\Entity\CompanyPositionCode;
+use PartnerBundle\Entity\District;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Entity\PartnerRegistryUser;
+use PartnerBundle\Entity\Region;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -43,6 +45,12 @@ class PartnerRegistryUserType extends AbstractType
                 'class' => CompanyPositionCode::class,
             ])
             ->add('isAdmin', CheckboxType::class)
+            ->add('region', EntityType::class, [
+                'class' => Region::class,
+            ])
+            ->add('district', EntityType::class, [
+                'class' => District::class,
+            ])
         ;
     }
 

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- To be executed 1st -->
 <jobs>
     <job name="Groups migration">
         <extractor>
@@ -18,7 +17,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\Group</entity>
         </loader>
 
@@ -60,7 +59,7 @@
         </transformer>
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\Partner</entity>
         </loader>
 

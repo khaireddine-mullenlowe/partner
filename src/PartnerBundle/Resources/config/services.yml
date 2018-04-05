@@ -2,3 +2,19 @@ services:
     PartnerBundle\DataFixtures\Provider\PartnerFixtureProvider:
         tags:
             - { name: hautelook_alice.faker.provider }
+
+    PartnerBundle\ETL\Transformer\RegistryUserTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.user_connection'
+
+    PartnerBundle\ETL\Transformer\MyaudiUserTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.user_connection'

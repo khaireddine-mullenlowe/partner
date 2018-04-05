@@ -395,10 +395,14 @@ class Partner extends BaseEntity
 
     /**
      * @param int $legacyId
+     *
+     * @return Partner
      */
     public function setLegacyId(int $legacyId)
     {
         $this->legacyId = $legacyId;
+
+        return $this;
     }
 
     /**

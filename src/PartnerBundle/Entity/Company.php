@@ -97,4 +97,12 @@ class Company extends BaseCompany
 
         return $this;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->registryUsers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

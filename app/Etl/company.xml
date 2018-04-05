@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- To be executed 2nd -->
 <jobs>
     <job name="CompanyType migration">
         <extractor>
@@ -20,7 +19,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\CompanyType</entity>
         </loader>
 
@@ -56,7 +55,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\Company</entity>
         </loader>
 
@@ -95,7 +94,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\CompanyDepartment</entity>
         </loader>
 
@@ -129,7 +128,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <association/>
         </loader>
 
@@ -181,7 +180,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\CompanyPosition</entity>
         </loader>
 
@@ -226,7 +225,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <association/>
         </loader>
 
@@ -277,7 +276,7 @@
         <transformer />
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\CompanyPositionCode</entity>
         </loader>
 

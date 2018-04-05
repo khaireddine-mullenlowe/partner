@@ -2,21 +2,20 @@
 
 namespace PartnerBundle\Form;
 
-use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\District;
+use PartnerBundle\Entity\Region;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use PartnerBundle\Entity\PartnerMyaudiUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Required;
 
 /**
- * Class PartnerMyaudiUserType
+ * Class DistrictType
  * @package PartnerBundle\Form
  */
-class PartnerMyaudiUserType extends AbstractType
+class DistrictType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -24,25 +23,20 @@ class PartnerMyaudiUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('myaudiUserId', IntegerType::class)
-            ->add('partner', EntityType::class, [
-                'class' => Partner::class,
-                'constraints' => [new Required(), new NotNull()],
-            ])
-        ;
-    }
-
-    /**
+            ->add('name', TextType::class)
+            ->add('legacyId', IntegerType::class)
+            ->add('region', EntityType::class, ['class' => Region::class]);
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => PartnerMyaudiUser::class,
+        $resolver->setDefaults(array(
             'csrf_protection' => false,
+            'data_class' => District::class,
             'allow_extra_fields' => false,
             'extra_fields_message' => 'This form should not contain extra fields : "{{ extra_fields }}".',
-        ]);
+        ));
     }
 
     /**
@@ -52,4 +46,6 @@ class PartnerMyaudiUserType extends AbstractType
     {
         return null;
     }
+
+
 }

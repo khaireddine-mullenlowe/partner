@@ -55,6 +55,16 @@ doctrine:
                 user: '%database_user%'
                 password: '%database_password%'
                 charset: UTF8
+            migration:
+                driver: pdo_mysql
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
+                charset: UTF8
+                logging: false
+                profiling: false
             agcv4:
                 driver: pdo_sqlsrv
                 host: '%v4_database_host%'
@@ -62,7 +72,7 @@ doctrine:
                 dbname: '%v4_database_name%'
                 user: '%v4_database_user%'
                 password: '%v4_database_password%'
-            agcv5_user:
+            user:
                 driver: pdo_mysql
                 host: '%database_host%'
                 port: '%database_port%'
@@ -70,6 +80,8 @@ doctrine:
                 user: '%database_user_user%'
                 password: '%database_password%'
                 charset: UTF8
+                logging: false
+                profiling: false
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         entity_managers:
@@ -78,13 +90,13 @@ doctrine:
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     PartnerBundle: ~
-            agcv4:
-                connection: agcv4
+            migration:
+                connection: default
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     PartnerBundle: ~
-            agcv5_user:
-                connection: agcv5_user
+            agcv4:
+                connection: agcv4
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     PartnerBundle: ~
