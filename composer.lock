@@ -2446,12 +2446,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/etl-bundle.git",
-                "reference": "7db72f434ecf0f1cf873c54464719f0e741225ee"
+                "reference": "7110dae5192051410b82deb9575c7defcb1d835b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/7db72f434ecf0f1cf873c54464719f0e741225ee",
-                "reference": "7db72f434ecf0f1cf873c54464719f0e741225ee",
+                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/7110dae5192051410b82deb9575c7defcb1d835b",
+                "reference": "7110dae5192051410b82deb9575c7defcb1d835b",
                 "shasum": ""
             },
             "require": {
@@ -2474,7 +2474,7 @@
                 "proprietary"
             ],
             "description": "Symfony implementation of an ETL database migration flow",
-            "time": "2018-03-29 12:29:04"
+            "time": "2018-04-05 14:21:48"
         },
         {
             "name": "namshi/jose",
