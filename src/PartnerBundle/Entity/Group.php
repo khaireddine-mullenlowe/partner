@@ -176,9 +176,13 @@ class Group extends BaseEntity
      * Remove partner
      *
      * @param \PartnerBundle\Entity\Partner $partner
+     *
+     * @return Group
      */
     public function removePartner(\PartnerBundle\Entity\Partner $partner)
     {
         $this->partners->removeElement($partner);
+
+        return $this;
     }
 }

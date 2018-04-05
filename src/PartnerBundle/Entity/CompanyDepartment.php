@@ -154,29 +154,41 @@ class CompanyDepartment extends BaseCompany
      * Remove companyType
      *
      * @param \PartnerBundle\Entity\CompanyType $companyType
+     *
+     * @return $this
      */
     public function removeCompanyType(\PartnerBundle\Entity\CompanyType $companyType)
     {
         $this->companyTypes->removeElement($companyType);
+
+        return $this;
     }
 
     /**
      * Remove position
      *
      * @param \PartnerBundle\Entity\CompanyPosition $position
+     *
+     * @return $this
      */
     public function removePosition(\PartnerBundle\Entity\CompanyPosition $position)
     {
         $this->positions->removeElement($position);
+
+        return $this;
     }
 
     /**
      * Remove positionCode
      *
      * @param \PartnerBundle\Entity\CompanyPositionCode $positionCode
+     *
+     * @return $this
      */
     public function removePositionCode(\PartnerBundle\Entity\CompanyPositionCode $positionCode)
     {
         $this->positionCodes->removeElement($positionCode);
+
+        return $this;
     }
 }

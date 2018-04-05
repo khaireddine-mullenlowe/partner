@@ -120,19 +120,27 @@ class CompanyType extends BaseCompany
      * Remove company
      *
      * @param \PartnerBundle\Entity\Company $company
+     *
+     * @return $this
      */
     public function removeCompany(\PartnerBundle\Entity\Company $company)
     {
         $this->companies->removeElement($company);
+
+        return $this;
     }
 
     /**
      * Remove department
      *
      * @param \PartnerBundle\Entity\CompanyDepartment $department
+     *
+     * @return $this
      */
     public function removeDepartment(\PartnerBundle\Entity\CompanyDepartment $department)
     {
         $this->departments->removeElement($department);
+
+        return $this;
     }
 }
