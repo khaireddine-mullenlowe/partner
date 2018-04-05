@@ -18,7 +18,7 @@ abstract class BaseEnum
      */
     public static function getValue($key)
     {
-        $data = self::getData();
+        $data = static::getData();
 
         return isset($data[$key]) ? $data[$key] : null;
     }

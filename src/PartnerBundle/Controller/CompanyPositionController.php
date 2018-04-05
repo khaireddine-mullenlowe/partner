@@ -6,6 +6,7 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use PartnerBundle\Enum\OperatorEnum;
 use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 
@@ -70,14 +71,17 @@ class CompanyPositionController extends MullenloweRestController
         $queryBuilder = $repository->createQueryBuilder('cp');
 
         if ($request->query->has('department')) {
-            $repository->applyFilterDepartment($queryBuilder, $request->query->get('department'));
+            $repository->applyFilterDepartment(
+                $queryBuilder,
+                $request->query->get('department'),
+                $request->query->get('operator', OperatorEnum::EQUAL));
         }
 
         /** @var SlidingPagination $pager */
         $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 20)
+            $request->query->getInt('limit', 50)
         );
 
         return $this->createPaginatedView($pager);
