@@ -181,9 +181,7 @@ class Region extends BaseEntity
      */
     public function removeDistrict(District $district)
     {
-        if ($this->districts->contains($district)) {
-            $this->districts->remove($district);
-        }
+        $this->districts->removeElement($district);
 
         return $this;
     }
@@ -248,9 +246,7 @@ class Region extends BaseEntity
      */
     public function removePartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
     {
-        if ($this->partnerRegistryUsers->contains($partnerRegistryUser)) {
-            $this->partnerRegistryUsers->remove($partnerRegistryUser);
-        }
+        $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
 
         return $this;
     }

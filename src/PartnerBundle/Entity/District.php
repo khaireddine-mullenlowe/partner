@@ -187,9 +187,7 @@ class District extends BaseEntity
      */
     public function removePartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
     {
-        if ($this->partnerRegistryUsers->contains($partnerRegistryUser)) {
-            $this->partnerRegistryUsers->remove($partnerRegistryUser);
-        }
+        $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
 
         return $this;
     }

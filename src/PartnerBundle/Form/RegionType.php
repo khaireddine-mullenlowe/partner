@@ -24,7 +24,9 @@ class RegionType extends AbstractType
             ->add('name', TextType::class)
             ->add('partnerType', TextType::class)
             ->add('legacyId', IntegerType::class);
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

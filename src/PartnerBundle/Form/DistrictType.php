@@ -26,7 +26,9 @@ class DistrictType extends AbstractType
             ->add('name', TextType::class)
             ->add('legacyId', IntegerType::class)
             ->add('region', EntityType::class, ['class' => Region::class]);
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
