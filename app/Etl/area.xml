@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Regions migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t1.id_item,
+                           t1.name,
+                           CASE WHEN t1.parent_id = 2270913 THEN 'sales' ELSE 'aftersales' END AS partner_type,
+                           t2.hist_change_date as created_at
+                    FROM area_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_area_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 22
+                    ORDER BY t1.id_item
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\Region</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Districts migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT t1.id_item,
+                           t1.name,
+                           t1.parent_id,
+                           t2.hist_change_date as created_at
+                    FROM area_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_area_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 23
+                    ORDER BY t1.id_item
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\District</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_item</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>parent_id</name>
+                <targetProperty>region</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Region</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

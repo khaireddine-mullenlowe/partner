@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- To be executed 3rd -->
 <jobs>
     <job name="Partners Registry Users migration">
         <extractor>
@@ -8,7 +7,7 @@
                 <![CDATA[
                     SELECT
                         t1.id_company as partner_id,
-                        t5.id AS contact_id,
+                        t2.contact_id,
                         t7.id_item AS department_id,
                         t9.id_item AS position_id,
                         CASE
@@ -16,14 +15,17 @@
                         END AS position_code_id,
                         CASE
                             WHEN t10.contact_id IS NOT NULL THEN 1 ELSE 0
-                        END AS is_admin
+                        END AS is_admin,
+                        t2.ntw_region_id,
+                        t2.ntw_district_id
                     FROM ntw_company t1
                     INNER JOIN ntw_company_contact t2 ON t2.company_id = t1.id_company
-                    INNER JOIN sys_user t3 ON t3.contact_id = t2.contact_id
+                    INNER JOIN sys_user t3
+                        ON t3.contact_id = t2.contact_id
+                        AND t3.status = 1
                     INNER JOIN ntw_company_business t4
                         ON t1.id_company = t4.company_id
                         AND t4.ntw_contract_id IN (2270913, 2270914)
-                    INNER JOIN temp_registry_user t5 on t5.legacy_id = t3.contact_id
                     LEFT JOIN buss_item t6 on t6.id_item = t2.ntw_company_department_id
                     LEFT JOIN (
                         SELECT MIN(id_item) AS id_item, name
@@ -46,10 +48,12 @@
             </query>
         </extractor>
 
-        <transformer/>
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\RegistryUserTransformer</preTransformerClass>
+        </transformer>
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\PartnerRegistryUser</entity>
         </loader>
 
@@ -86,6 +90,20 @@
                 <entityClass>PartnerBundle\Entity\CompanyPositionCode</entityClass>
                 <referencedBy>legacyId</referencedBy>
             </mapping>
+            <mapping>
+                <name>ntw_region_id</name>
+                <targetProperty>region</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Region</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>ntw_district_id</name>
+                <targetProperty>district</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\District</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
         </mappings>
     </job>
 
@@ -96,7 +114,7 @@
                 <![CDATA[
                     SELECT
                         t1.id_company,
-                        t5.id AS contact_id,
+                        t2.contact_id,
                         t7.id_item AS department_id,
                         t9.id_item AS position_id,
                         CASE
@@ -105,8 +123,9 @@
 						t2.ntw_company_position as position_description
                     FROM ntw_company t1
                     INNER JOIN ntw_company_contact t2 ON t2.company_id = t1.id_company
-                    INNER JOIN sys_user t3 ON t3.contact_id = t2.contact_id
-                    INNER JOIN temp_registry_user t5 on t5.legacy_id = t3.contact_id
+                    INNER JOIN sys_user t3
+                        ON t3.contact_id = t2.contact_id
+                        AND t3.status = 1
                     LEFT JOIN buss_item t6 on t6.id_item = t2.ntw_company_department_id
                     LEFT JOIN (
                         SELECT MIN(id_item) AS id_item, name
@@ -127,10 +146,12 @@
             </query>
         </extractor>
 
-        <transformer/>
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\RegistryUserTransformer</preTransformerClass>
+        </transformer>
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\CompanyRegistryUser</entity>
         </loader>
 

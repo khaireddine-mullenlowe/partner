@@ -395,10 +395,14 @@ class Partner extends BaseEntity
 
     /**
      * @param int $legacyId
+     *
+     * @return Partner
      */
     public function setLegacyId(int $legacyId)
     {
         $this->legacyId = $legacyId;
+
+        return $this;
     }
 
     /**
@@ -473,9 +477,7 @@ class Partner extends BaseEntity
      */
     public function removeMyaudiUser(PartnerMyaudiUser $myaudiUser)
     {
-        if ($this->myaudiUsers->contains($myaudiUser)) {
-            $this->myaudiUsers->removeElement($myaudiUser);
-        }
+        $this->myaudiUsers->removeElement($myaudiUser);
 
         return $this;
     }
@@ -500,9 +502,7 @@ class Partner extends BaseEntity
      */
     public function removeRegistryUser(PartnerRegistryUser $registryUser)
     {
-        if ($this->registryUsers->contains($registryUser)) {
-            $this->registryUsers->removeElement($registryUser);
-        }
+        $this->registryUsers->removeElement($registryUser);
         $registryUser->setPartner(null);
 
         return $this;

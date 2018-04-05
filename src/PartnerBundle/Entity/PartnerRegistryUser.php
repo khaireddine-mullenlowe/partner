@@ -86,6 +86,24 @@ class PartnerRegistryUser extends BaseEntity
     private $positionCode;
 
     /**
+     * @var Region|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="partnerRegistryUsers")
+     * @ORM\JoinColumn(name="region_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $region;
+
+    /**
+     * @var District|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="partnerRegistryUsers")
+     * @ORM\JoinColumn(name="district_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $district;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default":0})
@@ -239,6 +257,56 @@ class PartnerRegistryUser extends BaseEntity
     public function setIsAdmin(bool $isAdmin)
     {
         $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isAdmin
+     *
+     * @return boolean
+     */
+    public function getIsAdmin()
+    {
+        return $this->isAdmin();
+    }
+
+    /**
+     * @return Region|null
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region|null $region
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return District|null
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param District|null $district
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
 
         return $this;
     }

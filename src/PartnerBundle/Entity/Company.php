@@ -40,6 +40,14 @@ class Company extends BaseCompany
     private $registryUsers;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->registryUsers = new ArrayCollection();
+    }
+
+    /**
      * @return CompanyType
      */
     public function getType()
@@ -90,9 +98,7 @@ class Company extends BaseCompany
      */
     public function removeRegistryUser(CompanyRegistryUser $registryUser)
     {
-        if ($this->registryUsers->contains($registryUser)) {
-            $this->registryUsers->removeElement($registryUser);
-        }
+        $this->registryUsers->removeElement($registryUser);
         $registryUser->setCompany(null);
 
         return $this;

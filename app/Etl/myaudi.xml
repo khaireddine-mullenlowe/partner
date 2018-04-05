@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- To be executed 4th -->
 <jobs>
     <job name="Partners Myaudi Users migration">
         <extractor>
@@ -8,13 +7,15 @@
                 <![CDATA[
                     SELECT
                         t1.sales_partner_id,
-                        t5.id AS contact_id,
+                        t1.contact_id,
                         CASE WHEN t1.selection_time IS NOT NULL
                             THEN t1.selection_time
                             ELSE t4.hist_change_date
                         END AS created_at
                     FROM ctc_sales_partner t1
-                    INNER JOIN sys_user t2 on t2.contact_id = t1.contact_id
+                    INNER JOIN sys_user t2
+                        ON t2.contact_id = t1.contact_id
+                        AND t2.status = 1
                     INNER JOIN usr_application_access t3 on t3.user_id = t2.id_user
                     INNER JOIN (
                         SELECT contact_id, sales_partner_id, hist_action, Max(hist_change_date) as hist_change_date
@@ -24,17 +25,18 @@
                     ) t4
                         ON t4.contact_id = t1.contact_id
                         AND t4.sales_partner_id = t1.sales_partner_id
-                    INNER JOIN temp_myaudi_user t5 on t5.legacy_id = t1.contact_id
                     WHERE t3.application_id = 4
                     ORDER BY t1.sales_partner_id ASC
                 ]]>
             </query>
         </extractor>
 
-        <transformer/>
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\MyaudiUserTransformer</preTransformerClass>
+        </transformer>
 
         <loader>
-            <connection>default</connection>
+            <connection>migration</connection>
             <entity>PartnerBundle\Entity\PartnerMyaudiUser</entity>
         </loader>
 
