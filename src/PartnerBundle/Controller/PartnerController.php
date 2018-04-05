@@ -6,6 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Enum\PartnerTypeEnum;
 use PartnerBundle\Form\PartnerType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,34 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class PartnerController extends MullenloweRestController
 {
     const CONTEXT = 'Partner';
+
+    /**
+     * @Rest\Get("/types", name="_partner_type")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Get(
+     *      path="/types",
+     *     summary="Get partner type",
+     *     tags={"Partner"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Types contract partner",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(type="string")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     */
+    public function getTypesAction()
+    {
+        return $this->createView(PartnerTypeEnum::getData());
+    }
 
     /**
      * @Rest\Get(

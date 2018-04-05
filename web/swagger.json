@@ -179,6 +179,41 @@
                 ]
             }
         },
+        "/types": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get partner type",
+                "responses": {
+                    "200": {
+                        "description": "Types contract partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/{id}": {
             "get": {
                 "tags": [
