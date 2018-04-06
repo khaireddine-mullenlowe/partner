@@ -9,9 +9,10 @@ class PartnerTypeEnum extends BaseEnum
 
     public static function getData()
     {
+        // TODO : => i18n
         return [
-            self::TYPE_SALES => 'partner.type.sales',
-            self::TYPE_AFTERSALES => 'partner.type.aftersales'
+            self::TYPE_SALES => 'Vente',
+            self::TYPE_AFTERSALES => 'Service'
         ];
     }
 }
