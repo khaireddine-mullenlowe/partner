@@ -29,7 +29,7 @@ region:
     prefix:   /region
 
 partner_myaudi_user:
-    resource: PartnerBundle\Controller\MyaudiUserController
+    resource: PartnerBundle\Controller\PartnerMyaudiUserController
     type:     rest
     prefix:   /myaudi-user
 

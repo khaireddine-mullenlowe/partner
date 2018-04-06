@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-class MyaudiUserController extends MullenloweRestController
+class PartnerMyaudiUserController extends MullenloweRestController
 {
 
-    const CONTEXT = 'MyaudiUserPartner';
+    const CONTEXT = 'PartnerMyaudiUser';
     /**
      * Checks Duplicate MyaudiUser Partner Rule with incoming request body data.
      *
@@ -66,7 +66,7 @@ class MyaudiUserController extends MullenloweRestController
      * @param Request $request
      * @return View
      */
-    public function postCheckDuplicateRuleAction(Request $request, $myaudiUserId)
+    public function postCheckDuplicateRuleAction(Request $request, int $myaudiUserId)
     {
         if (0 === $request->request->count()) {
             throw new BadRequestHttpException('Input data are empty');

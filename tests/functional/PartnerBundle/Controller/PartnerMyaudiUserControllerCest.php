@@ -4,7 +4,7 @@ namespace PartnerBundle\Tests\Controller;
 
 use Codeception\Util\HttpCode;
 
-class MyaudiUserControllerCest
+class PartnerMyaudiUserControllerCest
 {
     public function duplicateRuleWithEmptyInputData(\FunctionalTester $I)
     {
