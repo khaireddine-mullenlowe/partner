@@ -8,6 +8,7 @@ use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use PartnerBundle\Enum\PartnerTypeEnum;
 
 /**
  * Region
@@ -38,7 +39,7 @@ class Region extends BaseEntity
      * @var string
      *
      * @ORM\Column(name="partnerType", type="string", length=25)
-     * @Assert\Choice(choices={Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
+     * @Assert\Choice(choices={PartnerTypeEnum::TYPE_SALES, PartnerTypeEnum::TYPE_AFTERSALES}, strict=true)
      */
     private $partnerType;
 
