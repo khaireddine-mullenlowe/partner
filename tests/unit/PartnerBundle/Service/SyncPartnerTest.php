@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Mullenlowe\PluginsBundle\Service\Wega\WegaSoapClient;
 use PartnerBundle\Entity\Partner;
 use PartnerBundle\Entity\PartnerMyaudiUser;
-use PartnerBundle\Entity\Repository\PartnerRepository;
+use PartnerBundle\Repository\PartnerRepository;
 use PartnerBundle\Service\Sync\SyncPartner;
 
 /**
