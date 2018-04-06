@@ -18,6 +18,7 @@ use Swagger\Annotations as SWG;
 class CompanyPositionController extends MullenloweRestController
 {
     const CONTEXT = 'CompanyPosition';
+    const LIMIT = 50;
 
     /**
      * @Rest\Get("/", name="_positions")
@@ -81,7 +82,7 @@ class CompanyPositionController extends MullenloweRestController
         $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 50)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);
