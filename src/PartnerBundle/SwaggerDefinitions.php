@@ -121,8 +121,8 @@ class SwaggerDefinitions
      *                      property="type",
      *                      type="string",
      *                      enum={
-     *                          PartnerBundle\Entity\Partner::SALES_TYPE,
-     *                          PartnerBundle\Entity\Partner::AFTERSALES_TYPE
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
      *                      }
      *                  ),
      *                  @SWG\Property(property="contractNumber", type="string"),
@@ -166,6 +166,28 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/Group"),
      *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
      *         }
+     *     ),
+     *
+     *     @SWG\Definition(
+     *          definition="Region",
+     *          allOf={
+     *              @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *              @SWG\Definition(
+     *                  @SWG\Property(property="name", type="string")
+     *              ),
+     *              @SWG\Property(
+     *                  property="type",
+     *                  type="string",
+     *                  enum={
+     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
+     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
+     *                  }
+     *              ),
+     *              @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *              @SWG\Definition(
+     *                  @SWG\Property(property="legacy_id", type="string")
+     *              )
+     *          }
      *     ),
      *
      *     @SWG\Definition(

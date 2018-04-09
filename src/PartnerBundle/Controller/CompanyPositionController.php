@@ -6,6 +6,7 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use PartnerBundle\Enum\OperatorEnum;
 use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 
@@ -17,6 +18,7 @@ use Swagger\Annotations as SWG;
 class CompanyPositionController extends MullenloweRestController
 {
     const CONTEXT = 'CompanyPosition';
+    const LIMIT = 50;
 
     /**
      * @Rest\Get("/", name="_positions")
@@ -27,11 +29,11 @@ class CompanyPositionController extends MullenloweRestController
      *     summary="get positions",
      *     tags={"Position"},
      *     @SWG\Parameter(
-     *         name="deparmentId",
+     *         name="deparment",
      *         in="query",
      *         type="integer",
      *         required=false,
-     *         description="deparmentId"
+     *         description="deparment id"
      *     ),
      *     @SWG\Parameter(
      *         name="page",
@@ -69,15 +71,18 @@ class CompanyPositionController extends MullenloweRestController
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition');
         $queryBuilder = $repository->createQueryBuilder('cp');
 
-        if ($request->query->has('departmentId')) {
-            $repository->applyFilterDepartment($queryBuilder, $request->query->get('departmentId'));
+        if ($request->query->has('department')) {
+            $repository->applyFilterDepartment(
+                $queryBuilder,
+                $request->query->get('department'),
+                $request->query->get('operator', OperatorEnum::EQUAL));
         }
 
         /** @var SlidingPagination $pager */
         $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 20)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);

@@ -67,9 +67,9 @@
                 "summary": "get positions",
                 "parameters": [
                     {
-                        "name": "deparmentId",
+                        "name": "deparment",
                         "in": "query",
-                        "description": "deparmentId",
+                        "description": "deparment id",
                         "required": false,
                         "type": "integer"
                     },
@@ -164,6 +164,41 @@
                                             "type": "array",
                                             "items": {
                                                 "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/types": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get partner type",
+                "responses": {
+                    "200": {
+                        "description": "Types contract partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
                                             }
                                         }
                                     }
@@ -696,6 +731,32 @@
                     }
                 ]
             }
+        },
+        "/regions": {
+            "get": {
+                "tags": [
+                    "Region"
+                ],
+                "summary": "Get region collection",
+                "responses": {
+                    "200": {
+                        "description": "Region list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {}
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {
@@ -945,6 +1006,38 @@
                 },
                 {
                     "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Region": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "property": "type",
+                    "type": "string",
+                    "enum": [
+                        "sales",
+                        "aftersales"
+                    ]
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                },
+                {
+                    "properties": {
+                        "legacy_id": {
+                            "type": "string"
+                        }
+                    }
                 }
             ]
         },

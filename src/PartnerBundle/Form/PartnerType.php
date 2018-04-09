@@ -4,6 +4,7 @@ namespace PartnerBundle\Form;
 
 use PartnerBundle\Entity\Group;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Enum\PartnerTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,7 +30,7 @@ class PartnerType extends AbstractType
         $builder
             ->add('legacyId', IntegerType::class)
             ->add('type', ChoiceType::class, [
-                'choices' => [Partner::SALES_TYPE, Partner::AFTERSALES_TYPE]
+                'choices' => [PartnerTypeEnum::TYPE_SALES, PartnerTypeEnum::TYPE_AFTERSALES]
             ])
             ->add('contractNumber', TextType::class)
             ->add('commercialName', TextType::class)
