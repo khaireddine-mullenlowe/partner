@@ -179,6 +179,50 @@
                 ]
             }
         },
+        "/district": {
+            "get": {
+                "tags": [
+                    "District"
+                ],
+                "summary": "Get district collection",
+                "parameters": [
+                    {
+                        "name": "region",
+                        "in": "query",
+                        "description": "Filter by region id",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "District list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Region"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/types": {
             "get": {
                 "tags": [
@@ -1083,11 +1127,7 @@
                     "$ref": "#/definitions/IdableEntity"
                 },
                 {
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    }
+                    "$ref": "#/definitions/NamedEntity"
                 },
                 {
                     "property": "type",
@@ -1106,6 +1146,22 @@
                             "type": "string"
                         }
                     }
+                }
+            ]
+        },
+        "District": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/NamedEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
                 }
             ]
         },

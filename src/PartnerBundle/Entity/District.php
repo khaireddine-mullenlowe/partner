@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * District
  *
  * @ORM\Table(name="district")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\DistrictRepository")
  */
 class District extends BaseEntity
 {
@@ -29,7 +29,7 @@ class District extends BaseEntity
 
     /**
      * @var string
-     *
+     * @Groups({"rest"})
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;

@@ -4,14 +4,14 @@ namespace PartnerBundle\Controller;
 
 use Codeception\Util\HttpCode;
 
-class RegionControllerCest
+class DistrictControllerCest
 {
-    public function tryToGetRegionCollection(\FunctionalTester $I)
+    public function tryToGetDistrictCollection(\FunctionalTester $I)
     {
-        $I->sendGet('/region/');
+        $I->sendGet('/district/');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['context' => 'Region']);
+        $I->seeResponseContainsJson(['context' => 'District']);
         $I->seeResponseContains('data');
         $I->seeResponseContains('pagination');
     }
