@@ -169,6 +169,28 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
+     *          definition="Region",
+     *          allOf={
+     *              @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *              @SWG\Definition(
+     *                  @SWG\Property(property="name", type="string")
+     *              ),
+     *              @SWG\Property(
+     *                  property="type",
+     *                  type="string",
+     *                  enum={
+     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
+     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
+     *                  }
+     *              ),
+     *              @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *              @SWG\Definition(
+     *                  @SWG\Property(property="legacy_id", type="string")
+     *              )
+     *          }
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="Company",
      *         allOf={
      *             @SWG\Definition(ref="#/definitions/ReferentialEntity"),
