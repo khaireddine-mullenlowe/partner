@@ -14,7 +14,7 @@ use PartnerBundle\Enum\PartnerTypeEnum;
  * Region
  *
  * @ORM\Table(name="region")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\RegionRepository")
  */
 class Region extends BaseEntity
 {
