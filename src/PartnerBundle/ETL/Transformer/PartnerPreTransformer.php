@@ -5,6 +5,7 @@ namespace PartnerBundle\ETL\Transformer;
 use Mullenlowe\EtlBundle\Row;
 use Mullenlowe\EtlBundle\Transformer\TransformerInterface;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Enum\PartnerTypeEnum;
 
 /**
  * Class PartnerPreTransformer
@@ -29,8 +30,8 @@ class PartnerPreTransformer implements TransformerInterface
      * @var array mapping between old contract id's and types
      */
     const CONTRACT_TYPE_MAPPING = [
-        self::SALES_CONTRACT_ID => Partner::SALES_TYPE,
-        self::AFTERSALES_CONTRACT_ID => Partner::AFTERSALES_TYPE,
+        self::SALES_CONTRACT_ID => PartnerTypeEnum::TYPE_SALES,
+        self::AFTERSALES_CONTRACT_ID => PartnerTypeEnum::TYPE_AFTERSALES,
     ];
 
     /**

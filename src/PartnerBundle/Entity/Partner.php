@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use PartnerBundle\Enum\PartnerTypeEnum;
 
 /**
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
@@ -22,15 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Partner extends BaseEntity
 {
     /**
-     * @var string
-     */
-    const SALES_TYPE = 'sales';
-    /**
-     * @var string
-     */
-    const AFTERSALES_TYPE = 'aftersales';
-
-    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -42,7 +34,7 @@ class Partner extends BaseEntity
     /**
      * @ORM\Column(type="string")
      * @var string
-     * @Assert\Choice({Partner::SALES_TYPE, Partner::AFTERSALES_TYPE}, strict=true)
+     * @Assert\Choice({PartnerTypeEnum::TYPE_SALES, PartnerTypeEnum::TYPE_AFTERSALES}, strict=true)
      * @Groups({"amqp", "rest"})
      */
     protected $type;
