@@ -11,7 +11,7 @@ class DistrictControllerCest
         $I->sendGet('/district/');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['context' => 'District']);
+        $I->seeResponseContainsJson(['context' => 'PartnerDistrict']);
         $I->seeResponseContains('data');
         $I->seeResponseContains('pagination');
     }

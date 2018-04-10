@@ -16,7 +16,7 @@ class DistrictRepository extends EntityRepository
      */
     public function applyFilterRegion(QueryBuilder $queryBuilder, $regionId, $operator)
     {
-        if (null === $regionId) {
+        if (null === $regionId || null === OperatorEnum::getValue($operator)) {
             return $queryBuilder;
         }
 

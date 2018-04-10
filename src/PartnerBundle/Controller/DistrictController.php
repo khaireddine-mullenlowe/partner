@@ -20,7 +20,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class DistrictController extends MullenloweRestController
 {
     const LIMIT = 20;
-    const CONTEXT = 'District';
+    const CONTEXT = 'PartnerDistrict';
 
     /**
      * @Rest\Get("/", name="_district")
@@ -36,6 +36,13 @@ class DistrictController extends MullenloweRestController
      *         type="string",
      *         required=false,
      *         description="Filter by region id"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="operator",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Operator to filter (equal or different)"
      *     ),
      *     @SWG\Response(
      *         response=200,
