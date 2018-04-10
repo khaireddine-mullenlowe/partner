@@ -9,7 +9,7 @@ use PartnerBundle\Entity\Base\BaseCompany;
  * Class CompanyPositionCode
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\CompanyPositionCodeRepository")
  * @ORM\Table(name="company_position_code")
  */
 class CompanyPositionCode extends BaseCompany
