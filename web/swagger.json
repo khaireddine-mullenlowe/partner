@@ -537,6 +537,56 @@
                 ]
             }
         },
+        "/myaudi-user/{myaudiUserId}/check_duplicate": {
+            "post": {
+                "tags": [
+                    "MyaudiUser"
+                ],
+                "summary": "Check Duplicate Partner Rule by myaudiUserId",
+                "operationId": "checkDuplicateRuleAction",
+                "parameters": [
+                    {
+                        "name": "myaudiUserId",
+                        "in": "path",
+                        "description": "MyaudiUser id to check",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "DataToCheck",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "partnerName": {
+                                    "description": "Checks Duplicate MyaudiUser Partner Rule with incoming request body data.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Check duplicate rule status",
+                        "schema": {
+                            "properties": {
+                                "isDuplicate": {
+                                    "description": "Checks Duplicate MyaudiUser Partner Rule with incoming request body data.",
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/registry/": {
             "get": {
                 "tags": [
@@ -732,12 +782,21 @@
                 ]
             }
         },
-        "/regions": {
+        "/region": {
             "get": {
                 "tags": [
                     "Region"
                 ],
                 "summary": "Get region collection",
+                "parameters": [
+                    {
+                        "name": "partnerType",
+                        "in": "query",
+                        "description": "Type of partner (sales or aftersales)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Region list",
@@ -746,7 +805,16 @@
                                 {
                                     "$ref": "#/definitions/Context"
                                 },
-                                {}
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Region"
+                                            }
+                                        }
+                                    }
+                                }
                             ]
                         }
                     }
