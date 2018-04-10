@@ -28,3 +28,8 @@ services:
         resource: '../../src/PartnerBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
+
+    PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer:
+        arguments:
+            $logger: '@monolog.logger.sync'
+

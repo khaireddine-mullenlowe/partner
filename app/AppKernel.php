@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new PartnerBundle\PartnerBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Mullenlowe\PluginsBundle\MullenlowePluginsBundle(),
             new Mullenlowe\EtlBundle\MullenloweEtlBundle(),
         ];
 
