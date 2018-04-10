@@ -9,10 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
+/**
+ * Class PartnerMyaudiUserController
+ * @package PartnerBundle\Controller
+ *
+ */
 class PartnerMyaudiUserController extends MullenloweRestController
 {
 
     const CONTEXT = 'PartnerMyaudiUser';
+
     /**
      * Checks Duplicate MyaudiUser Partner Rule with incoming request body data.
      *
@@ -22,7 +28,7 @@ class PartnerMyaudiUserController extends MullenloweRestController
      * )
      *
      * @SWG\Post(
-     *     path="/{myaudiUserId}/check_duplicate",
+     *     path="/myaudi-user/{myaudiUserId}/check_duplicate",
      *     summary="Check Duplicate Partner Rule by myaudiUserId",
      *     operationId="checkDuplicateRuleAction",
      *     tags={"MyaudiUser"},
@@ -64,7 +70,7 @@ class PartnerMyaudiUserController extends MullenloweRestController
      *
      * @param int $myaudiUserId
      * @param Request $request
-     * @return View
+     * @return \FOS\RestBundle\View\View
      */
     public function postCheckDuplicateRuleAction(Request $request, int $myaudiUserId)
     {
