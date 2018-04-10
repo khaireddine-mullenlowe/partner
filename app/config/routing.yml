@@ -23,6 +23,11 @@ company_position:
     type:     rest
     prefix:   /company/position
 
+company_position_code:
+    resource: PartnerBundle\Controller\CompanyPositionCodeController
+    type:     rest
+    prefix:   /company/position/code
+
 region:
     resource: PartnerBundle\Controller\RegionController
     type:     rest
