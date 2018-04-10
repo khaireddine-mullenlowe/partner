@@ -59,6 +59,57 @@
                 }
             }
         },
+        "/company/position/code": {
+            "get": {
+                "tags": [
+                    "Position code"
+                ],
+                "summary": "Get position code collection",
+                "parameters": [
+                    {
+                        "name": "deparment",
+                        "in": "query",
+                        "description": "deparment id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "operator",
+                        "in": "query",
+                        "description": "Operator to filter (equal or different)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Position code list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyPositionCode"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/company/position": {
             "get": {
                 "tags": [
@@ -190,6 +241,13 @@
                         "name": "region",
                         "in": "query",
                         "description": "Filter by region id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "operator",
+                        "in": "query",
+                        "description": "Operator to filter (equal or different)",
                         "required": false,
                         "type": "string"
                     }
