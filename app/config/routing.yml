@@ -37,6 +37,7 @@ district:
     resource: PartnerBundle\Controller\DistrictController
     type:     rest
     prefix:   /district
+
 partner_myaudi_user:
     resource: PartnerBundle\Controller\PartnerMyaudiUserController
     type:     rest
