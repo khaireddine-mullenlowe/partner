@@ -51,6 +51,13 @@ class Partner extends BaseEntity
      * @var string
      * @Groups({"amqp", "rest"})
      */
+    protected $corporateName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     * @Groups({"amqp", "rest"})
+     */
     protected $commercialName;
 
     /**
@@ -210,6 +217,30 @@ class Partner extends BaseEntity
     public function getContractNumber()
     {
         return $this->contractNumber;
+    }
+
+    /**
+     * Set corporateName.
+     *
+     * @param string $corporateName
+     *
+     * @return Partner
+     */
+    public function setCorporateName($corporateName)
+    {
+        $this->corporateName = $corporateName;
+
+        return $this;
+    }
+
+    /**
+     * Get corporateName.
+     *
+     * @return string
+     */
+    public function getCorporateName()
+    {
+        return $this->corporateName;
     }
 
     /**
