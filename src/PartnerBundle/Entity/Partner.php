@@ -117,6 +117,24 @@ class Partner extends BaseEntity
     protected $group;
 
     /**
+     * @var Region|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="partnerRegistryUsers")
+     * @ORM\JoinColumn(name="region_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $region;
+
+    /**
+     * @var District|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="partnerRegistryUsers")
+     * @ORM\JoinColumn(name="district_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $district;
+
+    /**
      * Legacy id
      * @ORM\Column(type="integer", unique=true)
      * @var integer
@@ -429,6 +447,46 @@ class Partner extends BaseEntity
     public function setGroup($group): Partner
     {
         $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * @return Region|null
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region|null $region
+     *
+     * @return Partner
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return District|null
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param District|null $district
+     *
+     * @return Partner
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
 
         return $this;
     }
