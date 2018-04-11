@@ -12,12 +12,33 @@ PartnerBundle\Entity\Group:
         status: 1
 
 PartnerBundle\Entity\Partner:
-    partner{1..20}:
+    partner1:
         type: '<randomElement(<{partner_type}>)>'
         contractNumber: '0<randomNumber(7, true)>'
-        commercialName: '<company()>'
+        corporateName: 'Maury Morel SARL'
+        commercialName: <($corporateName)>
         kvpsNumber: 'FRAA0<randomNumber(4, true)>'
         webSite: '<url()>'
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        isPartnerR8: <boolean(15)>
+        isTwinService: <boolean(15)>
+        isPartnerPlus: <boolean(15)>
+        isOccPlus: <boolean(75)>
+        isEtron: <boolean(50)>
+        group: '75%? @group*'
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner{2..20}:
+        type: '<randomElement(<{partner_type}>)>'
+        contractNumber: '0<randomNumber(7, true)>'
+        corporateName: '<company()>'
+        commercialName: <($corporateName)>
+        kvpsNumber: 'FRAA0<randomNumber(4, true)>'
+        webSite: '<url()>'
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
         isPartnerR8: <boolean(15)>
         isTwinService: <boolean(15)>
         isPartnerPlus: <boolean(15)>
@@ -29,19 +50,48 @@ PartnerBundle\Entity\Partner:
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
 
 PartnerBundle\Entity\PartnerMyaudiUser:
-    partner_myaudi_user{1..20}:
+    partner_myaudi_user1:
+        partner: '@partner1'
+        myaudiUserId: 1
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_myaudi_user{2..20}:
         partner: '@partner<numberBetween(1, 20)>'
-        myaudiUserId: <numberBetween(1, 300)>
+        myaudiUserId: <numberBetween(2, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
 
 PartnerBundle\Entity\PartnerRegistryUser:
-    partner_registry_user{1..50}:
+    partner_registry_user1:
         partner: '@partner<numberBetween(1, 20)>'
-        registryUserId: <numberBetween(1, 45)>
+        registryUserId: 1
         department: '@company_department*'
         position: '@company_position<numberBetween(1, 50)>'
         positionCode: '10%? @company_position_code*'
         isAdmin: <boolean(10)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_registry_user2:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: 2
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_registry_user{3..50}:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: <numberBetween(3, 45)>
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
