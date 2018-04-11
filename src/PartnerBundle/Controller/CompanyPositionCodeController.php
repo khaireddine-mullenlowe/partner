@@ -20,7 +20,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class CompanyPositionCodeController extends MullenloweRestController
 {
     const LIMIT = 20;
-    const CONTEXT = 'CompanyPositionCode';
+    const CONTEXT = 'PartnerCompanyPositionCode';
 
     /**
      * @Rest\Get("/", name="_company_position_code")
