@@ -119,7 +119,7 @@ class Partner extends BaseEntity
     /**
      * @var Region|null
      *
-     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="partnerRegistryUsers")
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="partners")
      * @ORM\JoinColumn(name="region_id", nullable=true)
      * @Groups({"amqp", "rest"})
      */
@@ -128,7 +128,7 @@ class Partner extends BaseEntity
     /**
      * @var District|null
      *
-     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="partnerRegistryUsers")
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="partners")
      * @ORM\JoinColumn(name="district_id", nullable=true)
      * @Groups({"amqp", "rest"})
      */
