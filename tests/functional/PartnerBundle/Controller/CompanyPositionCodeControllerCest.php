@@ -11,7 +11,7 @@ class CompanyPositionCodeControllerCest
         $I->sendGet('/company/position/code');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['context' => 'CompanyPositionCode']);
+        $I->seeResponseContainsJson(['context' => 'PartnerCompanyPositionCode']);
         $I->seeResponseContains('data');
         $I->seeResponseContains('pagination');
     }
