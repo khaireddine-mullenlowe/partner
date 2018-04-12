@@ -81,6 +81,13 @@ class Region extends BaseEntity
     /**
      * @var ArrayCollection
      *
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\Partner", mappedBy="region")
+     */
+    private $partners;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\PartnerRegistryUser", mappedBy="region")
      */
     private $partnerRegistryUsers;
@@ -92,6 +99,7 @@ class Region extends BaseEntity
     public function __construct()
     {
         $this->districts = new ArrayCollection();
+        $this->partners = new ArrayCollection();
         $this->partnerRegistryUsers = new ArrayCollection();
     }
 
@@ -204,6 +212,51 @@ class Region extends BaseEntity
     public function setLegacyId(int $legacyId)
     {
         $this->legacyId = $legacyId;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPartners()
+    {
+        return $this->partners;
+    }
+
+    /**
+     * @param ArrayCollection $partners
+     *
+     * @return Region
+     */
+    public function setPartners(ArrayCollection $partners)
+    {
+        $this->partners = $partners;
+
+        return $this;
+    }
+
+    /**
+     * @param Partner $partner
+     * @return Region
+     */
+    public function addPartner(Partner $partner)
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners->add($partner);
+            $partner->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Partner $partner
+     * @return Region
+     */
+    public function removePartner(Partner $partner)
+    {
+        $this->partners->removeElement($partner);
 
         return $this;
     }

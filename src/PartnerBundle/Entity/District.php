@@ -70,7 +70,14 @@ class District extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\PartnerRegistryUser", mappedBy="region")
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\Partner", mappedBy="district")
+     */
+    private $partners;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\PartnerRegistryUser", mappedBy="district")
      */
     private $partnerRegistryUsers;
 
@@ -80,6 +87,7 @@ class District extends BaseEntity
      */
     public function __construct()
     {
+        $this->partners = new ArrayCollection();
         $this->partnerRegistryUsers = new ArrayCollection();
     }
 
@@ -143,6 +151,51 @@ class District extends BaseEntity
     public function setLegacyId(int $legacyId)
     {
         $this->legacyId = $legacyId;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPartners()
+    {
+        return $this->partners;
+    }
+
+    /**
+     * @param ArrayCollection $partners
+     *
+     * @return District
+     */
+    public function setPartners(ArrayCollection $partners)
+    {
+        $this->partners = $partners;
+
+        return $this;
+    }
+
+    /**
+     * @param Partner $partner
+     * @return District
+     */
+    public function addPartner(Partner $partner)
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners->add($partner);
+            $partner->setDistrict($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Partner $partner
+     * @return District
+     */
+    public function removePartner(Partner $partner)
+    {
+        $this->partners->removeElement($partner);
 
         return $this;
     }

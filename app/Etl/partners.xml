@@ -30,26 +30,29 @@
             <query>
                 <![CDATA[
             SELECT
-                T2.id_company as partner_id
-                ,T2.commercial_name
-                ,T2.website
-                ,T6.kvps_number
-                ,T6.ntw_contract_id
-                ,T6.partner_r8
-                ,T6.twin_service
-                ,T6.partner_plus
-                ,T6.occ_plus
-                ,T6.etron
-                ,T6.contract_number
-                ,T3.hist_change_date as created_at
+                t1.id_company as partner_id
+                ,t1.name as corporate_name
+                ,t1.commercial_name
+                ,t1.website
+                ,t2.kvps_number
+                ,t2.ntw_contract_id
+                ,t2.partner_r8
+                ,t2.twin_service
+                ,t2.partner_plus
+                ,t2.occ_plus
+                ,t2.etron
+                ,t2.contract_number
+                ,t2.ntw_region_id
+                ,t2.ntw_district_id
+                ,t3.hist_change_date as created_at
                 ,T4.partner_group_id
-            FROM ntw_company AS T2
-            INNER JOIN ntw_company_business AS T6 ON  T2.id_company = T6.company_id
-            LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company T3
-                ON T2.id_company = T3.id_company
-                AND T3.hist_action = 'INSERT'
-            LEFT JOIN ntw_company_partner_group T4 ON T4.company_id = T2.id_company
-            WHERE T6.ntw_contract_id IN (2270913, 2270914)
+            FROM ntw_company AS t1
+            INNER JOIN ntw_company_business AS t2 ON  t1.id_company = t2.company_id
+            LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company t3
+                ON t1.id_company = t3.id_company
+                AND t3.hist_action = 'INSERT'
+            LEFT JOIN ntw_company_partner_group T4 ON T4.company_id = t1.id_company
+            WHERE t2.ntw_contract_id IN (2270913, 2270914)
             ]]>
             </query>
         </extractor>
@@ -96,6 +99,20 @@
             <mapping>
                 <name>etron</name>
                 <targetProperty>isEtron</targetProperty>
+            </mapping>
+            <mapping>
+                <name>ntw_region_id</name>
+                <targetProperty>region</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Region</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>ntw_district_id</name>
+                <targetProperty>district</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\District</entityClass>
+                <referencedBy>legacyId</referencedBy>
             </mapping>
             <mapping>
                 <name>partner_group_id</name>

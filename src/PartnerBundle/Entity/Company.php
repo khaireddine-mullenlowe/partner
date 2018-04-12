@@ -3,10 +3,11 @@
 namespace PartnerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PartnerBundle\Entity\Base\BaseCompany;
+use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Company
@@ -15,8 +16,32 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity()
  * @ORM\Table(name="company")
  */
-class Company extends BaseCompany
+class Company extends BaseEntity
 {
+    /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"rest"})
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     * @Groups({"rest"})
+     */
+    protected $corporateName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     * @Groups({"rest"})
+     */
+    protected $commercialName;
+
     /**
      * @var CompanyType
      *
@@ -25,6 +50,40 @@ class Company extends BaseCompany
      * @Groups({"rest"})
      */
     private $type;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", options={"default":1})
+     * @Groups({"rest"})
+     */
+    protected $status = 1;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+    protected $updatedAt;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @Groups({"rest"})
+     */
+    protected $legacyId;
 
     /**
      * One Company have Many registryUsers.
@@ -69,11 +128,99 @@ class Company extends BaseCompany
     }
 
     /**
+     * Set corporateName.
+     *
+     * @param string $corporateName
+     *
+     * @return Company
+     */
+    public function setCorporateName($corporateName)
+    {
+        $this->corporateName = $corporateName;
+
+        return $this;
+    }
+
+    /**
+     * Get corporateName.
+     *
+     * @return string
+     */
+    public function getCorporateName()
+    {
+        return $this->corporateName;
+    }
+
+    /**
+     * Set commercialName.
+     *
+     * @param string $commercialName
+     *
+     * @return Company
+     */
+    public function setCommercialName($commercialName)
+    {
+        $this->commercialName = $commercialName;
+
+        return $this;
+    }
+
+    /**
+     * Get commercialName.
+     *
+     * @return string
+     */
+    public function getCommercialName()
+    {
+        return $this->commercialName;
+    }
+
+    /**
      * @return Collection
      */
     public function getRegistryUsers()
     {
         return $this->registryUsers;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     *
+     * @return $this
+     */
+    public function setStatus(int $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLegacyId(): int
+    {
+        return $this->legacyId;
+    }
+
+    /**
+     * @param int $legacyId
+     *
+     * @return $this
+     */
+    public function setLegacyId(int $legacyId)
+    {
+        $this->legacyId = $legacyId;
+
+        return $this;
     }
 
     /**
