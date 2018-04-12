@@ -33,7 +33,6 @@ class PartnerRegistryUserType extends AbstractType
             ->add('registryUserId', IntegerType::class)
             ->add('partner', EntityType::class, [
                 'class' => Partner::class,
-                'constraints' => [new Required(), new NotNull()]
             ])
             ->add('department', EntityType::class, [
                 'class' => CompanyDepartment::class,
