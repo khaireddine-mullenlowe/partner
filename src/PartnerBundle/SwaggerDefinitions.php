@@ -172,9 +172,7 @@ class SwaggerDefinitions
      *          definition="Region",
      *          allOf={
      *              @SWG\Definition(ref="#/definitions/IdableEntity"),
-     *              @SWG\Definition(
-     *                  @SWG\Property(property="name", type="string")
-     *              ),
+     *              @SWG\Definition(ref="#/definitions/NamedEntity"),
      *              @SWG\Property(
      *                  property="type",
      *                  type="string",
@@ -188,6 +186,16 @@ class SwaggerDefinitions
      *                  @SWG\Property(property="legacy_id", type="string")
      *              )
      *          }
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="District",
+     *         allOf={
+     *              @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *              @SWG\Definition(ref="#/definitions/NamedEntity"),
+     *              @SWG\Definition(ref="#/definitions/LegacyEntity"),
+     *              @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *         }
      *     ),
      *
      *     @SWG\Definition(

@@ -32,6 +32,7 @@ class Region extends BaseEntity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Groups({"rest"})
      */
     private $name;
 
