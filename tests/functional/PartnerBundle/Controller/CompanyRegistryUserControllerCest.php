@@ -57,7 +57,7 @@ class CompanyRegistryUserControllerCest
 
     public function tryToGetARegistryUserIdsFilteredAndNonEmptyCompanyRegistryCollection(\FunctionalTester $I)
     {
-        $I->sendGet('/company/registry/?registryUserIds=1, 2');
+        $I->sendGet('/company/registry/?registryUserIds=1,2');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['context' => 'CompanyRegistryUser']);

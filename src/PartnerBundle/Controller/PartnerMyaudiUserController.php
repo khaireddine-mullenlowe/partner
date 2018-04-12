@@ -5,6 +5,7 @@ namespace PartnerBundle\Controller;
 
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
+use PartnerBundle\Entity\PartnerMyaudiUser;
 use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -68,8 +69,8 @@ class PartnerMyaudiUserController extends MullenloweRestController
      * )
      * @Rest\View()
      *
-     * @param int $myaudiUserId
      * @param Request $request
+     * @param int     $myaudiUserId
      * @return \FOS\RestBundle\View\View
      */
     public function postCheckDuplicateRuleAction(Request $request, int $myaudiUserId)
@@ -82,6 +83,7 @@ class PartnerMyaudiUserController extends MullenloweRestController
             throw new BadRequestHttpException('Input data are not valid (%s)');
         }
 
+        /** @var PartnerMyaudiUser $partnerMyaudiUser */
         $partnerMyaudiUser = $this->getDoctrine()->getRepository('PartnerBundle:PartnerMyaudiUser')
             ->findOneBy(['myaudiUserId' => $myaudiUserId]);
         if (null === $partnerMyaudiUser) {

@@ -36,7 +36,11 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_company, t1.name, t1.company_type_id, t2.created_at
+                    SELECT t1.id_company,
+                           t1.name as corporate_name,
+                           t1.commercial_name,
+                           t1.company_type_id,
+                           t2.created_at
                     FROM ntw_company t1
                     LEFT JOIN (
                         SELECT id_company, name, company_type_id, hist_action, MAX(hist_change_date) AS created_at

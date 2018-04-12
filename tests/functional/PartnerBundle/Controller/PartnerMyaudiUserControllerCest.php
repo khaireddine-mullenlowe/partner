@@ -50,11 +50,11 @@ class PartnerMyaudiUserControllerCest
     {
         return [
             [
-                'myaudiUserId' => 212,
+                'myaudiUserId' => 1,
                 'data' => ['partnerName' => 'Foo'],
                 'expected' => false,
             ],[
-                'myaudiUserId' => 212,
+                'myaudiUserId' => 1,
                 'data' => ['partnerName' => "Maury Morel SARL"],
                 'expected' => true,
             ],

@@ -51,6 +51,13 @@ class Partner extends BaseEntity
      * @var string
      * @Groups({"amqp", "rest"})
      */
+    protected $corporateName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     * @Groups({"amqp", "rest"})
+     */
     protected $commercialName;
 
     /**
@@ -115,6 +122,24 @@ class Partner extends BaseEntity
      * @Groups({"amqp", "rest"})
      */
     protected $group;
+
+    /**
+     * @var Region|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="partners")
+     * @ORM\JoinColumn(name="region_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $region;
+
+    /**
+     * @var District|null
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="partners")
+     * @ORM\JoinColumn(name="district_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $district;
 
     /**
      * Legacy id
@@ -192,6 +217,30 @@ class Partner extends BaseEntity
     public function getContractNumber()
     {
         return $this->contractNumber;
+    }
+
+    /**
+     * Set corporateName.
+     *
+     * @param string $corporateName
+     *
+     * @return Partner
+     */
+    public function setCorporateName($corporateName)
+    {
+        $this->corporateName = $corporateName;
+
+        return $this;
+    }
+
+    /**
+     * Get corporateName.
+     *
+     * @return string
+     */
+    public function getCorporateName()
+    {
+        return $this->corporateName;
     }
 
     /**
@@ -429,6 +478,46 @@ class Partner extends BaseEntity
     public function setGroup($group): Partner
     {
         $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * @return Region|null
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region|null $region
+     *
+     * @return Partner
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return District|null
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param District|null $district
+     *
+     * @return Partner
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
 
         return $this;
     }

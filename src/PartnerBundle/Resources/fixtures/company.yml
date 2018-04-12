@@ -20,14 +20,16 @@ PartnerBundle\Entity\CompanyType:
 PartnerBundle\Entity\Company:
     company1:
         type: '@company_type1'
-        name: 'AUDI FRANCE'
+        corporateName: 'AUDI FRANCE'
+        commercialName: 'AUDI FRANCE'
         status: 1
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
     company{2..20}:
         type: '@company_type<numberBetween(2, 6)>'
-        name: '<company()>'
+        corporateName: '<company()>'
+        commercialName: <($corporateName)>
         status: 1
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
@@ -62,9 +64,27 @@ PartnerBundle\Entity\CompanyPositionCode:
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
 
 PartnerBundle\Entity\CompanyRegistryUser:
-    company_registry_user{1..50}:
+    company_registry_user1:
+            company: '@company<numberBetween(1, 20)>'
+            registryUserId: 1
+            department: '@company_department*'
+            position: '@company_position<numberBetween(1, 50)>'
+            positionDescription: '<sentence()>'
+            positionCode: '10%? @company_position_code*'
+            createdAt: '<dateTimeBetween("-3 years", "now")>'
+            updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    company_registry_user2:
         company: '@company<numberBetween(1, 20)>'
-        registryUserId: <numberBetween(1, 35)>
+        registryUserId: 2
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionDescription: '<sentence()>'
+        positionCode: '10%? @company_position_code*'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    company_registry_user{3..50}:
+        company: '@company<numberBetween(1, 20)>'
+        registryUserId: <numberBetween(3, 35)>
         department: '@company_department*'
         position: '@company_position<numberBetween(1, 50)>'
         positionDescription: '<sentence()>'
