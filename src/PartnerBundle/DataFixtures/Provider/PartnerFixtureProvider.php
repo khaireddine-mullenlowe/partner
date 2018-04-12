@@ -2,6 +2,8 @@
 
 namespace PartnerBundle\DataFixtures\Provider;
 
+use Faker\Provider\Base;
+
 /**
  * Class ArrayRandomProvider
  * @package PartnerBundle\DataFixtures\Provider
@@ -11,7 +13,7 @@ class PartnerFixtureProvider
     /**
      * Returns element indexed by $index in input array.
      *
-     * @param array $input
+     * @param array      $input
      * @param int|string $index
      * @return mixed
      * @throws \InvalidArgumentException
@@ -25,5 +27,14 @@ class PartnerFixtureProvider
         }
 
         return $input[$index];
+    }
+
+    /**
+     * @param bool $isOccPlus
+     * @return string|null
+     */
+    public static function setOccPlusContractNumber(bool $isOccPlus)
+    {
+        return true === $isOccPlus ? sprintf('0%d', Base::randomNumber(7, true)) : null;
     }
 }

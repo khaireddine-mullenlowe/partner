@@ -1,8 +1,14 @@
 services:
+    #######################
+    # HautelookAliceFaker #
+    #######################
     PartnerBundle\DataFixtures\Provider\PartnerFixtureProvider:
         tags:
             - { name: hautelook_alice.faker.provider }
 
+    #######
+    # ETL #
+    #######
     PartnerBundle\ETL\Transformer\RegistryUserTransformer:
         public: true
         calls:

@@ -25,6 +25,7 @@ PartnerBundle\Entity\Partner:
         isTwinService: <boolean(15)>
         isPartnerPlus: <boolean(15)>
         isOccPlus: <boolean(75)>
+        occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
         legacyId (unique): <numberBetween(1, 300)>
@@ -43,6 +44,7 @@ PartnerBundle\Entity\Partner:
         isTwinService: <boolean(15)>
         isPartnerPlus: <boolean(15)>
         isOccPlus: <boolean(75)>
+        occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
         legacyId (unique): <numberBetween(1, 300)>
