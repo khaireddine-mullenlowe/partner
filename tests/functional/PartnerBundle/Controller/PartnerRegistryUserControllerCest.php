@@ -8,7 +8,9 @@ class PartnerRegistryUserControllerCest
     private $parterRegitryUserData = <<<HEREDOC
 {
   "partner": 1,
-  "registryUserId": 3
+  "registryUserId": 3,
+  "department": 1,
+  "position": 1
 }
 HEREDOC;
 
@@ -162,5 +164,21 @@ HEREDOC;
         $I->seeResponseCodeIs(404);
         $I->seeResponseIsJson();
         $I->seeResponseContains('error');
+    }
+
+    public function tryValidateInvalidPartnerRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('get an error when trying to post an invalid partner registry user');
+        $I->sendPOST('/registry/validate/', ['partner' => 1]);
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseIsJson();
+    }
+
+    public function tryValidatePartnerRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('get a successful response when trying to validate a correct partner registry user');
+        $I->sendPOST('/registry/validate/', ['partner' => 1, 'registryUserId' => 3, 'department' => 1, 'position' => 1]);
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NO_CONTENT); // 200
+        $I->seeResponseEquals('');
     }
 }
