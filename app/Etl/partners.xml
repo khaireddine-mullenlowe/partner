@@ -40,6 +40,7 @@
                 ,t2.twin_service
                 ,t2.partner_plus
                 ,t2.occ_plus
+                ,t2.contract_number_occ_plus
                 ,t2.etron
                 ,t2.contract_number
                 ,t2.ntw_region_id
@@ -79,6 +80,10 @@
                 <!-- this value is transformed into a string -->
                 <name>ntw_contract_id</name>
                 <targetProperty>type</targetProperty>
+            </mapping>
+            <mapping>
+                <name>contract_number_occ_plus</name>
+                <targetProperty>occPlusContractNumber</targetProperty>
             </mapping>
             <mapping>
                 <name>partner_r8</name>

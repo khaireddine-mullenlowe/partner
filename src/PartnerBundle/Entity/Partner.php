@@ -108,6 +108,14 @@ class Partner extends BaseEntity
     protected $isOccPlus;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $occPlusContractNumber;
+
+    /**
      * @var boolean
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\Type("boolean")
@@ -387,6 +395,26 @@ class Partner extends BaseEntity
     public function setIsOccPlus(bool $isOccPlus)
     {
         $this->isOccPlus = $isOccPlus;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOccPlusContractNumber()
+    {
+        return $this->occPlusContractNumber;
+    }
+
+    /**
+     * @param string|null $occPlusContractNumber
+     *
+     * @return Partner
+     */
+    public function setOccPlusContractNumber($occPlusContractNumber): Partner
+    {
+        $this->occPlusContractNumber = $occPlusContractNumber;
 
         return $this;
     }

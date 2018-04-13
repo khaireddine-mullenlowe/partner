@@ -133,6 +133,7 @@ class SwaggerDefinitions
      *                  @SWG\Property(property="isTwinService", type="boolean"),
      *                  @SWG\Property(property="isPartnerPlus", type="boolean"),
      *                  @SWG\Property(property="isOccPlus", type="boolean"),
+     *                  @SWG\Property(property="occPlusContractNumber", type="string"),
      *                  @SWG\Property(property="isEtron", type="boolean"),
      *                  @SWG\Property(property="group", type="integer"),
      *                  required={"type"}
