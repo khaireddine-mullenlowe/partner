@@ -29,38 +29,38 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-            SELECT
-                t1.id_company as partner_id
-                ,t1.name as corporate_name
-                ,t1.commercial_name
-                ,t1.website
-                ,t2.kvps_number
-                ,t2.ntw_contract_id
-                ,t2.partner_r8
-                ,t2.twin_service
-                ,t2.partner_plus
-                ,t2.occ_plus
-                ,t2.contract_number_occ_plus
-                ,t2.etron
-                ,t2.contract_number
-                ,t2.ntw_region_id
-                ,t2.ntw_district_id
-                ,t3.hist_change_date as created_at
-                ,t4.partner_group_id
-                ,CASE
-                    WHEN t5.name = 'Principal' THEN 'principal'
-                    WHEN t5.name = 'Secondaire' THEN 'secondary'
-                    ELSE null
-                END AS site_type
-            FROM ntw_company AS t1
-            INNER JOIN ntw_company_business AS t2 ON  t1.id_company = t2.company_id
-            LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company t3
-                ON t1.id_company = t3.id_company
-                AND t3.hist_action = 'INSERT'
-            LEFT JOIN ntw_company_partner_group t4 ON t4.company_id = t1.id_company
-            INNER JOIN buss_item t5 on t5.id_item  = t2.ntw_partner_site_type_id
-            WHERE t2.ntw_contract_id IN (2270913, 2270914)
-            ]]>
+                    SELECT
+                        t1.id_company as partner_id
+                        ,t1.name as corporate_name
+                        ,t1.commercial_name
+                        ,t1.website
+                        ,t2.kvps_number
+                        ,t2.ntw_contract_id
+                        ,t2.partner_r8
+                        ,t2.twin_service
+                        ,t2.partner_plus
+                        ,t2.occ_plus
+                        ,t2.contract_number_occ_plus
+                        ,t2.etron
+                        ,t2.contract_number
+                        ,t2.ntw_region_id
+                        ,t2.ntw_district_id
+                        ,t3.hist_change_date as created_at
+                        ,t4.partner_group_id
+                        ,CASE
+                            WHEN t5.name = 'Principal' THEN 'principal'
+                            WHEN t5.name = 'Secondaire' THEN 'secondary'
+                            ELSE null
+                        END AS site_type
+                    FROM ntw_company AS t1
+                    INNER JOIN ntw_company_business AS t2 ON  t1.id_company = t2.company_id
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company t3
+                        ON t1.id_company = t3.id_company
+                        AND t3.hist_action = 'INSERT'
+                    LEFT JOIN ntw_company_partner_group t4 ON t4.company_id = t1.id_company
+                    LEFT JOIN buss_item t5 on t5.id_item  = t2.ntw_partner_site_type_id
+                    WHERE t2.ntw_contract_id IN (2270913, 2270914)
+                ]]>
             </query>
         </extractor>
 
