@@ -2,13 +2,17 @@
 
 namespace PartnerBundle\Enum;
 
+/**
+ * Class OperatorEnum
+ * @package PartnerBundle\Enum
+ */
 class OperatorEnum extends BaseEnum
 {
     const EQUAL = 'equal';
     const DIFFERENT = 'different';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getData()
     {
@@ -19,7 +23,7 @@ class OperatorEnum extends BaseEnum
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool|mixed
      */
     public static function getDoctrineToArray($key)
@@ -29,7 +33,7 @@ class OperatorEnum extends BaseEnum
             self::DIFFERENT => 'NOT IN',
         ];
 
-        return isset($data[$key]) ? $data[$key] : false;
+        return $data[$key] ?? false;
     }
 
 }

@@ -2,6 +2,9 @@ parameters:
     partner_type:
         - 'sales'
         - 'aftersales'
+    partner_site_type:
+        - 'principal'
+        - 'secondary'
 
 PartnerBundle\Entity\Group:
     group{1..5}:
@@ -28,6 +31,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
+        type: '<randomElement(<{partner_site_type}>)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
@@ -47,6 +51,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
+        type: '<randomElement(<{partner_site_type}>)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'

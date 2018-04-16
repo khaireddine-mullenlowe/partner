@@ -30,7 +30,7 @@ class PartnerType extends AbstractType
         $builder
             ->add('legacyId', IntegerType::class)
             ->add('type', ChoiceType::class, [
-                'choices' => [PartnerTypeEnum::TYPE_SALES, PartnerTypeEnum::TYPE_AFTERSALES]
+                'choices' => [PartnerTypeEnum::TYPE_SALES, PartnerTypeEnum::TYPE_AFTERSALES],
             ])
             ->add('contractNumber', TextType::class)
             ->add('commercialName', TextType::class)
@@ -57,6 +57,7 @@ class PartnerType extends AbstractType
             ->add('group', EntityType::class, [
                 'class' => Group::class,
             ])
+            ->add('siteType', TextType::class)
         ;
     }
 

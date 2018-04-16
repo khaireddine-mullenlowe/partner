@@ -17,7 +17,8 @@ class PartnerControllerCest
     "isEtron": true,
     "type": "sales",
     "isPartnerPlus": false,
-    "group": 1
+    "group": 1,
+    "siteType": "principal"
 }
 HEREDOC;
 
@@ -36,7 +37,8 @@ HEREDOC;
     "isEtron": true,
     "type": "sales",
     "isPartnerPlus": false,
-    "group": 2
+    "group": 2,
+    "siteType": "secondary"
 }
 HEREDOC;
 

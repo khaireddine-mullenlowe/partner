@@ -1123,11 +1123,21 @@
                         "isOccPlus": {
                             "type": "boolean"
                         },
+                        "occPlusContractNumber": {
+                            "type": "string"
+                        },
                         "isEtron": {
                             "type": "boolean"
                         },
                         "group": {
                             "type": "integer"
+                        },
+                        "siteType": {
+                            "type": "string",
+                            "enum": [
+                                "principal",
+                                "secondary"
+                            ]
                         }
                     }
                 },

@@ -136,6 +136,14 @@ class SwaggerDefinitions
      *                  @SWG\Property(property="occPlusContractNumber", type="string"),
      *                  @SWG\Property(property="isEtron", type="boolean"),
      *                  @SWG\Property(property="group", type="integer"),
+     *                  @SWG\Property(
+     *                      property="siteType",
+     *                      type="string",
+     *                      enum={
+     *                          PartnerBundle\Enum\PartnerSiteTypeEnum::SITE_TYPE_PRINCIPAL,
+     *                          PartnerBundle\Enum\PartnerSiteTypeEnum::SITE_TYPE_SECONDARY
+     *                      }
+     *                  ),
      *                  required={"type"}
      *             ),
      *             @SWG\Definition(ref="#/definitions/LegacyEntity"),
