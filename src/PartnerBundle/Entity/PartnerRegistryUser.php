@@ -112,6 +112,38 @@ class PartnerRegistryUser extends BaseEntity
     private $isAdmin;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Groups({"amqp", "rest"})
+     */
+    private $vision;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Groups({"amqp", "rest"})
+     */
+    private $convention;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Groups({"amqp", "rest"})
+     */
+    private $dealersMeeting;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Groups({"amqp", "rest"})
+     */
+    private $brandDays;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -269,6 +301,86 @@ class PartnerRegistryUser extends BaseEntity
     public function getIsAdmin()
     {
         return $this->isAdmin();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getVision()
+    {
+        return $this->vision;
+    }
+
+    /**
+     * @param bool $vision
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setVision($vision): PartnerRegistryUser
+    {
+        $this->vision = $vision;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getConvention()
+    {
+        return $this->convention;
+    }
+
+    /**
+     * @param bool $convention
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setConvention($convention): PartnerRegistryUser
+    {
+        $this->convention = $convention;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDealersMeeting()
+    {
+        return $this->dealersMeeting;
+    }
+
+    /**
+     * @param bool $dealersMeeting
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setDealersMeeting($dealersMeeting): PartnerRegistryUser
+    {
+        $this->dealersMeeting = $dealersMeeting;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getBrandDays()
+    {
+        return $this->brandDays;
+    }
+
+    /**
+     * @param bool $brandDays
+     *
+     * @return PartnerRegistryUser
+     */
+    public function setBrandDays($brandDays): PartnerRegistryUser
+    {
+        $this->brandDays = $brandDays;
+
+        return $this;
     }
 
     /**

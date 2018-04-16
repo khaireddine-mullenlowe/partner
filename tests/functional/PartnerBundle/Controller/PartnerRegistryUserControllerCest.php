@@ -126,7 +126,11 @@ HEREDOC;
   "department": 1,
   "position": 1,
   "positionCode": 1,
-  "isAdmin": 0
+  "isAdmin": 0,
+  "vision": 0,
+  "convention": 0,
+  "dealersMeeting": 0,
+  "brandDays": 0
 }
 HEREDOC;
         $I->haveHttpHeader('Content-Type', 'application/json');
@@ -146,7 +150,11 @@ HEREDOC;
   "department": 1,
   "position": 1,
   "positionCode": 1,
-  "isAdmin": 0
+  "isAdmin": 0,
+  "vision": 0,
+  "convention": 0,
+  "dealersMeeting": 0,
+  "brandDays": 0
 }
 HEREDOC;
         $I->haveHttpHeader('Content-Type', 'application/json');

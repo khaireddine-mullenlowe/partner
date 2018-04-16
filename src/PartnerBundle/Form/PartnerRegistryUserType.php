@@ -45,6 +45,10 @@ class PartnerRegistryUserType extends AbstractType
                 'class' => CompanyPositionCode::class,
             ])
             ->add('isAdmin', CheckboxType::class)
+            ->add('vision', CheckboxType::class)
+            ->add('convention', CheckboxType::class)
+            ->add('dealersMeeting', CheckboxType::class)
+            ->add('brandDays', CheckboxType::class)
             ->add('region', EntityType::class, [
                 'class' => Region::class,
             ])
