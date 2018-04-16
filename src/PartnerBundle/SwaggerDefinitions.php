@@ -327,6 +327,10 @@ class SwaggerDefinitions
      *         @SWG\Property(property="position", type="integer"),
      *         @SWG\Property(property="positionCode", type="integer"),
      *         @SWG\Property(property="isAdmin", type="boolean"),
+     *         @SWG\Property(property="vision", type="boolean"),
+     *         @SWG\Property(property="convention", type="boolean"),
+     *         @SWG\Property(property="dealersMeeting", type="boolean"),
+     *         @SWG\Property(property="brandDays", type="boolean"),
      *         required={"partner", "registryUserId"}
      *     ),
      *
@@ -341,6 +345,10 @@ class SwaggerDefinitions
      *                 @SWG\Property(property="position", ref="#/definitions/CompanyPositionComplete"),
      *                 @SWG\Property(property="positionCode", ref="#/definitions/CompanyPositionCodeComplete"),
      *                 @SWG\Property(property="isAdmin", type="boolean"),
+     *                 @SWG\Property(property="vision", type="boolean"),
+     *                 @SWG\Property(property="convention", type="boolean"),
+     *                 @SWG\Property(property="dealersMeeting", type="boolean"),
+     *                 @SWG\Property(property="brandDays", type="boolean"),
      *                 required={"partner", "registryUserId"}
      *             ),
      *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),

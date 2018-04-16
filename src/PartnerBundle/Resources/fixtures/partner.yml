@@ -31,7 +31,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
-        type: '<randomElement(<{partner_site_type}>)>'
+        siteType: '<randomElement(<{partner_site_type}>)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
@@ -51,7 +51,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
-        type: '<randomElement(<{partner_site_type}>)>'
+        siteType: '<randomElement(<{partner_site_type}>)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
@@ -76,6 +76,10 @@ PartnerBundle\Entity\PartnerRegistryUser:
         position: '@company_position<numberBetween(1, 50)>'
         positionCode: '10%? @company_position_code*'
         isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
         region: '@region<numberBetween(1, 9)>'
         district: '@district<numberBetween(1, 30)>'
         createdAt: '<dateTimeBetween("-3 years", "now")>'
@@ -87,6 +91,10 @@ PartnerBundle\Entity\PartnerRegistryUser:
         position: '@company_position<numberBetween(1, 50)>'
         positionCode: '10%? @company_position_code*'
         isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
         region: '@region<numberBetween(1, 9)>'
         district: '@district<numberBetween(1, 30)>'
         createdAt: '<dateTimeBetween("-3 years", "now")>'
@@ -98,6 +106,10 @@ PartnerBundle\Entity\PartnerRegistryUser:
         position: '@company_position<numberBetween(1, 50)>'
         positionCode: '10%? @company_position_code*'
         isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
         region: '@region<numberBetween(1, 9)>'
         district: '@district<numberBetween(1, 30)>'
         createdAt: '<dateTimeBetween("-3 years", "now")>'

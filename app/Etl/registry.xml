@@ -17,7 +17,11 @@
                             WHEN t10.contact_id IS NOT NULL THEN 1 ELSE 0
                         END AS is_admin,
                         t2.ntw_region_id,
-                        t2.ntw_district_id
+                        t2.ntw_district_id,
+                        ISNULL(t5.vision, 0) AS vision,
+                        ISNULL(t5.convention, 0) AS convention,
+                        ISNULL(t5.dealers_meeting, 0) AS dealers_meeting,
+                        ISNULL(t5.brand_days, 0) AS brand_days
                     FROM ntw_company t1
                     INNER JOIN ntw_company_contact t2 ON t2.company_id = t1.id_company
                     INNER JOIN sys_user t3
@@ -26,6 +30,7 @@
                     INNER JOIN ntw_company_business t4
                         ON t1.id_company = t4.company_id
                         AND t4.ntw_contract_id IN (2270913, 2270914)
+                    LEFT JOIN ctc_business_information t5 on t5.contact_id = t2.contact_id
                     LEFT JOIN buss_item t6 on t6.id_item = t2.ntw_company_department_id
                     LEFT JOIN (
                         SELECT MIN(id_item) AS id_item, name

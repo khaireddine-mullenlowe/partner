@@ -1425,6 +1425,18 @@
                 },
                 "isAdmin": {
                     "type": "boolean"
+                },
+                "vision": {
+                    "type": "boolean"
+                },
+                "convention": {
+                    "type": "boolean"
+                },
+                "dealersMeeting": {
+                    "type": "boolean"
+                },
+                "brandDays": {
+                    "type": "boolean"
                 }
             }
         },
@@ -1455,6 +1467,18 @@
                             "$ref": "#/definitions/CompanyPositionCodeComplete"
                         },
                         "isAdmin": {
+                            "type": "boolean"
+                        },
+                        "vision": {
+                            "type": "boolean"
+                        },
+                        "convention": {
+                            "type": "boolean"
+                        },
+                        "dealersMeeting": {
+                            "type": "boolean"
+                        },
+                        "brandDays": {
                             "type": "boolean"
                         }
                     }
