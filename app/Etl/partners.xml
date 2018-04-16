@@ -46,13 +46,19 @@
                 ,t2.ntw_region_id
                 ,t2.ntw_district_id
                 ,t3.hist_change_date as created_at
-                ,T4.partner_group_id
+                ,t4.partner_group_id
+                ,CASE
+                    WHEN t5.name = 'Principal' THEN 'principal'
+                    WHEN t5.name = 'Secondaire' THEN 'secondary'
+                    ELSE null
+                END AS site_type
             FROM ntw_company AS t1
             INNER JOIN ntw_company_business AS t2 ON  t1.id_company = t2.company_id
             LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company t3
                 ON t1.id_company = t3.id_company
                 AND t3.hist_action = 'INSERT'
-            LEFT JOIN ntw_company_partner_group T4 ON T4.company_id = t1.id_company
+            LEFT JOIN ntw_company_partner_group t4 ON t4.company_id = t1.id_company
+            INNER JOIN buss_item t5 on t5.id_item  = t2.ntw_partner_site_type_id
             WHERE t2.ntw_contract_id IN (2270913, 2270914)
             ]]>
             </query>

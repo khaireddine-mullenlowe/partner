@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use PartnerBundle\Enum\PartnerTypeEnum;
+use PartnerBundle\Enum\PartnerSiteTypeEnum;
 
 /**
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
@@ -130,6 +131,18 @@ class Partner extends BaseEntity
      * @Groups({"amqp", "rest"})
      */
     protected $group;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Assert\Choice(
+     *     choices={PartnerSiteTypeEnum::SITE_TYPE_PRINCIPAL, PartnerSiteTypeEnum::SITE_TYPE_SECONDARY},
+     *     strict=true
+     * )
+     * @Groups({"amqp", "rest"})
+     */
+    protected $siteType;
 
     /**
      * @var Region|null
@@ -506,6 +519,26 @@ class Partner extends BaseEntity
     public function setGroup($group): Partner
     {
         $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSiteType()
+    {
+        return $this->siteType;
+    }
+
+    /**
+     * @param string|null $siteType
+     *
+     * @return Partner
+     */
+    public function setSiteType($siteType): Partner
+    {
+        $this->siteType = $siteType;
 
         return $this;
     }
