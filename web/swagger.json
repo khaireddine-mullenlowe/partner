@@ -1173,6 +1173,66 @@
                                 "principal",
                                 "secondary"
                             ]
+                        },
+                        "category": {
+                            "type": "string",
+                            "enum": [
+                                "A",
+                                "A*"
+                            ]
+                        },
+                        "representationType": {
+                            "type": "string",
+                            "enum": [
+                                "E1",
+                                "E2",
+                                "Y",
+                                "W",
+                                "G"
+                            ]
+                        },
+                        "prestigeType": {
+                            "type": "string",
+                            "enum": [
+                                "exclusive",
+                                "specialized"
+                            ]
+                        },
+                        "dealersMeeting": {
+                            "type": "boolean"
+                        },
+                        "brandDays": {
+                            "type": "boolean"
+                        },
+                        "rent": {
+                            "type": "boolean"
+                        },
+                        "extraHour": {
+                            "type": "boolean"
+                        },
+                        "ferMembership": {
+                            "type": "boolean"
+                        },
+                        "onlineQuotation": {
+                            "type": "boolean"
+                        },
+                        "amexPayment": {
+                            "type": "boolean"
+                        },
+                        "isDigitAll": {
+                            "type": "boolean"
+                        },
+                        "digitAllId": {
+                            "type": "string"
+                        },
+                        "isV12": {
+                            "type": "boolean"
+                        },
+                        "v12Id": {
+                            "type": "string"
+                        },
+                        "sellingVolume": {
+                            "type": "integer"
                         }
                     }
                 },

@@ -18,7 +18,22 @@ class PartnerControllerCest
     "type": "sales",
     "isPartnerPlus": false,
     "group": 1,
-    "siteType": "principal"
+    "siteType": "principal",
+    "category": "A",
+    "representationType": "E1",
+    "prestigeType": "exclusive",
+    "dealersMeeting": true,
+    "brandDays": false,
+    "rent": false,
+    "extraHour": true,
+    "ferMembership": true,
+    "onlineQuotation": true,
+    "amexPayment": false,
+    "isDigitAll": false,
+    "digitAllId": null,
+    "isV12": true,
+    "v12Id": "V12FAKEID",
+    "sellingVolume": 1200
 }
 HEREDOC;
 
@@ -38,7 +53,22 @@ HEREDOC;
     "type": "sales",
     "isPartnerPlus": false,
     "group": 2,
-    "siteType": "secondary"
+    "siteType": "secondary",
+    "category": "A*",
+    "representationType": "W",
+    "prestigeType": "specialized",
+    "dealersMeeting": false,
+    "brandDays": false,
+    "rent": true,
+    "extraHour": false,
+    "ferMembership": true,
+    "onlineQuotation": false,
+    "amexPayment": false,
+    "isDigitAll": true,
+    "digitAllId": "DIGITALLFAKEID",
+    "isV12": false,
+    "v12Id": null,
+    "sellingVolume": null
 }
 HEREDOC;
 

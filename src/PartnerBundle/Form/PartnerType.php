@@ -58,6 +58,21 @@ class PartnerType extends AbstractType
                 'class' => Group::class,
             ])
             ->add('siteType', TextType::class)
+            ->add('category', TextType::class)
+            ->add('representationType', TextType::class)
+            ->add('prestigeType', TextType::class)
+            ->add('dealersMeeting', CheckboxType::class)
+            ->add('brandDays', CheckboxType::class)
+            ->add('rent', CheckboxType::class)
+            ->add('extraHour', CheckboxType::class)
+            ->add('ferMembership', CheckboxType::class)
+            ->add('onlineQuotation', CheckboxType::class)
+            ->add('amexPayment', CheckboxType::class)
+            ->add('isDigitAll', CheckboxType::class)
+            ->add('digitAllId', TextType::class)
+            ->add('isV12', CheckboxType::class)
+            ->add('v12Id', TextType::class)
+            ->add('sellingVolume', IntegerType::class)
         ;
     }
 

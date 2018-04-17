@@ -144,6 +144,36 @@ class SwaggerDefinitions
      *                          PartnerBundle\Enum\PartnerSiteTypeEnum::SITE_TYPE_SECONDARY
      *                      }
      *                  ),
+     *                  @SWG\Property(
+     *                      property="category",
+     *                      type="string",
+     *                      enum=PartnerBundle\Enum\PartnerVariousEnum::PARTNER_CATEGORY_ENUM
+     *                  ),
+     *                  @SWG\Property(
+     *                      property="representationType",
+     *                      type="string",
+     *                      enum=PartnerBundle\Enum\PartnerVariousEnum::PARTNER_REPRESENTATION_TYPE_ENUM
+     *                  ),
+     *                  @SWG\Property(
+     *                      property="prestigeType",
+     *                      type="string",
+     *                      enum={
+     *                          PartnerBundle\Enum\PartnerPrestigeTypeEnum::PRESTIGE_TYPE_EXCLUSIVE,
+     *                          PartnerBundle\Enum\PartnerPrestigeTypeEnum::PRESTIGE_TYPE_SPECIALIZED
+     *                      }
+     *                  ),
+     *                  @SWG\Property(property="dealersMeeting", type="boolean"),
+     *                  @SWG\Property(property="brandDays", type="boolean"),
+     *                  @SWG\Property(property="rent", type="boolean"),
+     *                  @SWG\Property(property="extraHour", type="boolean"),
+     *                  @SWG\Property(property="ferMembership", type="boolean"),
+     *                  @SWG\Property(property="onlineQuotation", type="boolean"),
+     *                  @SWG\Property(property="amexPayment", type="boolean"),
+     *                  @SWG\Property(property="isDigitAll", type="boolean"),
+     *                  @SWG\Property(property="digitAllId", type="string"),
+     *                  @SWG\Property(property="isV12", type="boolean"),
+     *                  @SWG\Property(property="v12Id", type="string"),
+     *                  @SWG\Property(property="sellingVolume", type="integer"),
      *                  required={"type"}
      *             ),
      *             @SWG\Definition(ref="#/definitions/LegacyEntity"),
