@@ -7,8 +7,11 @@ use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
+use PartnerBundle\Entity\CompanyRegistryUser;
+use PartnerBundle\Form\CompanyRegistryUserType;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Rest\RouteResource("")
@@ -101,6 +104,49 @@ class CompanyRegistryUserController extends MullenloweRestController
         );
 
         return $this->createPaginatedView($pager);
+    }
+
+    /**
+     * @Rest\Post("/validate/", name="_company_registry_user")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Post(
+     *     path="/company/validate/",
+     *     summary="Validate CompanyRegistryUser",
+     *     operationId="validateCompanyRegistryUser",
+     *     tags={"Partner Registry User"},
+     *     @SWG\Parameter(
+     *         name="company registry user",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CompanyRegistryUser")
+     *     ),
+     *     @SWG\Response(
+     *         response=204,
+     *         description="the companyRegistryUser is valid"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="the partnerRegistryUser is not valid",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function validateAction(Request $request)
+    {
+        $companyRegistryUser = new CompanyRegistryUser();
+        $form = $this->createForm(CompanyRegistryUserType::class, $companyRegistryUser, ['validation_groups' => ['orchestrator']]);
+        $form->handleRequest($request);
+        // validate
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->createView(null, Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->view($form);
     }
 
     /**

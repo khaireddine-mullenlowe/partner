@@ -45,6 +45,7 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Company", inversedBy="registryUsers")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     * @Assert\NotNull(groups={"Default", "orchestrator"})
      * @Groups({"amqp", "rest"})
      */
     private $company;
@@ -54,6 +55,7 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @ORM\Column(type="integer")
      * @Assert\Range(min=1, max=null)
+     * @Assert\NotNull(groups={"Default"})
      * @Groups({"amqp", "rest"})
      */
     private $registryUserId;
@@ -63,6 +65,7 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyDepartment")
      * @ORM\JoinColumn(name="department", referencedColumnName="id")
+     * @Assert\NotNull(groups={"Default", "orchestrator"})
      * @Groups({"amqp", "rest"})
      */
     private $department;
@@ -72,6 +75,7 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPosition")
      * @ORM\JoinColumn(name="position", referencedColumnName="id")
+     * @Assert\NotNull(groups={"Default", "orchestrator"})
      * @Groups({"amqp", "rest"})
      */
     private $position;

@@ -86,4 +86,20 @@ class CompanyRegistryUserControllerCest
         $I->dontSeeResponseJsonMatchesJsonPath('$.data[1].company');
         $I->dontSeeResponseJsonMatchesJsonPath('$.data[1].registryUserId');
     }
+
+    public function tryValidateInvalidCompanyRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('get an error when trying to post an invalid company registry user');
+        $I->sendPOST('/company/registry/validate/', ['company' => 1]);
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseIsJson();
+    }
+
+    public function tryValidateCompanyRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('get a successful response when trying to validate a correct company registry user');
+        $I->sendPOST('/company/registry/validate/', ['company' => 1, 'registryUserId' => 3, 'department' => 1, 'position' => 1]);
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NO_CONTENT); // 200
+        $I->seeResponseEquals('');
+    }
 }
