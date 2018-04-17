@@ -12,6 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use PartnerBundle\Enum\PartnerTypeEnum;
 use PartnerBundle\Enum\PartnerSiteTypeEnum;
+use PartnerBundle\Enum\PartnerPrestigeTypeEnum;
+use PartnerBundle\Enum\PartnerVariousEnum;
 
 /**
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
@@ -143,6 +145,152 @@ class Partner extends BaseEntity
      * @Groups({"amqp", "rest"})
      */
     protected $siteType;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Assert\Choice(
+     *     choices=PartnerVariousEnum::PARTNER_CATEGORY_ENUM,
+     *     strict=true
+     * )
+     * @Groups({"amqp", "rest"})
+     */
+    protected $category;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Assert\Choice(
+     *     choices=PartnerVariousEnum::PARTNER_REPRESENTATION_TYPE_ENUM,
+     *     strict=true
+     * )
+     * @Groups({"amqp", "rest"})
+     */
+    protected $representationType;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Assert\Choice(
+     *     choices={
+     *         PartnerPrestigeTypeEnum::PRESTIGE_TYPE_EXCLUSIVE,
+     *         PartnerPrestigeTypeEnum::PRESTIGE_TYPE_SPECIALIZED
+     *     },
+     *     strict=true
+     * )
+     * @Groups({"amqp", "rest"})
+     */
+    protected $prestigeType;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $dealersMeeting;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $brandDays;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $rent;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $extraHour;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $ferMembership;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $onlineQuotation;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $amexPayment;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $isDigitAll;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $digitAllId;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @Assert\Type("bool")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $isV12;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $v12Id;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type("int")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $sellingVolume;
 
     /**
      * @var Region|null
@@ -339,7 +487,7 @@ class Partner extends BaseEntity
     /**
      * @return bool
      */
-    public function getIsPartnerR8(): bool
+    public function getIsPartnerR8()
     {
         return $this->isPartnerR8;
     }
@@ -348,7 +496,7 @@ class Partner extends BaseEntity
      * @param bool $isPartnerR8
      * @return $this
      */
-    public function setIsPartnerR8(bool $isPartnerR8)
+    public function setIsPartnerR8($isPartnerR8)
     {
         $this->isPartnerR8 = $isPartnerR8;
 
@@ -358,7 +506,7 @@ class Partner extends BaseEntity
     /**
      * @return bool
      */
-    public function getIsTwinService(): bool
+    public function getIsTwinService()
     {
         return $this->isTwinService;
     }
@@ -367,7 +515,7 @@ class Partner extends BaseEntity
      * @param bool $isTwinService
      * @return $this
      */
-    public function setIsTwinService(bool $isTwinService)
+    public function setIsTwinService($isTwinService)
     {
         $this->isTwinService = $isTwinService;
 
@@ -377,7 +525,7 @@ class Partner extends BaseEntity
     /**
      * @return bool
      */
-    public function getIsPartnerPlus(): bool
+    public function getIsPartnerPlus()
     {
         return $this->isPartnerPlus;
     }
@@ -386,7 +534,7 @@ class Partner extends BaseEntity
      * @param bool $isPartnerPlus
      * @return $this
      */
-    public function setIsPartnerPlus(bool $isPartnerPlus)
+    public function setIsPartnerPlus($isPartnerPlus)
     {
         $this->isPartnerPlus = $isPartnerPlus;
 
@@ -396,7 +544,7 @@ class Partner extends BaseEntity
     /**
      * @return bool
      */
-    public function getIsOccPlus(): bool
+    public function getIsOccPlus()
     {
         return $this->isOccPlus;
     }
@@ -405,7 +553,7 @@ class Partner extends BaseEntity
      * @param bool $isOccPlus
      * @return $this
      */
-    public function setIsOccPlus(bool $isOccPlus)
+    public function setIsOccPlus($isOccPlus)
     {
         $this->isOccPlus = $isOccPlus;
 
@@ -435,7 +583,7 @@ class Partner extends BaseEntity
     /**
      * @return bool
      */
-    public function getIsEtron(): bool
+    public function getIsEtron()
     {
         return $this->isEtron;
     }
@@ -444,7 +592,7 @@ class Partner extends BaseEntity
      * @param bool $isEtron
      * @return $this
      */
-    public function setIsEtron(bool $isEtron)
+    public function setIsEtron($isEtron)
     {
         $this->isEtron = $isEtron;
 
@@ -539,6 +687,306 @@ class Partner extends BaseEntity
     public function setSiteType($siteType): Partner
     {
         $this->siteType = $siteType;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param null|string $category
+     *
+     * @return Partner
+     */
+    public function setCategory($category): Partner
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRepresentationType()
+    {
+        return $this->representationType;
+    }
+
+    /**
+     * @param null|string $representationType
+     *
+     * @return Partner
+     */
+    public function setRepresentationType($representationType): Partner
+    {
+        $this->representationType = $representationType;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPrestigeType()
+    {
+        return $this->prestigeType;
+    }
+
+    /**
+     * @param null|string $prestigeType
+     *
+     * @return Partner
+     */
+    public function setPrestigeType($prestigeType): Partner
+    {
+        $this->prestigeType = $prestigeType;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDealersMeeting()
+    {
+        return $this->dealersMeeting;
+    }
+
+    /**
+     * @param bool $dealersMeeting
+     *
+     * @return Partner
+     */
+    public function setDealersMeeting($dealersMeeting): Partner
+    {
+        $this->dealersMeeting = $dealersMeeting;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBrandDays()
+    {
+        return $this->brandDays;
+    }
+
+    /**
+     * @param bool $brandDays
+     *
+     * @return Partner
+     */
+    public function setBrandDays($brandDays): Partner
+    {
+        $this->brandDays = $brandDays;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRent()
+    {
+        return $this->rent;
+    }
+
+    /**
+     * @param bool $rent
+     *
+     * @return Partner
+     */
+    public function setRent($rent): Partner
+    {
+        $this->rent = $rent;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExtraHour()
+    {
+        return $this->extraHour;
+    }
+
+    /**
+     * @param bool $extraHour
+     *
+     * @return Partner
+     */
+    public function setExtraHour($extraHour): Partner
+    {
+        $this->extraHour = $extraHour;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFerMembership()
+    {
+        return $this->ferMembership;
+    }
+
+    /**
+     * @param bool $ferMembership
+     *
+     * @return Partner
+     */
+    public function setFerMembership($ferMembership): Partner
+    {
+        $this->ferMembership = $ferMembership;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnlineQuotation()
+    {
+        return $this->onlineQuotation;
+    }
+
+    /**
+     * @param bool $onlineQuotation
+     *
+     * @return Partner
+     */
+    public function setOnlineQuotation($onlineQuotation): Partner
+    {
+        $this->onlineQuotation = $onlineQuotation;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAmexPayment()
+    {
+        return $this->amexPayment;
+    }
+
+    /**
+     * @param bool $amexPayment
+     *
+     * @return Partner
+     */
+    public function setAmexPayment($amexPayment): Partner
+    {
+        $this->amexPayment = $amexPayment;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDigitAll()
+    {
+        return $this->isDigitAll;
+    }
+
+    /**
+     * @param bool $isDigitAll
+     *
+     * @return Partner
+     */
+    public function setIsDigitAll($isDigitAll): Partner
+    {
+        $this->isDigitAll = $isDigitAll;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDigitAllId()
+    {
+        return $this->digitAllId;
+    }
+
+    /**
+     * @param null|string $digitAllId
+     *
+     * @return Partner
+     */
+    public function setDigitAllId($digitAllId): Partner
+    {
+        $this->digitAllId = $digitAllId;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isV12()
+    {
+        return $this->isV12;
+    }
+
+    /**
+     * @param bool $isV12
+     *
+     * @return Partner
+     */
+    public function setIsV12($isV12): Partner
+    {
+        $this->isV12 = $isV12;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getV12Id()
+    {
+        return $this->v12Id;
+    }
+
+    /**
+     * @param null|string $v12Id
+     *
+     * @return Partner
+     */
+    public function setV12Id($v12Id): Partner
+    {
+        $this->v12Id = $v12Id;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSellingVolume()
+    {
+        return $this->sellingVolume;
+    }
+
+    /**
+     * @param int|null $sellingVolume
+     *
+     * @return Partner
+     */
+    public function setSellingVolume($sellingVolume): Partner
+    {
+        $this->sellingVolume = $sellingVolume;
 
         return $this;
     }

@@ -5,6 +5,13 @@ parameters:
     partner_site_type:
         - 'principal'
         - 'secondary'
+    partner_category:
+        - 'A'
+        - 'A*'
+    partner_representation_type: ['E1', 'E2', 'Y', 'W', 'G']
+    partner_prestige_type:
+        - 'exclusive'
+        - 'specialized'
 
 PartnerBundle\Entity\Group:
     group{1..5}:
@@ -32,6 +39,20 @@ PartnerBundle\Entity\Partner:
         isEtron: <boolean(50)>
         group: '75%? @group*'
         siteType: '<randomElement(<{partner_site_type}>)>'
+        category: '<randomElement(<{partner_category}>)>'
+        representationType: '<randomElement(<{partner_representation_type}>)>'
+        prestigeType: '<randomElement(<{partner_prestige_type}>)>'
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        rent: <boolean(50)>
+        extraHour: <boolean(50)>
+        ferMembership: <boolean(50)>
+        onlineQuotation: <boolean(50)>
+        amexPayment: <boolean(50)>
+        isDigitAll: <boolean(50)>
+        digitAllId: '<setDigitallV12Id($isDigitAll)>'
+        isV12: <boolean(50)>
+        v12Id: '<setDigitallV12Id($isV12)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
@@ -52,6 +73,20 @@ PartnerBundle\Entity\Partner:
         isEtron: <boolean(50)>
         group: '75%? @group*'
         siteType: '<randomElement(<{partner_site_type}>)>'
+        category: '<randomElement(<{partner_category}>)>'
+        representationType: '<randomElement(<{partner_representation_type}>)>'
+        prestigeType: '<randomElement(<{partner_prestige_type}>)>'
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        rent: <boolean(50)>
+        extraHour: <boolean(50)>
+        ferMembership: <boolean(50)>
+        onlineQuotation: <boolean(50)>
+        amexPayment: <boolean(50)>
+        isDigitAll: <boolean(50)>
+        digitAllId: '<setDigitallV12Id($isDigitAll)>'
+        isV12: <boolean(50)>
+        v12Id: '<setDigitallV12Id($isV12)>'
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'

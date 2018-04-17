@@ -3,6 +3,7 @@
 namespace PartnerBundle\DataFixtures\Provider;
 
 use Faker\Provider\Base;
+use Faker\Provider\Miscellaneous;
 
 /**
  * Class ArrayRandomProvider
@@ -36,5 +37,14 @@ class PartnerFixtureProvider
     public static function setOccPlusContractNumber(bool $isOccPlus)
     {
         return true === $isOccPlus ? sprintf('0%d', Base::randomNumber(7, true)) : null;
+    }
+
+    /**
+     * @param bool $isTrue
+     * @return string|null
+     */
+    public static function setDigitallV12Id(bool $isTrue)
+    {
+        return true === $isTrue ? Miscellaneous::md5() : null;
     }
 }
