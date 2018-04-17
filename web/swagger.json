@@ -884,6 +884,41 @@
                 ]
             }
         },
+        "/registry/validate/": {
+            "post": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "Validate PartnerRegistryUser",
+                "operationId": "validatePartnerRegistryUser",
+                "parameters": [
+                    {
+                        "name": "partner registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "the partnerRegistryUser is valid"
+                    },
+                    "400": {
+                        "description": "the partnerRegistryUser is not valid",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/region": {
             "get": {
                 "tags": [
