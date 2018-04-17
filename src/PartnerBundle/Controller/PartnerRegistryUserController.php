@@ -232,6 +232,49 @@ class PartnerRegistryUserController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Post("/validate/", name="_partner_registry_user")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Post(
+     *     path="/registry/validate/",
+     *     summary="Validate PartnerRegistryUser",
+     *     operationId="validatePartnerRegistryUser",
+     *     tags={"Partner Registry User"},
+     *     @SWG\Parameter(
+     *         name="partner registry user",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/PartnerRegistryUser")
+     *     ),
+     *     @SWG\Response(
+     *         response=204,
+     *         description="the partnerRegistryUser is valid"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="the partnerRegistryUser is not valid",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function validateAction(Request $request)
+    {
+        $partnerRegistryUser = new PartnerRegistryUser();
+        $form = $this->createForm(PartnerRegistryUserType::class, $partnerRegistryUser, ['validation_groups' => ['orchestrator']]);
+        $form->handleRequest($request);
+        // validate
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->createView(null, Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->view($form);
+    }
+
+    /**
      * Handles put or patch action
      *
      * @param Request $request
@@ -281,49 +324,5 @@ class PartnerRegistryUserController extends MullenloweRestController
                 ->andWhere($builder->expr()->in('pru.registryUserId', ':registryUserIds'))
                 ->setParameter('registryUserIds', $registryUserIds);
         }
-    }
-
-    /**
-     * @Rest\Post("/validate/", name="_partner_registry_user")
-     * @Rest\View(serializerGroups={"rest"})
-     *
-     * @SWG\Post(
-     *     path="/registry/validate/",
-     *     summary="Validate PartnerRegistryUser",
-     *     operationId="validatePartnerRegistryUser",
-     *     tags={"Partner Registry User"},
-     *     @SWG\Parameter(
-     *         name="partner registry user",
-     *         in="body",
-     *         required=true,
-     *         @SWG\Schema(ref="#/definitions/PartnerRegistryUser")
-     *     ),
-     *     @SWG\Response(
-     *         response=204,
-     *         description="the partnerRegistryUser is valid"
-     *     ),
-     *     @SWG\Response(
-     *         response=400,
-     *         description="the partnerRegistryUser is not valid",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     ),
-     *     security={{ "bearer":{} }}
-     * )
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function validateAction(Request $request)
-    {
-        $partnerRegistryUser = new PartnerRegistryUser();
-        $form = $this->createForm(PartnerRegistryUserType::class, $partnerRegistryUser, ['validation_groups' => ['orchestrator']]);
-        $form->handleRequest($request);
-        // validate
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            return $this->createView(null, Response::HTTP_NO_CONTENT);
-        }
-
-        return $this->view($form);
     }
 }

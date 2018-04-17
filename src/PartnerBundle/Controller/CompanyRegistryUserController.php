@@ -107,6 +107,67 @@ class CompanyRegistryUserController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Post("/", name="_company_registry_user")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Post(
+     *     path="/company/registry/",
+     *     summary="Link company and registry user",
+     *     operationId="postCompanyRegistryUser",
+     *     tags={"Company Registry User"},
+     *     @SWG\Parameter(
+     *         name="company registry user",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CompanyRegistryUser")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="the created link company and registry user",
+     *         @SWG\Schema(
+     *            allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/CompanyRegistryUserComplete")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function postAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $companyRegistryUser = new CompanyRegistryUser();
+        $form = $this->createForm(CompanyRegistryUserType::class, $companyRegistryUser);
+        $form->handleRequest($request);
+        // validate
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($companyRegistryUser);
+            $em->flush();
+
+            return $this->createView($companyRegistryUser, Response::HTTP_CREATED);
+        }
+
+        return $this->view($form);
+    }
+
+    /**
      * @Rest\Post("/validate/", name="_company_registry_user")
      * @Rest\View(serializerGroups={"rest"})
      *
@@ -114,7 +175,7 @@ class CompanyRegistryUserController extends MullenloweRestController
      *     path="/company/validate/",
      *     summary="Validate CompanyRegistryUser",
      *     operationId="validateCompanyRegistryUser",
-     *     tags={"Partner Registry User"},
+     *     tags={"Company Registry User"},
      *     @SWG\Parameter(
      *         name="company registry user",
      *         in="body",
@@ -127,7 +188,7 @@ class CompanyRegistryUserController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=400,
-     *         description="the partnerRegistryUser is not valid",
+     *         description="the companyRegistryUser is not valid",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     security={{ "bearer":{} }}
