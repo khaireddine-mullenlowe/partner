@@ -2,8 +2,10 @@
 
 namespace PartnerBundle\Form;
 
+use PartnerBundle\Entity\District;
 use PartnerBundle\Entity\Group;
 use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\Region;
 use PartnerBundle\Enum\PartnerTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -73,6 +75,12 @@ class PartnerType extends AbstractType
             ->add('isV12', CheckboxType::class)
             ->add('v12Id', TextType::class)
             ->add('sellingVolume', IntegerType::class)
+            ->add('region', EntityType::class, [
+                'class' => Region::class,
+            ])
+            ->add('district', EntityType::class, [
+                'class' => District::class,
+            ])
         ;
     }
 
