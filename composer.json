@@ -2,7 +2,6 @@
     "name": "mullenlowe/audi-agc5-partner",
     "license": "proprietary",
     "type": "project",
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "prefer-dist": true,
     "autoload": {
