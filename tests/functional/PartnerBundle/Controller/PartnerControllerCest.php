@@ -33,7 +33,9 @@ class PartnerControllerCest
     "digitAllId": null,
     "isV12": true,
     "v12Id": "V12FAKEID",
-    "sellingVolume": 1200
+    "sellingVolume": 1200,
+    "region": 1,
+    "district": 1
 }
 HEREDOC;
 
@@ -79,6 +81,7 @@ HEREDOC;
         $this->requestJson($I,201, 'POST', '/', [], [], [], static::$jsonPartner);
         $I->seeResponseContainsJson(['context' => 'Partner']);
         $I->seeResponseContains('data');
+        $I->seeResponseContains('region');
         $this->createdPartnerId = $I->grabDataFromResponseByJsonPath('$..id')[0];
     }
 
