@@ -13,6 +13,8 @@ use PartnerBundle\Entity\Partner;
  */
 class PartnerRepository extends EntityRepository
 {
+    const CDV = 'CDV';
+
     /**
      * @param integer $myaudiUserId
      * @return null|Partner
@@ -53,5 +55,64 @@ class PartnerRepository extends EntityRepository
         }
 
         return null;
+    }
+
+    /**
+     * @param Partner $partner
+     * @param $leader
+     * @return array
+     */
+    public function findByRegionAndDistrict(Partner $partner, $leader)
+    {
+        $region = $partner->getRegion()->getId();
+
+        $result = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.region = :region')
+            ->setParameter('region', $region);
+
+        if ($leader === self::CDV) {
+            $district = $partner->getDistrict()->getId();
+            $result->andWhere('p.district = :district')
+                ->setParameter('district', $district);
+        }
+
+        return $result
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param int|null    $registryUserId
+     * @param int|null    $myaudiUserId
+     * @param string|null $partnerIds
+     * @return \Doctrine\ORM\Query
+     */
+    public function findPartnersByCustomFilters($registryUserId = null, $myaudiUserId = null, $partnerIds = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('partner');
+
+        if ($registryUserId) {
+            $queryBuilder
+                ->join('partner.registryUsers', 'registryUsers')
+                ->andWhere('registryUsers.registryUserId = :registryUserId')
+                ->setParameter('registryUserId', $registryUserId);
+        }
+
+        if ($myaudiUserId) {
+            $queryBuilder
+                ->join('partner.myaudiUsers', 'myaudiUsers')
+                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
+                ->setParameter('myaudiUserId', $myaudiUserId);
+        }
+
+        if ($partnerIds) {
+            $ids = explode(',', $partnerIds);
+            $queryBuilder
+                ->andWhere('partner.id IN (:ids)')
+                ->setParameter('ids', $ids);
+        }
+
+        return $queryBuilder->getQuery();
     }
 }

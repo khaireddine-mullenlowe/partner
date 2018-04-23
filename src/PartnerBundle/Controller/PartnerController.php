@@ -160,13 +160,14 @@ class PartnerController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
-
         $paginator = $this->get('knp_paginator');
 
-        $queryBuilder = $repository->createQueryBuilder('partner');
-
-        $this->applyFilters($queryBuilder, $request);
+        $queryBuilder = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
+            ->findPartnersByCustomFilters(
+                $request->query->getInt('registryUserId'),
+                $request->query->getInt('myaudiUserId'),
+                $request->query->get('partnerIds')
+            );
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
@@ -420,30 +421,55 @@ class PartnerController extends MullenloweRestController
     }
 
     /**
-     * Applies filters from request
-     * todo: move this method in a service
+     * @Rest\Get("/getFromLeader")
+     * @Rest\View(serializerGroups={"rest"})
      *
-     * @param QueryBuilder $builder
+     * @SWG\Get(
+     *     path="/getFromLeader",
+     *     summary="get partners from the leader id",
+     *     operationId="getPartnersFromLeader",
+     *     tags={"Partner"},
+     *     @SWG\Parameter(
+     *         name="leader",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="CDV or CRO"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="partnerId",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description="partner Id"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Target Partners by the leader region and/or district",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerComplete")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     * )
+     *
      * @param Request $request
+     * @return View
      */
-    private function applyFilters(QueryBuilder $builder, Request $request)
+    public function getPartnersFromLeaderAction(Request $request)
     {
-        $registryUserId = $request->query->get('registryUserId');
-        $myaudiUserId = $request->query->get('myaudiUserId');
+        /** @var Partner $partner */
+        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
+            ->find($request->query->get('partnerId'));
 
-        if ($registryUserId) {
-            $builder
-                ->join('partner.registryUsers', 'registryUsers')
-                ->andWhere('registryUsers.registryUserId = :registryUserId')
-                ->setParameter('registryUserId', $registryUserId);
-        }
+        $partners = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
+            ->findByRegionAndDistrict($partner, $request->query->get('leader'));
 
-        if ($myaudiUserId) {
-            $builder
-                ->join('partner.myaudiUsers', 'myaudiUsers')
-                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
-                ->setParameter('myaudiUserId', $myaudiUserId);
-        }
+        return $this->createView($partners);
     }
 
     /**
