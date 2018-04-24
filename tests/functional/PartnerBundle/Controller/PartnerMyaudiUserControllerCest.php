@@ -24,16 +24,6 @@ class PartnerMyaudiUserControllerCest
         $I->seeResponseContains('Input data are not valid');
     }
 
-    public function duplicateRuleWithNonExistingPartner(\FunctionalTester $I)
-    {
-        $I->wantToTest('Partner duplicate rule returns error when lead ID does not exist');
-        $I->sendPOST('/myaudi-user/552233/check_duplicate',
-            ['partnerName' => 'foo']);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NOT_FOUND);
-        $I->seeResponseIsJson();
-        $I->seeResponseContains('"PartnerMyaudiUser not found');
-    }
-
     /**
      * @dataprovider duplicateRuleProvider
      */
@@ -57,6 +47,10 @@ class PartnerMyaudiUserControllerCest
                 'myaudiUserId' => 1,
                 'data' => ['partnerName' => "Maury Morel SARL"],
                 'expected' => true,
+            ],[
+                'myaudiUserId' => 552233,
+                'data' => ['partnerName' => "Maury Morel SARL"],
+                'expected' => false,
             ],
         ];
     }
