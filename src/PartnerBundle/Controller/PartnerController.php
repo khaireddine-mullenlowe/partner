@@ -166,7 +166,9 @@ class PartnerController extends MullenloweRestController
             ->findPartnersByCustomFilters(
                 $request->query->getInt('registryUserId'),
                 $request->query->getInt('myaudiUserId'),
-                $request->query->get('partnerIds')
+                $request->query->get('partnerIds'),
+                $request->query->getInt('region'),
+                $request->query->getInt('district')
             );
 
         /** @var SlidingPagination $pager */
@@ -418,58 +420,6 @@ class PartnerController extends MullenloweRestController
         $em->flush();
 
         return $this->deleteView();
-    }
-
-    /**
-     * @Rest\Get("/getFromLeader")
-     * @Rest\View(serializerGroups={"rest"})
-     *
-     * @SWG\Get(
-     *     path="/getFromLeader",
-     *     summary="get partners from the leader id",
-     *     operationId="getPartnersFromLeader",
-     *     tags={"Partner"},
-     *     @SWG\Parameter(
-     *         name="leader",
-     *         in="query",
-     *         type="string",
-     *         required=false,
-     *         description="CDV or CRO"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="partnerId",
-     *         in="query",
-     *         type="integer",
-     *         required=true,
-     *         description="partner Id"
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="Target Partners by the leader region and/or district",
-     *         @SWG\Schema(
-     *             allOf={
-     *                 @SWG\Definition(ref="#/definitions/Context"),
-     *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerComplete")),
-     *                 ),
-     *             }
-     *         )
-     *     ),
-     * )
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function getPartnersFromLeaderAction(Request $request)
-    {
-        /** @var Partner $partner */
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
-            ->find($request->query->get('partnerId'));
-
-        $partners = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
-            ->findByRegionAndDistrict($partner, $request->query->get('leader'));
-
-        return $this->createView($partners);
     }
 
     /**

@@ -58,37 +58,13 @@ class PartnerRepository extends EntityRepository
     }
 
     /**
-     * @param Partner $partner
-     * @param $leader
-     * @return array
-     */
-    public function findByRegionAndDistrict(Partner $partner, $leader)
-    {
-        $region = $partner->getRegion()->getId();
-
-        $result = $this->createQueryBuilder('p')
-            ->select('p')
-            ->where('p.region = :region')
-            ->setParameter('region', $region);
-
-        if ($leader === self::CDV) {
-            $district = $partner->getDistrict()->getId();
-            $result->andWhere('p.district = :district')
-                ->setParameter('district', $district);
-        }
-
-        return $result
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
      * @param int|null    $registryUserId
      * @param int|null    $myaudiUserId
      * @param string|null $partnerIds
      * @return \Doctrine\ORM\Query
      */
-    public function findPartnersByCustomFilters($registryUserId = null, $myaudiUserId = null, $partnerIds = null)
+    public function findPartnersByCustomFilters($registryUserId = null, $myaudiUserId = null,
+        $partnerIds = null, $region = null, $district = null)
     {
         $queryBuilder = $this->createQueryBuilder('partner');
 
@@ -111,6 +87,18 @@ class PartnerRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('partner.id IN (:ids)')
                 ->setParameter('ids', $ids);
+        }
+
+        if ($region) {
+            $queryBuilder
+                ->andWhere('partner.region = :region')
+                ->setParameter('region', $region);
+        }
+
+        if ($district) {
+            $queryBuilder
+                ->andWhere('partner.district = :district')
+                ->setParameter('district', $district);
         }
 
         return $queryBuilder->getQuery();

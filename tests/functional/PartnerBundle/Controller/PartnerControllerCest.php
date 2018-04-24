@@ -133,13 +133,4 @@ HEREDOC;
         $I->seeResponseCodeIs($expectedStatusCode);
         $I->seeResponseIsJson();
     }
-
-    public function testGetPartnerFromLeader(FunctionalTester $I)
-    {
-        $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET('?partnerId=1');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
-        $I->seeResponseIsJson();
-        $I->seeResponseContains('Partner');
-    }
 }
