@@ -62,8 +62,8 @@ class PartnerMyaudiUserController extends MullenloweRestController
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
+     *         response=500,
+     *         description="internal error",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
@@ -80,17 +80,17 @@ class PartnerMyaudiUserController extends MullenloweRestController
         }
 
         if (!$request->request->get('partnerName')) {
-            throw new BadRequestHttpException('Input data are not valid (%s)');
+            throw new BadRequestHttpException('Input data are not valid');
         }
 
         /** @var PartnerMyaudiUser $partnerMyaudiUser */
         $partnerMyaudiUser = $this->getDoctrine()->getRepository('PartnerBundle:PartnerMyaudiUser')
             ->findOneBy(['myaudiUserId' => $myaudiUserId]);
-        if (null === $partnerMyaudiUser) {
-            throw $this->createNotFoundException('PartnerMyaudiUser not found');
-        }
 
-        $isDuplicate = $request->request->get('partnerName') == $partnerMyaudiUser->getPartner()->getCommercialName();
+        $isDuplicate = false;
+        if (null !== $partnerMyaudiUser) {
+            $isDuplicate = $request->request->get('partnerName') == $partnerMyaudiUser->getPartner()->getCommercialName();
+        }
 
         return $this->createView(['isDuplicate' => $isDuplicate]);
     }

@@ -319,6 +319,97 @@
                         "bearer": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Link company and registry user",
+                "operationId": "postCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created link company and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/validate/": {
+            "post": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Validate CompanyRegistryUser",
+                "operationId": "validateCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "the companyRegistryUser is valid"
+                    },
+                    "400": {
+                        "description": "the companyRegistryUser is not valid",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/district": {
@@ -771,8 +862,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "not found",
+                    "500": {
+                        "description": "internal error",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
