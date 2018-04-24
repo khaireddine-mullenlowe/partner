@@ -312,7 +312,7 @@ class Partner extends BaseEntity
 
     /**
      * Legacy id
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer", unique=true, nullable=true)
      * @var integer
      * @Groups({"amqp", "rest"})
      */
