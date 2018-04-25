@@ -63,42 +63,41 @@ class PartnerRepository extends EntityRepository
      * @param string|null $partnerIds
      * @return \Doctrine\ORM\Query
      */
-    public function findPartnersByCustomFilters($registryUserId = null, $myaudiUserId = null,
-        $partnerIds = null, $region = null, $district = null)
+    public function findPartnersByCustomFilters(array $filters)
     {
         $queryBuilder = $this->createQueryBuilder('partner');
 
-        if ($registryUserId) {
+        if ($filters['registryUserId']) {
             $queryBuilder
                 ->join('partner.registryUsers', 'registryUsers')
                 ->andWhere('registryUsers.registryUserId = :registryUserId')
-                ->setParameter('registryUserId', $registryUserId);
+                ->setParameter('registryUserId', $filters['registryUserId']);
         }
 
-        if ($myaudiUserId) {
+        if ($filters['myaudiUserId']) {
             $queryBuilder
                 ->join('partner.myaudiUsers', 'myaudiUsers')
                 ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
-                ->setParameter('myaudiUserId', $myaudiUserId);
+                ->setParameter('myaudiUserId', $filters['myaudiUserId']);
         }
 
-        if ($partnerIds) {
-            $ids = explode(',', $partnerIds);
+        if ($filters['partnerIds']) {
+            $ids = explode(',', $filters['partnerIds']);
             $queryBuilder
                 ->andWhere('partner.id IN (:ids)')
                 ->setParameter('ids', $ids);
         }
 
-        if ($region) {
+        if ($filters['region']) {
             $queryBuilder
                 ->andWhere('partner.region = :region')
-                ->setParameter('region', $region);
+                ->setParameter('region', $filters['region']);
         }
 
-        if ($district) {
+        if ($filters['district']) {
             $queryBuilder
                 ->andWhere('partner.district = :district')
-                ->setParameter('district', $district);
+                ->setParameter('district', $filters['district']);
         }
 
         return $queryBuilder->getQuery();

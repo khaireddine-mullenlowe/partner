@@ -148,7 +148,11 @@ class PartnerController extends MullenloweRestController
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
      *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerComplete")),
+     *                     @SWG\Property(
+     *                         property="data",
+     *                         type="array",
+     *                         @SWG\Items(ref="#/definitions/PartnerComplete")
+     *                     ),
      *                 ),
      *             }
      *         )
@@ -162,14 +166,10 @@ class PartnerController extends MullenloweRestController
     {
         $paginator = $this->get('knp_paginator');
 
+        $filters = $request->query->all();
+
         $queryBuilder = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
-            ->findPartnersByCustomFilters(
-                $request->query->getInt('registryUserId'),
-                $request->query->getInt('myaudiUserId'),
-                $request->query->get('partnerIds'),
-                $request->query->getInt('region'),
-                $request->query->getInt('district')
-            );
+            ->findPartnersByCustomFilters($filters);
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
