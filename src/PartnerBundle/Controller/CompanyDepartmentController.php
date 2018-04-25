@@ -2,6 +2,7 @@
 
 namespace PartnerBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
@@ -26,6 +27,14 @@ class CompanyDepartmentController extends MullenloweRestController
      *     path="/company/department",
      *     summary="get departments",
      *     tags={"Department"},
+     *     @SWG\Parameter(
+     *         name="ids",
+     *         in="query",
+     *         type="array",
+     *         required=false,
+     *         description="company department id's",
+     *         @SWG\Items(type="string")
+     *     ),
      *     @SWG\Parameter(
      *         name="page",
      *         in="query",
@@ -60,14 +69,14 @@ class CompanyDepartmentController extends MullenloweRestController
     public function cgetAction(Request $request)
     {
         $paginator = $this->get('knp_paginator');
-        $queryBuilder = $this->getDoctrine()
+        $companyDepartments = $this->getDoctrine()
             ->getRepository('PartnerBundle:CompanyDepartment')
-            ->createQueryBuilder('company_department')
+            ->findByCriteria($request->query->all())
         ;
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $queryBuilder,
+            $companyDepartments,
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 100)
         );
