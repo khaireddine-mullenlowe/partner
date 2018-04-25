@@ -1,6 +1,9 @@
 <?php
 namespace PartnerBundle\Tests\Controller;
 
+use FunctionalTester;
+use Symfony\Component\HttpFoundation\Response;
+
 class PartnerControllerCest
 {
     protected static $jsonPartner = <<<HEREDOC
@@ -76,7 +79,7 @@ HEREDOC;
 
     protected $createdPartnerId;
 
-    public function testPostPartner(\FunctionalTester $I)
+    public function testPostPartner(FunctionalTester $I)
     {
         $this->requestJson($I,201, 'POST', '/', [], [], [], static::$jsonPartner);
         $I->seeResponseContainsJson(['context' => 'Partner']);
@@ -88,7 +91,7 @@ HEREDOC;
     /**
      * @depends testPostPartner
      */
-    public function testPutPartner(\FunctionalTester $I)
+    public function testPutPartner(FunctionalTester $I)
     {
         $this->requestJson($I,200, 'PUT', '/'.$this->createdPartnerId, [], [], [], static::$jsonPartner2);
         $I->seeResponseContainsJson(['context' => 'Partner']);
@@ -98,7 +101,7 @@ HEREDOC;
     /**
      * @depends testPutPartner
      */
-    public function testGetPartner(\FunctionalTester $I)
+    public function testGetPartner(FunctionalTester $I)
     {
         $this->requestJson($I,200, 'GET', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(['context' => 'Partner']);
@@ -108,7 +111,7 @@ HEREDOC;
     /**
      * @depends testGetPartner
      */
-    public function testRemovePartner(\FunctionalTester $I)
+    public function testRemovePartner(FunctionalTester $I)
     {
         $this->requestJson($I, 200, 'DELETE', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(['context' => 'Partner']);
@@ -117,13 +120,13 @@ HEREDOC;
     /**
      * @depends testRemovePartner
      */
-    public function testGetParnterWhenNotFound(\FunctionalTester $I)
+    public function testGetParnterWhenNotFound(FunctionalTester $I)
     {
         $this->requestJson($I,404, 'GET', '/'.$this->createdPartnerId);
         $I->seeResponseContainsJson(["message" => "Partner not found"]);
     }
 
-    protected function requestJson(\FunctionalTester $I, $expectedStatusCode, $method, $uri, $parameters = [], $files = [], $server = [], $content = [])
+    protected function requestJson(FunctionalTester $I, $expectedStatusCode, $method, $uri, $parameters = [], $files = [], $server = [], $content = [])
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->{"send".$method}($uri, $content, $parameters);

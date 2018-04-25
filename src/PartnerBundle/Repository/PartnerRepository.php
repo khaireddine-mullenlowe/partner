@@ -13,6 +13,8 @@ use PartnerBundle\Entity\Partner;
  */
 class PartnerRepository extends EntityRepository
 {
+    const CDV = 'CDV';
+
     /**
      * @param integer $myaudiUserId
      * @return null|Partner
@@ -53,5 +55,51 @@ class PartnerRepository extends EntityRepository
         }
 
         return null;
+    }
+
+    /**
+     * @param int|null    $registryUserId
+     * @param int|null    $myaudiUserId
+     * @param string|null $partnerIds
+     * @return \Doctrine\ORM\Query
+     */
+    public function findPartnersByCustomFilters(array $filters)
+    {
+        $queryBuilder = $this->createQueryBuilder('partner');
+
+        if ($filters['registryUserId']) {
+            $queryBuilder
+                ->join('partner.registryUsers', 'registryUsers')
+                ->andWhere('registryUsers.registryUserId = :registryUserId')
+                ->setParameter('registryUserId', $filters['registryUserId']);
+        }
+
+        if ($filters['myaudiUserId']) {
+            $queryBuilder
+                ->join('partner.myaudiUsers', 'myaudiUsers')
+                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
+                ->setParameter('myaudiUserId', $filters['myaudiUserId']);
+        }
+
+        if ($filters['partnerIds']) {
+            $ids = explode(',', $filters['partnerIds']);
+            $queryBuilder
+                ->andWhere('partner.id IN (:ids)')
+                ->setParameter('ids', $ids);
+        }
+
+        if ($filters['region']) {
+            $queryBuilder
+                ->andWhere('partner.region = :region')
+                ->setParameter('region', $filters['region']);
+        }
+
+        if ($filters['district']) {
+            $queryBuilder
+                ->andWhere('partner.district = :district')
+                ->setParameter('district', $filters['district']);
+        }
+
+        return $queryBuilder->getQuery();
     }
 }

@@ -148,7 +148,11 @@ class PartnerController extends MullenloweRestController
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
      *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerComplete")),
+     *                     @SWG\Property(
+     *                         property="data",
+     *                         type="array",
+     *                         @SWG\Items(ref="#/definitions/PartnerComplete")
+     *                     ),
      *                 ),
      *             }
      *         )
@@ -160,13 +164,12 @@ class PartnerController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository('PartnerBundle:Partner');
-
         $paginator = $this->get('knp_paginator');
 
-        $queryBuilder = $repository->createQueryBuilder('partner');
+        $filters = $request->query->all();
 
-        $this->applyFilters($queryBuilder, $request);
+        $queryBuilder = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
+            ->findPartnersByCustomFilters($filters);
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
@@ -417,33 +420,6 @@ class PartnerController extends MullenloweRestController
         $em->flush();
 
         return $this->deleteView();
-    }
-
-    /**
-     * Applies filters from request
-     * todo: move this method in a service
-     *
-     * @param QueryBuilder $builder
-     * @param Request $request
-     */
-    private function applyFilters(QueryBuilder $builder, Request $request)
-    {
-        $registryUserId = $request->query->get('registryUserId');
-        $myaudiUserId = $request->query->get('myaudiUserId');
-
-        if ($registryUserId) {
-            $builder
-                ->join('partner.registryUsers', 'registryUsers')
-                ->andWhere('registryUsers.registryUserId = :registryUserId')
-                ->setParameter('registryUserId', $registryUserId);
-        }
-
-        if ($myaudiUserId) {
-            $builder
-                ->join('partner.myaudiUsers', 'myaudiUsers')
-                ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
-                ->setParameter('myaudiUserId', $myaudiUserId);
-        }
     }
 
     /**
