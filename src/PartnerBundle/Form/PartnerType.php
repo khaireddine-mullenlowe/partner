@@ -36,6 +36,7 @@ class PartnerType extends AbstractType
             ])
             ->add('contractNumber', TextType::class)
             ->add('commercialName', TextType::class)
+            ->add('corporateName', TextType::class)
             ->add('kvpsNumber', TextType::class)
             ->add('webSite', UrlType::class)
             ->add('isPartnerR8', CheckboxType::class)

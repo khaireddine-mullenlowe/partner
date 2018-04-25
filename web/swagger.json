@@ -730,53 +730,6 @@
                 ]
             }
         },
-        "/getFromLeader": {
-            "get": {
-                "tags": [
-                    "Partner"
-                ],
-                "summary": "get partners from the leader id",
-                "operationId": "getPartnersFromLeader",
-                "parameters": [
-                    {
-                        "name": "leader",
-                        "in": "query",
-                        "description": "CDV or CRO",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "partnerId",
-                        "in": "query",
-                        "description": "partner Id",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Target Partners by the leader region and/or district",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/PartnerComplete"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "/myaudi-user/{myaudiUserId}/check_duplicate": {
             "post": {
                 "tags": [
@@ -818,8 +771,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "not found",
+                    "500": {
+                        "description": "internal error",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }

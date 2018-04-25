@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use PartnerBundle\Entity\Base\BaseCompany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class CompanyDepartment
@@ -28,6 +29,7 @@ class CompanyDepartment extends BaseCompany
      *
      * @ORM\ManyToMany(targetEntity="PartnerBundle\Entity\CompanyPosition", inversedBy="departments")
      * @ORM\JoinTable(name="company_department_position")
+     * @Groups("rest")
      */
     private $positions;
 
@@ -35,6 +37,7 @@ class CompanyDepartment extends BaseCompany
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\CompanyPositionCode", mappedBy="department")
+     * @Groups("rest")
      */
     private $positionCodes;
 
