@@ -31,7 +31,7 @@ class CompanyRegistryUserType extends AbstractType
             ->add('registryUserId', IntegerType::class)
             ->add('company', EntityType::class, [
                 'class' => Company::class,
-                'constraints' => [new Required(), new NotNull()]
+                'constraints' => [new Required(), new NotNull()],
             ])
             ->add('department', EntityType::class, [
                 'class' => CompanyDepartment::class,
