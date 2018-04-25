@@ -90,7 +90,7 @@ class CompanyRegistryUserControllerCest
     public function tryValidateInvalidCompanyRegistryUser(\FunctionalTester $I)
     {
         $I->wantTo('get an error when trying to post an invalid company registry user');
-        $I->sendPOST('/company/registry/validate/', ['company' => 1]);
+        $I->sendPOST('/company/registry/validate/', ['company' => 0]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
         $I->seeResponseIsJson();
     }
