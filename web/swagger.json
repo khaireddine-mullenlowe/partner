@@ -13,6 +13,60 @@
         "application/json"
     ],
     "paths": {
+        "/company/": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "get companies",
+                "operationId": "getCompanies",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "company type id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Companies",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/company/department": {
             "get": {
                 "tags": [
