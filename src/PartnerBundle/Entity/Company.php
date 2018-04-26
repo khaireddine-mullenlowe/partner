@@ -80,7 +80,7 @@ class Company extends BaseEntity
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"rest"})
      */
     protected $legacyId;
@@ -186,17 +186,17 @@ class Company extends BaseEntity
     /**
      * @return int
      */
-    public function getStatus(): int
+    public function getStatus()
     {
         return $this->status;
     }
 
     /**
-     * @param int $status
+     * @param mixed $status
      *
      * @return $this
      */
-    public function setStatus(int $status)
+    public function setStatus($status)
     {
         $this->status = $status;
 
@@ -206,7 +206,7 @@ class Company extends BaseEntity
     /**
      * @return int
      */
-    public function getLegacyId(): int
+    public function getLegacyId()
     {
         return $this->legacyId;
     }
@@ -216,7 +216,7 @@ class Company extends BaseEntity
      *
      * @return $this
      */
-    public function setLegacyId(int $legacyId)
+    public function setLegacyId($legacyId)
     {
         $this->legacyId = $legacyId;
 

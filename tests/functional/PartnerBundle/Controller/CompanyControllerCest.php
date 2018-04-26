@@ -20,4 +20,31 @@ class CompanyControllerCest
         $I->seeResponseContains('data');
         $I->seeResponseContains('pagination');
     }
+
+    public function tryToPost(\FunctionalTester $I)
+    {
+        $I->sendPOST('/company/', [
+            "corporateName"=> "MULLENLOWE",
+            "commercialName"=> "MULLENLOWE",
+            "type"=> 4,
+            "status"=> 1
+        ]);
+        $I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'Company']);
+        $I->seeResponseContains('data');
+    }
+
+    public function tryToPostKo(\FunctionalTester $I)
+    {
+        $I->sendPOST('/company/', [
+            "commercialName"=> "MULLENLOWE",
+            "type"=> 4,
+            "status"=> 1
+        ]);
+        $I->seeResponseCodeIs(400);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'Company']);
+        $I->seeResponseContains('errors');
+    }
 }

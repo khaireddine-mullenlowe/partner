@@ -8,6 +8,11 @@ partner_registry_user:
     type:     rest
     prefix:   /registry
 
+company:
+    resource: PartnerBundle\Controller\CompanyController
+    type:     rest
+    prefix:   /company
+
 company_registry_user:
     resource: PartnerBundle\Controller\CompanyRegistryUserController
     type:     rest
