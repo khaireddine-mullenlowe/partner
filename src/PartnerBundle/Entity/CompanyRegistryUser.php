@@ -75,7 +75,6 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPosition")
      * @ORM\JoinColumn(name="position", referencedColumnName="id")
-     * @Assert\NotNull(groups={"Default", "orchestrator"})
      * @Groups({"amqp", "rest"})
      */
     private $position;
