@@ -3,7 +3,6 @@
 namespace PartnerBundle\Form;
 
 use PartnerBundle\Entity\Company;
-use PartnerBundle\Entity\Group;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -26,22 +25,18 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'constraints' => [new Required(), new NotNull()]
-            ])
+            ->add('corporateName', TextType::class)
+            ->add('commercialName', TextType::class)
             ->add('type', EntityType::class, [
-                'class' => \PartnerBundle\Entity\CompanyType::class,
-                'constraints' => [new Required(), new NotNull()]
+                'class' => \PartnerBundle\Entity\CompanyType::class
             ])
             ->add('registryUsers', CollectionType::class, [
-                'entry_type'   => PartnerRegistryUserType::class,
+                'entry_type'   => CompanyRegistryUserType::class,
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
-            ->add('status', IntegerType::class, [
-                'constraints' => [new Required(), new NotNull()]
-            ])
+            ->add('status', IntegerType::class)
         ;
     }
 

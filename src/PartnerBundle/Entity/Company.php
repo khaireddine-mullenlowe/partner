@@ -7,6 +7,7 @@ use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -30,6 +31,7 @@ class Company extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotNull()
      * @var string
      * @Groups({"rest"})
      */
@@ -37,6 +39,7 @@ class Company extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotNull()
      * @var string
      * @Groups({"rest"})
      */
@@ -44,7 +47,7 @@ class Company extends BaseEntity
 
     /**
      * @var CompanyType
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyType", inversedBy="companies")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
      * @Groups({"rest"})
@@ -55,6 +58,7 @@ class Company extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", options={"default":1})
+     * @Assert\NotNull()
      * @Groups({"rest"})
      */
     protected $status = 1;
@@ -80,7 +84,7 @@ class Company extends BaseEntity
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"rest"})
      */
     protected $legacyId;
@@ -186,17 +190,17 @@ class Company extends BaseEntity
     /**
      * @return int
      */
-    public function getStatus(): int
+    public function getStatus()
     {
         return $this->status;
     }
 
     /**
-     * @param int $status
+     * @param mixed $status
      *
      * @return $this
      */
-    public function setStatus(int $status)
+    public function setStatus($status)
     {
         $this->status = $status;
 
@@ -206,7 +210,7 @@ class Company extends BaseEntity
     /**
      * @return int
      */
-    public function getLegacyId(): int
+    public function getLegacyId()
     {
         return $this->legacyId;
     }
@@ -216,7 +220,7 @@ class Company extends BaseEntity
      *
      * @return $this
      */
-    public function setLegacyId(int $legacyId)
+    public function setLegacyId($legacyId)
     {
         $this->legacyId = $legacyId;
 
