@@ -76,7 +76,7 @@ class CompanyController extends MullenloweRestController
         $companies = $this
             ->getDoctrine()
             ->getRepository('PartnerBundle:Company')
-            ->findByCriteria($request->query->all());
+            ->findByCustomFilters($request->query->getInt('type'));
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(

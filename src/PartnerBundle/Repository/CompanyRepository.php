@@ -13,16 +13,16 @@ class CompanyRepository extends EntityRepository
     /**
      * Finds companies by criteria
      *
-     * @param array $criteria
+     * @param int $type
      *
      * @return mixed
      */
-    public function findByCriteria(array $criteria = [])
+    public function findByCustomFilters(int $type = null)
     {
         $queryBuilder = $this->createQueryBuilder('company');
 
-        if (isset($criteria['type'])) {
-            $queryBuilder->andWhere('company.type = :type')->setParameter('type', $criteria['type']);
+        if (isset($type)) {
+            $queryBuilder->andWhere('company.type = :type')->setParameter('type', $type);
         }
 
         return $queryBuilder->getQuery()->execute();
