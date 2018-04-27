@@ -95,7 +95,7 @@ class CompanyController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Post(
-     *     path="/",
+     *     path="/company/",
      *     summary="create company",
      *     operationId="createCompany",
      *     tags={"Company"},
