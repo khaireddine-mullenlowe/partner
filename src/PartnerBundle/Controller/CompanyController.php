@@ -136,11 +136,10 @@ class CompanyController extends MullenloweRestController
     public function postAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dataInput = $request->request->all();
 
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
-        $form->submit($dataInput);
+        $form->handleRequest($request);
         // validate
         if (!$form->isValid()) {
             return $this->view($form);

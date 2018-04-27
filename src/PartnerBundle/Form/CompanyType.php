@@ -25,15 +25,10 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('corporateName', TextType::class, [
-                'constraints' => [new Required(), new NotNull()]
-            ])
-            ->add('commercialName', TextType::class, [
-                'constraints' => [new Required(), new NotNull()]
-            ])
+            ->add('corporateName', TextType::class)
+            ->add('commercialName', TextType::class)
             ->add('type', EntityType::class, [
-                'class' => \PartnerBundle\Entity\CompanyType::class,
-                'constraints' => [new Required(), new NotNull()]
+                'class' => \PartnerBundle\Entity\CompanyType::class
             ])
             ->add('registryUsers', CollectionType::class, [
                 'entry_type'   => CompanyRegistryUserType::class,
@@ -41,9 +36,7 @@ class CompanyType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
-            ->add('status', IntegerType::class, [
-                'constraints' => [new Required(), new NotNull()]
-            ])
+            ->add('status', IntegerType::class)
         ;
     }
 

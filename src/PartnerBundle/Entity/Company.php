@@ -7,6 +7,7 @@ use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -30,6 +31,7 @@ class Company extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotNull()
      * @var string
      * @Groups({"rest"})
      */
@@ -37,6 +39,7 @@ class Company extends BaseEntity
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotNull()
      * @var string
      * @Groups({"rest"})
      */
@@ -44,7 +47,7 @@ class Company extends BaseEntity
 
     /**
      * @var CompanyType
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyType", inversedBy="companies")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
      * @Groups({"rest"})
@@ -55,6 +58,7 @@ class Company extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", options={"default":1})
+     * @Assert\NotNull()
      * @Groups({"rest"})
      */
     protected $status = 1;
