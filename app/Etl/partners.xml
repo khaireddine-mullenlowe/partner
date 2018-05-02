@@ -109,6 +109,9 @@
             <mapping>
                 <name>contract_number_occ_plus</name>
                 <targetProperty>occPlusContractNumber</targetProperty>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
             </mapping>
             <mapping>
                 <name>partner_r8</name>
