@@ -19,8 +19,16 @@ use PartnerBundle\Enum\PartnerVariousEnum;
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
  * @ORM\Table(name="partner")
  * @UniqueEntity(
+ *       fields={"contractNumber"},
+ *       message="contractNumber already in use"
+ * )
+ * @UniqueEntity(
+ *       fields={"occPlusContractNumber"},
+ *       message="occPlusContractNumber already in use"
+ * )
+ * @UniqueEntity(
  *       fields={"legacyId"},
- *       message="legacyId already used"
+ *       message="legacyId already in use"
  * )
  */
 class Partner extends BaseEntity
@@ -43,7 +51,7 @@ class Partner extends BaseEntity
     protected $type;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", unique=true, nullable=true)
      * @var string
      * @Groups({"amqp", "rest"})
      */
@@ -112,7 +120,7 @@ class Partner extends BaseEntity
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", unique=true, nullable=true)
      * @Assert\Type("string")
      * @Groups({"amqp", "rest"})
      */
