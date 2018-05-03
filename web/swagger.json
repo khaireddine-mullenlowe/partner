@@ -65,9 +65,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/company": {
+            },
             "post": {
                 "tags": [
                     "Company"
@@ -430,6 +428,41 @@
                         "description": "the companyRegistryUser is not valid",
                         "schema": {
                             "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/type": {
+            "get": {
+                "tags": [
+                    "Company type"
+                ],
+                "summary": "Get district collection",
+                "responses": {
+                    "200": {
+                        "description": "Company type list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyTypeComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 },
