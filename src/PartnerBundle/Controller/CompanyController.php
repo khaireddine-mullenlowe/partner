@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use PartnerBundle\Entity\Company;
 use PartnerBundle\Form\CompanyType;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,7 +64,7 @@ class CompanyController extends MullenloweRestController
     {
         $company = $this->getDoctrine()->getRepository('PartnerBundle:Company')->find($id);
         if (!$company) {
-            throw $this->createNotFoundException('Company not found');
+            throw new NotFoundHttpException(self::CONTEXT, 'Company not found');
         }
 
         return $this->createView($company);
@@ -333,7 +334,7 @@ class CompanyController extends MullenloweRestController
 
         $company = $em->getRepository('PartnerBundle:Company')->find($id);
         if (!$company) {
-            throw $this->createNotFoundException('Company not found');
+            throw new NotFoundHttpException(self::CONTEXT, 'Company not found');
         }
 
         $form = $this->createForm(CompanyType::class, $company);
