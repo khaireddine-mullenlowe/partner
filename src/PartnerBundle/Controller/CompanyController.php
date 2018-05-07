@@ -21,7 +21,7 @@ class CompanyController extends MullenloweRestController
     const CONTEXT = 'Company';
 
     /**
-     * @Rest\Get("/", name="_companies")
+     * @Rest\Get("/", name="_company")
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
@@ -149,5 +149,153 @@ class CompanyController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($company, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Rest\Put("/{id}", name="_company", requirements={"id"="\d+"})
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Put(
+     *     summary="Update company by Id",
+     *     operationId="putCompanyById",
+     *     security={{ "bearer":{} }},
+     *     path="/company/{id}",
+     *     tags={"Company"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="company",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/Company")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the updated company",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/CompanyComplete"),
+     *                 )
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @param int     $id
+     * @return View
+     */
+    public function putAction(Request $request, $id)
+    {
+        return $this->putOrPatch($request, $id);
+    }
+
+    /**
+     * @Rest\Patch(
+     *     "/{id}",
+     *     name="_company",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Patch(
+     *     path="/company/{id}",
+     *     summary="patch company from id",
+     *     operationId="patchCompanyById",
+     *     security={{ "bearer":{} }},
+     *     tags={"Company"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="company",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/Company")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the updated company",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/CompanyComplete"),
+     *                 )
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param int     $id
+     * @return View
+     */
+    public function patchAction(Request $request, $id)
+    {
+        return $this->putOrPatch($request, $id, false);
+    }
+
+    /**
+     * Handles put or patch action
+     *
+     * @param Request $request
+     * @param int $id company id
+     * @param bool $clearMissing
+     *
+     * @return View
+     */
+    private function putOrPatch(Request $request, int $id, $clearMissing = true)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dataInput = $request->request->all();
+
+        $company = $em->getRepository('PartnerBundle:Company')->find($id);
+        if (!$company) {
+            throw $this->createNotFoundException('Company not found');
+        }
+
+        $form = $this->createForm(CompanyType::class, $company);
+        $form->submit($dataInput, $clearMissing);
+        // validate
+        if (!$form->isValid()) {
+            return $this->view($form);
+        }
+
+        $em->flush();
+
+        return $this->createView($company);
     }
 }

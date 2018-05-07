@@ -120,6 +120,128 @@
                 ]
             }
         },
+        "/company/{id}": {
+            "put": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Update company by Id",
+                "operationId": "putCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "patch company from id",
+                "operationId": "patchCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/company/department": {
             "get": {
                 "tags": [

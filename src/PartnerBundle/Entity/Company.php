@@ -123,7 +123,7 @@ class Company extends BaseEntity
      *
      * @return Company
      */
-    public function setType(CompanyType $type)
+    public function setType($type)
     {
         $this->type = $type;
         $type->addCompany($this);
