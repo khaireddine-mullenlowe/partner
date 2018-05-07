@@ -21,7 +21,56 @@ class CompanyController extends MullenloweRestController
     const CONTEXT = 'Company';
 
     /**
-     * @Rest\Get("/", name="_company")
+     * @Rest\Get("/{id}", name="_company", requirements={"id"="\d+"})
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Get(
+     *     path="/company/{id}",
+     *     summary="Get a Company from id",
+     *     operationId="getCompanyById",
+     *     tags={"Company"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyId"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Target company",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/CompanyComplete"),
+     *                 )
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *   security={{ "bearer":{} }}
+     * )
+     *
+     * @param int $id
+     * @return View
+     */
+    public function getAction($id)
+    {
+        $company = $this->getDoctrine()->getRepository('PartnerBundle:Company')->find($id);
+        if (!$company) {
+            throw $this->createNotFoundException('Company not found');
+        }
+
+        return $this->createView($company);
+    }
+
+    /**
+     * @Rest\Get("/", name="_companies")
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(

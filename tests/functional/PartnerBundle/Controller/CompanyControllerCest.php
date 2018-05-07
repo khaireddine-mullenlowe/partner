@@ -101,4 +101,20 @@ HEREDOC;
         $I->seeResponseIsJson();
         $I->seeResponseContains('errors');
     }
+
+    public function tryToGet(\FunctionalTester $I)
+    {
+        $I->sendGET('/company/1');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'Company']);
+    }
+
+    public function tryToGetKO(\FunctionalTester $I)
+    {
+        $I->sendGET('/company/9999');
+        $I->seeResponseCodeIs(404);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('errors');
+    }
 }
