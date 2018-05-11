@@ -64,7 +64,7 @@ class CompanyRegistryUser extends BaseEntity
      * @var CompanyDepartment
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyDepartment")
-     * @ORM\JoinColumn(name="department", referencedColumnName="id")
+     * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      * @Groups({"amqp", "rest"})
      */
     private $department;
@@ -73,10 +73,19 @@ class CompanyRegistryUser extends BaseEntity
      * @var CompanyPosition
      *
      * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPosition")
-     * @ORM\JoinColumn(name="position", referencedColumnName="id")
+     * @ORM\JoinColumn(name="position_id", referencedColumnName="id")
      * @Groups({"amqp", "rest"})
      */
     private $position;
+
+    /**
+     * @var CompanyPositionCode
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPositionCode")
+     * @ORM\JoinColumn(name="position_code_id", referencedColumnName="id")
+     * @Groups({"amqp", "rest"})
+     */
+    private $positionCode;
 
     /**
      * @var string
@@ -85,15 +94,6 @@ class CompanyRegistryUser extends BaseEntity
      * @Groups({"amqp", "rest"})
      */
     private $positionDescription;
-
-    /**
-     * @var CompanyPositionCode
-     *
-     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\CompanyPositionCode")
-     * @ORM\JoinColumn(name="position_code", referencedColumnName="id")
-     * @Groups({"amqp", "rest"})
-     */
-    private $positionCode;
 
     /**
      * @var \DateTime
