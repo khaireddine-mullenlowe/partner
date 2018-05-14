@@ -30,7 +30,7 @@ class CompanyType extends AbstractType
             ->add('type', EntityType::class, [
                 'class' => \PartnerBundle\Entity\CompanyType::class
             ])
-            ->add('registryUsers', CollectionType::class, [
+            ->add('companyRegistryUsers', CollectionType::class, [
                 'entry_type'   => CompanyRegistryUserType::class,
                 'allow_add'    => true,
                 'by_reference' => false,

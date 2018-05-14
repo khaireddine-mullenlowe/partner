@@ -33,3 +33,30 @@ services:
         arguments:
             $logger: '@monolog.logger.sync'
 
+    partner.elastica.listener.partner_registry_user:
+        class: PartnerBundle\Listener\ElasticaPartnerRegistryUserListener
+        arguments:
+            - '@fos_elastica.object_persister.partner.partner_registry_user'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    partner.elastica.listener.partner:
+        class: PartnerBundle\Listener\ElasticaPartnerListener
+        arguments:
+            - '@fos_elastica.object_persister.partner.partner'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    partner.elastica.listener.company_registry_user:
+        class: PartnerBundle\Listener\ElasticaCompanyRegistryUserListener
+        arguments:
+            - '@fos_elastica.object_persister.partner.company_registry_user'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
+

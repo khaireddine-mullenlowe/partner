@@ -23,9 +23,31 @@ class CompanyPosition extends BaseCompany
      */
     private $departments;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\PartnerRegistryUser", mappedBy="position")
+     */
+    private $partnerRegistryUsers;
+
+    /**
+     * One CompanyPosition have Many companyRegistryUsers.
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="PartnerBundle\Entity\CompanyRegistryUser",
+     *     mappedBy="position",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     */
+    private $companyRegistryUsers;
+
     public function __construct()
     {
         $this->departments = new ArrayCollection();
+        $this->partnerRegistryUsers = new ArrayCollection();
+        $this->companyRegistryUsers = new ArrayCollection();
     }
 
     /**
@@ -76,6 +98,88 @@ class CompanyPosition extends BaseCompany
     public function removeDepartment(\PartnerBundle\Entity\CompanyDepartment $department)
     {
         $this->departments->removeElement($department);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPartnerRegistryUsers()
+    {
+        return $this->partnerRegistryUsers;
+    }
+
+    /**
+     * @param ArrayCollection $partnerRegistryUsers
+     *
+     * @return CompanyPosition
+     */
+    public function setPartnerRegistryUsers(ArrayCollection $partnerRegistryUsers)
+    {
+        $this->partnerRegistryUsers = $partnerRegistryUsers;
+
+        return $this;
+    }
+
+    /**
+     * @param PartnerRegistryUser $partnerRegistryUser
+     * @return CompanyPosition
+     */
+    public function addPartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
+    {
+        if (!$this->partnerRegistryUsers->contains($partnerRegistryUser)) {
+            $this->partnerRegistryUsers->add($partnerRegistryUser);
+            $partnerRegistryUser->setPosition($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PartnerRegistryUser $partnerRegistryUser
+     * @return CompanyPosition
+     */
+    public function removePartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
+    {
+        $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
+        $partnerRegistryUser->setPosition(null);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCompanyRegistryUsers()
+    {
+        return $this->companyRegistryUsers;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     *
+     * @return CompanyPosition
+     */
+    public function addCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        if (!$this->companyRegistryUsers->contains($companyRegistryUser)) {
+            $this->companyRegistryUsers->add($companyRegistryUser);
+        }
+        $companyRegistryUser->setPosition($this);
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     *
+     * @return CompanyPosition
+     */
+    public function removeCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        $this->companyRegistryUsers->removeElement($companyRegistryUser);
+        $companyRegistryUser->setPosition(null);
 
         return $this;
     }

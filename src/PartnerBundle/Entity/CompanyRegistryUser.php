@@ -43,7 +43,7 @@ class CompanyRegistryUser extends BaseEntity
     /**
      * @var Company
      *
-     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Company", inversedBy="registryUsers")
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Company", inversedBy="companyRegistryUsers")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      * @Assert\NotNull(groups={"Default", "orchestrator"})
      * @Groups({"amqp", "rest"})
