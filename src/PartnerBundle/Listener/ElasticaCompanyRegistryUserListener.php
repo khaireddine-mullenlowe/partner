@@ -14,17 +14,6 @@ use PartnerBundle\Entity\CompanyPositionCode;
 
 class ElasticaCompanyRegistryUserListener extends Listener implements EventSubscriber
 {
-
-    private $config;
-
-    public function __construct(
-        ObjectPersisterInterface $postPersister,
-        IndexableInterface $indexable,
-        array $config = []) {
-        $this->config = $config;
-        parent::__construct($postPersister, $indexable, $config);
-    }
-
     /**
      * Returns an array of events this subscriber wants to listen to.
      *
@@ -59,7 +48,17 @@ class ElasticaCompanyRegistryUserListener extends Listener implements EventSubsc
      */
     private function syncRegistryUserIndex($entity)
     {
-        if (in_array(get_class($entity), [Company::class, CompanyDepartment::class, CompanyPosition::class, CompanyPositionCode::class])) {
+        if (
+            in_array(
+                get_class($entity),
+                [
+                    Company::class,
+                    CompanyDepartment::class,
+                    CompanyPosition::class,
+                    CompanyPositionCode::class,
+                ]
+            )
+        ) {
             $this->scheduledForUpdate = array_merge($this->scheduledForUpdate, $entity->getCompanyRegistryUsers()->toArray());
         }
     }
