@@ -100,14 +100,14 @@ class Company extends BaseEntity
      *     orphanRemoval=true
      * )
      */
-    private $registryUsers;
+    private $companyRegistryUsers;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->registryUsers = new ArrayCollection();
+        $this->companyRegistryUsers = new ArrayCollection();
     }
 
     /**
@@ -182,9 +182,9 @@ class Company extends BaseEntity
     /**
      * @return Collection
      */
-    public function getRegistryUsers()
+    public function getCompanyRegistryUsers()
     {
-        return $this->registryUsers;
+        return $this->companyRegistryUsers;
     }
 
     /**
@@ -228,29 +228,29 @@ class Company extends BaseEntity
     }
 
     /**
-     * @param CompanyRegistryUser $registryUser
+     * @param CompanyRegistryUser $companyRegistryUser
      *
      * @return Company
      */
-    public function addRegistryUser(CompanyRegistryUser $registryUser)
+    public function addCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
     {
-        if (!$this->registryUsers->contains($registryUser)) {
-            $this->registryUsers->add($registryUser);
+        if (!$this->companyRegistryUsers->contains($companyRegistryUser)) {
+            $this->companyRegistryUsers->add($companyRegistryUser);
         }
-        $registryUser->setCompany($this);
+        $companyRegistryUser->setCompany($this);
 
         return $this;
     }
 
     /**
-     * @param CompanyRegistryUser $registryUser
+     * @param CompanyRegistryUser $companyRegistryUser
      *
      * @return Company
      */
-    public function removeRegistryUser(CompanyRegistryUser $registryUser)
+    public function removeCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
     {
-        $this->registryUsers->removeElement($registryUser);
-        $registryUser->setCompany(null);
+        $this->companyRegistryUsers->removeElement($companyRegistryUser);
+        $companyRegistryUser->setCompany(null);
 
         return $this;
     }

@@ -21,7 +21,7 @@ class CompanyRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('company');
 
-        if (isset($type)) {
+        if (!empty($type)) {
             $queryBuilder->andWhere('company.type = :type')->setParameter('type', $type);
         }
 

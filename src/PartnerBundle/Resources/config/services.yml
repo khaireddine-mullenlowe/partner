@@ -1,14 +1,15 @@
 services:
-    #######################
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     # HautelookAliceFaker #
-    #######################
     PartnerBundle\DataFixtures\Provider\PartnerFixtureProvider:
         tags:
             - { name: hautelook_alice.faker.provider }
 
-    #######
     # ETL #
-    #######
     PartnerBundle\ETL\Transformer\RegistryUserTransformer:
         public: true
         calls:
@@ -24,3 +25,33 @@ services:
                 method: setConnection
                 arguments:
                     - '@doctrine.dbal.user_connection'
+
+    # AMQP #
+    PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer:
+        arguments:
+            $logger: '@monolog.logger.sync'
+
+    # Elastica Listeners #
+    PartnerBundle\Listener\ElasticaPartnerRegistryUserListener:
+        arguments:
+            - '@fos_elastica.object_persister.partner.partner_registry_user'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    PartnerBundle\Listener\ElasticaPartnerListener:
+        arguments:
+            - '@fos_elastica.object_persister.partner.partner'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    PartnerBundle\Listener\ElasticaCompanyRegistryUserListener:
+        arguments:
+            - '@fos_elastica.object_persister.partner.company_registry_user'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
