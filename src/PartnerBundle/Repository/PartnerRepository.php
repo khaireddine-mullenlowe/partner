@@ -67,34 +67,34 @@ class PartnerRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('partner');
 
-        if ($filters['registryUserId']) {
+        if (isset($filters['registryUserId'])) {
             $queryBuilder
                 ->join('partner.registryUsers', 'registryUsers')
                 ->andWhere('registryUsers.registryUserId = :registryUserId')
                 ->setParameter('registryUserId', $filters['registryUserId']);
         }
 
-        if ($filters['myaudiUserId']) {
+        if (isset($filters['myaudiUserId'])) {
             $queryBuilder
                 ->join('partner.myaudiUsers', 'myaudiUsers')
                 ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
                 ->setParameter('myaudiUserId', $filters['myaudiUserId']);
         }
 
-        if ($filters['partnerIds']) {
+        if (isset($filters['partnerIds'])) {
             $ids = explode(',', $filters['partnerIds']);
             $queryBuilder
                 ->andWhere('partner.id IN (:ids)')
                 ->setParameter('ids', $ids);
         }
 
-        if ($filters['region']) {
+        if (isset($filters['region'])) {
             $queryBuilder
                 ->andWhere('partner.region = :region')
                 ->setParameter('region', $filters['region']);
         }
 
-        if ($filters['district']) {
+        if (isset($filters['district'])) {
             $queryBuilder
                 ->andWhere('partner.district = :district')
                 ->setParameter('district', $filters['district']);

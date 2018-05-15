@@ -133,4 +133,10 @@ HEREDOC;
         $I->seeResponseCodeIs($expectedStatusCode);
         $I->seeResponseIsJson();
     }
+
+    public function testGetCollectionPartner(FunctionalTester $I)
+    {
+        $this->requestJson($I,200, 'GET', '/');
+        $I->seeResponseContainsJson(['context' => 'Partner']);
+    }
 }
