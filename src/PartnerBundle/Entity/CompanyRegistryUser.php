@@ -137,7 +137,7 @@ class CompanyRegistryUser extends BaseEntity
      *
      * @return CompanyRegistryUser
      */
-    public function setCompany(Company $company): CompanyRegistryUser
+    public function setCompany($company): CompanyRegistryUser
     {
         $this->company = $company;
 
