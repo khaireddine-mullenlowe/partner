@@ -99,7 +99,17 @@ class CompanyRegistryUserControllerCest
     {
         $I->wantTo('get a successful response when trying to validate a correct company registry user');
         $I->sendPOST('/company/registry/validate/', ['company' => 1, 'registryUserId' => 3, 'department' => 1, 'position' => 1]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NO_CONTENT); // 200
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NO_CONTENT); // 204
         $I->seeResponseEquals('');
+    }
+
+    public function tryToPutCompanyRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('get a successful response when trying to edit a correct company registry user');
+        $I->sendPUT('/company/registry/1', ['company' => 1, 'registryUserId' => 3, 'department' => 1, 'position' => 1]);
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'CompanyRegistryUser']);
+        $I->seeResponseContains('data');
     }
 }
