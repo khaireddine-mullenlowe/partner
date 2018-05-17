@@ -115,6 +115,8 @@ fos_elastica:
                             type: integer
                         registryUserId:
                             type: integer
+                        convention:
+                            type: boolean
                         partner:
                             type: object
                             properties:
