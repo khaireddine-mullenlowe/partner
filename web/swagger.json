@@ -571,6 +571,71 @@
                 ]
             }
         },
+        "/company/registry/{id}": {
+            "put": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Updates link between company and registry user",
+                "operationId": "putCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyRegistryUserId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated link between company and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/company/validate/": {
             "post": {
                 "tags": [
