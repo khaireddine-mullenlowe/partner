@@ -6,6 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use PartnerBundle\Entity\CompanyRegistryUser;
 use PartnerBundle\Form\CompanyRegistryUserType;
 use Swagger\Annotations as SWG;
@@ -224,7 +225,7 @@ class CompanyRegistryUserController extends MullenloweRestController
 
         $companyRegistryUser = $em->getRepository('PartnerBundle:CompanyRegistryUser')->find($id);
         if (!$companyRegistryUser) {
-            throw $this->createNotFoundException('CompanyRegistryUser not found');
+            throw new NotFoundHttpException(self::CONTEXT, 'CompanyRegistryUser not found');
         }
 
         $form = $this->createForm(CompanyRegistryUserType::class, $companyRegistryUser, ['method' => $request->getMethod()]);
