@@ -168,6 +168,80 @@ class CompanyRegistryUserController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Put("/{id}", name="_company_registry_user")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Put(
+     *     path="/company/registry/{id}",
+     *     summary="Updates link between company and registry user",
+     *     operationId="putCompanyRegistryUser",
+     *     tags={"Company Registry User"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyRegistryUserId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="company registry user",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CompanyRegistryUser")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="the updated link between company and registry user",
+     *         @SWG\Schema(
+     *            allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/CompanyRegistryUserComplete")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return View
+     */
+    public function putAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $companyRegistryUser = $em->getRepository('PartnerBundle:CompanyRegistryUser')->find($id);
+        if (!$companyRegistryUser) {
+            throw new NotFoundHttpException(self::CONTEXT, 'CompanyRegistryUser not found');
+        }
+
+        $form = $this->createForm(CompanyRegistryUserType::class, $companyRegistryUser, ['method' => $request->getMethod()]);
+        $form->handleRequest($request);
+
+        // validate
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->createView($companyRegistryUser);
+        }
+
+        return $this->view($form);
+    }
+
+    /**
      * @Rest\Post("/validate/", name="_company_registry_user")
      * @Rest\View(serializerGroups={"rest"})
      *
