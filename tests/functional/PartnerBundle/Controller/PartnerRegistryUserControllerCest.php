@@ -181,4 +181,13 @@ HEREDOC;
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::NO_CONTENT); // 200
         $I->seeResponseEquals('');
     }
+
+    public function tryToDeletePartnerRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('delete a partner registry user');
+        $I->sendDELETE('/registry/1');
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('The resource has been deleted.');
+    }
 }
