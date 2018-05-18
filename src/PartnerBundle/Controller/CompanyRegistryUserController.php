@@ -242,6 +242,64 @@ class CompanyRegistryUserController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Delete(
+     *     "/{id}",
+     *     name="company_registry_user",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Delete(
+     *     path="/company/registry/{id}",
+     *     summary="delete companyRegistryUser by id",
+     *     operationId="deleteCompanyRegistryUserById",
+     *     tags={"Company Registry User"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyRegistryUserId"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="delete status",
+     *         @SWG\Schema(ref="#/definitions/Success")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
+     * )
+     *
+     * @param integer $id
+     * @return View
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var CompanyRegistryUser $companyRegistryUser
+         */
+        $companyRegistryUser = $em->getRepository('PartnerBundle:CompanyRegistryUser')->find($id);
+        if (!$companyRegistryUser) {
+            throw new NotFoundHttpException(self::CONTEXT, 'CompanyRegistryUser not found.');
+        }
+
+        $em->remove($companyRegistryUser);
+        $em->flush();
+
+        return $this->deleteView();
+    }
+
+    /**
      * @Rest\Post("/validate/", name="_company_registry_user")
      * @Rest\View(serializerGroups={"rest"})
      *
