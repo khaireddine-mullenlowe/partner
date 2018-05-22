@@ -112,4 +112,13 @@ class CompanyRegistryUserControllerCest
         $I->seeResponseContainsJson(['context' => 'CompanyRegistryUser']);
         $I->seeResponseContains('data');
     }
+
+    public function tryToDeleteCompanyRegistryUser(\FunctionalTester $I)
+    {
+        $I->wantTo('delete a company registry user');
+        $I->sendDELETE('/company/registry/1');
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('The resource has been deleted.');
+    }
 }

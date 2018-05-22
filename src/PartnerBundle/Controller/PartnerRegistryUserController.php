@@ -5,6 +5,7 @@ namespace PartnerBundle\Controller;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use PartnerBundle\Entity\PartnerRegistryUser;
 use PartnerBundle\Form\PartnerRegistryUserType;
 use Swagger\Annotations as SWG;
@@ -229,6 +230,64 @@ class PartnerRegistryUserController extends MullenloweRestController
     public function putAction(Request $request, int $id)
     {
         return $this->putOrPatch($request, $id);
+    }
+
+    /**
+     * @Rest\Delete(
+     *     "/{id}",
+     *     name="partner_registry_user",
+     *     requirements={"id"="\d+"}
+     * )
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Delete(
+     *     path="/registry/{id}",
+     *     summary="delete partnerRegistryUser by id",
+     *     operationId="deletePartnerRegistryUserById",
+     *     tags={"Partner Registry User"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="partnerRegistryUserId"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="delete status",
+     *         @SWG\Schema(ref="#/definitions/Success")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *    ),
+     *    security={{ "bearer":{} }}
+     * )
+     *
+     * @param integer $id
+     * @return View
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var PartnerRegistryUser $partnerRegistryUser
+         */
+        $partnerRegistryUser = $em->getRepository('PartnerBundle:PartnerRegistryUser')->find($id);
+        if (!$partnerRegistryUser) {
+            throw new NotFoundHttpException(self::CONTEXT, 'PartnerRegistryUser not found.');
+        }
+
+        $em->remove($partnerRegistryUser);
+        $em->flush();
+
+        return $this->deleteView();
     }
 
     /**
