@@ -20,6 +20,7 @@ use Swagger\Annotations as SWG;
 class CompanyController extends MullenloweRestController
 {
     const CONTEXT = 'Company';
+    const LIMIT = 20;
 
     /**
      * @Rest\Get("/{id}", name="_company", requirements={"id"="\d+"})
@@ -134,7 +135,7 @@ class CompanyController extends MullenloweRestController
         $pager = $paginator->paginate(
             $companies,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);

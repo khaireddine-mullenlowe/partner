@@ -22,6 +22,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class PartnerController extends MullenloweRestController
 {
     const CONTEXT = 'Partner';
+    const LIMIT = 20;
 
     /**
      * @Rest\Get("/types", name="_partner_type")
@@ -175,7 +176,7 @@ class PartnerController extends MullenloweRestController
         $pager = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);
