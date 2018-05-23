@@ -38,6 +38,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
+        status: 1
         siteType: '<randomElement(<{partner_site_type}>)>'
         category: '<randomElement(<{partner_category}>)>'
         representationType: '<randomElement(<{partner_representation_type}>)>'
@@ -72,6 +73,7 @@ PartnerBundle\Entity\Partner:
         occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
         isEtron: <boolean(50)>
         group: '75%? @group*'
+        status: 1
         siteType: '<randomElement(<{partner_site_type}>)>'
         category: '<randomElement(<{partner_category}>)>'
         representationType: '<randomElement(<{partner_representation_type}>)>'

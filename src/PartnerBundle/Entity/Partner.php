@@ -51,6 +51,14 @@ class Partner extends BaseEntity
     protected $type;
 
     /**
+     * @var boolean
+     * @ORM\Column(type="boolean", options={"default":1})
+     * @Assert\Type("boolean")
+     * @Groups({"amqp", "rest"})
+     */
+    protected $status;
+
+    /**
      * @ORM\Column(type="string", unique=true, nullable=true)
      * @var string
      * @Groups({"amqp", "rest"})
@@ -370,6 +378,7 @@ class Partner extends BaseEntity
         $this->isPartnerPlus = false;
         $this->isOccPlus = false;
         $this->isEtron = false;
+        $this->status = true;
     }
 
     /**
@@ -1102,6 +1111,25 @@ class Partner extends BaseEntity
     {
         $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
         $partnerRegistryUser->setPartner(null);
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param bool $status
+     * @return Partner
+     */
+    public function setStatus(bool $status)
+    {
+        $this->status = $status;
 
         return $this;
     }
