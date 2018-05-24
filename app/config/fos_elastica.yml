@@ -334,3 +334,114 @@ fos_elastica:
                         finder: ~
                         provider: ~
                         listener: ~
+
+                partner_myaudi_user:
+                    properties:
+                        id:
+                            type: integer
+                        myaudiUserId:
+                            type: integer
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                        partner:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                type:
+                                    type: string
+                                contractNumber:
+                                    type: string
+                                corporateName:
+                                    type: string
+                                commercialName:
+                                    type: string
+                                kvpsNumber:
+                                    type: string
+                                webSite:
+                                    type: string
+                                isPartnerR8:
+                                    type: boolean
+                                isTwinService:
+                                    type: boolean
+                                isPartnerPlus:
+                                    type: boolean
+                                isOccPlus:
+                                    type: boolean
+                                occPlusContractNumber:
+                                    type: string
+                                isEtron:
+                                    type: boolean
+                                siteType:
+                                    type: string
+                                category:
+                                    type: string
+                                representationType:
+                                    type: string
+                                prestigeType:
+                                    type: string
+                                dealersMeeting:
+                                    type: boolean
+                                brandDays:
+                                    type: boolean
+                                rent:
+                                    type: boolean
+                                extraHour:
+                                    type: boolean
+                                ferMembership:
+                                    type: boolean
+                                onlineQuotation:
+                                    type: boolean
+                                amexPayment:
+                                    type: boolean
+                                isDigitAll:
+                                    type: boolean
+                                digitAllId:
+                                    type: string
+                                isV12:
+                                    type: boolean
+                                v12Id:
+                                    type: string
+                                sellingVolume:
+                                    type: integer
+                                group:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                        websiteUrl:
+                                            type: string
+                                        status:
+                                            type: integer
+                                region:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                        partnerType:
+                                            type: string
+                                district:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                legacyId:
+                                    type: integer
+                                createdAt:
+                                    type: date
+                                updatedAt:
+                                    type: date
+                    persistence:
+                        driver: orm
+                        model: PartnerBundle\Entity\PartnerMyaudiUser
+                        finder: ~
+                        provider: ~
+                        listener: ~
