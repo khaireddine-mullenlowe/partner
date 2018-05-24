@@ -39,6 +39,9 @@ class ElasticaCompanyRegistryUserListener extends Listener implements EventSubsc
      */
     public function preRemove(LifecycleEventArgs $args)
     {
+        echo '=========================';
+        var_dump($args->getObject());
+        echo '=========================';
         $this->syncRegistryUserIndex($args->getObject());
     }
 
@@ -59,7 +62,10 @@ class ElasticaCompanyRegistryUserListener extends Listener implements EventSubsc
                 ]
             )
         ) {
+            echo '====== SYNC =====';
+            var_dump(count($this->scheduledForUpdate));
             $this->scheduledForUpdate = array_merge($this->scheduledForUpdate, $entity->getCompanyRegistryUsers()->toArray());
+            var_dump(count($this->scheduledForUpdate));
         }
     }
 }
