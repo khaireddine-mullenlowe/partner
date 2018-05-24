@@ -349,4 +349,58 @@ class CompanyController extends MullenloweRestController
 
         return $this->createView($company);
     }
+
+    /**
+     * @Rest\Delete("/{id}", name="_company")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Delete(
+     *     path="/company/{id}",
+     *     summary="Delete company from id",
+     *     operationId="deleteCompanyById",
+     *     security={{ "bearer":{} }},
+     *     tags={"Company"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="companyId"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success message",
+     *         @SWG\Schema(ref="#/definitions/Success")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="updating error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     * @param Request $request
+     * @return View
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /**
+         * @var Company $company
+         */
+        $company = $em->getRepository('PartnerBundle:Company')->find($id);
+        if (!$company) {
+            throw $this->createNotFoundException('Company not found');
+        }
+
+        $em->remove($company);
+        $em->flush();
+
+        return $this->deleteView();
+    }
 }
