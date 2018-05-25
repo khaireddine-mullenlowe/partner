@@ -45,6 +45,7 @@ class PartnerType extends AbstractType
             ->add('isOccPlus', CheckboxType::class)
             ->add('occPlusContractNumber', TextType::class)
             ->add('isEtron', CheckboxType::class)
+            ->add('status', CheckboxType::class)
             ->add('partnerRegistryUsers', CollectionType::class, [
                 'entry_type'   => PartnerRegistryUserType::class,
                 'allow_add'    => true,

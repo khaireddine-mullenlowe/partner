@@ -37,6 +37,8 @@ fos_elastica:
                             type: string
                         isEtron:
                             type: boolean
+                        status:
+                            type: boolean
                         siteType:
                             type: string
                         category:
