@@ -1,9 +1,9 @@
 #!/bin/sh
 #
-# If DB schema has changed then launch migration process again
+# If DB schema has changed then update DB schema
 
 php bin/console doctrine:schema:validate --env=prod --quiet
 
-if [ $? -ne 0 ] && [ -f "bin/migrate.sh" ]; then
-    sh bin/migrate.sh
+if [ $? -ne 0 ]; then
+    php bin/console doctrine:schema:update --force --env=prod
 fi
