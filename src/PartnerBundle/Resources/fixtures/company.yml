@@ -2,14 +2,13 @@ parameters:
     company_types:
         - 'Audi France'
         - 'Volkswagen Group France'
-        - 'Partner'
         - 'Agency'
         - 'ExternalPartner'
         - 'Holding'
     company_departments: ['Après-vente' ,'Audi Client Plus' ,'Audi Magazine' ,'Audi Occasion Plus' ,'Audi Partner Plus' ,'Audi pro' ,'Centre de pilotage' ,'Commerce' ,'Communication nationale' ,'Communication régionale' ,'Conseiller en communication' ,'Controlling' ,'Développement réseau' ,'Direction' ,'Evénements et partenariats' ,'Fourniture de contenus' ,'Marketing' ,'Marketing direct' ,'Media' ,'Prestataire informatique' ,'Relations Clients' ,'Relations Presse' ,'Volkswagen Utilitaires']
 
 PartnerBundle\Entity\CompanyType:
-    company_type{1..6}:
+    company_type{1..5}:
         id: <current()>
         name: '<arrayAt(<{company_types}>, $id - 1)>'
         status: 1
@@ -26,10 +25,18 @@ PartnerBundle\Entity\Company:
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
         updatedAt: '<dateTimeBetween($createdAt, "now")>'
-    company{2..20}:
-        type: '@company_type<numberBetween(2, 6)>'
+    company{2..29}:
+        type: '@company_type<numberBetween(2, 5)>'
         corporateName: '<company()>'
         commercialName: <($corporateName)>
+        status: 1
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    company30:
+        type: '@company_type3'
+        corporateName: 'MULLENLOWE PARIS'
+        commercialName: 'MULLENLOWE PARIS'
         status: 1
         legacyId (unique): <numberBetween(1, 300)>
         createdAt: '<dateTimeBetween("-3 years", "now")>'
@@ -65,14 +72,14 @@ PartnerBundle\Entity\CompanyPositionCode:
 
 PartnerBundle\Entity\CompanyRegistryUser:
     company_registry_user1:
-            company: '@company<numberBetween(1, 20)>'
-            registryUserId: 1
-            department: '@company_department*'
-            position: '@company_position<numberBetween(1, 50)>'
-            positionDescription: '<sentence()>'
-            positionCode: '10%? @company_position_code*'
-            createdAt: '<dateTimeBetween("-3 years", "now")>'
-            updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        company: '@company<numberBetween(1, 20)>'
+        registryUserId: 1
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionDescription: '<sentence()>'
+        positionCode: '10%? @company_position_code*'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
     company_registry_user2:
         company: '@company<numberBetween(1, 20)>'
         registryUserId: 2
