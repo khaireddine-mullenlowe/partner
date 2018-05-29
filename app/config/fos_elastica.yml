@@ -38,7 +38,7 @@ fos_elastica:
                         isEtron:
                             type: boolean
                         status:
-                            type: boolean
+                            type: integer
                         siteType:
                             type: string
                         category:
@@ -98,6 +98,8 @@ fos_elastica:
                                     type: integer
                                 name:
                                     type: string
+                        status:
+                            type: integer
                         legacyId:
                             type: integer
                         createdAt:
@@ -107,6 +109,39 @@ fos_elastica:
                     persistence:
                         driver: orm
                         model: PartnerBundle\Entity\Partner
+                        finder: ~
+                        provider: ~
+                        listener: ~
+
+                company:
+                    properties:
+                        id:
+                            type: integer
+                        corporateName:
+                            type: string
+                        commercialName:
+                            type: string
+                        companyType:
+                            type: object
+                            property_path: type
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: string
+                                status:
+                                    type: integer
+                        status:
+                            type: integer
+                        legacyId:
+                            type: integer
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: PartnerBundle\Entity\Company
                         finder: ~
                         provider: ~
                         listener: ~
@@ -280,8 +315,9 @@ fos_elastica:
                             properties:
                                 id:
                                     type: integer
-                                type:
+                                companyType:
                                     type: object
+                                    property_path: type
                                     properties:
                                         id:
                                             type: integer

@@ -51,12 +51,13 @@ class Partner extends BaseEntity
     protected $type;
 
     /**
-     * @var boolean
-     * @ORM\Column(type="boolean", options={"default":1})
-     * @Assert\Type("boolean")
+     * @var int
+     *
+     * @ORM\Column(type="smallint", options={"default":1})
+     * @Assert\NotNull()
      * @Groups({"amqp", "rest"})
      */
-    protected $status;
+    protected $status = 1;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
@@ -378,7 +379,6 @@ class Partner extends BaseEntity
         $this->isPartnerPlus = false;
         $this->isOccPlus = false;
         $this->isEtron = false;
-        $this->status = true;
     }
 
     /**
@@ -1116,7 +1116,7 @@ class Partner extends BaseEntity
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getStatus()
     {
@@ -1124,10 +1124,10 @@ class Partner extends BaseEntity
     }
 
     /**
-     * @param bool $status
+     * @param int $status
      * @return Partner
      */
-    public function setStatus(bool $status)
+    public function setStatus(int $status)
     {
         $this->status = $status;
 
