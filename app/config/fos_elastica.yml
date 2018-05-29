@@ -38,7 +38,7 @@ fos_elastica:
                         isEtron:
                             type: boolean
                         status:
-                            type: boolean
+                            type: integer
                         siteType:
                             type: string
                         category:
@@ -132,7 +132,7 @@ fos_elastica:
                                 status:
                                     type: integer
                         status:
-                            type: boolean
+                            type: integer
                         legacyId:
                             type: integer
                         createdAt:
