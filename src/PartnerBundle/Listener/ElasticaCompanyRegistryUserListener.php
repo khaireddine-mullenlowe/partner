@@ -39,14 +39,15 @@ class ElasticaCompanyRegistryUserListener extends Listener implements EventSubsc
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-        $this->syncRegistryUserIndex($args->getObject());
+        $this->syncRegistryUserIndex($args->getObject(), true);
     }
 
     /**
      * Synchronize RegistryUser Index on update / remove child.
-     * @param mixed $entity
+     * @param mixed     $entity
+     * @param boolean   $delete
      */
-    private function syncRegistryUserIndex($entity)
+    private function syncRegistryUserIndex($entity, $delete = false)
     {
         if (
             in_array(
@@ -59,7 +60,21 @@ class ElasticaCompanyRegistryUserListener extends Listener implements EventSubsc
                 ]
             )
         ) {
-            $this->scheduledForUpdate = array_merge($this->scheduledForUpdate, $entity->getCompanyRegistryUsers()->toArray());
+            $this->syncScheduled($entity->getCompanyRegistryUsers()->toArray(), $delete);
+        }
+    }
+
+    /**
+     * Record dependencies for update or remove from indexes.
+     * @param array     $items
+     * @param bool      $delete
+     */
+    private function syncScheduled(array $items, $delete = false)
+    {
+        if ($delete) {
+            $this->scheduledForDeletion = array_merge($this->scheduledForDeletion, array_column($items, 'id'));
+        } else {
+            $this->scheduledForUpdate = array_merge($this->scheduledForUpdate, $items);
         }
     }
 }

@@ -427,7 +427,7 @@ class PartnerController extends MullenloweRestController
      * Handles put or patch action
      *
      * @param Request $request
-     * @param int $id lead id
+     * @param int $id $partner id
      * @param bool $clearMissing
      *
      * @return View
@@ -437,12 +437,12 @@ class PartnerController extends MullenloweRestController
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
 
-        $lead = $em->getRepository('PartnerBundle:Partner')->find($id);
-        if (!$lead) {
+        $partner = $em->getRepository('PartnerBundle:Partner')->find($id);
+        if (!$partner) {
             throw $this->createNotFoundException('Partner not found');
         }
 
-        $form = $this->createForm(PartnerType::class, $lead);
+        $form = $this->createForm(PartnerType::class, $partner);
         $form->submit($dataInput, $clearMissing);
         // validate
         if (!$form->isValid()) {
@@ -451,6 +451,6 @@ class PartnerController extends MullenloweRestController
 
         $em->flush();
 
-        return $this->createView($lead);
+        return $this->createView($partner);
     }
 }

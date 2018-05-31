@@ -117,4 +117,17 @@ HEREDOC;
         $I->seeResponseIsJson();
         $I->seeResponseContains('errors');
     }
+
+    public function tryToDelete(\FunctionalTester $I)
+    {
+        $I->sendDELETE('/company/12');
+        $I->seeResponseContainsJson(['context' => 'Company']);
+        $I->seeResponseContains('The resource has been deleted');
+    }
+
+    public function tryToDeleteKo(\FunctionalTester $I)
+    {
+        $I->sendDELETE('/company/99999');
+        $I->seeResponseContains('errors');
+    }
 }
