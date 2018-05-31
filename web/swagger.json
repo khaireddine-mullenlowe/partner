@@ -120,6 +120,47 @@
                     }
                 ]
             },
+            "delete": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Delete company from id",
+                "operationId": "deleteCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "patch": {
                 "tags": [
                     "Company"
