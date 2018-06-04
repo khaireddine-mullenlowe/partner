@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "235145356483b3a7a04fd8ca3dff3377",
-    "content-hash": "fffed66ceef9b37ff7b052bcf6048428",
+    "hash": "823904d9cc795c1968bf8a5e42b567d2",
+    "content-hash": "5e7564dbfc9b7b61c869dff1514752e1",
     "packages": [
         {
             "name": "analog/analog",
@@ -2341,16 +2341,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/auth-common-part",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "0d2c4d3f2d407235c3864550e3ab36a7a79d42ec"
+                "reference": "a7726c0935f58baf9f243c293d9efd8663a44bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/0d2c4d3f2d407235c3864550e3ab36a7a79d42ec",
-                "reference": "0d2c4d3f2d407235c3864550e3ab36a7a79d42ec",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/a7726c0935f58baf9f243c293d9efd8663a44bc5",
+                "reference": "a7726c0935f58baf9f243c293d9efd8663a44bc5",
                 "shasum": ""
             },
             "require": {
@@ -2370,6 +2370,7 @@
                 "ruflin/elastica": "^5.2.1",
                 "stof/doctrine-extensions-bundle": "^1.2",
                 "symfony/config": ">=3",
+                "symfony/form": "^3.4",
                 "symfony/security-bundle": ">=3",
                 "symfony/serializer": "^3.3",
                 "symfony/validator": "^3.3"
@@ -2397,7 +2398,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-03-27 15:11:53"
+            "time": "2018-06-04 10:12:05"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -5570,11 +5571,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "mullenlowe/audi-agc5-common-bundle": 20,
         "mullenlowe/audi-agc5-plugins-bundle": 20,
-        "mullenlowe/etl-bundle": 20
+        "mullenlowe/etl-bundle": 20,
+        "mullenlowe/component": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
