@@ -8,8 +8,8 @@ namespace PartnerBundle\Enum;
  */
 class OperatorEnum extends BaseEnum
 {
-    const EQUAL = 'equal';
-    const DIFFERENT = 'different';
+    const EQUAL = 'eq';
+    const NOT_EQUAL = 'neq';
 
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class OperatorEnum extends BaseEnum
     {
         return [
             self::EQUAL => '=',
-            self::DIFFERENT => '<>',
+            self::NOT_EQUAL => '<>',
         ];
     }
 
@@ -30,7 +30,7 @@ class OperatorEnum extends BaseEnum
     {
         $data = [
             self::EQUAL => 'IN',
-            self::DIFFERENT => 'NOT IN',
+            self::NOT_EQUAL => 'NOT IN',
         ];
 
         return $data[$key] ?? false;

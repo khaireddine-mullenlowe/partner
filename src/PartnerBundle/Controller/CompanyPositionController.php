@@ -71,10 +71,20 @@ class CompanyPositionController extends MullenloweRestController
         $repository = $this->getDoctrine()->getRepository('PartnerBundle:CompanyPosition');
         $queryBuilder = $repository->createQueryBuilder('cp');
 
+        $department = null;
+
         if ($request->query->has('department')) {
+            $department = $request->query->get('department');
+        } elseif ($request->query->has('companyDepartment')) {
+            $department = $request->query->get('companyDepartment');
+        } elseif ($request->query->has('partnerDepartment')) {
+            $department = $request->query->get('partnerDepartment');
+        }
+
+        if ($department) {
             $repository->applyFilterDepartment(
                 $queryBuilder,
-                $request->query->get('department'),
+                $department,
                 $request->query->get('operator', OperatorEnum::EQUAL));
         }
 
