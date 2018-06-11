@@ -1,12 +1,7 @@
 partners_type:
-    resource: PartnerBundle\Controller\PartnerTypeController
+    resource: PartnerBundle\Controller\PartnerOptionController
     type:     rest
-    prefix:   /type
-
-partners_site:
-    resource: PartnerBundle\Controller\PartnerSiteController
-    type:     rest
-    prefix:   /site
+    prefix:   /option
 
 partners_api:
     resource: PartnerBundle\Controller\PartnerController
