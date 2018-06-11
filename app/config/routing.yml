@@ -3,6 +3,11 @@ partners_type:
     type:     rest
     prefix:   /type
 
+partners_site:
+    resource: PartnerBundle\Controller\PartnerSiteController
+    type:     rest
+    prefix:   /site
+
 partners_api:
     resource: PartnerBundle\Controller\PartnerController
     type:     rest

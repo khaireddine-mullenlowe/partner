@@ -1468,12 +1468,47 @@
                 ]
             }
         },
+        "/partner/site": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get partner sites",
+                "responses": {
+                    "200": {
+                        "description": "Partner site list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/partner/type": {
             "get": {
                 "tags": [
-                    "Partner type"
+                    "Partner"
                 ],
-                "summary": "Get partner type collection",
+                "summary": "Get partner types",
                 "responses": {
                     "200": {
                         "description": "Partner type list",

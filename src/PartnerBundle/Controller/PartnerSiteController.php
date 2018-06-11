@@ -5,6 +5,7 @@ namespace PartnerBundle\Controller;
 use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use PartnerBundle\Enum\PartnerSiteTypeEnum;
 use PartnerBundle\Enum\PartnerTypeEnum;
 use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
@@ -16,22 +17,22 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  *
  * @package PartnerBundle\Controller
  */
-class PartnerTypeController extends MullenloweRestController
+class PartnerSiteController extends MullenloweRestController
 {
     const LIMIT = 20;
-    const CONTEXT = 'PartnerType';
+    const CONTEXT = 'PartnerSite';
 
     /**
-     * @Rest\Get("", name="partner_type")
+     * @Rest\Get("", name="partner_site")
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
-     *      path="/partner/type",
-     *     summary="Get partner types",
+     *      path="/partner/site",
+     *     summary="Get partner sites",
      *     tags={"Partner"},
      *     @SWG\Response(
      *         response=200,
-     *         description="Partner type list",
+     *         description="Partner site list",
      *         @SWG\Schema(
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
@@ -47,7 +48,6 @@ class PartnerTypeController extends MullenloweRestController
      */
     public function getAction(Request $request)
     {
-
-        return $this->createView(PartnerTypeEnum::getData());
+        return $this->createView(PartnerSiteTypeEnum::getData());
     }
 }
