@@ -24,12 +24,6 @@ doctrine:
         password: %database_password%
         charset:  UTF8
 
-security:
-    firewalls:
-        # replace 'main' by the name of your own firewall
-        secured_api:
-            security: false
-
 hautelook_alice:
     locale: 'fr_FR'
     seed: 1

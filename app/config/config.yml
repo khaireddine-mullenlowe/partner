@@ -112,10 +112,6 @@ nelmio_cors:
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'PATCH']
             max_age: 3600
 
-lexik_jwt_authentication:
-    public_key_path:  "%kernel.root_dir%/../var/jwtcertificates/public.pem"
-    token_ttl:        3600
-
 fos_rest:
     format_listener: true
     routing_loader:

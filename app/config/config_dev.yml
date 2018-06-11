@@ -11,6 +11,12 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+# disable security check in dev and test environments
+security:
+    firewalls:
+        api:
+            security: false
+
 monolog:
     handlers:
         main:

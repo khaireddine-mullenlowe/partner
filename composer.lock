@@ -2348,12 +2348,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "9221cb572304dd44842b898507c47e192410ab58"
+                "reference": "7e9bcbe495ad19a345b2c4a92f724aa93b977072"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/9221cb572304dd44842b898507c47e192410ab58",
-                "reference": "9221cb572304dd44842b898507c47e192410ab58",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/7e9bcbe495ad19a345b2c4a92f724aa93b977072",
+                "reference": "7e9bcbe495ad19a345b2c4a92f724aa93b977072",
                 "shasum": ""
             },
             "require": {
@@ -2373,6 +2373,7 @@
                 "ruflin/elastica": "^5.2.1",
                 "stof/doctrine-extensions-bundle": "^1.2",
                 "symfony/config": ">=3",
+                "symfony/form": "^3.4",
                 "symfony/security-bundle": ">=3",
                 "symfony/serializer": "^3.3",
                 "symfony/validator": "^3.3"
@@ -2400,7 +2401,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-06-01 15:53:54"
+            "time": "2018-06-11 08:58:03"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -3011,16 +3012,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.12",
+            "version": "v2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb"
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
                 "shasum": ""
             },
             "require": {
@@ -3052,10 +3053,11 @@
             "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
             "keywords": [
                 "csprng",
+                "polyfill",
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-04-04 21:24:14"
+            "time": "2018-06-08 15:26:40"
         },
         {
             "name": "php-amqplib/php-amqplib",
@@ -3888,16 +3890,16 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v5.0.21",
+            "version": "v5.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "eb6266b3b472e4002538610b28a0a04bcf94891a"
+                "reference": "209b11f8cee5bf71986dd703e45e27d3ed7a6d15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/eb6266b3b472e4002538610b28a0a04bcf94891a",
-                "reference": "eb6266b3b472e4002538610b28a0a04bcf94891a",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/209b11f8cee5bf71986dd703e45e27d3ed7a6d15",
+                "reference": "209b11f8cee5bf71986dd703e45e27d3ed7a6d15",
                 "shasum": ""
             },
             "require": {
@@ -3936,7 +3938,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2017-08-25 16:55:44"
+            "time": "2018-06-07 06:22:12"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -4119,30 +4121,30 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v3.2.0",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd"
+                "reference": "8204f3cd7c1bd6a6e2955c0a34475243a7bd9802"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/8781649349fe418d51d194f8c9d212c0b97c40dd",
-                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/8204f3cd7c1bd6a6e2955c0a34475243a7bd9802",
+                "reference": "8204f3cd7c1bd6a6e2955c0a34475243a7bd9802",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.22",
-                "php": ">=5.3.2",
-                "symfony/config": "~2.7|~3.0|~4.0",
-                "symfony/dependency-injection": "~2.7|~3.0|~4.0",
-                "symfony/http-kernel": "~2.7|~3.0|~4.0",
-                "symfony/monolog-bridge": "~2.7|~3.0|~4.0"
+                "php": ">=5.6",
+                "symfony/config": "~2.7|~3.3|~4.0",
+                "symfony/dependency-injection": "~2.7|~3.4.10|^4.0.10",
+                "symfony/http-kernel": "~2.7|~3.3|~4.0",
+                "symfony/monolog-bridge": "~2.7|~3.3|~4.0"
             },
             "require-dev": {
-                "symfony/console": "~2.3|~3.0|~4.0",
+                "symfony/console": "~2.7|~3.3|~4.0",
                 "symfony/phpunit-bridge": "^3.3|^4.0",
-                "symfony/yaml": "~2.3|~3.0|~4.0"
+                "symfony/yaml": "~2.7|~3.3|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -4178,7 +4180,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2018-03-05 14:51:36"
+            "time": "2018-06-04 05:55:43"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -5510,16 +5512,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v3.16.0",
+            "version": "v3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "798cc8896897a2bed2e8779f1199eab4754e0e7a"
+                "reference": "f1cdb6a032c1d8187c0990b51e94e8d8bb9898b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/798cc8896897a2bed2e8779f1199eab4754e0e7a",
-                "reference": "798cc8896897a2bed2e8779f1199eab4754e0e7a",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/f1cdb6a032c1d8187c0990b51e94e8d8bb9898b2",
+                "reference": "f1cdb6a032c1d8187c0990b51e94e8d8bb9898b2",
                 "shasum": ""
             },
             "type": "library",
@@ -5563,7 +5565,7 @@
                 "swagger",
                 "ui"
             ],
-            "time": "2018-05-26 08:14:09"
+            "time": "2018-06-02 04:31:19"
         },
         {
             "name": "symfony/phpunit-bridge",
