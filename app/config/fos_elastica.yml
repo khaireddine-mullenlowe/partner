@@ -131,6 +131,15 @@ fos_elastica:
                                     type: string
                                 status:
                                     type: integer
+                                departments:
+                                    type: nested
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                        status:
+                                            type: integer
                         status:
                             type: integer
                         legacyId:
@@ -325,6 +334,15 @@ fos_elastica:
                                             type: string
                                         status:
                                             type: integer
+                                        departments:
+                                            type: nested
+                                            properties:
+                                                id:
+                                                    type: integer
+                                                name:
+                                                    type: string
+                                                status:
+                                                    type: integer
                                 corporateName:
                                     type: string
                                 commercialName:
