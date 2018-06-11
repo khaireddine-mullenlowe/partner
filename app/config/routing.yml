@@ -1,3 +1,8 @@
+partners_type:
+    resource: PartnerBundle\Controller\PartnerTypeController
+    type:     rest
+    prefix:   /type
+
 partners_api:
     resource: PartnerBundle\Controller\PartnerController
     type:     rest

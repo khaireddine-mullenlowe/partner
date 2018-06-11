@@ -1468,6 +1468,41 @@
                 ]
             }
         },
+        "/partner/type": {
+            "get": {
+                "tags": [
+                    "Partner type"
+                ],
+                "summary": "Get partner type collection",
+                "responses": {
+                    "200": {
+                        "description": "Partner type list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/region": {
             "get": {
                 "tags": [
