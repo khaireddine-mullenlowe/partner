@@ -5,8 +5,6 @@ namespace PartnerBundle\Listener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use FOS\ElasticaBundle\Doctrine\Listener;
-use FOS\ElasticaBundle\Persister\ObjectPersisterInterface;
-use FOS\ElasticaBundle\Provider\IndexableInterface;
 use PartnerBundle\Entity\Company;
 use PartnerBundle\Entity\CompanyDepartment;
 use PartnerBundle\Entity\CompanyPosition;
