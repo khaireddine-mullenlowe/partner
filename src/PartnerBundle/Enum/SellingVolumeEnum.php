@@ -3,7 +3,7 @@
 namespace PartnerBundle\Enum;
 
 /**
- * Class PartnerPrestigeTypeEnum
+ * Class SellingVolumeEnum
  * @package PartnerBundle\Enum
  */
 class SellingVolumeEnum

@@ -32,4 +32,13 @@ class PartnerOptionControllerCest
         $I->seeResponseContainsJson(['context' => 'PartnerOption']);
         $I->seeResponseContains('data');
     }
+
+    public function tryToGetPrestige(\FunctionalTester $I)
+    {
+        $I->sendGet('/option/prestige');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'PartnerOption']);
+        $I->seeResponseContains('data');
+    }
 }

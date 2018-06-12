@@ -5,6 +5,7 @@ namespace PartnerBundle\Controller;
 use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use PartnerBundle\Enum\PartnerPrestigeTypeEnum;
 use PartnerBundle\Enum\PartnerSiteTypeEnum;
 use PartnerBundle\Enum\PartnerTypeEnum;
 use PartnerBundle\Enum\SellingVolumeEnum;
@@ -108,5 +109,34 @@ class PartnerOptionController extends MullenloweRestController
     public function getSellingVolumeAction(Request $request)
     {
         return $this->createView(SellingVolumeEnum::getData());
+    }
+
+    /**
+     * @Rest\Get("/prestige", name="partner_option_prestige")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Get(
+     *      path="/partner/option/prestige",
+     *     summary="Get prestige",
+     *     tags={"Partner option"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Partner prestige list",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(type="string")),
+     *                 ),
+     *             }
+     *         )
+     *     ),
+     *
+     *     security={{ "bearer":{} }}
+     * )
+     */
+    public function getPrestigeAction(Request $request)
+    {
+        return $this->createView(PartnerPrestigeTypeEnum::getData());
     }
 }

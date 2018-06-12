@@ -6,7 +6,7 @@ namespace PartnerBundle\Enum;
  * Class PartnerPrestigeTypeEnum
  * @package PartnerBundle\Enum
  */
-class PartnerPrestigeTypeEnum
+class PartnerPrestigeTypeEnum extends BaseEnum
 {
     const PRESTIGE_TYPE_EXCLUSIVE = 'exclusive';
     const PRESTIGE_TYPE_SPECIALIZED = 'specialized';
