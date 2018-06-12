@@ -6,7 +6,7 @@ namespace PartnerBundle\Enum;
  * Class SellingVolumeEnum
  * @package PartnerBundle\Enum
  */
-class SellingVolumeEnum
+class SellingVolumeEnum extends BaseEnum
 {
     const VOLUME_120 = '0-120';
     const VOLUME_240 = '121-240';
