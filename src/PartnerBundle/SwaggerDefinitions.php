@@ -212,17 +212,15 @@ class SwaggerDefinitions
      *          allOf={
      *              @SWG\Definition(ref="#/definitions/IdableEntity"),
      *              @SWG\Definition(ref="#/definitions/NamedEntity"),
-     *              @SWG\Property(
-     *                  property="type",
-     *                  type="string",
-     *                  enum={
-     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
-     *                      PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
-     *                  }
-     *              ),
      *              @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *              @SWG\Definition(@SWG\Property(property="legacy_id", type="string")),
      *              @SWG\Definition(
-     *                  @SWG\Property(property="legacy_id", type="string")
+     *                  @SWG\Property(property="partnerType", type="string",
+     *                      enum={
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_SALES,
+     *                          PartnerBundle\Enum\PartnerTypeEnum::TYPE_AFTERSALES
+     *                      }
+     *                  )
      *              )
      *          }
      *     ),

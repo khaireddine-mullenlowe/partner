@@ -36,6 +36,17 @@ class CompanyDepartmentController extends MullenloweRestController
      *         @SWG\Items(type="string")
      *     ),
      *     @SWG\Parameter(
+     *         name="type",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Filter department by type",
+     *         @SWG\Items(
+     *              type="string",
+     *              enum={"Audi France","Volkswagen Group France","Partner","Agency","ExternalPartner","Holding"}
+     *         )
+     *     ),
+     *     @SWG\Parameter(
      *         name="page",
      *         in="query",
      *         type="integer",

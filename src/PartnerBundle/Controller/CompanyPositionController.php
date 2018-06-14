@@ -29,7 +29,7 @@ class CompanyPositionController extends MullenloweRestController
      *     summary="get positions",
      *     tags={"Position"},
      *     @SWG\Parameter(
-     *         name="deparment",
+     *         name="department",
      *         in="query",
      *         type="integer",
      *         required=false,
