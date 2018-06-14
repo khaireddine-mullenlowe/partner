@@ -347,6 +347,24 @@
                         }
                     },
                     {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter department by type",
+                        "required": false,
+                        "type": "string",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Audi France",
+                                "Volkswagen Group France",
+                                "Partner",
+                                "Agency",
+                                "ExternalPartner",
+                                "Holding"
+                            ]
+                        }
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "page number",
@@ -444,7 +462,7 @@
                 "summary": "get positions",
                 "parameters": [
                     {
-                        "name": "deparment",
+                        "name": "department",
                         "in": "query",
                         "description": "deparment id",
                         "required": false,
@@ -1302,6 +1320,41 @@
                 ]
             }
         },
+        "/partner/option/prestige": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get prestige",
+                "responses": {
+                    "200": {
+                        "description": "Partner prestige list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/registry/": {
             "get": {
                 "tags": [
@@ -1947,20 +2000,23 @@
                     "$ref": "#/definitions/NamedEntity"
                 },
                 {
-                    "property": "type",
-                    "type": "string",
-                    "enum": [
-                        "sales",
-                        "aftersales"
-                    ]
-                },
-                {
                     "$ref": "#/definitions/TimestampableEntity"
                 },
                 {
                     "properties": {
                         "legacy_id": {
                             "type": "string"
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "partnerType": {
+                            "type": "string",
+                            "enum": [
+                                "sales",
+                                "aftersales"
+                            ]
                         }
                     }
                 }

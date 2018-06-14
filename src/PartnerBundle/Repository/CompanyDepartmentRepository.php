@@ -26,6 +26,13 @@ class CompanyDepartmentRepository extends EntityRepository
             $qb->where('company_department.id IN (:departmentIds)')->setParameter('departmentIds', $ids);
         }
 
+        if (isset($criteria['type'])) {
+            $qb
+                ->leftJoin('company_department.companyTypes', 'company_types')
+                ->andWhere('company_types.name = :nameType')
+                ->setParameter('nameType', $criteria['type']);
+        }
+
         return $qb->getQuery()->execute();
     }
 }
