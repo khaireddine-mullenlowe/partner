@@ -1197,6 +1197,111 @@
                 ]
             }
         },
+        "/partner/option/type": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get types",
+                "responses": {
+                    "200": {
+                        "description": "Partner type list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/site": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get sites",
+                "responses": {
+                    "200": {
+                        "description": "Partner site list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/selling-volume": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get selling volume",
+                "responses": {
+                    "200": {
+                        "description": "Partner selling volume list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/registry/": {
             "get": {
                 "tags": [
