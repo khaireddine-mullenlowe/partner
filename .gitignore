@@ -11,3 +11,6 @@ tests/_data
 
 .idea
 /c3.php
+!/var/jwtcertificates/
+/var/jwtcertificates/*
+!/var/jwtcertificates/public.pem
