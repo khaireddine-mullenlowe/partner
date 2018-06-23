@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jobs>
-    <job name="Partners Myaudi Users migration">
+    <job name="Sales Partners Myaudi Users migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
@@ -43,6 +43,61 @@
         <mappings>
             <mapping>
                 <name>sales_partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>myaudiUserId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Aftersales Partners Myaudi Users migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        t1.aftersales_partner_id,
+                        t1.contact_id,
+                        CASE WHEN t1.selection_time IS NOT NULL
+                            THEN t1.selection_time
+                            ELSE t4.hist_change_date
+                        END AS created_at
+                    FROM ctc_aftersales_partner t1
+                    INNER JOIN sys_user t2
+                        ON t2.contact_id = t1.contact_id
+                        AND t2.status = 1
+                    INNER JOIN usr_application_access t3 on t3.user_id = t2.id_user
+                    INNER JOIN (
+                        SELECT contact_id, aftersales_partner_id, hist_action, Max(hist_change_date) as hist_change_date
+                        FROM HIST_AUDIV3.dbo.hist_ctc_aftersales_partner
+                        WHERE hist_action = 'INSERT'
+                        GROUP by contact_id, aftersales_partner_id, hist_action
+                    ) t4
+                        ON t4.contact_id = t1.contact_id
+                        AND t4.aftersales_partner_id = t1.aftersales_partner_id
+                    WHERE t3.application_id = 4
+                    ORDER BY t1.aftersales_partner_id ASC
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\MyaudiUserTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\PartnerMyaudiUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>aftersales_partner_id</name>
                 <targetProperty>partner</targetProperty>
                 <type>entity</type>
                 <entityClass>PartnerBundle\Entity\Partner</entityClass>
