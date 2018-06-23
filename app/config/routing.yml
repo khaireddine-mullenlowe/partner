@@ -8,6 +8,11 @@ partners_api:
     type:     rest
     prefix:   /
 
+partner_myaudi_user:
+    resource: PartnerBundle\Controller\PartnerMyaudiUserController
+    type:     rest
+    prefix:   /myaudi
+
 partner_registry_user:
     resource: PartnerBundle\Controller\PartnerRegistryUserController
     type:     rest
