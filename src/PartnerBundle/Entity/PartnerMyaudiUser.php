@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class PartnerMyaudiUser
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerMyaudiUserRepository")
  * @ORM\Table(
  *     name="partner_myaudi_user",
  *     indexes={

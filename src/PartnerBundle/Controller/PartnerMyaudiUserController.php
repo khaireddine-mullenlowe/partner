@@ -105,8 +105,7 @@ class PartnerMyaudiUserController extends MullenloweRestController
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getDoctrine()
             ->getRepository('PartnerBundle:PartnerMyaudiUser')
-            ->createQueryBuilder('pmu');
-        $this->applyFilters($queryBuilder, $request);
+            ->applyFilters($request->query->all());
 
         if ('0' === $request->query->get('paginate')) {
             $result = $queryBuilder
@@ -184,14 +183,7 @@ class PartnerMyaudiUserController extends MullenloweRestController
         /** @var PartnerMyaudiUser $partnerMyaudiUser */
         $partnerMyaudiUser = $em
             ->getRepository('PartnerBundle:PartnerMyaudiUser')
-            ->createQueryBuilder('pmu')
-            ->andWhere('pmu.myaudiUserId = :myaudiUserId')
-            ->setParameter('myaudiUserId', $dataInput['myaudiUserId'])
-            ->innerJoin('pmu.partner', 'p')
-            ->andWhere('p.type = :partnerType')
-            ->setParameter('partnerType', $partner->getType())
-            ->getQuery()
-            ->execute();
+            ->getSingleResult($dataInput['myaudiUserId'], $partner->getType());
 
         if ($partnerMyaudiUser && $partnerMyaudiUser[0]) {
             $partnerMyaudiUser = $partnerMyaudiUser[0];
@@ -371,33 +363,5 @@ class PartnerMyaudiUserController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($partnerMyaudiUser);
-    }
-
-    /**
-     * Applies filters from request
-     * todo: move this method in a service
-     *
-     * @param QueryBuilder $builder
-     * @param Request $request
-     */
-    private function applyFilters(QueryBuilder $builder, Request $request)
-    {
-        if ($myaudiUserId = $request->query->get('myaudiUserId')) {
-            $builder
-                ->andWhere('pmu.myaudiUserId = :myaudiUserId')
-                ->setParameter('myaudiUserId', $myaudiUserId);
-        } elseif ($myaudiUserIds = $request->query->get('myaudiUserIds')) {
-            $myaudiUserIds = explode(',', $myaudiUserIds);
-            $builder
-                ->andWhere($builder->expr()->in('pmu.myaudiUserId', ':myaudiUserIds'))
-                ->setParameter('myaudiUserIds', $myaudiUserIds);
-        }
-
-        if ($partnerType = $request->query->get('partnerType')) {
-            $builder
-                ->innerJoin('pmu.partner', 'p')
-                ->andWhere('p.type = :partnerType')
-                ->setParameter('partnerType', $partnerType);
-        }
     }
 }
