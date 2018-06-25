@@ -131,7 +131,7 @@ class DepositType extends BaseEntity
         $this->depositWaitOnSpotDaysBeforeFreeCalendar = 0;
         $this->depositReplacementVehicleDaysBeforeFreeCalendar = 0;
         $this->depositValetParkingDaysBeforeFreeCalendar = 0;
-        $this->depositValetParkingDaysBeforeFreeCalendar = 0;
+        $this->depositValetParkingPrice = 0;
     }
 
     /**
