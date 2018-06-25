@@ -1215,6 +1215,247 @@
                 ]
             }
         },
+        "/myaudi/": {
+            "get": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "Finds and displays a PartnerMyaudiUser entity collection",
+                "operationId": "cgetPartnerMyaudiUser",
+                "parameters": [
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "Filter collection by MyaudiUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of MyaudiUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerType",
+                        "in": "query",
+                        "description": "Filter by partner type",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "sales",
+                            "aftersales"
+                        ]
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to MyaudiUser collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PartnerMyaudiUser collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a PartnerMyaudiUser entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "Link partner and myaudi user",
+                "operationId": "postPartnerMyaudiUser",
+                "parameters": [
+                    {
+                        "name": "partner myaudi user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerMyaudiUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created link partner and myaudi user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/myaudi/{id}": {
+            "put": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "update link partner myaudi user by id",
+                "operationId": "putPartnerMyaudiUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerRMyaudiUserId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner myaudi user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerMyaudiUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated link partner and myaudi user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "delete partnerMyaudiUser by id",
+                "operationId": "deletePartnerMyaudiUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerMyaudiUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/partner/option/type": {
             "get": {
                 "tags": [
@@ -1463,12 +1704,6 @@
                                     }
                                 }
                             ]
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
                         }
                     },
                     "500": {

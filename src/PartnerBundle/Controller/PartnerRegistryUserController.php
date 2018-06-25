@@ -2,6 +2,7 @@
 
 namespace PartnerBundle\Controller;
 
+use Knp\Component\Pager\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -76,7 +77,10 @@ class PartnerRegistryUserController extends MullenloweRestController
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
      *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUserComplete")),
+     *                     @SWG\Property(
+     *                         property="data",
+     *                         type="array",
+     *                         @SWG\Items(ref="#/definitions/PartnerRegistryUserComplete")),
      *                 ),
      *             }
      *         )
@@ -89,6 +93,7 @@ class PartnerRegistryUserController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
+        /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getDoctrine()
             ->getRepository('PartnerBundle:PartnerRegistryUser')
             ->createQueryBuilder('pru');
@@ -104,6 +109,7 @@ class PartnerRegistryUserController extends MullenloweRestController
         }
 
         $paginator = $this->get('knp_paginator');
+        /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
@@ -135,15 +141,14 @@ class PartnerRegistryUserController extends MullenloweRestController
      *            allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
      *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/PartnerRegistryUserComplete")),
+     *                     @SWG\Property(
+     *                         property="data",
+     *                         type="array",
+     *                         @SWG\Items(ref="#/definitions/PartnerRegistryUserComplete")
+     *                     ),
      *                 ),
      *             }
      *         )
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -337,8 +342,8 @@ class PartnerRegistryUserController extends MullenloweRestController
      * Handles put or patch action
      *
      * @param Request $request
-     * @param int $id lead id
-     * @param bool $clearMissing
+     * @param int     $id
+     * @param bool    $clearMissing
      *
      * @return View
      */
