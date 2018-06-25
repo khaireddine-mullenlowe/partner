@@ -368,80 +368,11 @@ class Partner extends BaseEntity
     protected $myaudiUsers;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":1})
-     * @Assert\Type("bool")
-     * @Groups({"amqp", "rest"})
+     * @ORM\OneToOne(targetEntity="PartnerBundle\Entity\DepositType", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid()
      */
-    protected $depositVehicleWorkshop = 1;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositVehicleWorkshopDaysBeforeFreeCalendar = 5;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
-     * @Assert\Type("bool")
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositWaitOnSpot;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositWaitOnSpotDaysBeforeFreeCalendar;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
-     * @Assert\Type("bool")
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositReplacementVehicle;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositReplacementVehicleDaysBeforeFreeCalendar;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
-     * @Assert\Type("bool")
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositValetParking;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositValetParkingDaysBeforeFreeCalendar;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="float", nullable=true)
-     * @Groups({"amqp", "rest"})
-     */
-    protected $depositValetParkingPrice;
+    protected $depositType;
 
     /**
      * Partner constructor.
@@ -1227,218 +1158,26 @@ class Partner extends BaseEntity
     }
 
     /**
-     * Set depositVehicleWorkshop
+     * Set depositType
      *
-     * @param boolean $depositVehicleWorkshop
+     * @param DepositType $depositType
      *
      * @return Partner
      */
-    public function setDepositVehicleWorkshop($depositVehicleWorkshop)
+    public function setDepositType(DepositType $depositType)
     {
-        $this->depositVehicleWorkshop = $depositVehicleWorkshop;
+        $this->depositType = $depositType;
 
         return $this;
     }
 
     /**
-     * Get depositVehicleWorkshop
+     * Get depositType
      *
-     * @return boolean
+     * @return DepositType
      */
-    public function getDepositVehicleWorkshop()
+    public function getDepositType()
     {
-        return $this->depositVehicleWorkshop;
-    }
-
-    /**
-     * Set depositVehicleWorkshopDaysBeforeFreeCalendar
-     *
-     * @param integer $depositVehicleWorkshopDaysBeforeFreeCalendar
-     *
-     * @return Partner
-     */
-    public function setDepositVehicleWorkshopDaysBeforeFreeCalendar($depositVehicleWorkshopDaysBeforeFreeCalendar)
-    {
-        $this->depositVehicleWorkshopDaysBeforeFreeCalendar = $depositVehicleWorkshopDaysBeforeFreeCalendar;
-
-        return $this;
-    }
-
-    /**
-     * Get depositVehicleWorkshopDaysBeforeFreeCalendar
-     *
-     * @return integer
-     */
-    public function getDepositVehicleWorkshopDaysBeforeFreeCalendar()
-    {
-        return $this->depositVehicleWorkshopDaysBeforeFreeCalendar;
-    }
-
-    /**
-     * Set depositWaitOnSpot
-     *
-     * @param boolean $depositWaitOnSpot
-     *
-     * @return Partner
-     */
-    public function setDepositWaitOnSpot($depositWaitOnSpot)
-    {
-        $this->depositWaitOnSpot = $depositWaitOnSpot;
-
-        return $this;
-    }
-
-    /**
-     * Get depositWaitOnSpot
-     *
-     * @return boolean
-     */
-    public function getDepositWaitOnSpot()
-    {
-        return $this->depositWaitOnSpot;
-    }
-
-    /**
-     * Set depositWaitOnSpotDaysBeforeFreeCalendar
-     *
-     * @param integer $depositWaitOnSpotDaysBeforeFreeCalendar
-     *
-     * @return Partner
-     */
-    public function setDepositWaitOnSpotDaysBeforeFreeCalendar($depositWaitOnSpotDaysBeforeFreeCalendar)
-    {
-        $this->depositWaitOnSpotDaysBeforeFreeCalendar = $depositWaitOnSpotDaysBeforeFreeCalendar;
-
-        return $this;
-    }
-
-    /**
-     * Get depositWaitOnSpotDaysBeforeFreeCalendar
-     *
-     * @return integer
-     */
-    public function getDepositWaitOnSpotDaysBeforeFreeCalendar()
-    {
-        return $this->depositWaitOnSpotDaysBeforeFreeCalendar;
-    }
-
-    /**
-     * Set depositReplacementVehicle
-     *
-     * @param boolean $depositReplacementVehicle
-     *
-     * @return Partner
-     */
-    public function setDepositReplacementVehicle($depositReplacementVehicle)
-    {
-        $this->depositReplacementVehicle = $depositReplacementVehicle;
-
-        return $this;
-    }
-
-    /**
-     * Get depositReplacementVehicle
-     *
-     * @return boolean
-     */
-    public function getDepositReplacementVehicle()
-    {
-        return $this->depositReplacementVehicle;
-    }
-
-    /**
-     * Set depositReplacementVehicleDaysBeforeFreeCalendar
-     *
-     * @param integer $depositReplacementVehicleDaysBeforeFreeCalendar
-     *
-     * @return Partner
-     */
-    public function setDepositReplacementVehicleDaysBeforeFreeCalendar($depositReplacementVehicleDaysBeforeFreeCalendar)
-    {
-        $this->depositReplacementVehicleDaysBeforeFreeCalendar = $depositReplacementVehicleDaysBeforeFreeCalendar;
-
-        return $this;
-    }
-
-    /**
-     * Get depositReplacementVehicleDaysBeforeFreeCalendar
-     *
-     * @return integer
-     */
-    public function getDepositReplacementVehicleDaysBeforeFreeCalendar()
-    {
-        return $this->depositReplacementVehicleDaysBeforeFreeCalendar;
-    }
-
-    /**
-     * Set depositValetParking
-     *
-     * @param boolean $depositValetParking
-     *
-     * @return Partner
-     */
-    public function setDepositValetParking($depositValetParking)
-    {
-        $this->depositValetParking = $depositValetParking;
-
-        return $this;
-    }
-
-    /**
-     * Get depositValetParking
-     *
-     * @return boolean
-     */
-    public function getDepositValetParking()
-    {
-        return $this->depositValetParking;
-    }
-
-    /**
-     * Set depositValetParkingDaysBeforeFreeCalendar
-     *
-     * @param integer $depositValetParkingDaysBeforeFreeCalendar
-     *
-     * @return Partner
-     */
-    public function setDepositValetParkingDaysBeforeFreeCalendar($depositValetParkingDaysBeforeFreeCalendar)
-    {
-        $this->depositValetParkingDaysBeforeFreeCalendar = $depositValetParkingDaysBeforeFreeCalendar;
-
-        return $this;
-    }
-
-    /**
-     * Get depositValetParkingDaysBeforeFreeCalendar
-     *
-     * @return integer
-     */
-    public function getDepositValetParkingDaysBeforeFreeCalendar()
-    {
-        return $this->depositValetParkingDaysBeforeFreeCalendar;
-    }
-
-    /**
-     * Set depositValetParkingPrice
-     *
-     * @param float $depositValetParkingPrice
-     *
-     * @return Partner
-     */
-    public function setDepositValetParkingPrice($depositValetParkingPrice)
-    {
-        $this->depositValetParkingPrice = $depositValetParkingPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get depositValetParkingPrice
-     *
-     * @return float
-     */
-    public function getDepositValetParkingPrice()
-    {
-        return $this->depositValetParkingPrice;
+        return $this->depositType;
     }
 }
