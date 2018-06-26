@@ -49,7 +49,7 @@ class DepositType extends BaseEntity
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
-    protected $depositVehicleWorkshop;
+    protected $depositVehicleWorkshop = true;
 
     /**
      * @var int
@@ -57,7 +57,7 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"rest"})
      */
-    protected $depositVehicleWorkshopDaysBeforeFreeCalendar;
+    protected $depositVehicleWorkshopDaysBeforeFreeCalendar = 5;
 
     /**
      * @var bool
@@ -66,7 +66,7 @@ class DepositType extends BaseEntity
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
-    protected $depositWaitOnSpot;
+    protected $depositWaitOnSpot = false;
 
     /**
      * @var int
@@ -74,7 +74,7 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"rest"})
      */
-    protected $depositWaitOnSpotDaysBeforeFreeCalendar;
+    protected $depositWaitOnSpotDaysBeforeFreeCalendar = 0;
 
     /**
      * @var bool
@@ -83,7 +83,7 @@ class DepositType extends BaseEntity
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
-    protected $depositReplacementVehicle;
+    protected $depositReplacementVehicle = false;
 
     /**
      * @var int
@@ -91,7 +91,7 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"rest"})
      */
-    protected $depositReplacementVehicleDaysBeforeFreeCalendar;
+    protected $depositReplacementVehicleDaysBeforeFreeCalendar = 0;
 
     /**
      * @var bool
@@ -100,7 +100,7 @@ class DepositType extends BaseEntity
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
-    protected $depositValetParking;
+    protected $depositValetParking = false;
 
     /**
      * @var int
@@ -108,7 +108,7 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"rest"})
      */
-    protected $depositValetParkingDaysBeforeFreeCalendar;
+    protected $depositValetParkingDaysBeforeFreeCalendar = 0;
 
     /**
      * @var int
@@ -116,23 +116,7 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="float", nullable=true)
      * @Groups({"rest"})
      */
-    protected $depositValetParkingPrice;
-
-    /**
-     * Partner constructor.
-     */
-    public function __construct()
-    {
-        $this->depositVehicleWorkshop = true;
-        $this->depositWaitOnSpot = false;
-        $this->depositReplacementVehicle = false;
-        $this->depositValetParking = false;
-        $this->depositVehicleWorkshopDaysBeforeFreeCalendar = 5;
-        $this->depositWaitOnSpotDaysBeforeFreeCalendar = 0;
-        $this->depositReplacementVehicleDaysBeforeFreeCalendar = 0;
-        $this->depositValetParkingDaysBeforeFreeCalendar = 0;
-        $this->depositValetParkingPrice = 0;
-    }
+    protected $depositValetParkingPrice = 0;
 
     /**
      * @return mixed
