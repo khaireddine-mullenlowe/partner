@@ -127,14 +127,6 @@ class DepositType extends BaseEntity
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * Set depositVehicleWorkshop
      *
      * @param boolean $depositVehicleWorkshop
