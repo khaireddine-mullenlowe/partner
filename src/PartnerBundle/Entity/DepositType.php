@@ -45,7 +45,7 @@ class DepositType extends BaseEntity
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":1})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":1})
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
@@ -62,7 +62,7 @@ class DepositType extends BaseEntity
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
@@ -79,7 +79,7 @@ class DepositType extends BaseEntity
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
@@ -96,7 +96,7 @@ class DepositType extends BaseEntity
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
      * @Groups({"rest"})
      */
