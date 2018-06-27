@@ -369,7 +369,7 @@ class Partner extends BaseEntity
 
     /**
      * @ORM\OneToOne(targetEntity="PartnerBundle\Entity\DepositType", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(name="deposit_type_id", referencedColumnName="id", nullable=true)
      * @Assert\Valid()
      */
     protected $depositType;
