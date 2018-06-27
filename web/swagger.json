@@ -13,6 +13,345 @@
         "application/json"
     ],
     "paths": {
+        "/service/types": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "Get Aftersales Services types",
+                "responses": {
+                    "200": {
+                        "description": "Aftersales Services types",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/service/{id}": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "Get an AftersalesService by id",
+                "operationId": "getAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "update AftersalesService by id",
+                "operationId": "putAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "aftersalesService",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "remove AftersalesService by id",
+                "operationId": "removeAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete acknowledge",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "patch AftersalesService by id",
+                "operationId": "patchAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "aftersalesService",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/service/": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "get AftersalesService collection",
+                "operationId": "cgetAftersalesService",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target AftersalesServices",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/AftersalesServiceComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "create AftersalesService",
+                "operationId": "createAftersalesService",
+                "parameters": [
+                    {
+                        "name": "aftersales_service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/company/{id}": {
             "get": {
                 "tags": [
@@ -2584,6 +2923,33 @@
                             "$ref": "#/definitions/CompanyPositionCodeComplete"
                         }
                     }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "AftersalesService": {
+            "required": [
+                "type",
+                "name"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "AftersalesServiceComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/AftersalesService"
                 },
                 {
                     "$ref": "#/definitions/TimestampableEntity"

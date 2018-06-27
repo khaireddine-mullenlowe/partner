@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Aftersales Services migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+                    SELECT t1.id_item,
+                           t1.name,
+                           t2.name AS type,
+                           t3.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN buss_item t2 ON t2.id_item = t1.parent_id
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t3
+                        ON t3.id_item = t1.id_item
+                        AND t3.hist_action = 'INSERT'
+                    WHERE t1.list_id = 115
+                    AND t1.level = 1
+                    ORDER BY t1.id_item
+                ]]>
+        </query>
+    </extractor>
+
+    <transformer />
+
+    <loader>
+        <connection>migration</connection>
+        <entity>PartnerBundle\Entity\AftersalesService</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>id_item</name>
+            <targetProperty>legacyId</targetProperty>
+        </mapping>
+    </mappings>
+</job>

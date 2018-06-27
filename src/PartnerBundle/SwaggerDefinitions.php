@@ -410,6 +410,22 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
      *         }
      *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="AftersalesService",
+     *         @SWG\Property(property="type", type="string"),
+     *         @SWG\Property(property="name", type="string"),
+     *         required={"type", "name"}
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="AftersalesServiceComplete",
+     *         allOf={
+     *             @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *             @SWG\Definition(ref="#/definitions/AftersalesService"),
+     *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *         }
+     *     ),
      * )
      *
      * @SWG\SecurityScheme(

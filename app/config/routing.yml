@@ -57,3 +57,8 @@ district:
     resource: PartnerBundle\Controller\DistrictController
     type:     rest
     prefix:   /district
+
+aftersales_service:
+    resource: PartnerBundle\Controller\AftersalesServiceController
+    type:     rest
+    prefix:   /service

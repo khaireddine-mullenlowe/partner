@@ -2,7 +2,6 @@
 
 namespace PartnerBundle\Controller;
 
-use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PartnerBundle\Entity\Partner;
