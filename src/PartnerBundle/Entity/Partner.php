@@ -1164,7 +1164,7 @@ class Partner extends BaseEntity
      *
      * @return Partner
      */
-    public function setDepositType(DepositType $depositType)
+    public function setDepositType(DepositType $depositType = null)
     {
         $this->depositType = $depositType;
 
