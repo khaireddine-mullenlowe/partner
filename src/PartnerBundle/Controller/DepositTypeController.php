@@ -245,7 +245,7 @@ class DepositTypeController extends MullenloweRestController
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
 
-        if(is_null($partner->getDepositType())) {
+        if (is_null($partner->getDepositType())) {
             $depositeType = new DepositType();
         } else {
             $depositeType = $partner->getDepositType();
@@ -343,7 +343,7 @@ class DepositTypeController extends MullenloweRestController
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
 
-        if(is_null($partner->getDepositType())) {
+        if (is_null($partner->getDepositType())) {
             $depositeType = new DepositType();
         } else {
             $depositeType = $partner->getDepositType();
