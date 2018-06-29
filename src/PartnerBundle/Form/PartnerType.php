@@ -52,12 +52,6 @@ class PartnerType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ])
-            ->add('myaudiUsers', CollectionType::class, [
-                'entry_type' => PartnerMyaudiUserType::class,
-                'allow_add'    => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ])
             ->add('group', EntityType::class, [
                 'class' => Group::class,
             ])
