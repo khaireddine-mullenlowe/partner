@@ -19,7 +19,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     name="aftersales_service",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(name="AftersalesService_unique_idx", columns={"type", "name"})
- *     }
+ *     },
+ *     indexes={@ORM\Index(name="AftersalesService_LegacyId_idx", columns={"legacy_id"})}
  * )
  *
  * @UniqueEntity(

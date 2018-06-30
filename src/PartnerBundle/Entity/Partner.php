@@ -17,7 +17,7 @@ use PartnerBundle\Enum\PartnerVariousEnum;
 
 /**
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\PartnerRepository")
- * @ORM\Table(name="partner")
+ * @ORM\Table(name="partner", indexes={@ORM\Index(name="Partner_LegacyId_idx", columns={"legacy_id"})})
  * @UniqueEntity(
  *       fields={"contractNumber"},
  *       message="contractNumber already in use"
