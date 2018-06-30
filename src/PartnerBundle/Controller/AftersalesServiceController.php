@@ -26,7 +26,7 @@ class AftersalesServiceController extends MullenloweRestController
      * @Rest\View()
      *
      * @SWG\Get(
-     *      path="/service/types",
+     *     path="/service/types",
      *     summary="Get Aftersales Services types",
      *     tags={"AftersalesService"},
      *     @SWG\Response(
