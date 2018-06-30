@@ -4,11 +4,15 @@
 parameters:
     database_host: 127.0.0.1
     database_port: ~
+    # Partner DB
     database_name: DB_PARTNERS
     database_user: dev_u_partners
+    database_password: spirit
+    # User DB
     database_name_user: DEV_DB_USERS
     database_user_user: dev_u_users
-    database_password: spirit
+    database_password_user: spirit
+
     mailer_transport: smtp
     # You should uncomment this if you want to use pdo_sqlite
     database_path: '%kernel.project_dir%/tests/_data/test.sqlite'
