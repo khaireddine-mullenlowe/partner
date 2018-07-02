@@ -22,15 +22,15 @@ class DepositTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('depositVehicleWorkshop', CheckboxType::class)
-            ->add('depositVehicleWorkshopDaysBeforeFreeCalendar', IntegerType::class)
-            ->add('depositWaitOnSpot', CheckboxType::class)
-            ->add('depositWaitOnSpotDaysBeforeFreeCalendar', IntegerType::class)
-            ->add('depositReplacementVehicle', CheckboxType::class)
-            ->add('depositReplacementVehicleDaysBeforeFreeCalendar', IntegerType::class)
-            ->add('depositValetParking', CheckboxType::class)
-            ->add('depositValetParkingDaysBeforeFreeCalendar', IntegerType::class)
-            ->add('depositValetParkingPrice', NumberType::class)
+            ->add('vehicleWorkshop', CheckboxType::class)
+            ->add('vehicleWorkshopDaysBeforeFreeCalendar', IntegerType::class)
+            ->add('waitOnSpot', CheckboxType::class)
+            ->add('waitOnSpotDaysBeforeFreeCalendar', IntegerType::class)
+            ->add('replacementVehicle', CheckboxType::class)
+            ->add('replacementVehicleDaysBeforeFreeCalendar', IntegerType::class)
+            ->add('valetParking', CheckboxType::class)
+            ->add('valetParkingDaysBeforeFreeCalendar', IntegerType::class)
+            ->add('valetParkingPrice', NumberType::class)
         ;
     }
 

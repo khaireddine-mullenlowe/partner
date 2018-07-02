@@ -9,29 +9,29 @@ class DepositTypeControllerCest
 {
     protected static $jsonDeposit = <<<HEREDOC
 {
-    "depositVehicleWorkshop": true,
-    "depositVehicleWorkshopDaysBeforeFreeCalendar": 5,
-    "depositWaitOnSpot": false,
-    "depositWaitOnSpotDaysBeforeFreeCalendar": 0,
-    "depositReplacementVehicle": false,
-    "depositReplacementVehicleDaysBeforeFreeCalendar": 0,
-    "depositValetParking": false,
-    "depositValetParkingDaysBeforeFreeCalendar": 0,
-    "depositValetParkingPrice": 89
+    "vehicleWorkshop": true,
+    "vehicleWorkshopDaysBeforeFreeCalendar": 5,
+    "waitOnSpot": false,
+    "waitOnSpotDaysBeforeFreeCalendar": 0,
+    "replacementVehicle": false,
+    "replacementVehicleDaysBeforeFreeCalendar": 0,
+    "valetParking": false,
+    "valetParkingDaysBeforeFreeCalendar": 0,
+    "valetParkingPrice": 89
 }
 HEREDOC;
 
     protected static $jsonDeposit2 = <<<HEREDOC
 {
-    "depositVehicleWorkshop": false,
-    "depositVehicleWorkshopDaysBeforeFreeCalendar": 0,
-    "depositWaitOnSpot": true,
-    "depositWaitOnSpotDaysBeforeFreeCalendar": 5,
-    "depositReplacementVehicle": false,
-    "depositReplacementVehicleDaysBeforeFreeCalendar": 5,
-    "depositValetParking": false,
-    "depositValetParkingDaysBeforeFreeCalendar": 6,
-    "depositValetParkingPrice": 99
+    "vehicleWorkshop": false,
+    "vehicleWorkshopDaysBeforeFreeCalendar": 0,
+    "waitOnSpot": true,
+    "waitOnSpotDaysBeforeFreeCalendar": 5,
+    "replacementVehicle": false,
+    "replacementVehicleDaysBeforeFreeCalendar": 5,
+    "valetParking": false,
+    "valetParkingDaysBeforeFreeCalendar": 6,
+    "valetParkingPrice": 99
 }
 HEREDOC;
 
