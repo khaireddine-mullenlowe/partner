@@ -62,3 +62,10 @@ aftersales_service:
     resource: PartnerBundle\Controller\AftersalesServiceController
     type:     rest
     prefix:   /service
+
+partner_deposit_type:
+    resource: PartnerBundle\Controller\DepositTypeController
+    type:     rest
+    prefix:   /{id}/deposit
+    requirements:
+        id: \d+
