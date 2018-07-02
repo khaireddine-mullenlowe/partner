@@ -55,7 +55,7 @@
         "nelmio/cors-bundle": "^1.5",
         "php-amqplib/rabbitmq-bundle": "~1.6",
         "sensio/distribution-bundle": "^5.0.19",
-        "sensio/framework-extra-bundle": "^5.0.0",
+        "sensio/framework-extra-bundle": "~5.1.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/symfony": "3.4.*",

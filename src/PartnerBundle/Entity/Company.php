@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @package PartnerBundle\Entity
  *
  * @ORM\Entity(repositoryClass="PartnerBundle\Repository\CompanyRepository")
- * @ORM\Table(name="company")
+ * @ORM\Table(name="company", indexes={@ORM\Index(name="Company_LegacyId_idx", columns={"legacy_id"})})
  */
 class Company extends BaseEntity
 {
