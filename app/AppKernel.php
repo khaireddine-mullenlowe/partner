@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new HadesArchitect\JsonSchemaBundle\JsonSchemaBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\RestBundle\FOSRestBundle(), // FosRestBundle must be loaded before CommonBundle
             new Mullenlowe\CommonBundle\MullenloweCommonBundle(),
