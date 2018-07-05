@@ -375,12 +375,21 @@ class Partner extends BaseEntity
     protected $depositType;
 
     /**
+     * One Partner have Many openingHour.
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="OpeningHour", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Valid()
+     */
+    private $openingHours;
+
+    /**
      * Partner constructor.
      */
     public function __construct()
     {
         $this->myaudiUsers = new ArrayCollection();
         $this->partnerRegistryUsers = new ArrayCollection();
+        $this->openingHours = new ArrayCollection();
         $this->isTwinService = false;
         $this->isPartnerR8 = false;
         $this->isPartnerPlus = false;
@@ -1179,5 +1188,43 @@ class Partner extends BaseEntity
     public function getDepositType()
     {
         return $this->depositType;
+    }
+
+    /**
+     * Add openingHour
+     *
+     * @param OpeningHour $openingHour
+     *
+     * @return Partner
+     */
+    public function addOpeningHour(OpeningHour $openingHour)
+    {
+        if (!$this->openingHours->contains($openingHour)) {
+            $this->openingHours->add($openingHour);
+        }
+        $openingHour->setPartner($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove openingHour
+     *
+     * @param OpeningHour $openingHour
+     */
+    public function removeOpeningHour(OpeningHour $openingHour)
+    {
+        $this->openingHours->removeElement($openingHour);
+        $openingHour->setPartner(null);
+    }
+
+    /**
+     * Get openingHours
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOpeningHours()
+    {
+        return $this->openingHours;
     }
 }

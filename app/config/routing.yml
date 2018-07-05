@@ -69,3 +69,8 @@ partner_deposit_type:
     prefix:   /{id}/deposit
     requirements:
         id: \d+
+
+partner_opening_hour:
+    resource: PartnerBundle\Controller\OpeningHourController
+    type:     rest
+    prefix:   /opening/hour
