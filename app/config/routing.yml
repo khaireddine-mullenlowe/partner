@@ -73,4 +73,4 @@ partner_deposit_type:
 partner_opening_hour:
     resource: PartnerBundle\Controller\OpeningHourController
     type:     rest
-    prefix:   /opening/hour
+    prefix:   /opening-hour

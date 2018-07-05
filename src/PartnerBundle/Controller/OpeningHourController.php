@@ -29,7 +29,7 @@ class OpeningHourController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
-     *     path="/opening/hour",
+     *     path="/opening-hour/",
      *     summary="Finds and displays an OpeningHour entity collection",
      *     operationId="cgetOpeningHour",
      *     tags={"Opening Hour"},
@@ -114,7 +114,7 @@ class OpeningHourController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Post(
-     *     path="/opening/hour/",
+     *     path="/opening-hour/",
      *     summary="Link partner to created opening hour",
      *     operationId="postOpeningHour",
      *     tags={"opening Hour"},
@@ -191,7 +191,7 @@ class OpeningHourController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Delete(
-     *     path="/opening/hour/{id}",
+     *     path="/opening-hour/{id}",
      *     summary="delete openingHour by id",
      *     operationId="deleteOpeningHourById",
      *     tags={"Opening Hour"},
@@ -252,7 +252,7 @@ class OpeningHourController extends MullenloweRestController
      *     summary="update opening hour id",
      *     operationId="putOpeningHourId",
      *     security={{ "bearer":{} }},
-     *     path="/myaudi/{id}",
+     *     path="/opening-hour/{id}",
      *     tags={"Opening Hour"},
      *     @SWG\Parameter(
      *         name="id",

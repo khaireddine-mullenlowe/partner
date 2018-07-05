@@ -28,8 +28,7 @@ class OpeningHourType extends AbstractType
     {
         $builder
             ->add('partner', EntityType::class, [
-                'class' => Partner::class,
-                'constraints' => [new Required(), new NotNull()],
+                'class' => Partner::class
             ])
             ->add('openingDay', TextType::class)
             // An example of input of all time 12:17
