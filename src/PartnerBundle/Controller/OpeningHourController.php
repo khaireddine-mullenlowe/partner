@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 class OpeningHourController extends MullenloweRestController
 {
     const CONTEXT = 'OpeningHour';
+    const LIMIT = 20;
 
     /**
      * Finds and displays a OpeningHour entity collection.
@@ -103,7 +104,7 @@ class OpeningHourController extends MullenloweRestController
         $pager = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);
@@ -164,7 +165,7 @@ class OpeningHourController extends MullenloweRestController
         // Check if already an OpeningHour has a Partner
         $openingHour = $em->getRepository('PartnerBundle:OpeningHour')->findOneByPartner($partner);
         if ($openingHour) {
-            return $this->putOrPatch($request, $openingHour->getId());
+            throw new NotFoundHttpException(self::CONTEXT, 'An opening hour with this partner already exist.');
         }
 
         // here is the creation of a new Opening Hour
