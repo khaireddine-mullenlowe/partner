@@ -33,22 +33,18 @@ class OpeningHourType extends AbstractType
             ->add('openingDay', TextType::class)
             // An example of input of all time 12:17
             ->add('amStartHour', TimeType::class, [
-                'input'  => 'datetime',
                 'widget' => 'single_text',
                 'with_minutes' => true
             ])
             ->add('amEndHour', TimeType::class, [
-                'input'  => 'datetime',
                 'widget' => 'single_text',
                 'with_minutes' => true
             ])
             ->add('pmStartHour', TimeType::class, [
-                'input'  => 'datetime',
                 'widget' => 'single_text',
                 'with_minutes' => true
             ])
             ->add('pmEndHour', TimeType::class, [
-                'input'  => 'datetime',
                 'widget' => 'single_text',
                 'with_minutes' => true
             ])
