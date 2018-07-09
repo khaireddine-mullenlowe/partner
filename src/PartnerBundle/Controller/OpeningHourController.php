@@ -162,12 +162,6 @@ class OpeningHourController extends MullenloweRestController
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
 
-        // Check if already an OpeningHour has a Partner
-        $openingHour = $em->getRepository('PartnerBundle:OpeningHour')->findOneByPartner($partner);
-        if ($openingHour) {
-            throw new NotFoundHttpException(self::CONTEXT, 'An opening hour with this partner already exist.');
-        }
-
         // here is the creation of a new Opening Hour
         $openingHour = new OpeningHour();
         $form = $this->createForm(OpeningHourType::class, $openingHour);
