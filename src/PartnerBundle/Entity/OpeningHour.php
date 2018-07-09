@@ -3,6 +3,7 @@
 namespace PartnerBundle\Entity;
 
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
+use PartnerBundle\Enum\OpeningHourDayEnum;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -53,9 +54,17 @@ class OpeningHour extends BaseEntity
     private $partner;
 
     /**
+     * @ORM\Column(type="string")
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Choice(choices={
+     *     OpeningHourDayEnum::MONDAY,
+     *     OpeningHourDayEnum::TUESDAY,
+     *     OpeningHourDayEnum::WEDNESDAY,
+     *     OpeningHourDayEnum::THURSDAY,
+     *     OpeningHourDayEnum::FRIDAY,
+     *     OpeningHourDayEnum::SATURDAY,
+     *     OpeningHourDayEnum::SUNDAY,
+     * }, strict=true)
      * @Groups({"rest"})
      */
     protected $openingDay;
@@ -63,7 +72,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $amStartHour;
@@ -71,7 +80,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $amEndHour;
@@ -79,7 +88,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmStartHour;
@@ -87,7 +96,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmEndHour;
@@ -104,10 +113,10 @@ class OpeningHour extends BaseEntity
     /**
      * @var int
      *
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint", options={"default":1})
      * @Groups({"rest"})
      */
-    protected $status;
+    protected $status = 1;
 
     /**
      * @return Partner
