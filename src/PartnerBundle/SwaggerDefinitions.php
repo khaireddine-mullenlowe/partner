@@ -437,7 +437,7 @@ class SwaggerDefinitions
      *         @SWG\Property(property="pmEndHour", type="time"),
      *         @SWG\Property(property="nox", type="boolean"),
      *         @SWG\Property(property="status", type="integer"),
-     *         required={"partnerId", "openingDay","amStartHour", "amEndHour","pmStartHour", "pmEndHour","nox", "status"}
+     *         required={"partnerId", "openingDay","amStartHour", "amEndHour","pmStartHour", "pmEndHour","nox"}
      *     ),
      *
      *     @SWG\Definition(
