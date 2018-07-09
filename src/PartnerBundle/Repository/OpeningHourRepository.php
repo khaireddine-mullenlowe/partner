@@ -22,10 +22,11 @@ class OpeningHourRepository extends EntityRepository
         if (!empty($filters['partnerId'])) {
             $builder
                 ->andWhere('oh.partner = :partnerId')
-                ->setParameter('partnerId', $filters['partnerId'])
-                ->orderBy('oh.id', 'ASC')
-            ;
+                ->setParameter('partnerId', $filters['partnerId']);
         }
+
+        $builder
+            ->orderBy('oh.id', 'ASC');
 
         return $builder;
     }
