@@ -426,6 +426,28 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
      *         }
      *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OpeningHour",
+     *         @SWG\Property(property="partnerId", type="integer"),
+     *         @SWG\Property(property="openingDay", type="string"),
+     *         @SWG\Property(property="amStartHour", type="time"),
+     *         @SWG\Property(property="amEndHour", type="time"),
+     *         @SWG\Property(property="pmStartHour", type="time"),
+     *         @SWG\Property(property="pmEndHour", type="time"),
+     *         @SWG\Property(property="nox", type="boolean"),
+     *         @SWG\Property(property="status", type="integer"),
+     *         required={"partnerId", "openingDay","amStartHour", "amEndHour","pmStartHour", "pmEndHour","nox", "status"}
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OpeningHourComplete",
+     *         allOf={
+     *             @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *             @SWG\Definition(ref="#/definitions/OpeningHour"),
+     *         }
+     *     ),
      * )
      *
      * @SWG\SecurityScheme(
