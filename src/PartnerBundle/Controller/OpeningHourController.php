@@ -64,7 +64,7 @@ class OpeningHourController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="PartnerMyaudiUser collection",
+     *         description="Opening Hours collection",
      *         @SWG\Schema(
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
@@ -199,7 +199,7 @@ class OpeningHourController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="delete status",
+     *         description="delete opening hour",
      *         @SWG\Schema(ref="#/definitions/Success")
      *     ),
      *     @SWG\Response(
