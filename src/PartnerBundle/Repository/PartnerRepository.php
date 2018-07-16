@@ -69,8 +69,8 @@ class PartnerRepository extends EntityRepository
 
         if (isset($filters['registryUserId'])) {
             $queryBuilder
-                ->join('partner.registryUsers', 'registryUsers')
-                ->andWhere('registryUsers.registryUserId = :registryUserId')
+                ->join('partner.partnerRegistryUsers', 'partnerRegistryUsers')
+                ->andWhere('partnerRegistryUsers.registryUserId = :registryUserId')
                 ->setParameter('registryUserId', $filters['registryUserId']);
         }
 
