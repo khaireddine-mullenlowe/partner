@@ -120,6 +120,13 @@ class PartnerController extends MullenloweRestController
      *         required=false,
      *         description="registryUserId"
      *     ),
+     *      @SWG\Parameter(
+     *         name="contractNumber",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Contract number"
+     *     ),
      *     @SWG\Parameter(
      *         name="myaudiUserId",
      *         in="query",
