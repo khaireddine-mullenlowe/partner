@@ -2334,16 +2334,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.5.1",
+            "version": "v2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "260891378d3177eedf959e88c240c3bf7ab3ea42"
+                "reference": "85b05784fbad7d6435626915edeeb55ed0bcd6a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/260891378d3177eedf959e88c240c3bf7ab3ea42",
-                "reference": "260891378d3177eedf959e88c240c3bf7ab3ea42",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/85b05784fbad7d6435626915edeeb55ed0bcd6a7",
+                "reference": "85b05784fbad7d6435626915edeeb55ed0bcd6a7",
                 "shasum": ""
             },
             "require": {
@@ -2426,7 +2426,7 @@
                 "rest",
                 "symfony"
             ],
-            "time": "2018-06-30T13:32:28+00:00"
+            "time": "2018-07-06T10:21:24+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2512,12 +2512,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "8f7a69e6afd5bca059fc84c0d9f458cf14f84656"
+                "reference": "85a4b931ca2827141af68279f8d8605c1c0a94f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/8f7a69e6afd5bca059fc84c0d9f458cf14f84656",
-                "reference": "8f7a69e6afd5bca059fc84c0d9f458cf14f84656",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/85a4b931ca2827141af68279f8d8605c1c0a94f3",
+                "reference": "85a4b931ca2827141af68279f8d8605c1c0a94f3",
                 "shasum": ""
             },
             "require": {
@@ -2535,6 +2535,7 @@
                 "php": ">=7",
                 "php-amqplib/rabbitmq-bundle": "~1.6",
                 "phpdocumentor/reflection-docblock": "^4.2",
+                "phpoffice/phpspreadsheet": "^1.2",
                 "ruflin/elastica": "^5.2.1",
                 "stof/doctrine-extensions-bundle": "^1.2",
                 "symfony/config": ">=3",
@@ -2567,7 +2568,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-07-03T08:20:52+00:00"
+            "time": "2018-07-18T15:35:35+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -2575,12 +2576,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git",
-                "reference": "791a9dba98e104b03b863f2d45169e136832c5a9"
+                "reference": "da1a4bc17e199d8ec5a051bf3b39b47151374449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/791a9dba98e104b03b863f2d45169e136832c5a9",
-                "reference": "791a9dba98e104b03b863f2d45169e136832c5a9",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/da1a4bc17e199d8ec5a051bf3b39b47151374449",
+                "reference": "da1a4bc17e199d8ec5a051bf3b39b47151374449",
                 "shasum": ""
             },
             "require": {
@@ -2629,7 +2630,7 @@
                 "bundle",
                 "wega"
             ],
-            "time": "2018-07-02T16:44:48+00:00"
+            "time": "2018-07-12T14:05:34+00:00"
         },
         {
             "name": "mullenlowe/component",
@@ -2679,12 +2680,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/etl-bundle.git",
-                "reference": "adb0bcaaa19b12a7795f861d04f61da8538f40d4"
+                "reference": "681c38bb39d32066f63446923d6185a7557f226d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/adb0bcaaa19b12a7795f861d04f61da8538f40d4",
-                "reference": "adb0bcaaa19b12a7795f861d04f61da8538f40d4",
+                "url": "https://api.github.com/repos/itagenceone/etl-bundle/zipball/681c38bb39d32066f63446923d6185a7557f226d",
+                "reference": "681c38bb39d32066f63446923d6185a7557f226d",
                 "shasum": ""
             },
             "require": {
@@ -2692,7 +2693,8 @@
                 "doctrine/doctrine-migrations-bundle": "^1.2",
                 "doctrine/orm": "^2.5",
                 "greenlion/php-sql-parser": "^4.1",
-                "php": ">=7"
+                "php": ">=7",
+                "symfony/validator": "^3.4"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2707,7 +2709,7 @@
                 "proprietary"
             ],
             "description": "Symfony implementation of an ETL database migration flow",
-            "time": "2018-07-03T08:23:45+00:00"
+            "time": "2018-07-05T13:22:17+00:00"
         },
         {
             "name": "namshi/jose",
@@ -3179,16 +3181,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.15",
+            "version": "v2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
-                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
                 "shasum": ""
             },
             "require": {
@@ -3224,7 +3226,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-06-08T15:26:40+00:00"
+            "time": "2018-07-04T16:31:37+00:00"
         },
         {
             "name": "php-amqplib/php-amqplib",
@@ -3519,6 +3521,92 @@
                 }
             ],
             "time": "2017-07-14T14:27:02+00:00"
+        },
+        {
+            "name": "phpoffice/phpspreadsheet",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
+                "reference": "aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec",
+                "reference": "aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-dom": "*",
+                "ext-gd": "*",
+                "ext-iconv": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
+                "ext-xml": "*",
+                "ext-xmlreader": "*",
+                "ext-xmlwriter": "*",
+                "ext-zip": "*",
+                "ext-zlib": "*",
+                "php": "^5.6|^7.0",
+                "psr/simple-cache": "^1.0"
+            },
+            "require-dev": {
+                "dompdf/dompdf": "^0.8.0",
+                "friendsofphp/php-cs-fixer": "@stable",
+                "jpgraph/jpgraph": "^4.0",
+                "mpdf/mpdf": "^7.0.0",
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^2.7",
+                "tecnickcom/tcpdf": "^6.2"
+            },
+            "suggest": {
+                "dompdf/dompdf": "Option for rendering PDF with PDF Writer",
+                "jpgraph/jpgraph": "Option for rendering charts, or including charts with PDF or HTML Writers",
+                "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
+                "tecnick.com/tcpdf": "Option for rendering PDF with PDF Writer"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpOffice\\PhpSpreadsheet\\": "src/PhpSpreadsheet"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Erik Tilt"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://rootslabs.net"
+                },
+                {
+                    "name": "Mark Baker",
+                    "homepage": "http://markbakeruk.net"
+                }
+            ],
+            "description": "PHPSpreadsheet - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "https://github.com/PHPOffice/PhpSpreadsheet",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "gnumeric",
+                "ods",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2018-06-12T13:40:21+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -4901,20 +4989,21 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.8",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d"
+                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7b604c89da162034bdf4bb66310f358d313dd16d",
-                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6a5f676b77a90823c2d4eaf76137b771adf31323",
+                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
+                "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
@@ -4925,7 +5014,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -4954,16 +5043,16 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "homepage": "https://twig.symfony.com/contributors",
                     "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
+            "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
             ],
-            "time": "2018-04-02T09:24:19+00:00"
+            "time": "2018-07-13T07:18:09+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -5726,16 +5815,16 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.7.1",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
                 "shasum": ""
             },
             "require": {
@@ -5743,7 +5832,7 @@
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
                 "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
@@ -5772,7 +5861,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-15T16:48:10+00:00"
+            "time": "2018-07-12T10:23:15+00:00"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -6457,16 +6546,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "5.0.7",
+            "version": "5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "3eaf040f20154d27d6da59ca2c6e28ac8fd56dce"
+                "reference": "6f9a3c8bf34188a2b53ce2ae7a126089c53e0a9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3eaf040f20154d27d6da59ca2c6e28ac8fd56dce",
-                "reference": "3eaf040f20154d27d6da59ca2c6e28ac8fd56dce",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/6f9a3c8bf34188a2b53ce2ae7a126089c53e0a9f",
+                "reference": "6f9a3c8bf34188a2b53ce2ae7a126089c53e0a9f",
                 "shasum": ""
             },
             "require": {
@@ -6512,7 +6601,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2018-05-29T13:50:43+00:00"
+            "time": "2018-07-13T03:27:23+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -7129,16 +7218,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v3.17.2",
+            "version": "v3.17.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "bf21ebbc0c6cfbab32560b410303a5001c06d815"
+                "reference": "a3578fcafb77cae06ee76c66e97ef1f210345a95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/bf21ebbc0c6cfbab32560b410303a5001c06d815",
-                "reference": "bf21ebbc0c6cfbab32560b410303a5001c06d815",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/a3578fcafb77cae06ee76c66e97ef1f210345a95",
+                "reference": "a3578fcafb77cae06ee76c66e97ef1f210345a95",
                 "shasum": ""
             },
             "type": "library",
@@ -7182,7 +7271,7 @@
                 "swagger",
                 "ui"
             ],
-            "time": "2018-06-30T19:26:41+00:00"
+            "time": "2018-07-14T07:44:47+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
