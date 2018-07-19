@@ -448,6 +448,13 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/OpeningHour"),
      *         }
      *     ),
+     *     @SWG\Definition(
+     *         definition="DepositType",
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="DepositTypeComplete",
+     *     ),
      * )
      *
      * @SWG\SecurityScheme(

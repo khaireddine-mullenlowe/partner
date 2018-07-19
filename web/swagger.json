@@ -1145,6 +1145,268 @@
                 ]
             }
         },
+        "/{id}/deposit/": {
+            "get": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "Get a Deposit Partner from id",
+                "operationId": "getDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target depositType",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "update depositType from partnerId",
+                "operationId": "putDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated deposit partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "create deposit type",
+                "operationId": "createDepositType",
+                "parameters": [
+                    {
+                        "name": "depositType",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created deposit type",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "remove deposit type",
+                "operationId": "removeDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the deposit type",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "patch depositType from partnerId",
+                "operationId": "patchDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated deposit partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/district": {
             "get": {
                 "tags": [
@@ -1186,6 +1448,229 @@
                                     }
                                 }
                             ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/opening-hour/": {
+            "get": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "Finds and displays an OpeningHour entity collection",
+                "operationId": "cgetOpeningHour",
+                "parameters": [
+                    {
+                        "name": "partnerId",
+                        "in": "query",
+                        "description": "Filter collection by Partner Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to OpeningHours collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Opening Hours collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a OpeningHour entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "opening Hour"
+                ],
+                "summary": "Link partner to created opening hour",
+                "operationId": "postOpeningHour",
+                "parameters": [
+                    {
+                        "name": "opening hour",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OpeningHour"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created opening hour",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/opening-hour/{id}": {
+            "put": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "update opening hour id",
+                "operationId": "putOpeningHourId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "openingHourId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "opening hour",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OpeningHour"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated opening hour",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "delete openingHour by id",
+                "operationId": "deleteOpeningHourById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "openingHourId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete opening hour",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -1452,6 +1937,13 @@
                         "name": "registryUserId",
                         "in": "query",
                         "description": "registryUserId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "contractNumber",
+                        "in": "query",
+                        "description": "Contract number",
                         "required": false,
                         "type": "integer"
                     },
@@ -2955,7 +3447,59 @@
                     "$ref": "#/definitions/TimestampableEntity"
                 }
             ]
-        }
+        },
+        "OpeningHour": {
+            "required": [
+                "partnerId",
+                "openingDay",
+                "amStartHour",
+                "amEndHour",
+                "pmStartHour",
+                "pmEndHour",
+                "nox"
+            ],
+            "properties": {
+                "partnerId": {
+                    "type": "integer"
+                },
+                "openingDay": {
+                    "type": "string"
+                },
+                "amStartHour": {
+                    "type": "time"
+                },
+                "amEndHour": {
+                    "type": "time"
+                },
+                "pmStartHour": {
+                    "type": "time"
+                },
+                "pmEndHour": {
+                    "type": "time"
+                },
+                "nox": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "OpeningHourComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                },
+                {
+                    "$ref": "#/definitions/OpeningHour"
+                }
+            ]
+        },
+        "DepositType": {},
+        "DepositTypeComplete": {}
     },
     "securityDefinitions": {
         "bearer": {
