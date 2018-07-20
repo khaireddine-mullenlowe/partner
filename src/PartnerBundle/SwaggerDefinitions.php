@@ -448,12 +448,28 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/OpeningHour"),
      *         }
      *     ),
+     *
      *     @SWG\Definition(
      *         definition="DepositType",
+     *         @SWG\Property(property="vehicleWorkshop", type="boolean"),
+     *         @SWG\Property(property="vehicleWorkshopDaysBeforeFreeCalendar", type="integer"),
+     *         @SWG\Property(property="waitOnSpot", type="boolean"),
+     *         @SWG\Property(property="waitOnSpotDaysBeforeFreeCalendar", type="integer"),
+     *         @SWG\Property(property="replacementVehicle", type="boolean"),
+     *         @SWG\Property(property="replacementVehicleDaysBeforeFreeCalendar", type="integer"),
+     *         @SWG\Property(property="valetParking", type="boolean"),
+     *         @SWG\Property(property="valetParkingDaysBeforeFreeCalendar", type="integer"),
+     *         @SWG\Property(property="valetParkingPrice", type="integer"),
+     *         required={"vehicleWorkshop", "waitOnSpot","replacementVehicle", "valetParking"}
      *     ),
      *
      *     @SWG\Definition(
      *         definition="DepositTypeComplete",
+     *         allOf={
+     *             @SWG\Definition(ref="#/definitions/IdableEntity"),
+     *             @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *             @SWG\Definition(ref="#/definitions/DepositType"),
+     *         }
      *     ),
      * )
      *
