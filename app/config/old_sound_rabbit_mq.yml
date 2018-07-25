@@ -37,8 +37,8 @@ old_sound_rabbit_mq:
     consumers:
         sync_partner:
             connection: default
-            exchange_options: {name: 'authentication', type: direct}
-            queue_options:    {name: 'authentication.sso.partner'}
+            exchange_options: {name: 'Authentication', type: direct}
+            queue_options:    {name: '%env%.authentication.sso.partner'}
             callback:         PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
 
