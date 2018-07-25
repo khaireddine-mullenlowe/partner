@@ -499,3 +499,24 @@ fos_elastica:
                         finder: ~
                         provider: ~
                         listener: ~
+
+                aftersales_service:
+                    properties:
+                        id:
+                            type: integer
+                        legacyId:
+                            type: string
+                        type:
+                            type: date
+                        name:
+                            type: date
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: PartnerBundle\Entity\AftersalesService
+                        finder: ~
+                        provider: ~
+                        listener: ~
