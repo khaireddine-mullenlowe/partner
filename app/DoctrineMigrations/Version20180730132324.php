@@ -12,6 +12,14 @@ use Symfony\Component\Yaml\Yaml;
 class Version20180730132324 extends AbstractMigration
 {
     /**
+     * @inheritdoc
+     */
+    public function getDescription()
+    {
+        return 'Links partners with registry_user ids.';
+    }
+
+    /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
