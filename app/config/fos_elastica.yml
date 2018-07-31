@@ -505,11 +505,11 @@ fos_elastica:
                         id:
                             type: integer
                         legacyId:
-                            type: string
+                            type: integer
                         type:
-                            type: date
+                            type: string
                         name:
-                            type: date
+                            type: string
                         createdAt:
                             type: date
                         updatedAt:
