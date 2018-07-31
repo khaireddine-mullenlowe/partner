@@ -7,7 +7,6 @@
 /web/bundles/
 /web/swagger-ui
 tests/_data
-/app/DoctrineMigrations
 
 .idea
 /c3.php
