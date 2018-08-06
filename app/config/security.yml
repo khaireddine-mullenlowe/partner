@@ -18,4 +18,5 @@ security:
                     - Mullenlowe\CommonBundle\Security\Guard\JWTTokenAuthenticator
 
     access_control:
+        - { path: ^/myaudi, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
         - { path: ^/, role: IS_AUTHENTICATED_FULLY }
