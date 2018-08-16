@@ -7,7 +7,7 @@ fos_elastica:
     indexes:
         partner:
             client: default
-            index_name: '%partner_index_name%'
+            index_name: '%partner_index_name%_%env%'
             types:
                 partner:
                     properties:
