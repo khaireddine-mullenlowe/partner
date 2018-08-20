@@ -92,6 +92,12 @@ class Region extends BaseEntity
      */
     private $partnerRegistryUsers;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\CompanyRegistryUser", mappedBy="region")
+     */
+    private $companyRegistryUsers;
 
     /**
      * Region constructor.
@@ -101,6 +107,7 @@ class Region extends BaseEntity
         $this->districts = new ArrayCollection();
         $this->partners = new ArrayCollection();
         $this->partnerRegistryUsers = new ArrayCollection();
+        $this->companyRegistryUsers = new ArrayCollection();
     }
 
     /**
@@ -302,6 +309,51 @@ class Region extends BaseEntity
     public function removePartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
     {
         $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCompanyRegistryUsers()
+    {
+        return $this->companyRegistryUsers;
+    }
+
+    /**
+     * @param ArrayCollection $companyRegistryUsers
+     *
+     * @return Region
+     */
+    public function setCompanyRegistryUsers(ArrayCollection $companyRegistryUsers)
+    {
+        $this->companyRegistryUsers = $companyRegistryUsers;
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     * @return Region
+     */
+    public function addCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        if (!$this->companyRegistryUsers->contains($companyRegistryUser)) {
+            $this->companyRegistryUsers->add($companyRegistryUser);
+            $companyRegistryUser->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     * @return Region
+     */
+    public function removeCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        $this->companyRegistryUsers->removeElement($companyRegistryUser);
 
         return $this;
     }

@@ -96,6 +96,24 @@ class CompanyRegistryUser extends BaseEntity
     private $positionDescription;
 
     /**
+     * @var Region
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\Region", inversedBy="companyRegistryUsers")
+     * @ORM\JoinColumn(name="region_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $region;
+
+    /**
+     * @var District
+     *
+     * @ORM\ManyToOne(targetEntity="PartnerBundle\Entity\District", inversedBy="companyRegistryUsers")
+     * @ORM\JoinColumn(name="district_id", nullable=true)
+     * @Groups({"amqp", "rest"})
+     */
+    private $district;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -240,6 +258,44 @@ class CompanyRegistryUser extends BaseEntity
     public function setPositionDescription($positionDescription): CompanyRegistryUser
     {
         $this->positionDescription = $positionDescription;
+        return $this;
+    }
+
+    /**
+     * @return Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region $region
+     * @return CompanyRegistryUser
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return District
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * @param District $district
+     * @return CompanyRegistryUser
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+
         return $this;
     }
 }
