@@ -3,6 +3,7 @@
 namespace PartnerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use PartnerBundle\Entity\CompanyRegistryUser;
 use PartnerBundle\Entity\Partner;
 
 /**
@@ -58,9 +59,7 @@ class PartnerRepository extends EntityRepository
     }
 
     /**
-     * @param int|null    $registryUserId
-     * @param int|null    $myaudiUserId
-     * @param string|null $partnerIds
+     * @param array $filters
      * @return \Doctrine\ORM\Query
      */
     public function findPartnersByCustomFilters(array $filters)
@@ -73,8 +72,20 @@ class PartnerRepository extends EntityRepository
                 ->andWhere('partnerRegistryUsers.registryUserId = :registryUserId')
                 ->setParameter('registryUserId', $filters['registryUserId']);
 
-            $queryBuilder
-                ->join('partner.companyRegistry')
+            if ($filters['companyRegistryUser'] instanceof CompanyRegistryUser) {
+                $companyRegistryUser = $filters['companyRegistryUser'];
+                if ($companyRegistryUser->getDistrict()) {
+                    $queryBuilder
+                        ->orWhere('partner.district = :district')
+                        ->setParameter('district', $companyRegistryUser->getDistrict());
+                }
+
+                if ($companyRegistryUser->getRegion()) {
+                    $queryBuilder
+                        ->orWhere('partner.region = :region')
+                        ->setParameter('region', $companyRegistryUser->getRegion());
+                }
+            }
         }
 
         if (isset($filters['contractNumber'])) {

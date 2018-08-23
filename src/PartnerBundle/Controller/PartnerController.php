@@ -174,6 +174,11 @@ class PartnerController extends MullenloweRestController
         $paginator = $this->get('knp_paginator');
 
         $filters = $request->query->all();
+        if (isset($filters['registryUserId'])) {
+            $filters['companyRegistryUser'] = $this->getDoctrine()
+                ->getRepository('PartnerBundle:CompanyRegistryUser')
+                ->findOneByRegistryUserId($filters['registryUserId']);
+        }
 
         $queryBuilder = $this->getDoctrine()->getRepository('PartnerBundle:Partner')
             ->findPartnersByCustomFilters($filters);
