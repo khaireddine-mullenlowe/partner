@@ -94,7 +94,7 @@ class Version20180816094155 extends AbstractMigration implements ContainerAwareI
      * @param array $data
      * @return null|int
      */
-    public function searchEntityId($pattern, $description, $data)
+    private function searchEntityId($pattern, $description, $data)
     {
         $entityName = $this->formatName($pattern, $description);
 
@@ -112,7 +112,7 @@ class Version20180816094155 extends AbstractMigration implements ContainerAwareI
      * @param string $description
      * @return string
      */
-    public function formatName($pattern, $description)
+    private function formatName($pattern, $description)
     {
         $districtName = trim(preg_replace($pattern, '', $description));
 
