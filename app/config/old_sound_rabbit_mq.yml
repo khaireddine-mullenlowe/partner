@@ -1,5 +1,6 @@
 parameters:
-    dlx_name: dead-messages
+    dlx_name: '%env%.dead-letter'
+    dlq_name: '%env%.dead-letter'
     sync_partner_queue: '%env%.authentication.sso.partner'
 
 # RabbitMQ configuration
@@ -47,16 +48,13 @@ old_sound_rabbit_mq:
                 arguments: {'x-dead-letter-exchange': ['S', '%dlx_name%'], 'x-dead-letter-routing-key': ['S', '%sync_partner_queue%']}
             callback:         PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
-
-    multiple_consumers:
         dead_messages:
             connection: default
             exchange_options: {name: '%dlx_name%', type: direct}
-            queues:
-                -
-                    name: '%sync_partner_queue%.dlq'
-                    callback: Mullenlowe\CommonBundle\Component\AMQP\DeadLetterConsumer
-                    routing_keys: ['%sync_partner_queue%']
+            queue_options:
+                name: '%dlq_name%'
+                routing_keys: ['%sync_partner_queue%']
+            callback: Mullenlowe\CommonBundle\Component\AMQP\DeadLetterConsumer
 
 mullenlowe_common:
     rabbitmq_crud_publisher:
