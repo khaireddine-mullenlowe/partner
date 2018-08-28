@@ -1,0 +1,3511 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Partner Api",
+        "version": "1.0.0"
+    },
+    "host": "api5.audi.dev.agence-one.net",
+    "basePath": "/partner/dev/",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/service/types": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "Get Aftersales Services types",
+                "responses": {
+                    "200": {
+                        "description": "Aftersales Services types",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/service/{id}": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "Get an AftersalesService by id",
+                "operationId": "getAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "update AftersalesService by id",
+                "operationId": "putAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "aftersalesService",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "remove AftersalesService by id",
+                "operationId": "removeAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete acknowledge",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "patch AftersalesService by id",
+                "operationId": "patchAftersalesServiceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "aftersalesServiceId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "aftersalesService",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/service/": {
+            "get": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "get AftersalesService collection",
+                "operationId": "cgetAftersalesService",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target AftersalesServices",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/AftersalesServiceComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AftersalesService"
+                ],
+                "summary": "create AftersalesService",
+                "operationId": "createAftersalesService",
+                "parameters": [
+                    {
+                        "name": "aftersales_service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AftersalesService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created AftersalesService",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/AftersalesServiceComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/{id}": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Get a Company from id",
+                "operationId": "getCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Update company by Id",
+                "operationId": "putCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Delete company from id",
+                "operationId": "deleteCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "patch company from id",
+                "operationId": "patchCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "get companies",
+                "operationId": "getCompanies",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "company type id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Companies",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "create company",
+                "operationId": "createCompany",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created company",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/CompanyComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/department": {
+            "get": {
+                "tags": [
+                    "Department"
+                ],
+                "summary": "get departments",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "company department id's",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter department by type",
+                        "required": false,
+                        "type": "string",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Audi France",
+                                "Volkswagen Group France",
+                                "Partner",
+                                "Agency",
+                                "ExternalPartner",
+                                "Holding"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target department collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyDepartmentComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/company/position/code": {
+            "get": {
+                "tags": [
+                    "Position code"
+                ],
+                "summary": "Get position code collection",
+                "parameters": [
+                    {
+                        "name": "deparment",
+                        "in": "query",
+                        "description": "deparment id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "operator",
+                        "in": "query",
+                        "description": "Operator to filter (equal or different)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Position code list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyPositionCode"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/position": {
+            "get": {
+                "tags": [
+                    "Position"
+                ],
+                "summary": "get positions",
+                "parameters": [
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "description": "deparment id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target position collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyPositionComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/company/registry/": {
+            "get": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Finds and displays a CompanyRegistryUser entity collection",
+                "operationId": "cgetCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "query",
+                        "description": "Filter collection by RegistryUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "registryUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of RegistryUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "CompanyRegistryUser collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a CompanyRegistryUser entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Link company and registry user",
+                "operationId": "postCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created link company and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/registry/{id}": {
+            "put": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Updates link between company and registry user",
+                "operationId": "putCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyRegistryUserId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated link between company and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "delete companyRegistryUser by id",
+                "operationId": "deleteCompanyRegistryUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "companyRegistryUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/validate/": {
+            "post": {
+                "tags": [
+                    "Company Registry User"
+                ],
+                "summary": "Validate CompanyRegistryUser",
+                "operationId": "validateCompanyRegistryUser",
+                "parameters": [
+                    {
+                        "name": "company registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CompanyRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "the companyRegistryUser is valid"
+                    },
+                    "400": {
+                        "description": "the companyRegistryUser is not valid",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/company/type": {
+            "get": {
+                "tags": [
+                    "Company type"
+                ],
+                "summary": "Get district collection",
+                "responses": {
+                    "200": {
+                        "description": "Company type list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/CompanyTypeComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/{id}/deposit/": {
+            "get": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "Get a Deposit Partner from id",
+                "operationId": "getDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target depositType",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "update depositType from partnerId",
+                "operationId": "putDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated deposit partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "create deposit type",
+                "operationId": "createDepositType",
+                "parameters": [
+                    {
+                        "name": "depositType",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created deposit type",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "remove deposit type",
+                "operationId": "removeDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the deposit type",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "DepositType"
+                ],
+                "summary": "patch depositType from partnerId",
+                "operationId": "patchDepositTypeByPartnerId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DepositType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated deposit partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/DepositTypeComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/district": {
+            "get": {
+                "tags": [
+                    "District"
+                ],
+                "summary": "Get district collection",
+                "parameters": [
+                    {
+                        "name": "region",
+                        "in": "query",
+                        "description": "Filter by region id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "operator",
+                        "in": "query",
+                        "description": "Operator to filter (equal or different)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "District list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Region"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/opening-hour/": {
+            "get": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "Finds and displays an OpeningHour entity collection",
+                "operationId": "cgetOpeningHour",
+                "parameters": [
+                    {
+                        "name": "partnerId",
+                        "in": "query",
+                        "description": "Filter collection by Partner Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to OpeningHours collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Opening Hours collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a OpeningHour entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "opening Hour"
+                ],
+                "summary": "Link partner to created opening hour",
+                "operationId": "postOpeningHour",
+                "parameters": [
+                    {
+                        "name": "opening hour",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OpeningHour"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created opening hour",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/opening-hour/{id}": {
+            "put": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "update opening hour id",
+                "operationId": "putOpeningHourId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "openingHourId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "opening hour",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OpeningHour"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated opening hour",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OpeningHourComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Opening Hour"
+                ],
+                "summary": "delete openingHour by id",
+                "operationId": "deleteOpeningHourById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "openingHourId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete opening hour",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/types": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get partner type",
+                "responses": {
+                    "200": {
+                        "description": "Types contract partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/{id}": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Get a Partner from id",
+                "operationId": "getPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "update partner from userId",
+                "operationId": "putPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "remove partner from id",
+                "operationId": "removePartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the partner",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "patch partner from id",
+                "operationId": "patchPartnerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "get partners",
+                "operationId": "getPartners",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "query",
+                        "description": "registryUserId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "contractNumber",
+                        "in": "query",
+                        "description": "Contract number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "myaudiUserId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target Partners",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "create partner",
+                "operationId": "createPartner",
+                "parameters": [
+                    {
+                        "name": "partner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Partner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created partner",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/myaudi/": {
+            "get": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "Finds and displays a PartnerMyaudiUser entity collection",
+                "operationId": "cgetPartnerMyaudiUser",
+                "parameters": [
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "Filter collection by MyaudiUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of MyaudiUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerType",
+                        "in": "query",
+                        "description": "Filter by partner type",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "sales",
+                            "aftersales"
+                        ]
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to MyaudiUser collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PartnerMyaudiUser collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a PartnerMyaudiUser entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "Link partner and myaudi user",
+                "operationId": "postPartnerMyaudiUser",
+                "parameters": [
+                    {
+                        "name": "partner myaudi user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerMyaudiUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created link partner and myaudi user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/myaudi/{id}": {
+            "put": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "update link partner myaudi user by id",
+                "operationId": "putPartnerMyaudiUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerRMyaudiUserId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner myaudi user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerMyaudiUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated link partner and myaudi user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerMyaudiUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partner Myaudi User"
+                ],
+                "summary": "delete partnerMyaudiUser by id",
+                "operationId": "deletePartnerMyaudiUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerMyaudiUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/type": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get types",
+                "responses": {
+                    "200": {
+                        "description": "Partner type list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/site": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get sites",
+                "responses": {
+                    "200": {
+                        "description": "Partner site list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/selling-volume": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get selling volume",
+                "responses": {
+                    "200": {
+                        "description": "Partner selling volume list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/partner/option/prestige": {
+            "get": {
+                "tags": [
+                    "Partner option"
+                ],
+                "summary": "Get prestige",
+                "responses": {
+                    "200": {
+                        "description": "Partner prestige list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/registry/": {
+            "get": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "Finds and displays a PartnerRegistryUser entity collection",
+                "operationId": "cgetPartnerRegistryUser",
+                "parameters": [
+                    {
+                        "name": "registryUserId",
+                        "in": "query",
+                        "description": "Filter collection by RegistryUser Id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "registryUserIds",
+                        "in": "query",
+                        "description": "Filter collection by a string representation of an array of RegistryUser Ids seperated by ','",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Whether to apply pagination to RegistryUser collection or not",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max items per page",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PartnerRegistryUser collection",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Finds and displays a PartnerRegistryUser entity collection.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "Link partner and registry user",
+                "operationId": "postPartnerRegistryUser",
+                "parameters": [
+                    {
+                        "name": "partner registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created link partner and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/registry/{id}": {
+            "put": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "update link partner registry user by id",
+                "operationId": "putPartnerRegistryUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerRegistryUserId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "partner registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated link partner and registry user",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/PartnerRegistryUserComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "delete partnerRegistryUser by id",
+                "operationId": "deletePartnerRegistryUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "partnerRegistryUserId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/registry/validate/": {
+            "post": {
+                "tags": [
+                    "Partner Registry User"
+                ],
+                "summary": "Validate PartnerRegistryUser",
+                "operationId": "validatePartnerRegistryUser",
+                "parameters": [
+                    {
+                        "name": "partner registry user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PartnerRegistryUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "the partnerRegistryUser is valid"
+                    },
+                    "400": {
+                        "description": "the partnerRegistryUser is not valid",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/region": {
+            "get": {
+                "tags": [
+                    "Region"
+                ],
+                "summary": "Get region collection",
+                "parameters": [
+                    {
+                        "name": "partnerType",
+                        "in": "query",
+                        "description": "Type of partner (sales or aftersales)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Region list",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Region"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Context": {
+            "properties": {
+                "context": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Pagination": {
+            "required": [
+                "pagination"
+            ],
+            "properties": {
+                "pagination": {
+                    "properties": {
+                        "total": {
+                            "type": "integer"
+                        },
+                        "count": {
+                            "type": "integer"
+                        },
+                        "per_page": {
+                            "type": "integer"
+                        },
+                        "current_page": {
+                            "type": "integer"
+                        },
+                        "total_pages": {
+                            "type": "integer"
+                        },
+                        "previous_url": {
+                            "type": "string"
+                        },
+                        "next_url": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "Success": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "Error": {
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "IdableEntity": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "LegacyEntity": {
+            "required": [
+                "legacyId"
+            ],
+            "properties": {
+                "legacyId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "TimestampableEntity": {
+            "required": [
+                "createdAt",
+                "updatedAt"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "NamedEntity": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "StatusEntity": {
+            "required": [
+                "status"
+            ],
+            "properties": {
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ReferentialEntity": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/NamedEntity"
+                },
+                {
+                    "$ref": "#/definitions/StatusEntity"
+                }
+            ]
+        },
+        "Partner": {
+            "allOf": [
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "sales",
+                                "aftersales"
+                            ]
+                        },
+                        "contractNumber": {
+                            "type": "string"
+                        },
+                        "commercialName": {
+                            "type": "string"
+                        },
+                        "kvpsNumber": {
+                            "type": "string"
+                        },
+                        "webSite": {
+                            "type": "string"
+                        },
+                        "isPartnerR8": {
+                            "type": "boolean"
+                        },
+                        "isTwinService": {
+                            "type": "boolean"
+                        },
+                        "isPartnerPlus": {
+                            "type": "boolean"
+                        },
+                        "isOccPlus": {
+                            "type": "boolean"
+                        },
+                        "occPlusContractNumber": {
+                            "type": "string"
+                        },
+                        "isEtron": {
+                            "type": "boolean"
+                        },
+                        "group": {
+                            "type": "integer"
+                        },
+                        "siteType": {
+                            "type": "string",
+                            "enum": [
+                                "principal",
+                                "secondary"
+                            ]
+                        },
+                        "category": {
+                            "type": "string",
+                            "enum": [
+                                "A",
+                                "A*"
+                            ]
+                        },
+                        "representationType": {
+                            "type": "string",
+                            "enum": [
+                                "E1",
+                                "E2",
+                                "Y",
+                                "W",
+                                "G"
+                            ]
+                        },
+                        "prestigeType": {
+                            "type": "string",
+                            "enum": [
+                                "exclusive",
+                                "specialized"
+                            ]
+                        },
+                        "dealersMeeting": {
+                            "type": "boolean"
+                        },
+                        "brandDays": {
+                            "type": "boolean"
+                        },
+                        "rent": {
+                            "type": "boolean"
+                        },
+                        "extraHour": {
+                            "type": "boolean"
+                        },
+                        "ferMembership": {
+                            "type": "boolean"
+                        },
+                        "onlineQuotation": {
+                            "type": "boolean"
+                        },
+                        "amexPayment": {
+                            "type": "boolean"
+                        },
+                        "isDigitAll": {
+                            "type": "boolean"
+                        },
+                        "digitAllId": {
+                            "type": "string"
+                        },
+                        "isV12": {
+                            "type": "boolean"
+                        },
+                        "v12Id": {
+                            "type": "string"
+                        },
+                        "sellingVolume": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "PartnerComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/Partner"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Group": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "properties": {
+                        "webSiteUrl": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "GroupComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/Group"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Region": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/NamedEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                },
+                {
+                    "properties": {
+                        "legacy_id": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "partnerType": {
+                            "type": "string",
+                            "enum": [
+                                "sales",
+                                "aftersales"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "District": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/NamedEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "Company": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CompanyTypeComplete"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyType": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyTypeComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyType"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyDepartment": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyDepartmentComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyDepartment"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyPosition": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyPositionComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyPosition"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyPositionCode": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReferentialEntity"
+                },
+                {
+                    "$ref": "#/definitions/LegacyEntity"
+                }
+            ]
+        },
+        "CompanyPositionCodeComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/CompanyPositionCode"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "PartnerMyaudiUser": {
+            "required": [
+                "partner",
+                "myaudiUserId"
+            ],
+            "properties": {
+                "partner": {
+                    "type": "integer"
+                },
+                "myaudiUserId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "PartnerMyaudiUserComplete": {
+            "allOf": [
+                {
+                    "properties": {
+                        "partner": {
+                            "$ref": "#/definitions/PartnerComplete"
+                        },
+                        "myaudiUserId": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "PartnerRegistryUser": {
+            "required": [
+                "partner",
+                "registryUserId"
+            ],
+            "properties": {
+                "partner": {
+                    "type": "integer"
+                },
+                "registryUserId": {
+                    "type": "integer"
+                },
+                "department": {
+                    "type": "integer"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "positionCode": {
+                    "type": "integer"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                },
+                "vision": {
+                    "type": "boolean"
+                },
+                "convention": {
+                    "type": "boolean"
+                },
+                "dealersMeeting": {
+                    "type": "boolean"
+                },
+                "brandDays": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "PartnerRegistryUserComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "required": [
+                        "partner",
+                        "registryUserId"
+                    ],
+                    "properties": {
+                        "partner": {
+                            "$ref": "#/definitions/PartnerComplete"
+                        },
+                        "registryUserId": {
+                            "type": "integer"
+                        },
+                        "department": {
+                            "$ref": "#/definitions/CompanyDepartmentComplete"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/CompanyPositionComplete"
+                        },
+                        "positionCode": {
+                            "$ref": "#/definitions/CompanyPositionCodeComplete"
+                        },
+                        "isAdmin": {
+                            "type": "boolean"
+                        },
+                        "vision": {
+                            "type": "boolean"
+                        },
+                        "convention": {
+                            "type": "boolean"
+                        },
+                        "dealersMeeting": {
+                            "type": "boolean"
+                        },
+                        "brandDays": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "CompanyRegistryUser": {
+            "required": [
+                "partner",
+                "registryUserId"
+            ],
+            "properties": {
+                "company": {
+                    "type": "integer"
+                },
+                "registryUserId": {
+                    "type": "integer"
+                },
+                "department": {
+                    "type": "integer"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "positionDescription": {
+                    "type": "string"
+                },
+                "positionCode": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CompanyRegistryUserComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "required": [
+                        "partner",
+                        "registryUserId"
+                    ],
+                    "properties": {
+                        "company": {
+                            "$ref": "#/definitions/CompanyComplete"
+                        },
+                        "registryUserId": {
+                            "type": "integer"
+                        },
+                        "department": {
+                            "$ref": "#/definitions/CompanyDepartmentComplete"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/CompanyPositionComplete"
+                        },
+                        "positionDescription": {
+                            "type": "string"
+                        },
+                        "positionCode": {
+                            "$ref": "#/definitions/CompanyPositionCodeComplete"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "AftersalesService": {
+            "required": [
+                "type",
+                "name"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "AftersalesServiceComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/AftersalesService"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "OpeningHour": {
+            "required": [
+                "partnerId",
+                "openingDay",
+                "amStartHour",
+                "amEndHour",
+                "pmStartHour",
+                "pmEndHour",
+                "nox"
+            ],
+            "properties": {
+                "partnerId": {
+                    "type": "integer"
+                },
+                "openingDay": {
+                    "type": "string"
+                },
+                "amStartHour": {
+                    "type": "time"
+                },
+                "amEndHour": {
+                    "type": "time"
+                },
+                "pmStartHour": {
+                    "type": "time"
+                },
+                "pmEndHour": {
+                    "type": "time"
+                },
+                "nox": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "OpeningHourComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                },
+                {
+                    "$ref": "#/definitions/OpeningHour"
+                }
+            ]
+        },
+        "DepositType": {},
+        "DepositTypeComplete": {}
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

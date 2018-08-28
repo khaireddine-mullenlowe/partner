@@ -1,8 +1,76 @@
-partner:
-    resource: "@PartnerBundle/Controller/"
-    type:     annotation
+partners_type:
+    resource: PartnerBundle\Controller\PartnerOptionController
+    type:     rest
+    prefix:   /option
+
+partners_api:
+    resource: PartnerBundle\Controller\PartnerController
+    type:     rest
     prefix:   /
 
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+partner_myaudi_user:
+    resource: PartnerBundle\Controller\PartnerMyaudiUserController
+    type:     rest
+    prefix:   /myaudi
+
+partner_registry_user:
+    resource: PartnerBundle\Controller\PartnerRegistryUserController
+    type:     rest
+    prefix:   /registry
+
+company_type:
+    resource: PartnerBundle\Controller\CompanyTypeController
+    type:     rest
+    prefix:   /company/type
+
+company:
+    resource: PartnerBundle\Controller\CompanyController
+    type:     rest
+    prefix:   /company
+
+company_registry_user:
+    resource: PartnerBundle\Controller\CompanyRegistryUserController
+    type:     rest
+    prefix:   /company/registry
+
+company_department:
+    resource: PartnerBundle\Controller\CompanyDepartmentController
+    type:     rest
+    prefix:   /company/department
+
+company_position:
+    resource: PartnerBundle\Controller\CompanyPositionController
+    type:     rest
+    prefix:   /company/position
+
+company_position_code:
+    resource: PartnerBundle\Controller\CompanyPositionCodeController
+    type:     rest
+    prefix:   /company/position/code
+
+region:
+    resource: PartnerBundle\Controller\RegionController
+    type:     rest
+    prefix:   /region
+
+district:
+    resource: PartnerBundle\Controller\DistrictController
+    type:     rest
+    prefix:   /district
+
+aftersales_service:
+    resource: PartnerBundle\Controller\AftersalesServiceController
+    type:     rest
+    prefix:   /service
+
+partner_deposit_type:
+    resource: PartnerBundle\Controller\DepositTypeController
+    type:     rest
+    prefix:   /{id}/deposit
+    requirements:
+        id: \d+
+
+partner_opening_hour:
+    resource: PartnerBundle\Controller\OpeningHourController
+    type:     rest
+    prefix:   /opening-hour

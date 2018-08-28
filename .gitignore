@@ -3,19 +3,13 @@
 /build/
 /phpunit.xml
 /var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-bin
+/web/swagger-ui
+tests/_data
 
-#ide
 .idea
+/c3.php
+!/var/jwtcertificates/
+/var/jwtcertificates/*
+!/var/jwtcertificates/public.pem

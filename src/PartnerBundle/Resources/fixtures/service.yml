@@ -1,0 +1,7 @@
+PartnerBundle\Entity\AftersalesService:
+    aftersales_service{0..9}:
+        name: '<word()>'
+        type: '<word()>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        legacyId (unique): <numberBetween(1, 300)>

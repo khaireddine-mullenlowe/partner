@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Groups migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                SELECT t1.name, t1.website_url, t1.status, t2.hist_change_date as created_at
+                FROM ntw_partner_group t1
+                INNER JOIN HIST_AUDIV3.dbo.hist_ntw_partner_group t2
+                    ON t2.id_partner_group = t1.id_partner_group
+                    AND t2.hist_action = 'INSERT'
+            ]]>
+            </query>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\Group</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+
+    <job name="Partners migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        t1.id_company as partner_id
+                        ,t1.name as corporate_name
+                        ,t1.commercial_name
+                        ,t1.website
+                        ,t2.kvps_number
+                        ,t2.ntw_contract_id
+                        ,t2.partner_r8
+                        ,t2.twin_service
+                        ,t2.partner_plus
+                        ,t2.occ_plus
+                        ,t2.contract_number_occ_plus
+                        ,t2.etron
+                        ,t2.contract_number
+                        ,t2.ntw_region_id
+                        ,t2.ntw_district_id
+                        ,t3.hist_change_date as created_at
+                        ,t4.partner_group_id
+                        ,CASE
+                            WHEN t5.name = 'Principal' THEN 'principal'
+                            WHEN t5.name = 'Secondaire' THEN 'secondary'
+                            ELSE null
+                        END AS site_type
+                        ,t6.name AS category
+                        ,t7.name AS representation_type
+                        ,t8.name AS prestige_type
+                        ,ISNULL(t2.dealers_meeting, 0) AS dealers_meeting
+                        ,ISNULL(t2.brand_days, 0) AS brand_days
+                        ,ISNULL(t2.rent, 0) AS rent
+                        ,ISNULL(t2.digitall, 0) AS is_digit_all
+                        ,t2.digitall_id AS digit_all_id
+                        ,ISNULL(t2.v12, 0) AS is_v12
+                        ,t2.v12_id AS v12_id
+                        ,t2.selling_volume
+                        ,ISNULL(t9.hour_extended, 0) AS extra_hour
+                        ,ISNULL(t9.adhesion_fer, 0) AS fer_membership
+                        ,ISNULL(t9.devis_online, 0) AS online_quotation
+                        ,ISNULL(t9.pay_amex, 0) AS amex_payment
+                    FROM ntw_company AS t1
+                    INNER JOIN ntw_company_business AS t2 ON  t1.id_company = t2.company_id
+                    LEFT JOIN HIST_AUDIV3.dbo.hist_ntw_company t3
+                        ON t1.id_company = t3.id_company
+                        AND t3.hist_action = 'INSERT'
+                    LEFT JOIN ntw_company_partner_group t4 ON t4.company_id = t1.id_company
+                    LEFT JOIN buss_item t5 on t5.id_item  = t2.ntw_partner_site_type_id
+                    LEFT JOIN buss_item t6 on t6.id_item  = t2.ntw_partner_category_id
+                    LEFT JOIN buss_item t7 on t7.id_item  = t2.ntw_partner_representation_type_id
+                    LEFT JOIN buss_item t8 on t8.id_item  = t2.ntw_partner_prestige_type_id
+                    LEFT JOIN ntw_company_business_other t9 on t9.company_id  = t1.id_company
+                    WHERE t2.ntw_contract_id IN (2270913, 2270914)
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\PartnerPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\Partner</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>website</name>
+                <targetProperty>webSite</targetProperty>
+            </mapping>
+            <mapping>
+                <!-- this value is transformed into a string -->
+                <name>ntw_contract_id</name>
+                <targetProperty>type</targetProperty>
+            </mapping>
+            <mapping>
+                <name>contract_number_occ_plus</name>
+                <targetProperty>occPlusContractNumber</targetProperty>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>partner_r8</name>
+                <targetProperty>isPartnerR8</targetProperty>
+            </mapping>
+            <mapping>
+                <name>twin_service</name>
+                <targetProperty>isTwinService</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_plus</name>
+                <targetProperty>isPartnerPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>occ_plus</name>
+                <targetProperty>isOccPlus</targetProperty>
+            </mapping>
+            <mapping>
+                <name>etron</name>
+                <targetProperty>isEtron</targetProperty>
+            </mapping>
+            <mapping>
+                <name>ntw_region_id</name>
+                <targetProperty>region</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Region</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>ntw_district_id</name>
+                <targetProperty>district</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\District</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>partner_group_id</name>
+                <targetProperty>group</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Group</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>category</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>representation_type</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>prestige_type</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>digit_all_id</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>v12_id</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>selling_volume</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

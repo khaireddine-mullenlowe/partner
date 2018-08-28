@@ -1,8 +1,7 @@
 {
-    "name": "francois-xavier/test",
+    "name": "mullenlowe/audi-agc5-partner",
     "license": "proprietary",
     "type": "project",
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "prefer-dist": true,
     "autoload": {
@@ -25,36 +24,56 @@
     "repositories": [
         {
             "type": "vcs",
+	        "no-api": true,
             "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git"
         },
         {
             "type": "vcs",
+            "no-api": true,
+            "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git"
+        },
+        {
+            "type": "vcs",
+	        "no-api": true,
             "url": "git@github.com:itagenceone/component.git"
+        },
+        {
+            "type": "vcs",
+            "no-api": true,
+            "url": "git@github.com:itagenceone/etl-bundle.git"
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7",
         "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-migrations-bundle": "^1.3",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
+        "mullenlowe/audi-agc5-common-bundle": "dev-develop",
+        "mullenlowe/audi-agc5-plugins-bundle": "dev-develop",
+        "mullenlowe/component": "dev-master",
+        "mullenlowe/etl-bundle": "dev-master",
+        "nelmio/cors-bundle": "^1.5",
+        "php-amqplib/rabbitmq-bundle": "~1.6",
         "sensio/distribution-bundle": "^5.0.19",
-        "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/framework-extra-bundle": "~5.1.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
-        "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/symfony": "3.3.*",
-        "twig/twig": "^1.0||^2.0",
-        "stof/doctrine-extensions-bundle": "^1.2",
-        "php-amqplib/rabbitmq-bundle": "~1.6",
-        "mullenlowe/audi-agc5-common-bundle": "dev-master",
-        "mullenlowe/component": "dev-master"
+        "symfony/symfony": "3.4.*",
+        "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
-        "symfony/phpunit-bridge": "^3.0"
+        "flow/jsonpath": "^0.3",
+        "hautelook/alice-bundle": "^1.4",
+        "sensio/generator-bundle": "^3.0",
+        "swagger-api/swagger-ui": "^3.0",
+        "symfony/phpunit-bridge": "^3.0",
+        "zircote/swagger-php": "^2.0",
+        "codeception/codeception": "2.4"
     },
     "scripts": {
+        "swagger-ui-assets": "php -r \"is_dir('vendor/swagger-api/swagger-ui/dist') && !is_link('web/swagger-ui') && symlink('../vendor/swagger-api/swagger-ui/dist', 'web/swagger-ui');\"",
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
@@ -64,10 +83,12 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "@swagger-ui-assets"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "@swagger-ui-assets"
         ]
     },
     "config": {

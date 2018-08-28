@@ -1,0 +1,198 @@
+parameters:
+    partner_type:
+        - 'sales'
+        - 'aftersales'
+    partner_site_type:
+        - 'principal'
+        - 'secondary'
+    partner_category:
+        - 'A'
+        - 'A*'
+    partner_representation_type: ['E1', 'E2', 'Y', 'W', 'G']
+    partner_prestige_type:
+        - 'exclusive'
+        - 'specialized'
+
+PartnerBundle\Entity\Group:
+    group{1..5}:
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        name: '<company()>'
+        websiteUrl: '<url()>'
+        status: 1
+
+PartnerBundle\Entity\Partner:
+    partner1:
+        type: 'sales'
+        contractNumber: '0<randomNumber(7, true)>'
+        corporateName: 'Maury Morel SARL'
+        commercialName: <($corporateName)>
+        kvpsNumber: 'FRAA0<randomNumber(4, true)>'
+        webSite: '<url()>'
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        isPartnerR8: <boolean(15)>
+        isTwinService: <boolean(15)>
+        isPartnerPlus: <boolean(15)>
+        isOccPlus: <boolean(75)>
+        occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
+        isEtron: <boolean(50)>
+        group: '75%? @group*'
+        status: 1
+        siteType: '<randomElement(<{partner_site_type}>)>'
+        category: '<randomElement(<{partner_category}>)>'
+        representationType: '<randomElement(<{partner_representation_type}>)>'
+        prestigeType: '<randomElement(<{partner_prestige_type}>)>'
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        rent: <boolean(50)>
+        extraHour: <boolean(50)>
+        ferMembership: <boolean(50)>
+        onlineQuotation: <boolean(50)>
+        amexPayment: <boolean(50)>
+        isDigitAll: <boolean(50)>
+        digitAllId: '<setDigitallV12Id($isDigitAll)>'
+        isV12: <boolean(50)>
+        v12Id: '<setDigitallV12Id($isV12)>'
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner2:
+        type: 'aftersales'
+        contractNumber: '0<randomNumber(7, true)>'
+        corporateName: 'Yet Another Aftersales Partner'
+        commercialName: <($corporateName)>
+        kvpsNumber: 'FRAA0<randomNumber(4, true)>'
+        webSite: '<url()>'
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        isPartnerR8: <boolean(15)>
+        isTwinService: <boolean(15)>
+        isPartnerPlus: <boolean(15)>
+        isOccPlus: <boolean(75)>
+        occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
+        isEtron: <boolean(50)>
+        group: '75%? @group*'
+        status: 1
+        siteType: '<randomElement(<{partner_site_type}>)>'
+        category: '<randomElement(<{partner_category}>)>'
+        representationType: '<randomElement(<{partner_representation_type}>)>'
+        prestigeType: '<randomElement(<{partner_prestige_type}>)>'
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        rent: <boolean(50)>
+        extraHour: <boolean(50)>
+        ferMembership: <boolean(50)>
+        onlineQuotation: <boolean(50)>
+        amexPayment: <boolean(50)>
+        isDigitAll: <boolean(50)>
+        digitAllId: '<setDigitallV12Id($isDigitAll)>'
+        isV12: <boolean(50)>
+        v12Id: '<setDigitallV12Id($isV12)>'
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner{3..20}:
+        type: '<randomElement(<{partner_type}>)>'
+        contractNumber: '0<randomNumber(7, true)>'
+        corporateName: '<company()>'
+        commercialName: <($corporateName)>
+        kvpsNumber: 'FRAA0<randomNumber(4, true)>'
+        webSite: '<url()>'
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        isPartnerR8: <boolean(15)>
+        isTwinService: <boolean(15)>
+        isPartnerPlus: <boolean(15)>
+        isOccPlus: <boolean(75)>
+        occPlusContractNumber: '<setOccPlusContractNumber($isOccPlus)>'
+        isEtron: <boolean(50)>
+        group: '75%? @group*'
+        status: 1
+        siteType: '<randomElement(<{partner_site_type}>)>'
+        category: '<randomElement(<{partner_category}>)>'
+        representationType: '<randomElement(<{partner_representation_type}>)>'
+        prestigeType: '<randomElement(<{partner_prestige_type}>)>'
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        rent: <boolean(50)>
+        extraHour: <boolean(50)>
+        ferMembership: <boolean(50)>
+        onlineQuotation: <boolean(50)>
+        amexPayment: <boolean(50)>
+        isDigitAll: <boolean(50)>
+        digitAllId: '<setDigitallV12Id($isDigitAll)>'
+        isV12: <boolean(50)>
+        v12Id: '<setDigitallV12Id($isV12)>'
+        legacyId (unique): <numberBetween(1, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+
+PartnerBundle\Entity\PartnerMyaudiUser:
+    partner_myaudi_user1:
+        partner: '@partner1'
+        myaudiUserId: 1
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_myaudi_user2:
+        partner: '@partner2'
+        myaudiUserId: 1
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_myaudi_user3:
+        partner: '@partner1'
+        myaudiUserId: 2
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_myaudi_user{4..20}:
+        partner: '@partner<numberBetween(1, 20)>'
+        myaudiUserId: <numberBetween(2, 300)>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+
+PartnerBundle\Entity\PartnerRegistryUser:
+    partner_registry_user1:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: 1
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_registry_user2:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: 2
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+    partner_registry_user{3..50}:
+        partner: '@partner<numberBetween(1, 20)>'
+        registryUserId: <numberBetween(3, 45)>
+        department: '@company_department*'
+        position: '@company_position<numberBetween(1, 50)>'
+        positionCode: '10%? @company_position_code*'
+        isAdmin: <boolean(10)>
+        vision: <boolean(50)>
+        convention: <boolean(50)>
+        dealersMeeting: <boolean(50)>
+        brandDays: <boolean(50)>
+        region: '@region<numberBetween(1, 9)>'
+        district: '@district<numberBetween(1, 30)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'

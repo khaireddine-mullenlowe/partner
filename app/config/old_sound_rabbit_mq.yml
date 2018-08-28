@@ -2,12 +2,12 @@
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     '192.168.56.101'
+            host:     '%rabbitmq_host%'
             port:     5672
-            user:     'radmin'
-            password: 'radmin'
+            user:     '%rabbitmq_user%'
+            password: '%rabbitmq_password%'
             vhost:    '/'
-            lazy:     false
+            lazy:     true
             connection_timeout: 3
             read_write_timeout: 3
 
@@ -24,15 +24,30 @@ old_sound_rabbit_mq:
             # except the scheme (amqp:). If both segment in the URL and a key value (see above)
             # are given the value from the URL takes precedence.
             # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
-            url: 'amqp://radmin:radmin@192.168.56.101:5672/vhost?lazy=1&connection_timeout=6'
+            url: 'amqp://%rabbitmq_user%:%rabbitmq_password%@%rabbitmq_host%/vhost?lazy=1&connection_timeout=6'
+
     producers:
-        myaudi_user_create_or_update: ~
+        partner_crud:
+            connection: 'default'
+            class: Mullenlowe\CommonBundle\Component\AMQP\CrudProducer
+            exchange_options:
+                name: 'CRUD'
+                type: 'direct'
+
     consumers:
-        myaudi_user_create_or_update_partner:
-            connection:       default
-            exchange_options: {name: 'myaudi.user.create_or_update', type: topic}
-            queue_options:
-                name: "myaudi.user.create_or_update.partner"
-                routing_keys:
-                  - 'myaudi.user.create_or_update.#'
-            callback:         PartnerBundle\Service\MyaudiUserUpdatePartnerConsumer
+        sync_partner:
+            connection: default
+            exchange_options: {name: 'Authentication', type: direct}
+            queue_options:    {name: '%env%.authentication.sso.partner'}
+            callback:         PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+
+mullenlowe_common:
+    rabbitmq_crud_publisher:
+        producer: "old_sound_rabbit_mq.partner_crud_producer"
+        mapping:
+            - { context: 'Partner',             routing_key: 'crud.partner.partner'          }
+            - { context: 'Company',             routing_key: 'crud.partner.company'          }
+            - { context: 'PartnerRegistryUser', routing_key: 'crud.partner.partner_registry' }
+            - { context: 'CompanyRegistryUser', routing_key: 'crud.partner.company_registry' }
+            - { context: 'PartnerMyaudiUser',   routing_key: 'crud.partner.partner_myaudi'   }

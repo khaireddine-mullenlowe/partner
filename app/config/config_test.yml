@@ -1,6 +1,9 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    partner_index_name: test_partner
+
 framework:
     test: ~
     session:
@@ -12,5 +15,15 @@ web_profiler:
     toolbar: false
     intercept_redirects: false
 
-swiftmailer:
-    disable_delivery: true
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path:     %database_path%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+hautelook_alice:
+    locale: 'fr_FR'
+    seed: 1

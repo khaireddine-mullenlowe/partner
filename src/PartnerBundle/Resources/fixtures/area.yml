@@ -1,0 +1,20 @@
+parameters:
+    partner_type:
+        - 'sales'
+        - 'aftersales'
+
+PartnerBundle\Entity\Region:
+    region{1..9}:
+        name: '0<numberBetween(1, 9)>'
+        partnerType: '<randomElement(<{partner_type}>)>'
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        legacyId (unique): <numberBetween(1, 300)>
+
+PartnerBundle\Entity\District:
+    district{1..30}:
+        region: '@region<numberBetween(1, 9)>'
+        name: <regexify('(0[1-9]{1}|[1-2]{1}[0-9]{1})')>
+        createdAt: '<dateTimeBetween("-3 years", "now")>'
+        updatedAt: '<dateTimeBetween($createdAt, "now")>'
+        legacyId (unique): <numberBetween(1, 300)>

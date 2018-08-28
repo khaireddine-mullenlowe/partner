@@ -1,0 +1,5 @@
+include:
+    - '../../Resources/fixtures/area.yml'
+    - '../../Resources/fixtures/service.yml'
+    - '../../Resources/fixtures/company.yml'
+    - '../../Resources/fixtures/partner.yml'

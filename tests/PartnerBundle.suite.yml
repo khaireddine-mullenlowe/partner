@@ -1,0 +1,6 @@
+actor: PartnerBundleTester
+modules:
+    enabled:
+        - \Helper\Functional
+        - Symfony:
+            url: http://localhost

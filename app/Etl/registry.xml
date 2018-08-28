@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Partners Registry Users migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        t1.id_company as partner_id,
+                        t2.contact_id,
+                        t7.id_item AS department_id,
+                        t9.id_item AS position_id,
+                        CASE
+                            WHEN t2.ntw_company_position_code_id != 0 THEN t2.ntw_company_position_code_id ELSE NULL
+                        END AS position_code_id,
+                        CASE
+                            WHEN t10.contact_id IS NOT NULL THEN 1 ELSE 0
+                        END AS is_admin,
+                        t2.ntw_region_id,
+                        t2.ntw_district_id,
+                        ISNULL(t5.vision, 0) AS vision,
+                        ISNULL(t5.convention, 0) AS convention,
+                        ISNULL(t5.dealers_meeting, 0) AS dealers_meeting,
+                        ISNULL(t5.brand_days, 0) AS brand_days
+                    FROM ntw_company t1
+                    INNER JOIN ntw_company_contact t2 ON t2.company_id = t1.id_company
+                    INNER JOIN sys_user t3
+                        ON t3.contact_id = t2.contact_id
+                        AND t3.status = 1
+                    INNER JOIN ntw_company_business t4
+                        ON t1.id_company = t4.company_id
+                        AND t4.ntw_contract_id IN (2270913, 2270914)
+                    LEFT JOIN ctc_business_information t5 on t5.contact_id = t2.contact_id
+                    LEFT JOIN buss_item t6 on t6.id_item = t2.ntw_company_department_id
+                    LEFT JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 74
+                        GROUP BY name
+                    ) t7 ON t7.name = t6.name
+                    LEFT JOIN buss_item t8 on t8.id_item = t2.ntw_company_position_id
+                    LEFT JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 75
+                        GROUP BY name
+                    ) t9 ON t9.name = t8.name
+                    LEFT JOIN ntw_company_admin t10
+                        ON t10.company_id = t1.id_company
+                        AND t10.contact_id = t2.contact_id
+                    ORDER BY partner_id, contact_id ASC
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\RegistryUserTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\PartnerRegistryUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partner</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Partner</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>registryUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>department_id</name>
+                <targetProperty>department</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>position_id</name>
+                <targetProperty>position</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyPosition</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>position_code_id</name>
+                <targetProperty>positionCode</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyPositionCode</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>ntw_region_id</name>
+                <targetProperty>region</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Region</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>ntw_district_id</name>
+                <targetProperty>district</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\District</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+
+    <job name="Company Registry Users migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        t1.id_company,
+                        t2.contact_id,
+                        t7.id_item AS department_id,
+                        t9.id_item AS position_id,
+                        CASE
+                            WHEN t2.ntw_company_position_code_id != 0 THEN t2.ntw_company_position_code_id ELSE NULL
+                        END AS position_code_id,
+						t2.ntw_company_position as position_description
+                    FROM ntw_company t1
+                    INNER JOIN ntw_company_contact t2 ON t2.company_id = t1.id_company
+                    INNER JOIN sys_user t3
+                        ON t3.contact_id = t2.contact_id
+                        AND t3.status = 1
+                    LEFT JOIN buss_item t6 on t6.id_item = t2.ntw_company_department_id
+                    LEFT JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 74
+                        GROUP BY name
+                    ) t7 ON t7.name = t6.name
+                    LEFT JOIN buss_item t8 on t8.id_item = t2.ntw_company_position_id
+                    LEFT JOIN (
+                        SELECT MIN(id_item) AS id_item, name
+                        FROM buss_item
+                        WHERE list_id = 75
+                        GROUP BY name
+                    ) t9 ON t9.name = t8.name
+					WHERE t1.company_type_id != 424
+                    ORDER BY t1.id_company, contact_id ASC
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>PartnerBundle\ETL\Transformer\RegistryUserTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>PartnerBundle\Entity\CompanyRegistryUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_company</name>
+                <targetProperty>company</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\Company</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>registryUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>department_id</name>
+                <targetProperty>department</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyDepartment</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>position_id</name>
+                <targetProperty>position</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyPosition</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>position_code_id</name>
+                <targetProperty>positionCode</targetProperty>
+                <type>entity</type>
+                <entityClass>PartnerBundle\Entity\CompanyPositionCode</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>
