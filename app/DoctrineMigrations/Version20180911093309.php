@@ -116,7 +116,7 @@ class Version20180911093309 extends AbstractMigration implements ContainerAwareI
     {
         return sprintf('
             UPDATE `partner_registry_user`
-            SET `registry_user_id` = %s
+            SET `registry_user_id` = %s, `updated_at` = NOW()
             WHERE `partner_id` = %s
             AND`registry_user_id` = %s
             AND `position_id` IN (39, 40)
