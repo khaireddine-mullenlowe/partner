@@ -2,7 +2,7 @@ imports:
     - { resource: config_dev.yml }
 
 parameters:
-    partner_index_name: test_partner
+    env: test
 
 framework:
     test: ~
