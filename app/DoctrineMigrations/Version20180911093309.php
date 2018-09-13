@@ -6,6 +6,10 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Connection;
+use PartnerBundle\Entity\CompanyDepartment;
+use PartnerBundle\Entity\CompanyPosition;
+use PartnerBundle\Entity\Partner;
+use PartnerBundle\Entity\PartnerRegistryUser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -20,45 +24,16 @@ class Version20180911093309 extends AbstractMigration implements ContainerAwareI
     private $entityManager;
     /** @var Connection $userConnection */
     private $userConnection;
+    /** @var CompanyDepartment[] $departments */
+    private $departments = [];
+    /** @var CompanyPosition[] $positions */
+    private $positions = [];
 
     /**
      * @param Schema $schema
      * @throws \LogicException
      */
     public function preUp(Schema $schema)
-    {
-        $this->configure();
-    }
-
-    /**
-     * @param Schema $schema
-     * @throws \LogicException
-     */
-    public function preDown(Schema $schema)
-    {
-        $this->configure();
-    }
-
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
-    {
-        $this->execute('christophebonet@autosudbernabeu.com', 'abremond.autosudbernabeu@gmail.com');
-    }
-
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
-    {
-        $this->execute('abremond.autosudbernabeu@gmail.com', 'christophebonet@autosudbernabeu.com');
-    }
-
-    /**
-     * Configure required parameters
-     */
-    private function configure()
     {
         if (!$this->container->has('doctrine')) {
             throw new \LogicException('Doctrine is required for this migration');
@@ -74,22 +49,74 @@ class Version20180911093309 extends AbstractMigration implements ContainerAwareI
     }
 
     /**
-     * Execute the up or down queries
-     *
-     * @param string $newUserEmail
-     * @param string $oldUserEmail
+     * @param Schema $schema
+     * @throws \Doctrine\DBAL\ConnectionException|\Exception
      */
-    private function execute(string $newUserEmail, string $oldUserEmail)
+    public function up(Schema $schema)
     {
-        $newUserId = $this->getUser($newUserEmail);
-        $oldUserId = $this->getUser($oldUserEmail);
+        $this->connection->setAutoCommit(false);
+        $this->connection->beginTransaction();
 
-        $partner = $this->connection->fetchAssoc('SELECT `id` FROM `partner` WHERE `contract_number` = \'01000877\'');
-        if (!isset($partner['id'])) {
-            throw new \LogicException('Unable to find a Partner using below contract number: 01000877');
+        try {
+            $oldUserId = $this->getUser('abremond.autosudbernabeu@gmail.com');
+            $newUserId = $this->getUser('christophebonet@autosudbernabeu.com');
+            $partner   = $this->getPartner();
+
+            /** @var PartnerRegistryUser[] $partnerRegistryUsersToDelete */
+            $partnerRegistryUsersToDelete = $this->entityManager->getRepository('PartnerBundle:PartnerRegistryUser')->findBy([
+                'partner'        => $partner,
+                'registryUserId' => $oldUserId,
+            ]);
+
+            $region   = null;
+            $district = null;
+
+            foreach ($partnerRegistryUsersToDelete as $partnerRegistryUserToDelete) {
+                $partner->removePartnerRegistryUser($partnerRegistryUserToDelete);
+
+                if (is_null($region)) {
+                    $region = $partnerRegistryUserToDelete->getRegion();
+                }
+
+                if (is_null($district)) {
+                    $district = $partnerRegistryUserToDelete->getDistrict();
+                }
+            }
+
+            $positionByDepartment = ['Commerce' => 'VO Contact CRM', 'Marketing' => 'VN Contact CRM'];
+            foreach ($positionByDepartment as $departmentName => $positionName) {
+                $directorPartnerRegistryUser = new PartnerRegistryUser();
+                $directorPartnerRegistryUser
+                    ->setPartner($partner)
+                    ->setRegistryUserId($newUserId)
+                    ->setDepartment($this->getDepartment($departmentName))
+                    ->setPosition($this->getPosition($positionName))
+                    ->setRegion($region)
+                    ->setDistrict($district)
+                    ->setIsAdmin(false)
+                    ->setVision(false)
+                    ->setConvention(false)
+                    ->setDealersMeeting(false)
+                    ->setBrandDays(false)
+                ;
+
+                $this->entityManager->persist($directorPartnerRegistryUser);
+            }
+
+            $this->entityManager->flush();
+            $this->connection->commit();
+        } catch (\Exception $ex) {
+            $this->connection->rollBack();
+            throw $ex;
         }
+    }
 
-        $this->addSql($this->getUpdateQuery($newUserId, $oldUserId, (int) $partner['id']));
+    /**
+     * @param Schema $schema
+     */
+    public function down(Schema $schema)
+    {
+        // Unable to rollback
     }
 
     /**
@@ -99,6 +126,7 @@ class Version20180911093309 extends AbstractMigration implements ContainerAwareI
     private function getUser(string $email)
     {
         $user = $this->userConnection->fetchAssoc(sprintf('SELECT `id` FROM `registry_user` WHERE `email` = \'%s\' LIMIT 1', $email));
+
         if (!isset($user['id'])) {
             throw new \LogicException(sprintf('No user found with email %s', $email));
         }
@@ -107,19 +135,57 @@ class Version20180911093309 extends AbstractMigration implements ContainerAwareI
     }
 
     /**
-     * @param int $newUserId
-     * @param int $oldUserId
-     * @param int $partnerId
-     * @return string
+     * @return Partner
+     * @throws \LogicException
      */
-    private function getUpdateQuery(int $newUserId, int $oldUserId, int $partnerId)
+    private function getPartner()
     {
-        return sprintf('
-            UPDATE `partner_registry_user`
-            SET `registry_user_id` = %s, `updated_at` = NOW()
-            WHERE `partner_id` = %s
-            AND`registry_user_id` = %s
-            AND `position_id` IN (39, 40)
-        ', $newUserId, $partnerId, $oldUserId);
+        $partner = $this->entityManager->getRepository('PartnerBundle:Partner')->findOneBy([
+            'contractNumber' => '01000877'
+        ]);
+
+        if (!$partner instanceof Partner) {
+            throw new \LogicException('Partner 01000877 must be defined');
+        }
+
+        return $partner;
+    }
+
+    /**
+     * @param string $departmentName
+     * @return CompanyDepartment
+     */
+    private function getDepartment(string $departmentName)
+    {
+        if (!array_key_exists($departmentName, $this->departments)) {
+            $department = $this->entityManager->getRepository('PartnerBundle:CompanyDepartment')->findOneBy(['name' => $departmentName]);
+
+            if (!$department instanceof CompanyDepartment) {
+                throw new \LogicException(sprintf('Unable to find department %s', $departmentName));
+            }
+
+            $this->departments[$departmentName] = $department;
+        }
+
+        return $this->departments[$departmentName];
+    }
+
+    /**
+     * @param string $positionName
+     * @return CompanyPosition
+     */
+    private function getPosition(string $positionName)
+    {
+        if (!array_key_exists($positionName, $this->positions)) {
+            $position = $this->entityManager->getRepository('PartnerBundle:CompanyPosition')->findOneBy(['name' => $positionName]);
+
+            if (!$position instanceof CompanyPosition) {
+                throw new \LogicException(sprintf('Unable to find position %s', $positionName));
+            }
+
+            $this->positions[$positionName] = $position;
+        }
+
+        return $this->positions[$positionName];
     }
 }
