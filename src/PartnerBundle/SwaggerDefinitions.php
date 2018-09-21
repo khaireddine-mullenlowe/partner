@@ -471,6 +471,12 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#/definitions/DepositType"),
      *         }
      *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="PackagesPayload",
+     *         @SWG\Property(property="apotamoxId", type="integer"),
+     *         @SWG\Property(property="contractNumber", type="string")
+     *     ),
      * )
      *
      * @SWG\SecurityScheme(

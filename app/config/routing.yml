@@ -74,3 +74,8 @@ partner_opening_hour:
     resource: PartnerBundle\Controller\OpeningHourController
     type:     rest
     prefix:   /opening-hour
+
+ekino:
+    resource: PartnerBundle\Controller\EkinoController
+    type:     rest
+    prefix:   /

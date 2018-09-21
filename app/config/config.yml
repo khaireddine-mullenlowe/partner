@@ -119,3 +119,10 @@ fos_rest:
         include_format: false
     body_converter:
         enabled: true
+
+mullenlowe_plugins:
+    ekino:
+        base_uri: https://mon-devis-en-ligne.audi-entretien.as44099.com
+        username: audi
+        key: fjUMJ3qWEznFRRYTmCnQzKMJd9dFjZ
+
