@@ -190,7 +190,7 @@ class PartnerRegistryUser extends BaseEntity
      *
      * @return PartnerRegistryUser
      */
-    public function setPartner(Partner $partner): PartnerRegistryUser
+    public function setPartner(Partner $partner = null): PartnerRegistryUser
     {
         $this->partner = $partner;
 
