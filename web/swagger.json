@@ -1458,6 +1458,53 @@
                 ]
             }
         },
+        "/ekino/packages": {
+            "post": {
+                "tags": [
+                    "Partner"
+                ],
+                "summary": "Gets partner's packages from Ekino",
+                "operationId": "getPartnersPackages",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "in": "body",
+                        "description": "payload",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PackagesPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target partner's packages",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "property": "data",
+                                    "type": "object"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/opening-hour/": {
             "get": {
                 "tags": [
@@ -3498,8 +3545,66 @@
                 }
             ]
         },
-        "DepositType": {},
-        "DepositTypeComplete": {}
+        "DepositType": {
+            "required": [
+                "vehicleWorkshop",
+                "waitOnSpot",
+                "replacementVehicle",
+                "valetParking"
+            ],
+            "properties": {
+                "vehicleWorkshop": {
+                    "type": "boolean"
+                },
+                "vehicleWorkshopDaysBeforeFreeCalendar": {
+                    "type": "integer"
+                },
+                "waitOnSpot": {
+                    "type": "boolean"
+                },
+                "waitOnSpotDaysBeforeFreeCalendar": {
+                    "type": "integer"
+                },
+                "replacementVehicle": {
+                    "type": "boolean"
+                },
+                "replacementVehicleDaysBeforeFreeCalendar": {
+                    "type": "integer"
+                },
+                "valetParking": {
+                    "type": "boolean"
+                },
+                "valetParkingDaysBeforeFreeCalendar": {
+                    "type": "integer"
+                },
+                "valetParkingPrice": {
+                    "type": "integer"
+                }
+            }
+        },
+        "DepositTypeComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IdableEntity"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                },
+                {
+                    "$ref": "#/definitions/DepositType"
+                }
+            ]
+        },
+        "PackagesPayload": {
+            "properties": {
+                "apotamoxId": {
+                    "type": "integer"
+                },
+                "contractNumber": {
+                    "type": "string"
+                }
+            }
+        }
     },
     "securityDefinitions": {
         "bearer": {
