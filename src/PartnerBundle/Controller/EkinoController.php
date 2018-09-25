@@ -72,7 +72,7 @@ class EkinoController extends MullenloweRestController
         $response = $ekinoRESTClient->getPackages(
             $form->get('apotamoxId')->getData(),
             $form->get('contractNumber')->getData()
-    );
+        );
 
         return $this->createView($response);
     }
