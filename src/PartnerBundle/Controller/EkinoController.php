@@ -7,6 +7,8 @@ use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\PluginsBundle\Service\Ekino\EkinoRESTClient;
 use PartnerBundle\Form\Ekino\PackageType;
+use PartnerBundle\Form\Ekino\TyreType;
+use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -75,5 +77,109 @@ class EkinoController extends MullenloweRestController
         );
 
         return $this->createView($response);
+    }
+
+    /**
+     * @Rest\Get(
+     *     "/ekino/tyres/{contractNumber}",
+     *     name="contractNumber",
+     *     requirements={"contractNumber"="\d+"}
+     * )
+     *
+     * @SWG\Get(
+     *     path="/ekino/tyres/{contractNumber}",
+     *     summary="Gets partner's tyres from Ekino",
+     *     operationId="getPartnersTyres",
+     *     tags={"Partner"},
+     *     @SWG\Parameter(
+     *         name="contractNumber",
+     *         in="path",
+     *         type="string",
+     *         required=true,
+     *         description="partnerId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="width",
+     *         in="integer",
+     *         type="string",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Parameter(
+     *         name="height",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Parameter(
+     *         name="rim",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Parameter(
+     *         name="loadIndex",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Parameter(
+     *         name="speedIndex",
+     *         in="query",
+     *         type="string",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Parameter(
+     *         name="range",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description=""
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Target partner's tyres",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Property(property="data", type="object")
+     *             }
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *   security={{ "bearer":{} }}
+     * )
+     *
+     * @param string $contractNumber
+     * @param Request $request
+     * @param EkinoRESTClient $ekinoRESTClient
+     * @return mixed
+     */
+    public function getTyresAction(
+        string $contractNumber,
+        Request $request,
+        EkinoRESTClient $ekinoRESTClient
+    )
+    {
+        $searchCriteria = array(
+            'width' => $request->query->get('width') ?? '',
+            'height' => $request->query->get('height') ?? '',
+            'rim' => $request->query->get('rim') ?? '',
+            'loadIndex' => $request->query->get('loadIndex') ?? '',
+            'speedIndex' => $request->query->get('speedIndex') ?? '',
+            'range' => $request->query->get('range') ?? ''
+        );
+
+        $response = $ekinoRESTClient->getTyres($contractNumber, $searchCriteria);
+
+        return $response;
     }
 }
