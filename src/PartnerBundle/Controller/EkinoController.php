@@ -180,6 +180,6 @@ class EkinoController extends MullenloweRestController
 
         $response = $ekinoRESTClient->getTyres($contractNumber, $searchCriteria);
 
-        return $response;
+        return $this->createView($response);
     }
 }

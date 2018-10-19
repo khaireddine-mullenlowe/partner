@@ -19,5 +19,5 @@ security:
 
     access_control:
         - { path: ^/myaudi,           role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
-        - { path: ^/ekino/,   role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
+        - { path: ^/ekino/,   role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST, GET] }
         - { path: ^/,                 role: IS_AUTHENTICATED_FULLY }
