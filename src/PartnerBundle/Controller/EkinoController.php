@@ -120,7 +120,7 @@ class EkinoController extends MullenloweRestController
      *     @SWG\Parameter(
      *         name="loadIndex",
      *         in="query",
-     *         type="integer",
+     *         type="string",
      *         required=true,
      *         description=""
      *     ),
