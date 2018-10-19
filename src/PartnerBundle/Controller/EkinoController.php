@@ -26,7 +26,7 @@ class EkinoController extends MullenloweRestController
      *     path="/ekino/packages",
      *     summary="Gets partner's packages from Ekino",
      *     operationId="getPartnersPackages",
-     *     tags={"Partner"},
+     *     tags={"Ekino"},
      *     @SWG\Parameter(
      *         name="payload",
      *         in="body",
@@ -88,55 +88,48 @@ class EkinoController extends MullenloweRestController
      *     path="/ekino/tyres/{contractNumber}",
      *     summary="Gets partner's tyres from Ekino",
      *     operationId="getPartnersTyres",
-     *     tags={"Partner"},
+     *     tags={"Ekino"},
      *     @SWG\Parameter(
      *         name="contractNumber",
      *         in="path",
      *         type="string",
-     *         required=true,
-     *         description="partnerId"
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="width",
      *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="height",
      *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="rim",
      *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="loadIndex",
      *         in="query",
      *         type="string",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="speedIndex",
      *         in="query",
      *         type="string",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Parameter(
      *         name="range",
      *         in="query",
      *         type="integer",
-     *         required=true,
-     *         description=""
+     *         required=true
      *     ),
      *     @SWG\Response(
      *         response=200,
@@ -144,13 +137,15 @@ class EkinoController extends MullenloweRestController
      *         @SWG\Schema(
      *             allOf={
      *                 @SWG\Definition(ref="#/definitions/Context"),
-     *                 @SWG\Property(property="data", type="object")
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", ref="#/definitions/PartnerTyres"),
+     *                 )
      *             }
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
+     *         response=500,
+     *         description="Internal Server Error",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *   security={{ "bearer":{} }}
@@ -168,12 +163,12 @@ class EkinoController extends MullenloweRestController
     )
     {
         $searchCriteria = array(
-            'width' => $request->query->get('width') ?? '',
-            'height' => $request->query->get('height') ?? '',
-            'rim' => $request->query->get('rim') ?? '',
-            'loadIndex' => $request->query->get('loadIndex') ?? '',
-            'speedIndex' => $request->query->get('speedIndex') ?? '',
-            'range' => $request->query->get('range') ?? ''
+            'width' => $request->query->get('width', ''),
+            'height' => $request->query->get('height', ''),
+            'rim' => $request->query->get('rim', ''),
+            'loadIndex' => $request->query->get('loadIndex', ''),
+            'speedIndex' => $request->query->get('speedIndex', ''),
+            'range' => $request->query->get('range', '')
         );
 
         $response = $ekinoRESTClient->getTyres($contractNumber, $searchCriteria);
