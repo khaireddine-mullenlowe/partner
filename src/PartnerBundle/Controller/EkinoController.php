@@ -7,8 +7,6 @@ use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\PluginsBundle\Service\Ekino\EkinoRESTClient;
 use PartnerBundle\Form\Ekino\PackageType;
-use PartnerBundle\Form\Ekino\TyreType;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
