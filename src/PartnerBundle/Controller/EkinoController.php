@@ -98,8 +98,8 @@ class EkinoController extends MullenloweRestController
      *     ),
      *     @SWG\Parameter(
      *         name="width",
-     *         in="integer",
-     *         type="string",
+     *         in="query",
+     *         type="integer",
      *         required=true,
      *         description=""
      *     ),
