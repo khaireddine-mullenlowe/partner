@@ -93,43 +93,50 @@ class EkinoController extends MullenloweRestController
      *         name="contractNumber",
      *         in="path",
      *         type="string",
-     *         required=true
+     *         required=true,
+     *         description="Contract number of Audi Service partner"
      *     ),
      *     @SWG\Parameter(
      *         name="width",
      *         in="query",
      *         type="integer",
-     *         required=true
+     *         required=true,
+     *         description="Width of tyre"
      *     ),
      *     @SWG\Parameter(
      *         name="height",
      *         in="query",
      *         type="integer",
-     *         required=true
+     *         required=true,
+     *         description="Height of tyre"
      *     ),
      *     @SWG\Parameter(
      *         name="rim",
      *         in="query",
      *         type="integer",
-     *         required=true
+     *         required=true,
+     *         description="Rim of tyre"
      *     ),
      *     @SWG\Parameter(
      *         name="loadIndex",
      *         in="query",
      *         type="string",
-     *         required=true
+     *         required=true,
+     *         description="LoadIndex of tyre"
      *     ),
      *     @SWG\Parameter(
      *         name="speedIndex",
      *         in="query",
      *         type="string",
-     *         required=true
+     *         required=true,
+     *         description="SpeedIndex of tyre"
      *     ),
      *     @SWG\Parameter(
      *         name="range",
      *         in="query",
      *         type="integer",
-     *         required=true
+     *         required=true,
+     *         description="Winter or summer season"
      *     ),
      *     @SWG\Response(
      *         response=200,
