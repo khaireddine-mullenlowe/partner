@@ -487,7 +487,7 @@ class SwaggerDefinitions
      *         @SWG\Property(property="loadIndex", type="string"),
      *         @SWG\Property(property="speedIndex", type="string"),
      *         @SWG\Property(property="range", type="integer"),
-     *         required={"contractNumber", "width","height", "rim", "loadIndex", "speedIndex", "range"}
+     *         required={"contractNumber", "width", "height", "rim", "loadIndex", "speedIndex", "range"}
      *     ),
      * )
      *

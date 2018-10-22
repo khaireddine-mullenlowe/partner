@@ -163,12 +163,12 @@ class EkinoController extends MullenloweRestController
     )
     {
         $searchCriteria = array(
-            'width' => $request->query->get('width', ''),
-            'height' => $request->query->get('height', ''),
-            'rim' => $request->query->get('rim', ''),
-            'loadIndex' => $request->query->get('loadIndex', ''),
-            'speedIndex' => $request->query->get('speedIndex', ''),
-            'range' => $request->query->get('range', '')
+            'width' => $request->query->get('width'),
+            'height' => $request->query->get('height'),
+            'rim' => $request->query->get('rim'),
+            'loadIndex' => $request->query->get('loadIndex'),
+            'speedIndex' => $request->query->get('speedIndex'),
+            'range' => $request->query->get('range')
         );
 
         $response = $ekinoRESTClient->getTyres($contractNumber, $searchCriteria);
