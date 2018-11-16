@@ -42,3 +42,5 @@ parameters:
     rabbitmq_password: guest
     env: dev
 
+    guzzle_verify_ssl: true
+
