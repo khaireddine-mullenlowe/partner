@@ -70,33 +70,33 @@ class OpeningHour extends BaseEntity
     protected $openingDay;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(type="time", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Groups({"rest"})
      */
     protected $amStartHour;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(type="time", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Groups({"rest"})
      */
     protected $amEndHour;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(type="time", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmStartHour;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(type="time", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmEndHour;
@@ -165,7 +165,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set amStartHour
      *
-     * @param \DateTime $amStartHour
+     * @param string $amStartHour
      *
      * @return OpeningHour
      */
@@ -179,7 +179,7 @@ class OpeningHour extends BaseEntity
     /**
      * Get amStartHour
      *
-     * @return \DateTime
+     * @return string
      */
     public function getAmStartHour()
     {
@@ -189,7 +189,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set amEndHour
      *
-     * @param \DateTime $amEndHour
+     * @param string $amEndHour
      *
      * @return OpeningHour
      */
@@ -203,7 +203,7 @@ class OpeningHour extends BaseEntity
     /**
      * Get amEndHour
      *
-     * @return \DateTime
+     * @return string
      */
     public function getAmEndHour()
     {
@@ -213,7 +213,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set pmStartHour
      *
-     * @param \DateTime $pmStartHour
+     * @param string $pmStartHour
      *
      * @return OpeningHour
      */
@@ -227,7 +227,7 @@ class OpeningHour extends BaseEntity
     /**
      * Get pmStartHour
      *
-     * @return \DateTime
+     * @return string
      */
     public function getPmStartHour()
     {
@@ -237,7 +237,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set pmEndHour
      *
-     * @param \DateTime $pmEndHour
+     * @param string $pmEndHour
      *
      * @return OpeningHour
      */
@@ -251,7 +251,7 @@ class OpeningHour extends BaseEntity
     /**
      * Get pmEndHour
      *
-     * @return \DateTime
+     * @return string
      */
     public function getPmEndHour()
     {

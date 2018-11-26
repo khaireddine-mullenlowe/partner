@@ -55,3 +55,11 @@ services:
             - { identifier: id }
         tags:
             - { name: doctrine.event_subscriber }
+
+    PartnerBundle\ETL\Transformer\OpeningHourTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.migration_connection'
