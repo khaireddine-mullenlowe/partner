@@ -51,14 +51,7 @@ class OpeningHourTransformer implements TransformerInterface
         }
 
         $noxColumn = $row->getColumn('nox');
-        $noxColumnValue = (bool)$noxColumn->getValue();
-
-        if (is_bool($noxColumnValue)) {
-            $noxColumn->setValue($noxColumnValue);
-        } else {
-            $row->setSkipFlag(true)
-                ->setSkipComment(sprintf('Nox value %d is not a boolean', $noxColumnValue));
-        }
+        $noxColumn->setValue((bool)$noxColumn->getValue());
 
         $createdAtColumn = $row->getColumn('created_at');
         $createdAtColumnValue = new \DateTime($createdAtColumn->getValue());
