@@ -37,9 +37,21 @@ HEREDOC;
 
     protected $partnerId = 10;
 
+    const DEPOSIT_PATH = '/deposit/';
+    const TYPE_PATH = '/type/';
+
     public function testPostDeposit(FunctionalTester $I)
     {
-        $this->requestJson($I,Response::HTTP_CREATED, 'POST', '/'.$this->partnerId.'/deposit/', [], [], [], static::$jsonDeposit);
+        $this->requestJson(
+            $I,
+            Response::HTTP_CREATED,
+            'POST',
+            self::DEPOSIT_PATH.$this->partnerId.self::TYPE_PATH,
+            [],
+            [],
+            [],
+            static::$jsonDeposit
+        );
         $I->seeResponseContainsJson(['context' => 'DepositType']);
         $I->seeResponseContains('data');
     }
@@ -49,7 +61,16 @@ HEREDOC;
      */
     public function testPutDeposit(FunctionalTester $I)
     {
-        $this->requestJson($I,Response::HTTP_OK, 'PUT', '/'.$this->partnerId.'/deposit/', [], [], [], static::$jsonDeposit2);
+        $this->requestJson(
+            $I,
+            Response::HTTP_OK,
+            'PUT',
+            self::DEPOSIT_PATH.$this->partnerId.self::TYPE_PATH,
+            [],
+            [],
+            [],
+            static::$jsonDeposit2
+        );
         $I->seeResponseContainsJson(['context' => 'DepositType']);
         $I->seeResponseContains('data');
     }
@@ -59,7 +80,12 @@ HEREDOC;
      */
     public function testGetDeposit(FunctionalTester $I)
     {
-        $this->requestJson($I,Response::HTTP_OK, 'GET', '/'.$this->partnerId.'/deposit/');
+        $this->requestJson(
+            $I,
+            Response::HTTP_OK,
+            'GET',
+            self::DEPOSIT_PATH.$this->partnerId.self::TYPE_PATH
+        );
         $I->seeResponseContainsJson(['context' => 'DepositType']);
         $I->seeResponseContains('data');
     }
@@ -69,7 +95,12 @@ HEREDOC;
      */
     public function testRemoveDeposit(FunctionalTester $I)
     {
-        $this->requestJson($I, Response::HTTP_OK, 'DELETE', '/'.$this->partnerId.'/deposit/');
+        $this->requestJson(
+            $I,
+            Response::HTTP_OK,
+            'DELETE',
+            self::DEPOSIT_PATH.$this->partnerId.self::TYPE_PATH
+        );
         $I->seeResponseContainsJson(['context' => 'DepositType']);
     }
 
@@ -78,12 +109,25 @@ HEREDOC;
      */
     public function testGetDepositWhenNotFound(FunctionalTester $I)
     {
-        $this->requestJson($I,Response::HTTP_NOT_FOUND, 'GET', '/'.$this->partnerId.'/deposit/');
+        $this->requestJson(
+            $I,
+            Response::HTTP_NOT_FOUND,
+            'GET',
+            self::DEPOSIT_PATH.$this->partnerId.self::TYPE_PATH
+        );
         $I->seeResponseContainsJson(["message" => "Deposit Type not found"]);
     }
 
-    protected function requestJson(FunctionalTester $I, $expectedStatusCode, $method, $uri, $parameters = [], $files = [], $server = [], $content = [])
-    {
+    protected function requestJson(
+        FunctionalTester $I,
+        $expectedStatusCode,
+        $method,
+        $uri,
+        $parameters = [],
+        $files = [],
+        $server = [],
+        $content = []
+    ) {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->{"send".$method}($uri, $content, $parameters);
         $I->seeResponseCodeIs($expectedStatusCode);

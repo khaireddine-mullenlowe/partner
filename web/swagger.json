@@ -1145,7 +1145,7 @@
                 ]
             }
         },
-        "/{id}/deposit/": {
+        "/deposit/{partnerId}/type/": {
             "get": {
                 "tags": [
                     "DepositType"
@@ -1154,7 +1154,7 @@
                 "operationId": "getDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "partnerId",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1200,7 +1200,7 @@
                 "operationId": "putDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "partnerId",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1313,7 +1313,7 @@
                 "operationId": "removeDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "partnerId",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1354,7 +1354,7 @@
                 "operationId": "patchDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "partnerId",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1516,42 +1516,49 @@
                     {
                         "name": "contractNumber",
                         "in": "path",
+                        "description": "Contract number of Audi Service partner",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "width",
                         "in": "query",
+                        "description": "Width of tyre",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "height",
                         "in": "query",
+                        "description": "Height of tyre",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "rim",
                         "in": "query",
+                        "description": "Rim of tyre",
                         "required": true,
                         "type": "integer"
                     },
                     {
                         "name": "loadIndex",
                         "in": "query",
+                        "description": "LoadIndex of tyre",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "speedIndex",
                         "in": "query",
+                        "description": "SpeedIndex of tyre",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "range",
                         "in": "query",
+                        "description": "Winter or summer season",
                         "required": true,
                         "type": "integer"
                     }

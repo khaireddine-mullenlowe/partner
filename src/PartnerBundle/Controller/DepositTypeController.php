@@ -29,12 +29,12 @@ class DepositTypeController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Get(
-     *     path="/{id}/deposit/",
+     *     path="/deposit/{partnerId}/type/",
      *     summary="Get a Deposit Partner from id",
      *     operationId="getDepositTypeByPartnerId",
      *     tags={"DepositType"},
      *     @SWG\Parameter(
-     *         name="id",
+     *         name="partnerId",
      *         in="path",
      *         type="integer",
      *         required=true,
@@ -60,12 +60,12 @@ class DepositTypeController extends MullenloweRestController
      *   security={{ "bearer":{} }}
      * )
      *
-     * @param int $id
+     * @param int $partnerId
      * @return View
      */
-    public function getAction($id)
+    public function getAction($partnerId)
     {
-        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($id);
+        $partner = $this->getDoctrine()->getRepository('PartnerBundle:Partner')->find($partnerId);
         /** Partner $partner */
         if (!$partner) {
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
@@ -86,10 +86,10 @@ class DepositTypeController extends MullenloweRestController
      *     summary="update depositType from partnerId",
      *     operationId="putDepositTypeByPartnerId",
      *     security={{ "bearer":{} }},
-     *     path="/{id}/deposit/",
+     *     path="/deposit/{partnerId}/type/",
      *     tags={"DepositType"},
      *     @SWG\Parameter(
-     *         name="id",
+     *         name="partnerId",
      *         in="path",
      *         type="integer",
      *         required=true,
@@ -127,12 +127,12 @@ class DepositTypeController extends MullenloweRestController
      * )
      *
      * @param Request $request
-     * @param int     $id
+     * @param int     $partnerId
      * @return View
      */
-    public function putAction(Request $request, $id)
+    public function putAction(Request $request, $partnerId)
     {
-        return $this->putOrPatch($request, $id);
+        return $this->putOrPatch($request, $partnerId);
     }
 
     /**
@@ -140,13 +140,13 @@ class DepositTypeController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Patch(
-     *     path="/{id}/deposit/",
+     *     path="/deposit/{partnerId}/type/",
      *     summary="patch depositType from partnerId",
      *     operationId="patchDepositTypeByPartnerId",
      *     security={{ "bearer":{} }},
      *     tags={"DepositType"},
      *     @SWG\Parameter(
-     *         name="id",
+     *         name="partnerId",
      *         in="path",
      *         type="integer",
      *         required=true,
@@ -183,12 +183,12 @@ class DepositTypeController extends MullenloweRestController
      * )
      *
      * @param Request $request
-     * @param int     $id
+     * @param int     $partnerId
      * @return View
      */
-    public function patchAction(Request $request, $id)
+    public function patchAction(Request $request, $partnerId)
     {
-        return $this->putOrPatch($request, $id, false);
+        return $this->putOrPatch($request, $partnerId, false);
     }
 
     /**
@@ -196,7 +196,7 @@ class DepositTypeController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Post(
-     *     path="/{id}/deposit/",
+     *     path="/deposit/{partnerId}/type/",
      *     summary="create deposit type",
      *     operationId="createDepositType",
      *     tags={"DepositType"},
@@ -232,15 +232,16 @@ class DepositTypeController extends MullenloweRestController
      * )
      *
      * @param Request $request
+     * @param integer $partnerId
      * @return View
      */
-    public function postAction(Request $request, $id)
+    public function postAction(Request $request, $partnerId)
     {
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
 
         /** @var Partner $partner */
-        $partner = $em->getRepository('PartnerBundle:Partner')->find($id);
+        $partner = $em->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
@@ -271,12 +272,12 @@ class DepositTypeController extends MullenloweRestController
      * @Rest\View(serializerGroups={"rest"})
      *
      * @SWG\Delete(
-     *     path="/{id}/deposit/",
+     *     path="/deposit/{partnerId}/type/",
      *     summary="remove deposit type",
      *     operationId="removeDepositTypeByPartnerId",
      *     tags={"DepositType"},
      *     @SWG\Parameter(
-     *         name="id",
+     *         name="partnerId",
      *         in="path",
      *         type="integer",
      *         required=true,
@@ -300,16 +301,16 @@ class DepositTypeController extends MullenloweRestController
      *    security={{ "bearer":{} }}
      * )
      *
-     * @param integer $id
+     * @param integer $partnerId
      * @return View
      */
-    public function deleteAction($id)
+    public function deleteAction($partnerId)
     {
         $em = $this->getDoctrine()->getManager();
         /**
          * @var Partner $partner
          */
-        $partner = $em->getRepository('PartnerBundle:Partner')->find($id);
+        $partner = $em->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
@@ -333,12 +334,12 @@ class DepositTypeController extends MullenloweRestController
      *
      * @return View
      */
-    private function putOrPatch(Request $request, int $id, $clearMissing = true)
+    private function putOrPatch(Request $request, int $partnerId, $clearMissing = true)
     {
         $em = $this->getDoctrine()->getManager();
         $dataInput = $request->request->all();
 
-        $partner = $em->getRepository('PartnerBundle:Partner')->find($id);
+        $partner = $em->getRepository('PartnerBundle:Partner')->find($partnerId);
         if (!$partner) {
             throw new NotFoundHttpException(self::CONTEXT, 'Partner not found');
         }
