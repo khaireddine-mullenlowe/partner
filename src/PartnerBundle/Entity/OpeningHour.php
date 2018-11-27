@@ -165,7 +165,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set amStartHour
      *
-     * @param datetime $amStartHour
+     * @param \DateTime $amStartHour
      *
      * @return OpeningHour
      */
@@ -189,7 +189,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set amEndHour
      *
-     * @param string $amEndHour
+     * @param \DateTime $amEndHour
      *
      * @return OpeningHour
      */
@@ -213,7 +213,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set pmStartHour
      *
-     * @param string $pmStartHour
+     * @param \DateTime $pmStartHour
      *
      * @return OpeningHour
      */
@@ -237,7 +237,7 @@ class OpeningHour extends BaseEntity
     /**
      * Set pmEndHour
      *
-     * @param string $pmEndHour
+     * @param \DateTime $pmEndHour
      *
      * @return OpeningHour
      */
