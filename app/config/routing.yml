@@ -66,9 +66,9 @@ aftersales_service:
 partner_deposit_type:
     resource: PartnerBundle\Controller\DepositTypeController
     type:     rest
-    prefix:   /deposit/{partnerId}/type
+    prefix:   /{id}/deposit
     requirements:
-        partnerId: \d+
+        id: \d+
 
 partner_opening_hour:
     resource: PartnerBundle\Controller\OpeningHourController

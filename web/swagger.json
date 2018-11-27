@@ -1145,7 +1145,7 @@
                 ]
             }
         },
-        "/deposit/{partnerId}/type/": {
+        "/{id}/deposit/": {
             "get": {
                 "tags": [
                     "DepositType"
@@ -1154,7 +1154,7 @@
                 "operationId": "getDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "partnerId",
+                        "name": "id",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1200,7 +1200,7 @@
                 "operationId": "putDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "partnerId",
+                        "name": "id",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1313,7 +1313,7 @@
                 "operationId": "removeDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "partnerId",
+                        "name": "id",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
@@ -1354,7 +1354,7 @@
                 "operationId": "patchDepositTypeByPartnerId",
                 "parameters": [
                     {
-                        "name": "partnerId",
+                        "name": "id",
                         "in": "path",
                         "description": "partnerId",
                         "required": true,
