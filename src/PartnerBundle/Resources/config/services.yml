@@ -1,3 +1,4 @@
+---
 services:
     _defaults:
         autowire: true
@@ -7,7 +8,7 @@ services:
     # HautelookAliceFaker #
     PartnerBundle\DataFixtures\Provider\PartnerFixtureProvider:
         tags:
-            - { name: hautelook_alice.faker.provider }
+            - {name: hautelook_alice.faker.provider}
 
     # ETL #
     PartnerBundle\ETL\Transformer\RegistryUserTransformer:
@@ -36,25 +37,25 @@ services:
         arguments:
             - '@fos_elastica.object_persister.partner.partner_registry_user'
             - '@fos_elastica.indexable'
-            - { identifier: id }
+            - {identifier: id}
         tags:
-            - { name: doctrine.event_subscriber }
+            - {name: doctrine.event_subscriber}
 
     PartnerBundle\Listener\ElasticaPartnerListener:
         arguments:
             - '@fos_elastica.object_persister.partner.partner'
             - '@fos_elastica.indexable'
-            - { identifier: id }
+            - {identifier: id}
         tags:
-            - { name: doctrine.event_subscriber }
+            - {name: doctrine.event_subscriber}
 
     PartnerBundle\Listener\ElasticaCompanyRegistryUserListener:
         arguments:
             - '@fos_elastica.object_persister.partner.company_registry_user'
             - '@fos_elastica.indexable'
-            - { identifier: id }
+            - {identifier: id}
         tags:
-            - { name: doctrine.event_subscriber }
+            - {name: doctrine.event_subscriber}
 
     PartnerBundle\ETL\Transformer\OpeningHourTransformer:
         public: true
