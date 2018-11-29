@@ -72,7 +72,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $amStartHour;
@@ -80,7 +80,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $amEndHour;
@@ -88,7 +88,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmStartHour;
@@ -96,7 +96,7 @@ class OpeningHour extends BaseEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="time", nullable=false)
      * @Groups({"rest"})
      */
     protected $pmEndHour;

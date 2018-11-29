@@ -61,6 +61,26 @@ class OpeningHourTransformer implements TransformerInterface
         $updatedAtColumnValue = new \DateTime($updatedAtColumn->getValue());
         $updatedAtColumn->setValue($updatedAtColumnValue);
 
+        $amStartHourColumn = $row->getColumn('am_start_hour');
+        $updatedAtColumnValue = new \DateTime($amStartHourColumn->getValue());
+        $updatedAtColumnValue->format('H:i:s');
+        $amStartHourColumn->setValue($updatedAtColumnValue);
+
+        $amEndHourColumn = $row->getColumn('am_end_hour');
+        $amEndHourColumnValue = new \DateTime($amEndHourColumn->getValue());
+        $amEndHourColumnValue->format('H:i:s');
+        $amEndHourColumn->setValue($amEndHourColumnValue);
+
+        $pmStartHourColumn = $row->getColumn('pm_start_hour');
+        $pmStartHourColumnValue = new \DateTime($pmStartHourColumn->getValue());
+        $pmStartHourColumnValue->format('H:i:s');
+        $pmStartHourColumn->setValue($pmStartHourColumnValue);
+
+        $pmEndHourColumn = $row->getColumn('pm_end_hour');
+        $pmEndHourColumnValue = new \DateTime($pmEndHourColumn->getValue());
+        $pmEndHourColumnValue->format('H:i:s');
+        $pmEndHourColumn->setValue($pmEndHourColumnValue);
+
         return $row;
     }
 }
