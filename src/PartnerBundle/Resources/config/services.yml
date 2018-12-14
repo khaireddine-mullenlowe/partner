@@ -27,6 +27,14 @@ services:
                 arguments:
                     - '@doctrine.dbal.user_connection'
 
+    PartnerBundle\ETL\Transformer\OpeningHourTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.migration_connection'
+
     # AMQP #
     PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer:
         arguments:
@@ -57,10 +65,10 @@ services:
         tags:
             - {name: doctrine.event_subscriber}
 
-    PartnerBundle\ETL\Transformer\OpeningHourTransformer:
-        public: true
-        calls:
-            -
-                method: setConnection
-                arguments:
-                    - '@doctrine.dbal.migration_connection'
+    PartnerBundle\Listener\ElasticaDepositTypeListener:
+        arguments:
+            - '@fos_elastica.object_persister.partner.partner'
+            - '@fos_elastica.indexable'
+            - { identifier: id }
+        tags:
+            - { name: doctrine.event_subscriber }
