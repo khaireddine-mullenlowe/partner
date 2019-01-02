@@ -66,6 +66,7 @@ doctrine:
                 charset: UTF8
                 logging: false
                 profiling: false
+            # TODO: Remove agcv4 when migration is not needed anymore
             agcv4:
                 driver: pdo_mysql
                 host: '%database_host%'
