@@ -26,8 +26,6 @@ coverage:
     remote: false
     include:
         - src/*
-    exclude:
-        - src/*Bundle/Resources/*
     low_limit: 30
     high_limit: 60
 include:
