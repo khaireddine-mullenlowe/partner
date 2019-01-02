@@ -2638,16 +2638,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "815bdb386e39e11ec72b12f79c1dfba5a93ccc9c"
+                "reference": "d8f0a9411536b78569951c260e4a09685f24bd81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/815bdb386e39e11ec72b12f79c1dfba5a93ccc9c",
-                "reference": "815bdb386e39e11ec72b12f79c1dfba5a93ccc9c",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/d8f0a9411536b78569951c260e4a09685f24bd81",
+                "reference": "d8f0a9411536b78569951c260e4a09685f24bd81",
                 "shasum": ""
             },
             "require": {
@@ -2702,20 +2702,20 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-11-23T09:36:19+00:00"
+            "time": "2018-11-23T11:28:14+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git",
-                "reference": "a063f1c933f6a0c647cc6763e70cca35a5f082b9"
+                "reference": "893fe9850df654062ab283a0004e36b54bfc169e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/a063f1c933f6a0c647cc6763e70cca35a5f082b9",
-                "reference": "a063f1c933f6a0c647cc6763e70cca35a5f082b9",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/893fe9850df654062ab283a0004e36b54bfc169e",
+                "reference": "893fe9850df654062ab283a0004e36b54bfc169e",
                 "shasum": ""
             },
             "require": {
@@ -2764,7 +2764,7 @@
                 "bundle",
                 "wega"
             ],
-            "time": "2018-11-23T09:36:43+00:00"
+            "time": "2018-11-23T13:01:49+00:00"
         },
         {
             "name": "mullenlowe/component",
