@@ -26,10 +26,6 @@ coverage:
     remote: false
     include:
         - src/*
-        - vendor/mullenlowe/*/src/*
-    exclude:
-        - src/*Bundle/Resources/*
-        - vendor/mullenlowe/*/src/Resources/*
     low_limit: 30
     high_limit: 60
 include:
