@@ -66,13 +66,14 @@ doctrine:
                 charset: UTF8
                 logging: false
                 profiling: false
+            # TODO: Remove agcv4 when migration is not needed anymore
             agcv4:
-                driver: pdo_sqlsrv
-                host: '%v4_database_host%'
-                port: '%v4_database_port%'
-                dbname: '%v4_database_name%'
-                user: '%v4_database_user%'
-                password: '%v4_database_password%'
+                driver: pdo_mysql
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
             user:
                 driver: pdo_mysql
                 host: '%database_host%'
