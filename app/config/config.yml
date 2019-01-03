@@ -66,13 +66,6 @@ doctrine:
                 charset: UTF8
                 logging: false
                 profiling: false
-            agcv4:
-                driver: pdo_sqlsrv
-                host: '%v4_database_host%'
-                port: '%v4_database_port%'
-                dbname: '%v4_database_name%'
-                user: '%v4_database_user%'
-                password: '%v4_database_password%'
             user:
                 driver: pdo_mysql
                 host: '%database_host%'
