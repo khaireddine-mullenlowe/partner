@@ -25,7 +25,7 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    guzzle_ssl_verify: false
+    guzzle_verify_ssl: false
 
     api_host: api5.audi.dev.agence-one.net
 

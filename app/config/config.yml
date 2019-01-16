@@ -126,4 +126,7 @@ mullenlowe_plugins:
         base_uri: https://mon-devis-en-ligne.audi-entretien.as44099.com
         username: audi
         key: fjUMJ3qWEznFRRYTmCnQzKMJd9dFjZ
+    guzzle:
+        verify_ssl: '%guzzle_verify_ssl%'
+
 
