@@ -3,6 +3,7 @@
 namespace PartnerBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
+use GuzzleHttp\Exception\BadResponseException;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\PluginsBundle\Service\Ekino\EkinoRESTClient;
@@ -69,12 +70,14 @@ class EkinoController extends MullenloweRestController
             return $this->view($form);
         }
 
-        $response = $ekinoRESTClient->getPackages(
-            $form->get('apotamoxId')->getData(),
-            $form->get('contractNumber')->getData()
-        );
-
-        return $this->createView($response);
+        try {
+            return $this->createView($ekinoRESTClient->getPackages(
+                $form->get('apotamoxId')->getData(),
+                $form->get('contractNumber')->getData()
+            ));
+        } catch (BadResponseException $exception) {
+            return $this->createView($exception);
+        }
     }
 
     /**
