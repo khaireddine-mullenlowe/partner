@@ -3,8 +3,6 @@
 namespace PartnerBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\RequestException;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\PluginsBundle\Service\Ekino\EkinoRESTClient;
