@@ -9,6 +9,7 @@ use Mullenlowe\PluginsBundle\Service\Ekino\EkinoRESTClient;
 use PartnerBundle\Form\Ekino\PackageType;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 /**
  * Class EkinoController
@@ -52,7 +53,7 @@ class EkinoController extends MullenloweRestController
      *   security={{ "bearer":{} }}
      * )
      *
-     * @param Request         $request
+     * @param Request $request
      * @param EkinoRESTClient $ekinoRESTClient
      *
      * @return \FOS\RestBundle\View\View
@@ -69,12 +70,14 @@ class EkinoController extends MullenloweRestController
             return $this->view($form);
         }
 
-        $response = $ekinoRESTClient->getPackages(
-            $form->get('apotamoxId')->getData(),
-            $form->get('contractNumber')->getData()
-        );
-
-        return $this->createView($response);
+        try {
+            return $this->createView($ekinoRESTClient->getPackages(
+                $form->get('apotamoxId')->getData(),
+                $form->get('contractNumber')->getData()
+            ));
+        } catch (\Exception $exception) {
+            throw new ServiceUnavailableHttpException();
+        }
     }
 
     /**
