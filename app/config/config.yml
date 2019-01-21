@@ -124,9 +124,9 @@ mullenlowe_plugins:
     guzzle:
         verify_ssl: '%guzzle_verify_ssl%'
     ekino:
-        base_uri: https://mon-devis-en-ligne.audi-entretien.fr
-        username: audi
-        key: fjUMJ3qWEznFRRYTmCnQzKMJd9dFjZ
+        base_uri: '%ekino_base_uri%'
+        username: '%ekino_username%'
+        key: '%ekino_key%'
 
 mullenlowe_common:
     guzzle:

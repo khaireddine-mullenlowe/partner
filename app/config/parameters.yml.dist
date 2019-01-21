@@ -42,3 +42,7 @@ parameters:
 
     guzzle_verify_ssl: true
 
+    # Access Ekino WS
+    ekino_base_uri: xxxxx
+    ekino_username: audi
+    ekino_key: xxxxx
