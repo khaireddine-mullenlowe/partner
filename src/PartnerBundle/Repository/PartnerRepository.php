@@ -120,6 +120,12 @@ class PartnerRepository extends EntityRepository
                 ->setParameter('district', $filters['district']);
         }
 
+        if (isset($filters['kvpsNumber'])) {
+            $queryBuilder
+                ->andWhere('partner.kvpsNumber = :kvpsNumber')
+                ->setParameter('kvpsNumber', $filters['kvpsNumber']);
+        }
+
         return $queryBuilder->getQuery();
     }
 }
