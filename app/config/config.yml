@@ -129,6 +129,3 @@ mullenlowe_plugins:
         username: '%ekino_username%'
         key: '%ekino_key%'
 
-mullenlowe_common:
-    guzzle:
-        verify_ssl: '%guzzle_verify_ssl%'
