@@ -60,7 +60,7 @@
         "sensio/framework-extra-bundle": "~5.1.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
-        "symfony/symfony": "3.4.*",
+        "symfony/symfony": "3.4.20",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {

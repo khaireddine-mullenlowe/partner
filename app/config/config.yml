@@ -122,10 +122,9 @@ fos_rest:
         enabled: true
 
 mullenlowe_plugins:
-    guzzle:
-        verify_ssl: '%guzzle_verify_ssl%'
     ekino:
         base_uri: '%ekino_base_uri%'
         username: '%ekino_username%'
         key: '%ekino_key%'
-
+    guzzle:
+        verify_ssl: '%guzzle_verify_ssl%'

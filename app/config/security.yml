@@ -24,4 +24,3 @@ security:
         - { path: ^/opening-hour/,  role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
         - { path: ^/\d+/deposit/,   role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
         - { path: ^/,               role: IS_AUTHENTICATED_FULLY }
-
