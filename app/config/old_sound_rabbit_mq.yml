@@ -1,3 +1,10 @@
+parameters:
+    dlx_name: '%env%.dead-letter'
+    dlq_name: '%env%.dead-letter'
+    crud_exchange: '%env%.CRUD'
+    authentication_exchange: '%env%.Authentication'
+    sync_partner_queue: '%env%.authentication.sso.partner'
+
 # RabbitMQ configuration
 old_sound_rabbit_mq:
     connections:
@@ -31,16 +38,25 @@ old_sound_rabbit_mq:
             connection: 'default'
             class: Mullenlowe\CommonBundle\Component\AMQP\CrudProducer
             exchange_options:
-                name: 'CRUD'
+                name: '%crud_exchange%'
                 type: 'direct'
 
     consumers:
         sync_partner:
             connection: default
-            exchange_options: {name: 'Authentication', type: direct}
-            queue_options:    {name: '%env%.authentication.sso.partner'}
+            exchange_options: {name: '%authentication_exchange%', type: direct}
+            queue_options:
+                name: '%sync_partner_queue%'
+                arguments: {'x-dead-letter-exchange': ['S', '%dlx_name%'], 'x-dead-letter-routing-key': ['S', '%sync_partner_queue%']}
             callback:         PartnerBundle\Service\Sync\AMQP\SyncPartnerConsumer
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+        dead_messages:
+            connection: default
+            exchange_options: {name: '%dlx_name%', type: direct}
+            queue_options:
+                name: '%dlq_name%'
+                routing_keys: ['%sync_partner_queue%']
+            callback: Mullenlowe\CommonBundle\Component\AMQP\DeadLetterConsumer
 
 mullenlowe_common:
     rabbitmq_crud_publisher:

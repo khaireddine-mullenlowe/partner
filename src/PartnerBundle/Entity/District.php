@@ -81,6 +81,12 @@ class District extends BaseEntity
      */
     private $partnerRegistryUsers;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PartnerBundle\Entity\CompanyRegistryUser", mappedBy="district")
+     */
+    private $companyRegistryUsers;
 
     /**
      * District constructor.
@@ -89,6 +95,7 @@ class District extends BaseEntity
     {
         $this->partners = new ArrayCollection();
         $this->partnerRegistryUsers = new ArrayCollection();
+        $this->companyRegistryUsers = new ArrayCollection();
     }
 
     /**
@@ -241,6 +248,51 @@ class District extends BaseEntity
     public function removePartnerRegistryUser(PartnerRegistryUser $partnerRegistryUser)
     {
         $this->partnerRegistryUsers->removeElement($partnerRegistryUser);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCompanyRegistryUsers()
+    {
+        return $this->companyRegistryUsers;
+    }
+
+    /**
+     * @param ArrayCollection $companyRegistryUsers
+     *
+     * @return District
+     */
+    public function setCompanyRegistryUsers(ArrayCollection $companyRegistryUsers)
+    {
+        $this->companyRegistryUsers = $companyRegistryUsers;
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     * @return District
+     */
+    public function addCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        if (!$this->companyRegistryUsers->contains($companyRegistryUser)) {
+            $this->companyRegistryUsers->add($companyRegistryUser);
+            $companyRegistryUser->setDistrict($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyRegistryUser $companyRegistryUser
+     * @return District
+     */
+    public function removeCompanyRegistryUser(CompanyRegistryUser $companyRegistryUser)
+    {
+        $this->companyRegistryUsers->removeElement($companyRegistryUser);
 
         return $this;
     }

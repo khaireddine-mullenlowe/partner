@@ -120,6 +120,13 @@ class AftersalesServiceController extends MullenloweRestController
      *     operationId="cgetAftersalesService",
      *     tags={"AftersalesService"},
      *     @SWG\Parameter(
+     *         name="type",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="type of AftersalesServices"
+     *     ),
+     *     @SWG\Parameter(
      *         name="page",
      *         in="query",
      *         type="integer",
@@ -156,14 +163,19 @@ class AftersalesServiceController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
+        $aftersaleServiceRepo = $this->getDoctrine()->getRepository('PartnerBundle:AftersalesService');
+        $queryBuilder = $aftersaleServiceRepo->createQueryBuilder('aftersales_service');
         $paginator = $this->get('knp_paginator');
 
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', self::LIMIT);
+        $filters = $request->query->all();
 
-        $queryBuilder = $this->getDoctrine()
-            ->getRepository('PartnerBundle:AftersalesService')
-            ->createQueryBuilder('aftersales_service');
+        if (isset($filters['type'])) {
+            $queryBuilder
+                ->andWhere('aftersales_service.type = :type')
+                ->setParameter('type', $filters['type']);
+        }
 
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
