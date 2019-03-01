@@ -2809,12 +2809,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "9a07cb7699810c5f44af69d998a5ecdd0d68d905"
+                "reference": "95ad6f449ef1b8df5575618282d05f40c1c27f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/9a07cb7699810c5f44af69d998a5ecdd0d68d905",
-                "reference": "9a07cb7699810c5f44af69d998a5ecdd0d68d905",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/95ad6f449ef1b8df5575618282d05f40c1c27f76",
+                "reference": "95ad6f449ef1b8df5575618282d05f40c1c27f76",
                 "shasum": ""
             },
             "require": {
@@ -2847,6 +2847,10 @@
                 "symfony/symfony": "3.4.*",
                 "symfony/validator": "^3.3"
             },
+            "require-dev": {
+                "codeception/codeception": "^2.5",
+                "symfony/phpunit-bridge": "^3.0"
+            },
             "bin": [
                 "src/bin/swaggerGenerate"
             ],
@@ -2870,7 +2874,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-02-01T11:11:07+00:00"
+            "time": "2019-02-28T14:55:16+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -2878,12 +2882,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git",
-                "reference": "fa50817d7f9313c109520c5ca7eb47dc40eb9226"
+                "reference": "84091707a4e8a7105dcb0b368d368e8001cf06fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/fa50817d7f9313c109520c5ca7eb47dc40eb9226",
-                "reference": "fa50817d7f9313c109520c5ca7eb47dc40eb9226",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-plugins-bundle/zipball/84091707a4e8a7105dcb0b368d368e8001cf06fb",
+                "reference": "84091707a4e8a7105dcb0b368d368e8001cf06fb",
                 "shasum": ""
             },
             "require": {
@@ -2932,7 +2936,7 @@
                 "bundle",
                 "wega"
             ],
-            "time": "2019-01-28T14:07:04+00:00"
+            "time": "2019-02-28T15:09:18+00:00"
         },
         {
             "name": "mullenlowe/component",
@@ -5007,7 +5011,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -7074,6 +7078,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-08-09T05:50:03+00:00"
         },
         {
