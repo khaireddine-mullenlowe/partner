@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32888f3e047eb9fc57fda269122b9896",
+    "content-hash": "cb1e245dc73602ad8e1c48406a205037",
     "packages": [
         {
             "name": "analog/analog",
@@ -2805,7 +2805,7 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-ecom_merged",
+            "version": "dev-release/3.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
@@ -2878,7 +2878,7 @@
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
-            "version": "dev-ecom_merged",
+            "version": "dev-release/3.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-plugins-bundle.git",
@@ -5011,7 +5011,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
