@@ -384,6 +384,14 @@ class Partner extends BaseEntity
     private $openingHours;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"amqp", "rest"})
+     */
+    private $rcsNumber;
+
+    /**
      * Partner constructor.
      */
     public function __construct()
@@ -1227,5 +1235,25 @@ class Partner extends BaseEntity
     public function getOpeningHours()
     {
         return $this->openingHours;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRcsNumber()
+    {
+        return $this->rcsNumber;
+    }
+
+    /**
+     * @param null|string $rcsNumber
+     *
+     * @return Partner
+     */
+    public function setRcsNumber($rcsNumber): Partner
+    {
+        $this->rcsNumber = $rcsNumber;
+
+        return $this;
     }
 }

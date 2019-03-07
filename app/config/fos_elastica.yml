@@ -69,6 +69,8 @@ fos_elastica:
                             type: string
                         sellingVolume:
                             type: integer
+                        rcsNumber:
+                            type: string
                         group:
                             type: object
                             properties:
@@ -245,6 +247,8 @@ fos_elastica:
                                     type: string
                                 sellingVolume:
                                     type: integer
+                                rcsNumber:
+                                    type: string
                                 group:
                                     type: object
                                     properties:
@@ -481,6 +485,8 @@ fos_elastica:
                                     type: string
                                 sellingVolume:
                                     type: integer
+                                rcsNumber:
+                                    type: string
                                 group:
                                     type: object
                                     properties:
