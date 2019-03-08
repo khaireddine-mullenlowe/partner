@@ -25,8 +25,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    guzzle_verify_ssl: false
-
     api_host: api5.audi.dev.agence-one.net
 
     # Related to AGC V4
@@ -42,3 +40,9 @@ parameters:
     rabbitmq_password: guest
     env: dev
 
+    guzzle_verify_ssl: true
+
+    # Access Ekino WS
+    ekino_base_uri: xxxxx
+    ekino_username: audi
+    ekino_key: xxxxx

@@ -123,10 +123,8 @@ fos_rest:
 
 mullenlowe_plugins:
     ekino:
-        base_uri: https://mon-devis-en-ligne.audi-entretien.as44099.com
-        username: audi
-        key: fjUMJ3qWEznFRRYTmCnQzKMJd9dFjZ
+        base_uri: '%ekino_base_uri%'
+        username: '%ekino_username%'
+        key: '%ekino_key%'
     guzzle:
         verify_ssl: '%guzzle_verify_ssl%'
-
-

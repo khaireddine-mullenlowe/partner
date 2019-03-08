@@ -1461,7 +1461,7 @@
         "/ekino/packages": {
             "post": {
                 "tags": [
-                    "Partner"
+                    "Ekino"
                 ],
                 "summary": "Gets partner's packages from Ekino",
                 "operationId": "getPartnersPackages",
@@ -1493,6 +1493,96 @@
                     },
                     "404": {
                         "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/ekino/tyres/{contractNumber}": {
+            "get": {
+                "tags": [
+                    "Ekino"
+                ],
+                "summary": "Gets partner's tyres from Ekino",
+                "operationId": "getPartnersTyres",
+                "parameters": [
+                    {
+                        "name": "contractNumber",
+                        "in": "path",
+                        "description": "Contract number of Audi Service partner",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "width",
+                        "in": "query",
+                        "description": "Width of tyre",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "height",
+                        "in": "query",
+                        "description": "Height of tyre",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "rim",
+                        "in": "query",
+                        "description": "Rim of tyre",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "loadIndex",
+                        "in": "query",
+                        "description": "LoadIndex of tyre",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "speedIndex",
+                        "in": "query",
+                        "description": "SpeedIndex of tyre",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "range",
+                        "in": "query",
+                        "description": "Winter or summer season",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Target partner's tyres",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/PartnerTyres"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -3602,6 +3692,40 @@
                 },
                 "contractNumber": {
                     "type": "string"
+                }
+            }
+        },
+        "PartnerTyres": {
+            "required": [
+                "contractNumber",
+                "width",
+                "height",
+                "rim",
+                "loadIndex",
+                "speedIndex",
+                "range"
+            ],
+            "properties": {
+                "contractNumber": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "rim": {
+                    "type": "integer"
+                },
+                "loadIndex": {
+                    "type": "string"
+                },
+                "speedIndex": {
+                    "type": "string"
+                },
+                "range": {
+                    "type": "integer"
                 }
             }
         }

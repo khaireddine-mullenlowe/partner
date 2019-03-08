@@ -477,6 +477,18 @@ class SwaggerDefinitions
      *         @SWG\Property(property="apotamoxId", type="integer"),
      *         @SWG\Property(property="contractNumber", type="string")
      *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="PartnerTyres",
+     *         @SWG\Property(property="contractNumber", type="string"),
+     *         @SWG\Property(property="width", type="integer"),
+     *         @SWG\Property(property="height", type="integer"),
+     *         @SWG\Property(property="rim", type="integer"),
+     *         @SWG\Property(property="loadIndex", type="string"),
+     *         @SWG\Property(property="speedIndex", type="string"),
+     *         @SWG\Property(property="range", type="integer"),
+     *         required={"contractNumber", "width", "height", "rim", "loadIndex", "speedIndex", "range"}
+     *     ),
      * )
      *
      * @SWG\SecurityScheme(

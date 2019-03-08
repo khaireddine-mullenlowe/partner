@@ -368,10 +368,10 @@ class Partner extends BaseEntity
     protected $myaudiUsers;
 
     /**
-     * @ORM\OneToOne(targetEntity="PartnerBundle\Entity\DepositType", cascade={"persist"})
-     * @ORM\JoinColumn(name="deposit_type_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="PartnerBundle\Entity\DepositType", inversedBy="partner", cascade={"all"})
+     * @ORM\JoinColumn(name="deposit_type_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
-     * @Groups("rest")
+     * @Groups({"amqp", "rest"})
      */
     protected $depositType;
 
