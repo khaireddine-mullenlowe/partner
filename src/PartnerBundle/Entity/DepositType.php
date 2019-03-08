@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class DepositType
  * @package PartnerBundle\Entity
  *
- * @ORM\Entity(repositoryClass="PartnerBundle\Repository\DepositTypeRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="deposit_type")
  */
 class DepositType extends BaseEntity
@@ -22,15 +22,22 @@ class DepositType extends BaseEntity
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $id;
+
+    /**
+     * @var Partner
+     *
+     * @ORM\OneToOne(targetEntity="PartnerBundle\Entity\Partner", mappedBy="depositType")
+     */
+    protected $partner;
 
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $createdAt;
 
@@ -38,7 +45,7 @@ class DepositType extends BaseEntity
      * @var \DateTime
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $updatedAt;
 
@@ -47,7 +54,7 @@ class DepositType extends BaseEntity
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default":1})
      * @Assert\Type("bool")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $vehicleWorkshop = true;
 
@@ -55,7 +62,7 @@ class DepositType extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $vehicleWorkshopDaysBeforeFreeCalendar = 5;
 
@@ -64,7 +71,7 @@ class DepositType extends BaseEntity
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $waitOnSpot = false;
 
@@ -72,7 +79,7 @@ class DepositType extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $waitOnSpotDaysBeforeFreeCalendar = 0;
 
@@ -81,7 +88,7 @@ class DepositType extends BaseEntity
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $replacementVehicle = false;
 
@@ -89,7 +96,7 @@ class DepositType extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $replacementVehicleDaysBeforeFreeCalendar = 0;
 
@@ -98,7 +105,7 @@ class DepositType extends BaseEntity
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default":0})
      * @Assert\Type("bool")
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $valetParking = false;
 
@@ -106,7 +113,7 @@ class DepositType extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $valetParkingDaysBeforeFreeCalendar = 0;
 
@@ -114,16 +121,35 @@ class DepositType extends BaseEntity
      * @var int
      *
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"rest"})
+     * @Groups({"rest", "amqp"})
      */
     protected $valetParkingPrice = 0;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Partner
+     */
+    public function getPartner()
+    {
+        return $this->partner;
+    }
+
+    /**
+     * @param Partner $partner
+     * @return DepositType
+     */
+    public function setPartner($partner)
+    {
+        $this->partner = $partner;
+
+        return $this;
     }
 
     /**

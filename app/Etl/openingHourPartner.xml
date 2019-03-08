@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Aftersales opening hour migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+                    SELECT DISTINCT
+                        c.company_id AS partner_id
+                        , '2018-06-26 00:00:00' AS created_at
+                        , GETDATE() AS updated_at
+                          ,[openning_day] AS [opening_day]
+                          ,SUBSTRING(CAST([am_start_hour] AS VARCHAR(MAX)), 1, 8) AS [am_start_hour]
+                          ,SUBSTRING(CAST([am_end_hour] AS VARCHAR(MAX)), 1, 8) AS [am_end_hour]
+                          ,SUBSTRING(CAST([pm_start_hour] AS VARCHAR(MAX)), 1, 8) AS [pm_start_hour]
+                          ,SUBSTRING(CAST([pm_end_hour] AS VARCHAR(MAX)), 1, 8) AS [pm_end_hour]
+                          , CAST(nox AS int) AS nox
+                          ,[status]
+                    FROM [ecom_openning_hours] a
+                    INNER JOIN [ecom_aftersales_dealer] b ON b.id = a.ecom_aftersales_dealer_id
+                    INNER JOIN [ntw_company_business] c ON c.contract_number = b.contract_number
+                ]]>
+        </query>
+    </extractor>
+
+    <transformer>
+        <preTransformerClass>PartnerBundle\ETL\Transformer\OpeningHourTransformer</preTransformerClass>
+    </transformer>
+
+    <loader>
+        <connection>migration</connection>
+        <entity>PartnerBundle\Entity\OpeningHour</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>partner_id</name>
+            <targetProperty>partner</targetProperty>
+            <type>entity</type>
+            <entityClass>PartnerBundle\Entity\Partner</entityClass>
+            <referencedBy>legacyId</referencedBy>
+        </mapping>
+    </mappings>
+</job>

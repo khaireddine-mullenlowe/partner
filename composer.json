@@ -60,7 +60,7 @@
         "sensio/framework-extra-bundle": "~5.1.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
-        "symfony/symfony": "3.4.20",
+        "symfony/symfony": "3.4.*",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
@@ -71,7 +71,7 @@
         "swagger-api/swagger-ui": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
         "zircote/swagger-php": "^2.0",
-        "codeception/codeception": "2.4"
+        "codeception/codeception": "^2.5"
     },
     "scripts": {
         "swagger-ui-assets": "php -r \"is_dir('vendor/swagger-api/swagger-ui/dist') && !is_link('web/swagger-ui') && symlink('../vendor/swagger-api/swagger-ui/dist', 'web/swagger-ui');\"",
