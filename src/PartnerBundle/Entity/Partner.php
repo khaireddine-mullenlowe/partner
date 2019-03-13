@@ -392,6 +392,14 @@ class Partner extends BaseEntity
     private $rcsNumber;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"amqp", "rest"})
+     */
+    private $identificationTva;
+
+    /**
      * Partner constructor.
      */
     public function __construct()
@@ -1253,6 +1261,26 @@ class Partner extends BaseEntity
     public function setRcsNumber($rcsNumber): Partner
     {
         $this->rcsNumber = $rcsNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIdentificationTva()
+    {
+        return $this->identificationTva;
+    }
+
+    /**
+     * @param null|string $identificationTva
+     *
+     * @return Partner
+     */
+    public function setIdentificationTva($identificationTva): Partner
+    {
+        $this->identificationTva = $identificationTva;
 
         return $this;
     }
