@@ -174,6 +174,7 @@ class SwaggerDefinitions
      *                  @SWG\Property(property="isV12", type="boolean"),
      *                  @SWG\Property(property="v12Id", type="string"),
      *                  @SWG\Property(property="sellingVolume", type="integer"),
+     *                  @SWG\Property(property="rcsNumber", type="string"),
      *                  required={"type"}
      *             ),
      *             @SWG\Definition(ref="#/definitions/LegacyEntity"),

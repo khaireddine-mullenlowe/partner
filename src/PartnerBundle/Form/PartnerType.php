@@ -77,6 +77,8 @@ class PartnerType extends AbstractType
             ->add('district', EntityType::class, [
                 'class' => District::class,
             ])
+            ->add('rcsNumber', TextType::class)
+            ->add('identificationTva', TextType::class)
         ;
     }
 
