@@ -25,6 +25,17 @@ class Version20190320164028 extends AbstractMullenloweMigration
     }
 
     /**
+     * @param Schema $schema
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     */
+    public function down(Schema $schema)
+    {
+        $this->updateOnlineQuotation();
+    }
+    
+    /**
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
@@ -46,15 +57,6 @@ class Version20190320164028 extends AbstractMullenloweMigration
                     ->execute();
             }
         }
-    }
-
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
