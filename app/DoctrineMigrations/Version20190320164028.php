@@ -3,7 +3,6 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\ORM\EntityManager;
 use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -13,11 +12,6 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Version20190320164028 extends AbstractMullenloweMigration
 {
     const IMPORT_FILENAME = 'online_quotation.xlsx';
-
-    /**
-     * @var EntityManager
-     */
-    private $em;
 
     /**
      * @param Schema $schema
