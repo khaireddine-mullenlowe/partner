@@ -33,11 +33,13 @@ class Version20190311151004 extends AbstractMullenloweMigration
 
     /**
      * @param Schema $schema
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
-
+        $this->updateRcsNumberAndIdentificationTva();
     }
 
     /**
