@@ -261,6 +261,13 @@
                 "operationId": "cgetAftersalesService",
                 "parameters": [
                     {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type of AftersalesServices",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "page number",
@@ -3143,6 +3150,9 @@
                         },
                         "sellingVolume": {
                             "type": "integer"
+                        },
+                        "rcsNumber": {
+                            "type": "string"
                         }
                     }
                 },
