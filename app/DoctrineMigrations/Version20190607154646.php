@@ -76,6 +76,7 @@ class Version20190607154646 extends AbstractMullenloweMigration
     private function getExcelPath(): string
     {
         $rootDir = $this->container->getParameter('kernel.root_dir');
+        
         return $rootDir . '/../src/PartnerBundle/Resources/dataMigration/' . self::IMPORT_FILENAME;
     }
 }
