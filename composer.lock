@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "38d265c7423bbc592bfe65a9385910b6",
+    "content-hash": "5f4570e4135beb752e33f90ffeceacf7",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -3166,16 +3166,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-release/3.4.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "6445c011c4025c467fb006b2fb98586bf1ec5435"
+                "reference": "ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/6445c011c4025c467fb006b2fb98586bf1ec5435",
-                "reference": "6445c011c4025c467fb006b2fb98586bf1ec5435",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96",
+                "reference": "ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96",
                 "shasum": ""
             },
             "require": {
@@ -3238,7 +3238,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-06-17T12:58:25+00:00"
+            "time": "2019-07-03T13:38:09+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -5375,7 +5375,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
