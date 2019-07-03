@@ -46,3 +46,9 @@ parameters:
     ekino_base_uri: xxxxx
     ekino_username: audi
     ekino_key: xxxxx
+
+    # Mongo Config
+    mullenlowe_common.connection.host: 'mongodb://localhost'
+    mullenlowe_common.connection.port: '27017'
+    mullenlowe_common.connection.database: 'rmqp_db'
+    mullenlowe_common.connection.collection: 'rmqp_collection'

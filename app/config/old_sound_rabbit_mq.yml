@@ -67,3 +67,6 @@ mullenlowe_common:
             - { context: 'PartnerRegistryUser', routing_key: 'crud.partner.partner_registry' }
             - { context: 'CompanyRegistryUser', routing_key: 'crud.partner.company_registry' }
             - { context: 'PartnerMyaudiUser',   routing_key: 'crud.partner.partner_myaudi'   }
+        dependencies:
+            - {name: 'myaudiUserId', path: 'myaudiUser.id'}
+            - {name: 'leadId', path: 'lead.id'}
