@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f4570e4135beb752e33f90ffeceacf7",
+    "content-hash": "ddf09d11d34dbd0add20cac2b3854012",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
-            "version": "1.1.7",
+            "version": "1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alcaeus/mongo-php-adapter.git",
-                "reference": "b4c2f0d30dbddd624d3bc2a27175e6eb602241d4"
+                "reference": "b230e1fabd7e4c5e284619029c667fdfb53b3e3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alcaeus/mongo-php-adapter/zipball/b4c2f0d30dbddd624d3bc2a27175e6eb602241d4",
-                "reference": "b4c2f0d30dbddd624d3bc2a27175e6eb602241d4",
+                "url": "https://api.github.com/repos/alcaeus/mongo-php-adapter/zipball/b230e1fabd7e4c5e284619029c667fdfb53b3e3d",
+                "reference": "b230e1fabd7e4c5e284619029c667fdfb53b3e3d",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +70,7 @@
                 "database",
                 "mongodb"
             ],
-            "time": "2019-04-06T08:08:09+00:00"
+            "time": "2019-07-14T21:02:07+00:00"
         },
         {
             "name": "analog/analog",
@@ -1061,16 +1061,16 @@
         },
         {
             "name": "doctrine/mongodb",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb.git",
-                "reference": "859dad965f50cea9de012b878cf20932f458a311"
+                "reference": "46b6316ae42df121df1b870b2cd4342ce7eeac80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/859dad965f50cea9de012b878cf20932f458a311",
-                "reference": "859dad965f50cea9de012b878cf20932f458a311",
+                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/46b6316ae42df121df1b870b2cd4342ce7eeac80",
+                "reference": "46b6316ae42df121df1b870b2cd4342ce7eeac80",
                 "shasum": ""
             },
             "require": {
@@ -1134,7 +1134,7 @@
                 "mongodb",
                 "persistence"
             ],
-            "time": "2018-07-20T05:09:17+00:00"
+            "time": "2019-07-11T05:36:15+00:00"
         },
         {
             "name": "doctrine/mongodb-odm",
@@ -3166,16 +3166,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-master",
+            "version": "dev-release/3.5.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "167e3623711566d1b0ded0ada8e9aabf9bc4855d"
+                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/167e3623711566d1b0ded0ada8e9aabf9bc4855d",
-                "reference": "167e3623711566d1b0ded0ada8e9aabf9bc4855d",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/0611a365bedd8aab0ffefe677eb8b374a1f66f12",
+                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12",
                 "shasum": ""
             },
             "require": {
@@ -3238,7 +3238,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-07-03T13:38:09+00:00"
+            "time": "2019-07-25T09:30:52+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
