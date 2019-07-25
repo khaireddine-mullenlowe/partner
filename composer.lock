@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "5f4570e4135beb752e33f90ffeceacf7",
@@ -3170,12 +3170,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96"
+                "reference": "167e3623711566d1b0ded0ada8e9aabf9bc4855d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96",
-                "reference": "ddec5c9d7e23e54240bd9b5b2f9e3016a9089a96",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/167e3623711566d1b0ded0ada8e9aabf9bc4855d",
+                "reference": "167e3623711566d1b0ded0ada8e9aabf9bc4855d",
                 "shasum": ""
             },
             "require": {
