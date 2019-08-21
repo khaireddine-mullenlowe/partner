@@ -21,7 +21,8 @@ class PackageType extends AbstractType
     {
         $builder
             ->add('apotamoxId', TextType::class, ['constraints' => new NotNull()])
-            ->add('contractNumber', TextType::class, ['constraints' => new NotNull()]);
+            ->add('contractNumber', TextType::class, ['constraints' => new NotNull()])
+            ->add('vin', TextType::class);
     }
 
     /**
