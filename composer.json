@@ -51,7 +51,7 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "lexik/jwt-authentication-bundle": "2.6.1",
         "mullenlowe/audi-agc5-common-bundle": "dev-release/3.6.0",
-        "mullenlowe/audi-agc5-plugins-bundle": "dev-master",
+        "mullenlowe/audi-agc5-plugins-bundle": "dev-release/3.6.0",
         "mullenlowe/component": "dev-master",
         "mullenlowe/etl-bundle": "dev-master",
         "nelmio/cors-bundle": "^1.5",
