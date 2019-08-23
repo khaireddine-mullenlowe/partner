@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "553d3a43661d70094ec901f75f76b204",
@@ -3170,12 +3170,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "fcad9d4c71f9226db55a8bafdd0726f539272168"
+                "reference": "cb54ea0b54d3ef7e077c75a48ede7925a877fd7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/fcad9d4c71f9226db55a8bafdd0726f539272168",
-                "reference": "fcad9d4c71f9226db55a8bafdd0726f539272168",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/cb54ea0b54d3ef7e077c75a48ede7925a877fd7b",
+                "reference": "cb54ea0b54d3ef7e077c75a48ede7925a877fd7b",
                 "shasum": ""
             },
             "require": {
@@ -3238,7 +3238,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-08-13T16:08:38+00:00"
+            "time": "2019-08-23T14:47:45+00:00"
         },
         {
             "name": "mullenlowe/audi-agc5-plugins-bundle",
@@ -5375,7 +5375,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
