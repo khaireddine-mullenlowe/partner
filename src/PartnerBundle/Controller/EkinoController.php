@@ -73,7 +73,8 @@ class EkinoController extends MullenloweRestController
         try {
             return $this->createView($ekinoRESTClient->getPackages(
                 $form->get('apotamoxId')->getData(),
-                $form->get('contractNumber')->getData()
+                $form->get('contractNumber')->getData(),
+                $form->get('vin')->getData()
             ));
         } catch (\Exception $exception) {
             throw new ServiceUnavailableHttpException();
