@@ -29,3 +29,13 @@ Generate the swagger.json file and let nginx serve it :
 # if you want to modify host and basePath dynamically :
 ./vendor/bin/swagger src/PartnerBundle/  --stdout | sed 's#"host":.*#"host": "api5.audi.dev.agence-one.net",#;s#"basePath":.*#"basePath": "/partner/api/v1/partner",#' > web/swagger.json
 ```
+
+
+### Commands
+To setup paiement for partners, we need file contains at least two columns :
+* Contract Number : ensure that it's a string format (for the 0 at the begening).
+* Payment state : 1 to enable / 0 to disable.
+
+``` bash
+bin/console partner:payment:manage [file path] -H (if there has a header)
+```
