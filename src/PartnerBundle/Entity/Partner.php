@@ -355,7 +355,7 @@ class Partner extends BaseEntity
      * One Partner have Many partnerRegistryUsers.
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="PartnerRegistryUser", mappedBy="partner", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @Assert\Valid()
+     * @Assert\Valid(groups={})
      */
     private $partnerRegistryUsers;
 
