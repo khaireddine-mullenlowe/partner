@@ -21,7 +21,7 @@ class Version20191119110843 extends AbstractMullenloweMigration
         'originalContractNumber' => '01002478',
         'newContractNumber' => '01003693',
         'originalKvps' => 'FRAA02142',
-        'newKvps' => 'FRAA02613',
+        'newKvps' => 'FRAA02615',
         'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01000869',
