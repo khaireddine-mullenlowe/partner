@@ -7,7 +7,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 
 /**
- * Update partner kvps, contractnumber, et commercial name
+ * Update partner kvps, contractnumber, and commercial name
  */
 class Version20191119110843 extends AbstractMullenloweMigration
 {
@@ -102,7 +102,7 @@ class Version20191119110843 extends AbstractMullenloweMigration
             if ($dataRegistryUser['newKvps'] !== NULL) {
                 $partner->setKvpsNumber($dataRegistryUser['newKvps']);
             }
-            
+
             if ($dataRegistryUser['comercialName'] !== NULL) {
                 $partner->setCorporateName($dataRegistryUser['newKvps']);
                 $partner->setCommercialName($dataRegistryUser['newKvps']);
