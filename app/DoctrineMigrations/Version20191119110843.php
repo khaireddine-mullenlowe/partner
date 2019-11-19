@@ -93,6 +93,7 @@ class Version20191119110843 extends AbstractMullenloweMigration
 
             if (!$partner) {
                 echo sprintf('partner %s not found', $dataRegistryUser['originalContractNumber']);
+                continue;
             }
 
             if ($dataRegistryUser['newContractNumber'] !== NULL) {
