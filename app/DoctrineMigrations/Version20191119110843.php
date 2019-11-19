@@ -16,67 +16,67 @@ class Version20191119110843 extends AbstractMullenloweMigration
         'newContractNumber' => '01003557',
         'originalKvps' => 'FRAA02367',
         'newKvps' => 'FRAA02593',
-        'comercialName' => 'SAS BYMYCAR BOURGOGNE'
+        'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01002478',
         'newContractNumber' => '01003693',
         'originalKvps' => 'FRAA02142',
         'newKvps' => 'FRAA02613',
-        'comercialName' => 'ALLIANCE AUTO'
+        'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01000869',
         'newContractNumber' => '01003684',
         'originalKvps' => 'FRAA02527',
         'newKvps' => 'FRAA02609',
-        'comercialName' => 'EXCEL AUTOMOBILES'
+        'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01006290',
         'newContractNumber' => '01003830',
         'originalKvps' => 'FRAA02290',
         'newKvps' => 'FRAA02626',
-        'comercialName' => 'HONORÉ SAS'
+        'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01000737',
         'newContractNumber' => '01003604',
         'originalKvps' => 'FRAA06380',
         'newKvps' => 'FRAA02590',
-        'comercialName' => 'BYmy)CAR'
+        'newCommercialName' => NULL
     ], [
         'originalContractNumber' => '01001113',
         'newContractNumber' => '01003808',
         'originalKvps' => 'FRAA08460',
         'newKvps' => 'FRAA02630',
-        'comercialName' => 'ALMA DIFFUSION AUTOMOBILES'
+        'newCommercialName' => 'ALMA DIFFUSION AUTOMOBILES'
     ], [
         'originalContractNumber' => '01002369',
         'newContractNumber' => '01003811',
         'originalKvps' => 'FRAA02163',
         'newKvps' => 'FRAA02631',
-        'comercialName' => 'ALMA DIFFUSION AUTOMOBILES'
+        'newCommercialName' => 'ALMA DIFFUSION AUTOMOBILES'
     ], [
         'originalContractNumber' => '01002370',
         'newContractNumber' => '01003814',
         'originalKvps' => 'FRAA02079',
         'newKvps' => 'FRAA02632',
-        'comercialName' => 'ALMA DIFFUSION AUTOMOBILES'
+        'newCommercialName' => 'ALMA DIFFUSION AUTOMOBILES'
     ], [
         'originalContractNumber' => '01003320',
         'newContractNumber' => '01003320',
         'originalKvps' => 'FRAA05460',
         'newKvps' => 'FRAA02523',
-        'comercialName' => 'CAR'
+        'newCommercialName' => 'CAR'
     ], [
         'originalContractNumber' => '01004900',
-        'newContractNumber' => null,
-        'originalKvps' => null,
+        'newContractNumber' => NULL,
+        'originalKvps' => NULL,
         'newKvps' => 'FRAA04900',
-        'comercialName' => 'AVENIR AUTOMOBILES'
+        'newCommercialName' => 'AVENIR AUTOMOBILES'
     ], [
         'originalContractNumber' => '01000767',
-        'newContractNumber' => null,
-        'originalKvps' => null,
+        'newContractNumber' => NULL,
+        'originalKvps' => NULL,
         'newKvps' => 'FRAA06490',
-        'comercialName' => 'DUGAST'
+        'newCommercialName' => 'DUGAST'
     ]];
 
     /**
@@ -103,9 +103,9 @@ class Version20191119110843 extends AbstractMullenloweMigration
                 $partner->setKvpsNumber($dataRegistryUser['newKvps']);
             }
 
-            if ($dataRegistryUser['comercialName'] !== NULL) {
-                $partner->setCorporateName($dataRegistryUser['newKvps']);
-                $partner->setCommercialName($dataRegistryUser['newKvps']);
+            if ($dataRegistryUser['newCommercialName'] !== NULL) {
+                $partner->setCorporateName($dataRegistryUser['newCommercialName']);
+                $partner->setCommercialName($dataRegistryUser['newCommercialName']);
             }
         }
 
