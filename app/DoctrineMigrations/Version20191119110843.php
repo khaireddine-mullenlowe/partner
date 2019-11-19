@@ -60,11 +60,11 @@ class Version20191119110843 extends AbstractMullenloweMigration
         'newKvps' => 'FRAA02632',
         'newCommercialName' => 'ALMA DIFFUSION AUTOMOBILES'
     ], [
-        'originalContractNumber' => '01003320',
+        'originalContractNumber' => '01005460',
         'newContractNumber' => '01003320',
         'originalKvps' => 'FRAA05460',
         'newKvps' => 'FRAA02523',
-        'newCommercialName' => 'CAR'
+        'newCommercialName' => 'CAR SA'
     ], [
         'originalContractNumber' => '01004900',
         'newContractNumber' => NULL,
