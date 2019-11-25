@@ -453,7 +453,7 @@ class PartnerController extends MullenloweRestController
             throw $this->createNotFoundException('Partner not found');
         }
 
-        $form = $this->createForm(PartnerType::class, $partner);
+        $form = $this->createForm(PartnerType::class, $partner, ['validation_groups' => ['edit_partner']]);
         $form->submit($dataInput, $clearMissing);
         // validate
         if (!$form->isValid()) {
